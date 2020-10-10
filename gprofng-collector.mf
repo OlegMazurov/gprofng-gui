@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Public-Packages: org.gprofng.collector.**
+OpenIDE-Module: org.gprofng.collector/1
+Specification-Version: 1.0
+
+

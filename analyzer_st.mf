@@ -1,0 +1,2 @@
+Class-Path: gprofng.jar gprofng-collector.jar analyzer_help.jar
+Main-Class: org.gprofng.analyzer.AnMain

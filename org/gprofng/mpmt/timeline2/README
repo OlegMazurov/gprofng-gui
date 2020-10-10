@@ -1,0 +1,96 @@
+/* Copyright (C) 2022 Free Software Foundation
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses>.  */
+
+How timeline data is organized
+------------------------------
+The top-level tl-data-holding object is a
+
+- MetaExperiment, which handles experiment add/drop and contains
+
+  - Experiment[] which describes each experiment, each element contains
+    - DataDescriptor[], each is a description of a metric (e.g. CPU Cycles)
+
+  - TLDataFetcher, which synchronizes data for AWT and contains
+    - TLDataSnapshot, created by TLDataFetcher, contains
+      - RowDefinition[], populated by Experiment, each element contains
+        - DataDescriptor, which describes a metric (e.g. "CPU Cycles")
+        - Entity, which describes how data is aggregated (e.g. LWP, CPU, or EXP)
+      - RowData[], populated by TLDataFetcher, each element contains
+        - RowDefinition (described above)
+        - GenericEvent[], the data for a given row
+    - function_htable HashMap, unique function IDs linked to function names
+    - stack_htable, unique stack IDs linked to array of function IDs
+
+
+More about the "Event" hierarchy
+--------------------------------
+-Event(abstract class)-- all event types will be subclassed from
+this. Event itself cannot be instantiated
+
+-DurationEvent(interface) -- implement this for any event that has a 
+duration, for example Sample.
+
+-> Sample (implements DurationEvent) -- This is whats drawn as the 
+topmost bar in timeline. Has a start time, end time, duration, and 
+experiment name associated with it.
+
+-> ExtendedEvent--Has additional information about events like 
+threadid, lwpid, cpuid and stack
+--> SynchEvent (implements DurationEvent)
+--> MPIEvent (implements DurationEvent)
+--> HeapEvent
+--> HWCEvent
+--> ProfileEvent
+--> IOEvent
+
+(getEventSpecificInfo is the main function that is defined for all 
+the above subclasses)
+
+
+Components
+----------
+- TL2Disp -- This is the main hub for timeline. It owns 
+the right-side tab pane and control panel, the left-side TimelinePanel,
+and the graph drawer, TL2Drawer, used by TimelinePanel.
+When external filter and experiment loads occur, doCompute() triggers
+recomputing.  Most data fetches and rendering, however, 
+are driven by the user's actions in TL2ControlPanel and TimelinePanel.  Careful
+attention is paid to separating and synchronizing "IPC" and AWT activity.
+
+- TL2ControlPanel -- right side tab, it's controls, and selection details
+
+- TimelinePanel -- generic timeline shared by MPI and regular timeline.
+This component handles timeline scrollbar and zoom operations.  It drives
+the calculators, CoordCalcTimeMaster and CoordCalcDataMaster, used by various
+components to generate x and y coordinates.  It also drives the timeline panel
+grapher, TL2Drawer, telling it what to fetch and when to draw.  Finally, 
+it controls the rulers which show the time ticks and row position.
+
+- TL2Drawer -- owner of CoordCalcTimeMaster and CoordCalcDataMaster calculators,
+and responsible for what to paint in the timeline graph area.
+
+- TimelineDraw -- painter of the timeline graph area
+
+- IconRuler -- draws vertical ruler, the icons and labels along 
+the ruler etc.
+
+- RangeRuler -- draws horizontal rulers with the tickmarks.
+
+- Presentation -- Presentation panel that shows and saves user preferences.
+This generates events handled by TL2Disp.
+
+- ColorChooser -- Modal Dialog that shows map of functions and colors.  There
+is a single instance of ColorChooser for the main Analyzer window.
+

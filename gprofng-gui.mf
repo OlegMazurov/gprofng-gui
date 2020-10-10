@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+OpenIDE-Module-Layer: org/gprofng/mpmt/resources/mf-layer.xml
+Specification-Title: gprofng GUI
+OpenIDE-Module-Public-Packages: org.gprofng.mpmt.**
+OpenIDE-Module: org.gprofng.mpmt/1
+Specification-Version: 8.2
+OpenIDE-Module-Specification-Version: 8.2
+OpenIDE-Module-Localizing-Bundle: org/gprofng/mpmt/Bundle.properties
+Implementation-Title: org.gprofng.mpmt
+Specification-Vendor: gprofng GUI
+Implementation-Version: 8.2
+Implementation-Vendor: gprofng GUI
+

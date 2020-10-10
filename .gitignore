@@ -1,0 +1,13 @@
+*.diff
+*.patch
+*.orig
+*~
+*%
+
+autom4te.cache
+config.cache
+
+# ignore core files, but not java/net/protocol/core/
+core
+!core/
+

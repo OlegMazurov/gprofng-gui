@@ -1,0 +1,284 @@
+/* Copyright (C) 2022 Free Software Foundation
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses>.  */
+
+package org.gprofng.mpmt.remote;
+
+import org.gprofng.analyzer.AnEnvironment;
+import org.gprofng.mpmt.AnLocale;
+import org.gprofng.mpmt.util.gui.AnDialog2;
+import org.gprofng.mpmt.util.gui.AnUtility;
+import java.awt.Dimension;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.List;
+import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
+import javax.swing.JCheckBox;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+public class AuthenticationPanel extends javax.swing.JPanel {
+  private AnDialog2 dialog;
+  private List<Authentication> data;
+  private CheckBoxList checkBoxList;
+
+  public AuthenticationPanel(AnDialog2 dialog, List<Authentication> authentications) {
+    this.dialog = dialog;
+    this.data = authentications;
+    initComponents();
+    setBackground(AnEnvironment.DEFAULT_PANEL_BACKGROUND);
+
+    infoTextArea.setText(
+        AnLocale.getString(
+            "Select the preferred authentication methods and their order. At least one method must"
+                + " be selected."));
+    AnUtility.setAccessibleContext(infoTextArea.getAccessibleContext(), AnLocale.getString("Info"));
+
+    AnUtility.setTextAndAccessibleContext(upButton, AnLocale.getString("Up"));
+    upButton.setMnemonic(AnLocale.getString('U', "AuthenticationPanel.UpButton"));
+
+    AnUtility.setTextAndAccessibleContext(downButton, AnLocale.getString("Down"));
+    downButton.setMnemonic(AnLocale.getString('D', "AuthenticationPanel.DownButton"));
+
+    AnUtility.setTextAndAccessibleContext(
+        prefAutenticationsLabel, AnLocale.getString("Preferred Authentication Methods:"));
+    prefAutenticationsLabel.setDisplayedMnemonic(
+        AnLocale.getString('P', "AuthenticationPanel.AutenticationsLabel"));
+
+    checkBoxList = new CheckBoxList();
+    for (Authentication auth : authentications) {
+      final Authentication authentication = auth;
+      final JCheckBox checkBox = new JCheckBox(auth.getType().getName());
+      checkBox.setSelected(auth.isOn());
+      checkBoxList.addElement(checkBox);
+      checkBox.addItemListener(
+          new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+              authentication.setOn(checkBox.isSelected());
+              updateStates();
+            }
+          });
+    }
+    prefAutenticationsLabel.setLabelFor(checkBoxList);
+    checkBoxList.setSelectedIndex(0);
+    updateStates();
+
+    authenticationsPanel.add(checkBoxList);
+    authenticationsPanel.setBorder(
+        BorderFactory.createLineBorder(AnEnvironment.STATUS_PANEL_BORDER_COLOR));
+
+    setPreferredSize(new Dimension(400, 200));
+
+    checkBoxList
+        .getSelectionModel()
+        .addListSelectionListener(
+            new ListSelectionListener() {
+              @Override
+              public void valueChanged(ListSelectionEvent e) {
+                updateStates();
+              }
+            });
+  }
+
+  private void setErrorText(String text) {
+    errorLabel.setText(text);
+  }
+
+  private void updateStates() {
+    upButton.setEnabled(false);
+    downButton.setEnabled(false);
+    setErrorText("");
+    dialog.getOKButton().setEnabled(true);
+
+    if (data != null && data.size() > 0) {
+      if (checkBoxList.getSelectedIndex() > 0) {
+        upButton.setEnabled(true);
+      }
+      if (checkBoxList.getSelectedIndex() < data.size() - 1) {
+        downButton.setEnabled(true);
+      }
+    }
+    boolean atLeastOneSelected = false;
+    for (Authentication auth : data) {
+      if (auth.isOn()) {
+        atLeastOneSelected = true;
+        break;
+      }
+    }
+    if (!atLeastOneSelected) {
+      setErrorText(AnLocale.getString("At least one authentication method needs to be selected."));
+      dialog.getOKButton().setEnabled(false);
+    }
+  }
+
+  private void updateSelection(int selectedIndex) {
+    if (selectedIndex >= 0 && selectedIndex <= data.size()) {
+      checkBoxList.setSelectedIndex(selectedIndex);
+      checkBoxList.ensureIndexIsVisible(selectedIndex);
+    }
+  }
+
+  /**
+   * This method is called from within the constructor to initialize the form. WARNING: Do NOT
+   * modify this code. The content of this method is always regenerated by the Form Editor.
+   */
+  @SuppressWarnings("unchecked")
+  // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+  private void initComponents() {
+    java.awt.GridBagConstraints gridBagConstraints;
+
+    infoTextArea = new javax.swing.JTextArea();
+    prefAutenticationsLabel = new javax.swing.JLabel();
+    authenticationsPanel = new javax.swing.JPanel();
+    buttonPanel = new javax.swing.JPanel();
+    upButton = new javax.swing.JButton();
+    downButton = new javax.swing.JButton();
+    errorLabel = new javax.swing.JLabel();
+
+    setLayout(new java.awt.GridBagLayout());
+
+    infoTextArea.setEditable(false);
+    infoTextArea.setLineWrap(true);
+    infoTextArea.setWrapStyleWord(true);
+    infoTextArea.setOpaque(false);
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 0;
+    gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+    gridBagConstraints.weightx = 1.0;
+    add(infoTextArea, gridBagConstraints);
+
+    prefAutenticationsLabel.setText("Preferred Authentications:");
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 1;
+    gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+    gridBagConstraints.insets = new java.awt.Insets(10, 0, 0, 0);
+    add(prefAutenticationsLabel, gridBagConstraints);
+
+    authenticationsPanel.setLayout(new java.awt.BorderLayout());
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 2;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+    gridBagConstraints.weightx = 1.0;
+    gridBagConstraints.weighty = 1.0;
+    gridBagConstraints.insets = new java.awt.Insets(2, 0, 0, 0);
+    add(authenticationsPanel, gridBagConstraints);
+
+    buttonPanel.setOpaque(false);
+    buttonPanel.setLayout(new java.awt.GridBagLayout());
+
+    upButton.setText("Up");
+    upButton.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            upButtonActionPerformed(evt);
+          }
+        });
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 0;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+    buttonPanel.add(upButton, gridBagConstraints);
+
+    downButton.setText("Down");
+    downButton.addActionListener(
+        new java.awt.event.ActionListener() {
+          public void actionPerformed(java.awt.event.ActionEvent evt) {
+            downButtonActionPerformed(evt);
+          }
+        });
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 1;
+    gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+    gridBagConstraints.weighty = 1.0;
+    gridBagConstraints.insets = new java.awt.Insets(6, 0, 0, 0);
+    buttonPanel.add(downButton, gridBagConstraints);
+
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 1;
+    gridBagConstraints.gridy = 2;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_START;
+    gridBagConstraints.weighty = 1.0;
+    gridBagConstraints.insets = new java.awt.Insets(2, 6, 0, 0);
+    add(buttonPanel, gridBagConstraints);
+
+    errorLabel.setForeground(new java.awt.Color(255, 0, 0));
+    errorLabel.setText("Error dsadsa dsadsaldsa dsadsa ");
+    gridBagConstraints = new java.awt.GridBagConstraints();
+    gridBagConstraints.gridx = 0;
+    gridBagConstraints.gridy = 3;
+    gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+    gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+    add(errorLabel, gridBagConstraints);
+  } // </editor-fold>//GEN-END:initComponents
+
+  private void upButtonActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_upButtonActionPerformed
+    int selectedIndex = checkBoxList.getSelectedIndex();
+    if (selectedIndex > 0) {
+      // Update data
+      Authentication auth = data.get(selectedIndex);
+      data.remove(selectedIndex);
+      data.add(selectedIndex - 1, auth);
+      // Update GUI
+      JCheckBox checkBox = checkBoxList.getModel().getElementAt(selectedIndex);
+      ((DefaultListModel) checkBoxList.getModel()).remove(selectedIndex);
+      ((DefaultListModel) checkBoxList.getModel()).add(selectedIndex - 1, checkBox);
+
+      updateSelection(selectedIndex - 1);
+    }
+  } // GEN-LAST:event_upButtonActionPerformed
+
+  private void downButtonActionPerformed(
+      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_downButtonActionPerformed
+    int selectedIndex = checkBoxList.getSelectedIndex();
+    if (selectedIndex < data.size()) {
+      // Update data
+      Authentication auth = data.get(selectedIndex);
+      data.remove(selectedIndex);
+      data.add(selectedIndex + 1, auth);
+      // Update GUI
+      JCheckBox checkBox = checkBoxList.getModel().getElementAt(selectedIndex);
+      ((DefaultListModel) checkBoxList.getModel()).remove(selectedIndex);
+      ((DefaultListModel) checkBoxList.getModel()).add(selectedIndex + 1, checkBox);
+
+      updateSelection(selectedIndex + 1);
+    }
+  } // GEN-LAST:event_downButtonActionPerformed
+
+  protected List<Authentication> getAuthentications() {
+    return data;
+  }
+
+  // Variables declaration - do not modify//GEN-BEGIN:variables
+  private javax.swing.JPanel authenticationsPanel;
+  private javax.swing.JPanel buttonPanel;
+  private javax.swing.JButton downButton;
+  private javax.swing.JLabel errorLabel;
+  private javax.swing.JTextArea infoTextArea;
+  private javax.swing.JLabel prefAutenticationsLabel;
+  private javax.swing.JButton upButton;
+  // End of variables declaration//GEN-END:variables
+}
