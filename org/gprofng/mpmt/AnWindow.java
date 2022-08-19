@@ -2495,7 +2495,7 @@ public final class AnWindow implements AnChangeListener {
         getSystemProgressPanel().progressBarStart(AnLocale.getString("Loading Experiment(s)"));
     resetAllViews();
     if (restart) { // <=== FIXUP: check
-      // re-exec er_print
+      // re-exec gp-display-text
       Analyzer.getInstance()
           .restartEngine(); // Note: do this early so it has a chance to start! FIXUP: need a way to
       // find out when it has starte
@@ -2534,9 +2534,7 @@ public final class AnWindow implements AnChangeListener {
       }
       // Set search path and pathmap efter restart but before loading
       if (groups.length > 0 && !GUITesting.getInstance().isRunningUnderGUITesting()) {
-        // See 22184736 - Analyzer GUI cannot find source file, while er_print can find it using
-        // .er.rc
-        // Accept search path and pathmaps from .er.rc if first time experiment is being loaded
+        // Accept search path and pathmaps from .gprofng.rc if first time experiment is being loaded
         String experiment = groups[0][0];
         String asClosedPath = UserPref.getAsWhenClosedConfigPath(experiment);
         if (!new File(asClosedPath).exists()) {
@@ -2544,24 +2542,14 @@ public final class AnWindow implements AnChangeListener {
           String[] searchPath = SearchPathSetting.getSearchPathIPC();
           UserPref.getInstance().setPathmap(pathMaps);
           UserPref.getInstance().setSearchPath(Arrays.asList(searchPath));
-          //                    System.out.println("PathMap: " + pathMaps[0].length + " " +
-          // pathMaps[1].length);
-          //                    System.out.println("Search Path: " + searchPath.length);
-          //                    for (String s : searchPath) {
-          //                        System.out.println("  " + s);
-          //                    }
         }
-        //                getSettings().getSearchPathSetting().init(this,
-        // UserPref.getInstance().getSearchPath());
-        //                getSettings().getPathMapSetting().init(this,
-        // UserPref.getInstance().getPathmap());
       }
       if (groups.length > 0) {
         getSettings().getSearchPathSetting().init(this, UserPref.getInstance().getSearchPath());
         getSettings().getPathMapSetting().init(this, UserPref.getInstance().getPathmap());
       }
       synchronized (IPC.lock) {
-        IPC().send("setExperimentsGroups"); // IPC
+        IPC().send("setExperimentsGroups");
         IPC().send(groups);
         msg = (String) (IPC().recvString());
       }
@@ -2599,8 +2587,8 @@ public final class AnWindow implements AnChangeListener {
                 userPref.getMetricReversedSort(),
                 userPref.getMetricSortByMTypeList(),
                 userPref.getMetricOrderLists());
-        // Views. Load machine model and custom index/memmory objects before asking for available
-        // views
+        // Views. Load machine model and custom index/memmory objects before
+        // asking for available views
         final String machineModel;
         final String loadedMachineModel = machineModelIPC.getString();
         String savedMachineModel = userPref.getMachineModel();

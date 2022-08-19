@@ -123,7 +123,7 @@ public class IPCErrorReader implements Runnable {
         }
         continue;
       } catch (IPC.AnIPCException ae) {
-        break; // er_print closed stderr
+        break; // gp-display-text closed stderr
       }
     }
   }

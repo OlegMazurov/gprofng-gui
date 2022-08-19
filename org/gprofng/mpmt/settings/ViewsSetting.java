@@ -573,12 +573,12 @@ public class ViewsSetting extends Setting {
     AnWindow window = AnWindow.getInstance();
     int[] ids = (int[]) tabObjs[0];
     String[] cmds = (String[]) tabObjs[1];
-    String[] shortDescs = null; // FIXUP: need short/long descr from er_print
-    String[] longDescs = null; // FIXUP: need short/long descr from er_print
+    String[] shortDescs = null; // FIXUP: need short/long descr from gp-display-text
+    String[] longDescs = null; // FIXUP: need short/long descr from gp-display-text
     for (int i = 0; i < ids.length; i++) {
       AnDispTab anDispTab =
           window
-          .new AnDispTab(ids[i], cmds[i], null, null); // FIXUP: need short/long descr from er_print
+          .new AnDispTab(ids[i], cmds[i], null, null); // FIXUP: need short/long descr from gp-display-text
       list.add(anDispTab);
     }
 

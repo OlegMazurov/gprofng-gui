@@ -37,7 +37,7 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
-// Fetches requested rows (RowDataRequestParams) from er_print and places
+// Fetches requested rows (RowDataRequestParams) from gp-display-text and places
 // row data in TL2DataSnapshot.  Data fetch is asynchronous to the awt thread.
 public final class TL2DataFetcher {
   // passed in on contstruction

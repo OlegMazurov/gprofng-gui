@@ -62,8 +62,8 @@ public class TimelineSetting extends Setting {
   private static String tldata_cmd_default = "all";
 
   public TimelineSetting() {
-    // THOMAS YXXX:  why are PROP_* values hard coded here?  // tl_entity_prop_* should be set only
-    // once per er_print connect
+    // XXX: why are PROP_* values hard coded here?  // tl_entity_prop_* should be set only
+    // once per gp-display-text connect
     List<Integer> tl_entity_prop_ids =
         Arrays.asList(
             Settings.PROP_NONE,

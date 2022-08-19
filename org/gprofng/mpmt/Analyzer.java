@@ -52,7 +52,6 @@ public final class Analyzer {
   public static final String home_dir =
       UserPref.getHomeDirectory(); // System.getProperty("user.home", ".");
   private String workingDirectory = System.getProperty("user.dir", ".");
-  ;
   public String os_name = null;
   public String er_print = null;
   public String localHost = null;
@@ -321,21 +320,21 @@ public final class Analyzer {
     }
     fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CHANGING);
     // $SP_ANALYZER_CONFIG_MODE may be set to "R" to tell the spawned
-    //		er_print to configure for race detection
-    //		It will spawn er_print -RIPC, rather than -IPC in that case
+    //	 gp-display-text to configure for race detection
+    //	 It will spawn gp-display-text -RIPC, rather than -IPC in that case
     //
     // $SP_COLLECTOR_IPC_DEBUG may be set to a string to use to prepend
-    //	to the er_print -[R]IPC command -- examples:
+    //	to the gp-display-text -[R]IPC command -- examples:
     //    "LD_PRELOAD mem.so; "
     //	  "collect -Z -O /dev/null" -- to do the same thing
     //	  "collect -p on -H on -O /dev/null" to collect an experiments
     //		The -O command is necessary, since any IO from
-    //		collect to stdout before the er_print target is
-    //		spawned will confuse the analyzer-er_print
+    //		collect to stdout before the gp-display-text target is
+    //		spawned will confuse the GUI and gp-display-text
     //		communication channel.
     //    "dbx ..." can not be prepended, because there's no way to convince
     //		dbx to not write anything to stdout, and anything written
-    //		will confuse the er_print process
+    //		will confuse the gp-display-text process
 
     String str = null; // AnUtility.getenv("SP_COLLECTOR_IPC_DEBUG");
     if (str != null && !str.equals(emptyString)) {
@@ -354,17 +353,17 @@ public final class Analyzer {
       System.exit(1);
     }
 
-    //  SP_ANALYZER_ER_PRINT may be set to use the other er_print.
+    //  SP_ANALYZER_ER_PRINT may be set to use the other gp-display-text.
     //  Also SP_ANALYZER_ER_PRINT can be used instead SP_COLLECTOR_IPC_DEBUG
     //  For example::
-    //    "ssh host /opt/SUNWSpro/bin/er_print" - to use
-    //          the other er_print on the other machine.
-    //    "LD_PRELOAD mem.so /opt/SUNWSpro/bin/er_print"
-    //	  "collect -H on -O /dev/null /opt/SUNWSpro/bin/er_print" -
+    //    "ssh host /bin/gp-display-text" - to use
+    //          the other gp-display-text on the other machine.
+    //    "LD_PRELOAD mem.so /opt/SUNWSpro/bin/gp-display-text"
+    //	  "collect -H on -O /dev/null /bin/gp-display-text" -
     //          to collect an experiments.
     //		The -O command is necessary, since any IO from
-    //		collect to stdout before the er_print target is
-    //		spawned will confuse the analyzer-er_print
+    //		collect to stdout before the gp-display-text target is
+    //		spawned will confuse the GUI and gp-display-text
     //		communication channel.
     if (er_print == null || er_print.equals(emptyString)) {
       er_print = AnUtility.getenv("SP_ANALYZER_ER_PRINT");
@@ -376,15 +375,14 @@ public final class Analyzer {
 	er_print = "" + DisplayAppName;
       }
     } else {
-      // System.err.println("analyzer: SP_ANALYZER_ER_PRINT='" + er_print + "'");
       IPCLogger.logTrace("\n" + "analyzer: SP_ANALYZER_ER_PRINT='" + er_print + "'");
       if (remoteConnection != null) {
         str = remoteConnection + " " + str;
       }
     }
     System.err.println("fdhome: " + (fdhome == null ? "" : fdhome));
-    System.err.println("er_print: " + er_print);
-    AnLog.log("analyzer: er_print=" + er_print + "\n");
+    System.err.println("gp-display-text: " + er_print);
+    AnLog.log("analyzer: gp-display-text=" + er_print + "\n");
     // Check the OS - only Solaris and Linux are supported
     if (remoteHost == null) {
       if (null == os_name) {
@@ -518,7 +516,7 @@ public final class Analyzer {
       String er_printCmd_extn = " -E SP_IPC_PROTOCOL=" + ipc_protocol;
       er_printCmd = er_printCmd + er_printCmd_extn;
     }
-    // Initialize new IPC connection - start er_print
+    // Initialize new IPC connection - start gp-display-text
     try {
       newIPC.init(er_printCmd, false);
       sendP(newIPC, p, cc);
@@ -1821,7 +1819,7 @@ public final class Analyzer {
       // Measure connection performance (DEBUG)
       measureConnectionPerformance(null);
     }
-    // Initialize the er_ipc (er_print)
+    // Initialize gp-display-text
     final String[] license_info;
     if (IPC_started) {
       license_info = initApplication(false, fdhome, licpath, arguments);
@@ -2025,9 +2023,9 @@ public final class Analyzer {
     }
     // Switch IPCReader to restarting mode
     IPC_session.getIPCReader().suspendThread();
-    // Restart er_print
+    // Restart gp-display-text
     reExec();
-    // Wait till er_print is ready. Maximum 10 seconds
+    // Wait till gp-display-text is ready. Maximum 10 seconds
     int maxmsec = 10000;
     boolean restarted = false;
     int msec = 0;
@@ -2051,7 +2049,7 @@ public final class Analyzer {
     }
     if (restarted == false) {
       // Here we should show an error dialog
-      System.err.println("***** ERROR: Cannot restart er_print. Please, reconnect.");
+      System.err.println("***** ERROR: Cannot restart gp-display-text. Please, reconnect.");
     }
     IPC_session.getIPCReader().runThread();
     // Version Handshake
@@ -2076,11 +2074,8 @@ public final class Analyzer {
     startConnectionManager();
   } // Native methods from liber_dbe.so
 
-  /** Restart "er_ipc" ("er_print") */
+  /** Restart gp-display-text */
   public void reExec() {
-    //        IPCContext ipcc = IPCContext.newCurrentContext("OpenExperiment",
-    // IPCContext.Scope.WINDOW, false, AnWindow.getInstance());
-    //        ipcc.setCancellable(true);
     IPCHandle ipcHandle = new IPCHandle(IPCHandle.RequestKind.DBE, null);
     ipcHandle.append("reExec");
     IPCResult ipcResult = ipcHandle.sendRequest();
@@ -2113,8 +2108,8 @@ public final class Analyzer {
         int er_printVersion = ipcResult.getVersion();
         if (er_printVersion != IPCProtocol.version) {
           System.err.println("Frontend/backend protocol version mis-match:");
-          System.err.println("Analyzer version: " + IPCProtocol.version);
-          System.err.println("er_print version: " + er_printVersion);
+          System.err.println("GUI version: " + IPCProtocol.version);
+          System.err.println("gp-display-text version: " + er_printVersion);
           return (1);
         }
       }

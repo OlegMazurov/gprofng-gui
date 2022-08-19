@@ -120,8 +120,8 @@ public class AnFileSystemView extends FileSystemView {
   }
 
   /**
-   * Gets the list of shown (i.e. not hidden) files. Use '/bin/ls' or 'er_print' to get the list of
-   * remote files
+   * Gets the list of shown (i.e. not hidden) files. Use '/bin/ls' or
+   * 'gp-display-text' to get the list of remote files
    */
   @Override
   public synchronized File[] getFiles(File directory, boolean isFileHidingEnabled) {
@@ -146,7 +146,7 @@ public class AnFileSystemView extends FileSystemView {
       // Try to get directory contents
       if (firstEntry) { // First time try to use /bin/ls
         // firstEntry = false;
-      } else { // Try to get directory contents from er_print
+      } else { // Try to get directory contents from gp-display-text
         try {
           String filenames = lastResponse; // Debug optimization
           // Debug optimization
@@ -180,8 +180,6 @@ public class AnFileSystemView extends FileSystemView {
               lastRequest = dirname; // Debug optimization
               lastResponse = filenames; // Debug optimization
               end = System.currentTimeMillis();
-              // System.out.println("getFiles(" + dirname + ") using er_print: " + (end - start) + "
-              // ms.");
               return filterHiddenFiles(files, isFileHidingEnabled);
             }
           }
@@ -190,7 +188,7 @@ public class AnFileSystemView extends FileSystemView {
           // System.err.println("AnFileSystemView.getFiles: AnIPCException CR 7199013 Thread
           // ID="+ThreadID);
           IPCLogger.logTrace(
-              "\n" + "AnFileSystemView.getFiles: AnIPCException CR 7199013 Thread ID=" + ThreadID);
+              "\nAnFileSystemView.getFiles: AnIPCException CR 7199013 Thread ID=" + ThreadID);
         } catch (Exception e) {
           e.printStackTrace();
           // continue using /bin/ls
@@ -367,7 +365,7 @@ public class AnFileSystemView extends FileSystemView {
         dirname = dir.getCanonicalPath();
       }
       String filename = file.getPath();
-      // Try to get this info from er_print
+      // Try to get this info from gp-display-text
       String fullfilename = filename;
       if (!fullfilename.startsWith(SLASH)) {
         if (null != dirname) {
@@ -389,7 +387,6 @@ public class AnFileSystemView extends FileSystemView {
             return true;
           }
         }
-        // System.err.println("ERROR: er_print returned "+fattr+" , fullfilename: "+fullfilename);
         fattr = null;
       }
       if (null == fattr) {
@@ -545,7 +542,7 @@ public class AnFileSystemView extends FileSystemView {
       // Temporary fix for Windows
       dirname = slashifyPath(dirname);
       String cmd = "/bin/ls -aF";
-      // Try to get this info from er_print
+      // Try to get this info from gp-display-text
       // filenames = anWindow.getFiles(dirname, cmd);
       filenames = IPC_getFiles(dirname, cmd);
       if (filenames.length() > 0) {

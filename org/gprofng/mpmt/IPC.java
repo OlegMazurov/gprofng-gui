@@ -33,7 +33,7 @@ public final class IPC {
   private IPCProcess thisProcess;
   private Process delegate;
   private Analyzer parent_Analyzer;
-  private String cmd; // er_print path + option
+  private String cmd; // gp-display-text path + option
   private IPCHandle ipcHandle = null;
   private IPCResult ipcResult = null;
   private IPCReader ipcReader;
@@ -68,7 +68,7 @@ public final class IPC {
   }
 
   /**
-   * @return trimmed er_print command path plus IPC argument
+   * @return trimmed gp-display-text command path plus IPC argument
    */
   public String getCmd() {
     return cmd.trim();
@@ -82,7 +82,6 @@ public final class IPC {
     processOutput = delegate.getInputStream();
     processInput = delegate.getOutputStream();
     processError = delegate.getErrorStream();
-
     thisProcess =
         new IPCProcess(parent_Analyzer, delegate, processInput, processOutput, processError);
 

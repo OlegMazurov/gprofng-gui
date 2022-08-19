@@ -1,0 +1,26 @@
+
+The GNU gprofng GUI is a feature rich graphical user interface for the GNU
+gprofng tool. It makes it possible to interactively analyze and compare gprofng
+profiling experiments. Users can drill into an applications profile together
+with the applications code to gather an understanding and insight into
+what an application is doing throughout it's runtime.
+
+The GUI is a Java application utilizing the Swing GUI framework.
+
+To build and install gprofng GUI:
+  PREFIX=`pwd`/INSTALL
+  # Download and install gprofng (binutils-gdb):
+  git clone http://sourceware.org/git/binutils-gdb.git binutils-gdb.git
+  mkdir bld_binutils
+  ( cd bld_binutils && ../binutils-gdb.git/configure --prefix=$PREFIX && make && make install )
+
+  # Download and install gprofng GUI:
+  git clone git://ca-tools4.us.oracle.com/gprofng-gui.git gprofng-gui.git
+  mkdir bld_gui
+  ( cd gprofng-gui.git && ../binutils-gdb.git/configure --prefix=$PREFIX  && make && make install )
+
+
+To run the GUI
+  $PREFIX/bin/gprofng display gui [gui-options] [experiment]
+
+

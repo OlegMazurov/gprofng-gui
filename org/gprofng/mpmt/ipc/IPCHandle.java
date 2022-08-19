@@ -249,7 +249,7 @@ public class IPCHandle {
           System.err.println(msg);
         } else {
           if (Analyzer.getInstance().IPC_started != false) {
-            System.err.println("Connection closed (er_print died unexpectedly)");
+            System.err.println("Connection closed (gp-display-text died unexpectedly)");
           } else {
             // Normal exit
             System.exit(0); // Should we simply return null here?

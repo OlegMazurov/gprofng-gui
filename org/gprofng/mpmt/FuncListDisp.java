@@ -417,7 +417,7 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
       int printLimit = limit != null ? limit : 0;
       textImage += table.printTableContents(MaximumValues, printLimit);
     } else if (format == ExportFormat.CSV || format == ExportFormat.HTML) {
-      // FIXUP: code shold be moved form er_print to Analyzer
+      // FIXUP: code shold be moved form gp-display-text to GUI
       AnUtility.checkIPCOnWrongThread(false);
       Export.setLimit(limit);
       Export.setFormat(format, delimiter);

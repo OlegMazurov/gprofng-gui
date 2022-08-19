@@ -62,7 +62,7 @@ public final class DataDescriptor {
     return name;
   }
 
-  public String getAuxName(int aux) { // er_print metrics command for HWCs
+  public String getAuxName(int aux) { // gp-display-text metrics command for HWCs
     if (aux_count == 0) {
       return null;
     }
@@ -74,7 +74,7 @@ public final class DataDescriptor {
     return auxName;
   }
 
-  public String getAuxUName(int aux) { // er_print metrics command for HWCs' description
+  public String getAuxUName(int aux) { // gp-display-text metrics command for HWCs' description
     if (aux_count == 0) {
       return null;
     }
@@ -86,7 +86,7 @@ public final class DataDescriptor {
     return auxName;
   }
 
-  public String getErRcTLDataCmdName(int aux) { // tldata .er.rc command
+  public String getErRcTLDataCmdName(int aux) { // tldata .gprofng.rc command
     String cmd = Settings.getErRcTLDataCmdName(tldata_type, getAuxName(aux));
     return cmd;
   }

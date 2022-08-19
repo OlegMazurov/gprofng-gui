@@ -394,8 +394,9 @@ public abstract class AnDisplay extends JPanel {
   }
 
   /**
-   * Some views show only 'Values' and not Exclusive and Inclusive in tables. Fixup: they come in as
-   * 'Exclusive' but are not really 'Exclusive'. Should be fixed in er_print
+   * Some views show only 'Values' and not Exclusive and Inclusive in tables.
+   * Fixup: they come in as 'Exclusive' but are not really 'Exclusive'.
+   * Should be fixed in gp-display-text
    *
    * @return
    */
@@ -411,8 +412,8 @@ public abstract class AnDisplay extends JPanel {
   }
 
   /**
-   * Some views show only 'Included' and not Exclusive and Inclusive in tables. Fixup: Should be
-   * fixed in er_print...
+   * Some views show only 'Included' and not Exclusive and Inclusive in tables.
+   * Fixup: Should be in gp-display-text.
    *
    * @return
    */
@@ -421,8 +422,9 @@ public abstract class AnDisplay extends JPanel {
   }
 
   /**
-   * Some views show only 'Attributed' and not Exclusive and Inclusive in tables. Fixup: they come
-   * in as 'Exclusive' but are not really 'Exclusive'. Should be fixed in er_print
+   * Some views show only 'Attributed' and not Exclusive and Inclusive in tables.
+   * Fixup: they come in as 'Exclusive' but are not really 'Exclusive'.
+   * Should be fixed in gp-display-text
    *
    * @return
    */

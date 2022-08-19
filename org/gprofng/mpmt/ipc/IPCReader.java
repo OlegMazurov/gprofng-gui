@@ -30,9 +30,9 @@ public class IPCReader implements Runnable {
   private final int RUNNING = 2;
   private final int REQUEST_TO_STOP = 3;
   private final int CONNECTING =
-      4; // NM Temporary solution for remote analyzer: special state "CONNECTING"
-  private final int CONNECTION_CLOSDED = 5; // Connection closed by er_print
-  private final int RESTARTING = 6; // NM Restarting er_print
+      4; // Temporary solution for remote analyzer: special state "CONNECTING"
+  private final int CONNECTION_CLOSDED = 5; // Connection closed by gp-display-text
+  private final int RESTARTING = 6; // Restarting gp-display-text
   private int state = READY_TO_RUN;
   private String unknown_input = "";
   // Internal statistics
@@ -179,7 +179,7 @@ public class IPCReader implements Runnable {
           }
           String restartEngine = "Restart engine";
           if (unknown_input.contains(restartEngine)) {
-            // System.err.println("***** NOTE: er_print restarted");
+            // System.err.println("***** NOTE: gp-display-text restarted");
             resumeThread();
             // System.err.println("***** NOTE: unknown_input:" + unknown_input);
             // clean unknown input
@@ -252,22 +252,21 @@ public class IPCReader implements Runnable {
         }
       } else {
         if (IPCResponseHeader.ResponseType.PROGRESS == ipcResponseHeader.getResponseType()) {
-          //                    System.err.println("***** NOTE: IPCReader: PROGRESS:
-          // ipcResult==null");
-          //                    // Check responseBody
-          //                    String restartEngine = "Restart engine";
-          //                    IPCProtocol.CurChar curChar = new IPCProtocol.CurChar();
-          //                    int progress = IPCProtocol.decodeByte(responseBody, curChar);
-          //                    int percentage = IPCProtocol.decodeIVal(responseBody, curChar);
-          //                    String what = IPCProtocol.decodeSVal(responseBody, curChar);
-          //                    if (100 == percentage) {
-          //                        if (restartEngine.equals(what)) {
-          //                            if ((state == RESTARTING) || (state == CONNECTING)) {
-          //                                resumeThread();
-          //                                System.err.println("***** NOTE: er_print restarted");
-          //                            }
-          //                        }
-          //                    }
+          // System.err.println("***** NOTE: IPCReader: PROGRESS: ipcResult==null");
+          // // Check responseBody
+          // String restartEngine = "Restart engine";
+          // IPCProtocol.CurChar curChar = new IPCProtocol.CurChar();
+          // int progress = IPCProtocol.decodeByte(responseBody, curChar);
+          // int percentage = IPCProtocol.decodeIVal(responseBody, curChar);
+          // String what = IPCProtocol.decodeSVal(responseBody, curChar);
+          // if (100 == percentage) {
+          //   if (restartEngine.equals(what)) {
+          //     if ((state == RESTARTING) || (state == CONNECTING)) {
+          //       resumeThread();
+          //       System.err.println("***** NOTE: gp-display-text restarted");
+          //     }
+          //   }
+          // }
           continue;
         }
         // System.err.println("********************ERROR: IPCReader: state="+state+"

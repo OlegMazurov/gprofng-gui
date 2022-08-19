@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import javax.swing.JOptionPane;
 
-/** Process which delegates unix Runtime.exec process for er_print -IPC */
+/** Process which delegates Runtime.exec process for gp-display-text -IPC */
 public final class IPCProcess extends Process {
   private OutputStream stdin;
   private InputStream stdout, stderr;
@@ -130,43 +130,43 @@ public final class IPCProcess extends Process {
           msg = AnLocale.getString("Communication channel will be closed");
           break;
         case 2: // SIGINT
-          msg = AnLocale.getString("er_print has been interrupted.");
+          msg = AnLocale.getString("gp-display-text has been interrupted.");
           break;
         case 3: // SIGQUIT
-          msg = AnLocale.getString("er_print has quit.");
+          msg = AnLocale.getString("gp-display-text has quit.");
           break;
         case 4: // SIGILL
-          msg = AnLocale.getString("Illegal instruction in er_print.");
+          msg = AnLocale.getString("Illegal instruction in gp-display-text.");
           break;
         case 5: // SIGTRAP
-          msg = AnLocale.getString("Trace/Breakpoint trap in er_print.");
+          msg = AnLocale.getString("Trace/Breakpoint trap in gp-display-text.");
           break;
         case 6: // SIGABRT
-          msg = AnLocale.getString("er_print has been aborted.");
+          msg = AnLocale.getString("gp-display-text has been aborted.");
           break;
         case 7: // SIGEMT
-          msg = AnLocale.getString("Emulation trap in er_print.");
+          msg = AnLocale.getString("Emulation trap in gp-display-text.");
           break;
         case 8: // SIGFPE
-          msg = AnLocale.getString("Floating point exception in er_print.");
+          msg = AnLocale.getString("Floating point exception in gp-display-text.");
           break;
         case 9: // SIGKILL
-          msg = AnLocale.getString("er_print has been killed.");
+          msg = AnLocale.getString("gp-display-text has been killed.");
           break;
         case 10: // SIGBUS
-          msg = AnLocale.getString("Bus Error in er_print.");
+          msg = AnLocale.getString("Bus Error in gp-display-text.");
           break;
         case 11: // SIGSEGV
-          msg = AnLocale.getString("Segmentation Fault in er_print.");
+          msg = AnLocale.getString("Segmentation Fault in gp-display-text.");
           break;
         case 15: // SIGTERM
-          msg = AnLocale.getString("er_print has been terminated.");
+          msg = AnLocale.getString("gp-display-text has been terminated.");
           break;
         case 16: // SIGUSR1
-          msg = AnLocale.getString("Out of memory Error in er_print.");
+          msg = AnLocale.getString("Out of memory Error in gp-display-text.");
           break;
         default: // All other signals
-          msg = AnLocale.getString("er_print has exited unexpectedly.");
+          msg = AnLocale.getString("gp-display-text has exited unexpectedly.");
           break;
       }
 

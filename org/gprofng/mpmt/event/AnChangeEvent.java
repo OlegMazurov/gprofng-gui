@@ -33,8 +33,8 @@ public class AnChangeEvent extends EventObject {
     FILTER_CHANGING, // fired when filters are about to change
     FILTER_CHANGED, // fired when filters have changed
 
-    SOURCE_FINDING_CHANGING, // fired when find source are changing (archive, er_print pathmap, ...)
-    SOURCE_FINDING_CHANGED, // fired when find source are changing (archive, er_print pathmap, ...)
+    SOURCE_FINDING_CHANGING, // fired when find source are changing (archive, gp-display-text pathmap, ...)
+    SOURCE_FINDING_CHANGED, // fired when find source are changing (archive, gp-display-text pathmap, ...)
 
     EXPERIMENTS_LOADING_NEW, // fired when new experiment(s) are about to be loaded from scratch
     EXPERIMENTS_LOADING_ADDED_OR_REMOVED, // fired when new experiment(s) are about to be added or

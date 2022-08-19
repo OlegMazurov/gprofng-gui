@@ -320,11 +320,11 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
       if ((path == null) || (path.length() < 1)) {
         return (AnLocale.getString("Error: Installation Path is not specified."));
       }
-      if (!path.endsWith("er_print")) {
+      if (!path.endsWith("gp-display-text")) {
         if (path.endsWith("bin") || path.endsWith("bin/")) {
-          path = path + "/er_print";
+          path = path + "/gp-display-text";
         } else {
-          path = path + "/bin/er_print";
+          path = path + "/bin/gp-display-text";
         }
       }
       String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, path, connectionProperties);

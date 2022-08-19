@@ -1022,7 +1022,7 @@ public final class AnUtility {
               + '\n'
               + // NOI18N
               ((tmp == null)
-                  ? AnLocale.getString("er_print exited due to internal error") + '\n'
+                  ? AnLocale.getString("gp-display-text exited due to internal error") + '\n'
                   : "")
               + // NOI18N
               AnLocale.getString("Exception in thread ")
@@ -1051,15 +1051,15 @@ public final class AnUtility {
     Exception awtException = new Exception();
     StackTraceElement[] se = awtException.getStackTrace();
     StringBuilder s = new StringBuilder();
-    String msg = shouldBe ? "Should be on AWT" : "Should not be on AWT"; // NOI18N
-    s.append("*** Wrong Thread: " + msg + "\n"); // NOI18N
-    s.append(Thread.currentThread().getName() + "\n"); // NOI18N
+    String msg = shouldBe ? "Should be on AWT" : "Should not be on AWT";
+    s.append("*** Wrong Thread: " + msg + "\n");
+    s.append(Thread.currentThread().getName() + "\n");
     for (int i = 0; i < se.length; i++) {
-      s.append(se[i].toString() + "\n"); // NOI18N
+      s.append(se[i].toString() + "\n");
     }
     AnLog.log(s.toString());
     System.err.println(
-        "analyzer: Invalid use of AWT thread. See log file: " + AnLog.getLogFilePath()); // NOI18N
+        "analyzer: Invalid use of AWT thread. See log file: " + AnLog.getLogFilePath());
   }
 
   public static void checkIPCOnWrongThread(boolean set) {

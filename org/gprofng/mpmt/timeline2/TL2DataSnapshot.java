@@ -41,7 +41,7 @@ import java.util.Map;
 // The array for storing results, rowResults, is allocated only once and
 //     has a fixed size and a fixed set of RowData objects.
 // Note, however, that components within RowData
-//     are modified as data gets populated from er_print.
+//     are modified as data gets populated from gp-display-text.
 
 public class TL2DataSnapshot {
   public static class EntityData {

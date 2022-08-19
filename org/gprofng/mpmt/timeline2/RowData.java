@@ -27,7 +27,7 @@ public class RowData {
   public final RowDefinition rowDefinition; // immutable
   public final int idx; // location within RowData list (stable for life of snapshot)
 
-  // dynamic data from er_print
+  // dynamic data from gp-display-text
   private RowDataRequestParams params;
   private GenericEvent[] events; // primary row events
   private Object[] perPropChartData; // chart data
