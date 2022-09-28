@@ -74,7 +74,7 @@ public class ConnectionPanel extends JPanel {
     solstudioPathLabel.setText(AnLocale.getString("Installation Path:"));
     solstudioPathLabel.setToolTipText(
         AnLocale.getString(
-            "Full path to the Oracle Developer Studio software accessible on the remote system"));
+            "Full path to the gprofng installation accessible on the remote system"));
     solstudioPathLabel.setDisplayedMnemonic(AnLocale.getString('I', "RemoteDialogPathLabelMN"));
     solstudioPathLabel.setLabelFor(solstudioPathTextField);
 
