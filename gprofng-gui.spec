@@ -1,21 +1,17 @@
 
-Summary: A GNU gprofng GUI collection.
-Name: binutils-gprofng-gui
+Summary: Graphical User Interface for the gprofng profiler.
+Name: gprofng-gui
 Version: 2.39.50
-Release: 24.0.1%{?dist}
+Release: 1%{?dist}
 License: GPLv3+
-URL: https://sourceware.org/binutils
-Source: https://ftp.gnu.org/gnu/binutils/gprofng-gui-%{version}.tar.xz
+URL: https://www.gnu.org/software/gprofng-gui
+Source: https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-%{version}.tar.xz
 BuildRequires: autoconf automake make sed coreutils
+BuildRequires: jdk >= 1.8
 
-# We need java-1.8.0 or late to build and run.
-# How can I set it in the .spec file ?
-#BuildRequires: java
-#Requires: java
+Requires: binutils >= 2.39
+Requires: jdk >= 1.8
 
-Requires: binutils = %{version}-%{release}
-
-Summary: GUI part for gprofng
 Provides: gprofng-gui = %{version}-%{release}
 
 %description
@@ -40,20 +36,13 @@ what an application is doing throughout it's runtime.
 %install
 %make_install DESTDIR=%{buildroot}
 
-#----------------------------------------------------------------------------
-%post
-exit 0
-
-#----------------------------------------------------------------------------
-%preun
-exit 0
 
 #----------------------------------------------------------------------------
 %files
 %{_bindir}/gp-display-gui
-%{_datadir}/gprofng-tools/gprofng-analyzer.jar
-%{_datadir}/gprofng-tools/gprofng-collector.jar
-%{_datadir}/gprofng-tools/gprofng.jar
+%{_datadir}/%{name}/gprofng-analyzer.jar
+%{_datadir}/%{name}/gprofng-collector.jar
+%{_datadir}/%{name}/gprofng.jar
 
 #----------------------------------------------------------------------------
 %changelog

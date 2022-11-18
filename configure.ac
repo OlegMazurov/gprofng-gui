@@ -13,7 +13,7 @@ dnl
 dnl You should have received a copy of the GNU General Public License
 dnl along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([gprofng-tools], 1.0)
+AC_INIT([gprofng-gui], 1.0)
 AM_INIT_AUTOMAKE
 AC_PROG_CC
 AC_CONFIG_FILES(Makefile)

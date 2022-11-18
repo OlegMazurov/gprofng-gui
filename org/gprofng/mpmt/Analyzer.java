@@ -151,7 +151,7 @@ public final class Analyzer {
   private static String IPC_PROTOCOL = IPCProtocol.IPC_PROTOCOL_STR;
   private final String ipc_protocol = IPC_PROTOCOL;
 
-  private static final String JSSH_jar = "/share/gprofng-tools/JSSH3.jar";
+  private static final String JSSH_jar = "/share/gprofng-gui/JSSH3.jar";
   private static final String DisplayAppName = "gp-display-text";
   private static final String CollectAppName = "gp-collect-app";
   private static final String KernelAppName = "gp-collect-kernel";

@@ -303,7 +303,7 @@ PID=$$
 LOG="${USER_DIR}/an.${PID}.log"
 /bin/rm -f -- "${LOG}"
 
-gprofng_jar="${fdhome}/share/gprofng-tools/gprofng-analyzer.jar"
+gprofng_jar="${fdhome}/share/gprofng-gui/gprofng-analyzer.jar"
 if [ $verbose = "true" ] ; then
     echo "Run java:"
     echo "'$jdkhome/bin/java' $jargs -jar ${gprofng_jar} $args > ${LOG} 2>&1"
