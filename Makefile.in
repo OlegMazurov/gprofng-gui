@@ -1067,7 +1067,11 @@ $(collector_JAR): $(JAVA_PROFAPI_DIR) $(collector_FILES) $(collector_MF)
 
 gp-display-gui: $(srcdir)/gprofng-gui.sh
 	@echo "================= $@"
-	sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh > $@
+	sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh \
+	  | sed -e "s~GPROFNG_bindir=~GPROFNG_bindir='$(bindir)'~" \
+	  | sed -e "s~GPROFNG_libdir=~GPROFNG_libdir='$(libdir)'~" \
+	  | sed -e "s~GPROFNG_datadir=~GPROFNG_datadir='$(datadir)'~" \
+	  > $@
 	chmod +x $@
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.

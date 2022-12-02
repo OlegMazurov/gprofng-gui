@@ -1362,7 +1362,8 @@ public final class Analyzer {
     if (!isRemote()) {
       String collectPath = null; // AnUtility.getenv("SP_ANALYZER_COLLECT");
       if (collectPath == null || collectPath.length() == 0) {
-        collectPath = new File(fdhome).getAbsolutePath() + CollectAppName;
+        collectPath = UserPref.binDirFromCommandLine != null ?
+          UserPref.binDirFromCommandLine + "/" + CollectAppName : CollectAppName;
         AnLog.log("analyzer: collect=" + collectPath + "\n");
       } else {
         AnLog.log("analyzer: SP_ANALYZER_COLLECT=" + collectPath + "\n"); // DEBUG

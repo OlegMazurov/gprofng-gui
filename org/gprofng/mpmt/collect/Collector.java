@@ -486,7 +486,7 @@ public class Collector {
           if (line.length() > 0) {
             collect_output += line + eol;
           }
-          String pattern1 = "Creating experiment database ";
+          String pattern1 = "Creating experiment directory ";
           int idx = line.indexOf(pattern1);
           if (idx >= 0) {
             String substr = line.substring(idx + pattern1.length());

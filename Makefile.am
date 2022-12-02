@@ -623,7 +623,11 @@ CLEANFILES = $(bin_SCRIPTS) $(ANALYZER_JAR) $(GPROFNG_CLASSES)
 
 gp-display-gui: $(srcdir)/gprofng-gui.sh
 	@echo "================= $@"
-	sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh > $@
+	sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh \
+	  | sed -e "s~GPROFNG_bindir=~GPROFNG_bindir='$(bindir)'~" \
+	  | sed -e "s~GPROFNG_libdir=~GPROFNG_libdir='$(libdir)'~" \
+	  | sed -e "s~GPROFNG_datadir=~GPROFNG_datadir='$(datadir)'~" \
+	  > $@
 	chmod +x $@
 
 dist_pkgdata_DATA = $(ANALYZER_JAR) $(collector_JAR) $(anmodule_JAR)

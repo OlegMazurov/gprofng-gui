@@ -42,7 +42,7 @@ public final class AnMain {
 
   private static JOptionPane importOldSettingPane = null;
   private static final int JVM_MAJOR = 1;
-  private static final int JVM_MINOR = 7;
+  private static final int JVM_MINOR = 8;
   /* The size of the fonts in the UI - 0 pt. The value can be changed
   by command-line argument -fontsize <size> */
   private static int uiFontSize = 0;
@@ -77,6 +77,10 @@ public final class AnMain {
         }
         String userdir = args[++i];
         UserPref.getInstance().setUserDir(userdir);
+      } else if (argvOrig.startsWith("--bindir=")) {
+        UserPref.binDirFromCommandLine = argvOrig.substring(argvOrig.indexOf("=") + 1);
+      } else if (argvOrig.startsWith("--datadir=")) {
+        UserPref.dataDirFromCommandLine = argvOrig.substring(argvOrig.indexOf("=") + 1);
       } else {
         argsExp.add(argvOrig);
         // This argument is an experiment name, or a name of a binary to profile
@@ -117,7 +121,7 @@ public final class AnMain {
             + Analyzer.jvm_ver
             + AnLocale.getString(" found at ")
             + Analyzer.jvm_home
-            + AnLocale.getString(" should not be used by the Performance tools. ")
+            + AnLocale.getString(" should not be used by the gprofng tools.\n")
             + rec_ver
             + AnLocale.getString(" is recommended.\n")
             + AnLocale.getString("Use the -j option to specify a path to ")
@@ -160,7 +164,7 @@ public final class AnMain {
         minor = 9;
       }
     }
-    if ((major < JVM_MAJOR) || (minor < JVM_MINOR)) {
+    if (major == 0 || (major == 1 && minor < 8) || major < 8) {
       warningVersion();
     }
     ToolTipManager.sharedInstance().setInitialDelay(250);

@@ -118,6 +118,9 @@ public class UserPref {
   public static final String configDefaultName = "default";
   public static final String configurationSuffix = ".config.xml";
   private static String userDirFromCommandLine = null; // from gp-display-gui script
+  public static String binDirFromCommandLine = null;
+  public static String dataDirFromCommandLine = null;
+  
   private static long threeMonth = 90l * 24l * 3600l * 1000l; // 3 month
 
   private int version;

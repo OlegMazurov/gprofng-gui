@@ -1724,7 +1724,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
         cmds[i] = (String) iter.next();
         col_cmd += cmds[i] + ipc_str_space;
         if ((i == 0) && (null != output_file_name)) {
-          col_cmd += "-O " + output_file_name + ipc_str_space;
+          col_cmd += "--outfile" + ipc_str_space + output_file_name + ipc_str_space;
         }
       }
       // Temporary correction of default HWC set

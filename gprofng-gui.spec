@@ -7,10 +7,10 @@ License: GPLv3+
 URL: https://www.gnu.org/software/gprofng-gui
 Source: https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-%{version}.tar.xz
 BuildRequires: autoconf automake make sed coreutils
-BuildRequires: jdk >= 1.8
+BuildRequires: jdk
 
-Requires: binutils >= 2.39
-Requires: jdk >= 1.8
+Requires: binutils-gprofng >= 2.39
+Requires: jdk
 
 Provides: gprofng-gui = %{version}-%{release}
 

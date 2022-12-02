@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Copyright (C) 2022 Free Software Foundation
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,6 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 # loader for gprofng GUI
-
 
 #
 # L10N Message translation utility
@@ -99,8 +98,6 @@ verbose="false"
 
 # end of defaults
 
-PRG=$0
-
 PATH=$PATH:/bin:/usr/bin
 export PATH
 
@@ -110,28 +107,19 @@ export PATH
 
 OS_TYPE=`/bin/uname`
 
-#
-# resolve symlinks
-#
+PRG=$(readlink -f -- "$0")
+progdir=$(dirname -- "$PRG")
 
-while [ -h "$PRG" ]; do
-    ls=`ls -ld "$PRG"`
-    link=`expr "$ls" : '^.*-> \(.*\)$' 2>/dev/null`
-    if expr "$link" : '^/' > /dev/null 2>/dev/null; then
-	PRG="$link"
-    else
-	PRG="`dirname $PRG`/$link"
-    fi
-done
-
-progdir=`dirname $PRG`
 fdhome="$progdir/.."
+
+GPROFNG_bindir=
+GPROFNG_libdir=
+GPROFNG_datadir=
 
 #
 # L10N path
 #
-
-NLSPATH="$progdir/../lib/locale/%L/LC_MESSAGES/%N.cat:$progdir/../lib/locale/%L/LC_MESSAGES/%N:$NLSPATH"
+NLSPATH="${GPROFNG_libdir}/locale/%L/LC_MESSAGES/%N.cat:${GPROFNG_libdir}/locale/%L/LC_MESSAGES/%N:$NLSPATH"
 export NLSPATH
 
 #
@@ -149,7 +137,7 @@ cd "$fdhome"; fdhome=`pwd`; cd "$oldpwd"; unset oldpwd
 
 jargs=$jvmflags
 
-args=""
+args="--bindir='${GPROFNG_bindir}' --datadir='${GPROFNG_datadir}'"
 
 # see if invoked as "tha" or "rdt", and set environment variable accordingly
 if [ "`basename $0`" = "tha" -o "`basename $0`" = "rdt" ]; then
@@ -246,8 +234,8 @@ if [ "$jdkhome" = "" ]; then
     if [ "$jdkhome" = "" ]; then
         javaloc=`LC_ALL=C type java | sed -e 's|^[^/]*||' | sed -e "s|/java'|/java|"`
         if [ -f "$javaloc" ]; then
-            javaloc1=`/usr/bin/dirname "$javaloc"`
-            jdkhome=`/usr/bin/dirname "$javaloc1"`
+            javaloc1=$(dirname -- "$javaloc")
+            jdkhome=$(dirname -- "$javaloc1")
             java_how="PATH"
         fi
     fi
@@ -303,11 +291,10 @@ PID=$$
 LOG="${USER_DIR}/an.${PID}.log"
 /bin/rm -f -- "${LOG}"
 
-gprofng_jar="${fdhome}/share/gprofng-gui/gprofng-analyzer.jar"
+gprofng_jar="${GPROFNG_datadir}/gprofng-gui/gprofng-analyzer.jar"
 if [ $verbose = "true" ] ; then
     echo "Run java:"
     echo "'$jdkhome/bin/java' $jargs -jar ${gprofng_jar} $args > ${LOG} 2>&1"
-#    echo "  /usr/bin/strace -v -f -t -o '${USER_DIR}/truss.log' '$jdkhome/bin/java' $jargs -jar ${gprofng_jar} $args > '${LOG}' 2>&1"
 #    eval "/usr/bin/strace -v -f -t -o ${USER_DIR}/truss.log '$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args
 #    exit
 fi
