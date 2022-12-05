@@ -164,7 +164,7 @@ public final class AnMain {
         minor = 9;
       }
     }
-    if (major == 0 || (major == 1 && minor < 8) || major < 8) {
+    if (major == 0 || (major == 1 && minor < 8) || (major > 1 && major < 8)) {
       warningVersion();
     }
     ToolTipManager.sharedInstance().setInitialDelay(250);
