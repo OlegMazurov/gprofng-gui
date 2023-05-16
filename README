@@ -17,8 +17,7 @@ To build and install gprofng GUI:
   # Download and install gprofng GUI:
   git clone http://PATH_TO_GPROFNG_GUI_REPO gprofng-gui.git
   mkdir bld_gui
-  ( cd gprofng-gui.git && ../binutils-gdb.git/configure --prefix=$PREFIX  && make && make install )
-
+  ( cd bld_gui && ../gprofng-gui.git/configure --prefix=$PREFIX  && make && make install )
 
 To run the GUI:
   $PREFIX/bin/gprofng display gui [gui-options] [experiment]
