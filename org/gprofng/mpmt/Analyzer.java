@@ -44,7 +44,7 @@ import javax.swing.JOptionPane;
 public final class Analyzer {
 
   // Runtime environment
-  public static final String PERFORMANCE_ANALYZER_RELEASE_NAME = "Gprof GUI";
+  public static final String PERFORMANCE_ANALYZER_RELEASE_NAME = "gprofng GUI";
   public static final String THIS_VERSION = "12.6";
 
   public static final String jvm_ver = System.getProperty("java.version", "unknown");
@@ -136,16 +136,16 @@ public final class Analyzer {
       AnLocale.getString("Empty host name is not valid. Please specified remote host.");
   private String explanation_3_1 =
       AnLocale.getString(
-          "Gprofng GUI did not get a reply from the remote host. Please check that the"
+          "gprofng GUI did not get a reply from the remote host. Please check that the"
               + " specified remote host exists, and the specified Installation Path exists on the"
               + " remote host.");
   private String explanation_3_2 =
       AnLocale.getString(
-          "Gprofng GUI did not get a reply from the remote host. Please check that the"
+          "gprofng GUI did not get a reply from the remote host. Please check that the"
               + " specified Installation Path exists on the remote host.");
   private String explanation_9 =
       AnLocale.getString(
-          "Gprofng GUI version does not match version on the remote host as specified by"
+          "gprofng GUI version does not match version on the remote host as specified by"
               + " the Installation Path.");
   // Connection protocol version
   private static String IPC_PROTOCOL = IPCProtocol.IPC_PROTOCOL_STR;

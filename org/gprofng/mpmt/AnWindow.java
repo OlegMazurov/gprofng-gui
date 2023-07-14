@@ -239,17 +239,17 @@ public final class AnWindow implements AnChangeListener {
       AnLocale.getString("Export Settings as .er.rc...", "ACTION_EXPORT_SETTINGS_AS");
 
   private static final String ACTION_HELP_TT =
-      AnLocale.getString("Opens a documentation window in the Gprofng GUI");
+      AnLocale.getString("Opens a documentation window in the gprofng GUI");
   private static final String ACTION_HELP_AC = ACTION_HELP_TT;
   private static final String ACTION_HELP_PERFORMANCE_ANALYZER =
-      AnLocale.getString("Gprofng Analyzer");
+      AnLocale.getString("gprofng Analyzer");
   private static final String ACTION_HELP_NEW_FEATURES = AnLocale.getString("New Features");
   private static final String ACTION_HELP_INFORMATION_MAP = AnLocale.getString("Information Map");
   private static final String ACTION_HELP_KEYBOARD_SHORTCUTS =
       AnLocale.getString("Keyboard Shortcuts");
   private static final String ACTION_HELP_SHORTCUTS = AnLocale.getString("Help Shortcuts");
   private static final String ACTION_HELP_TROUBLESHOOTING = AnLocale.getString("Troubleshooting");
-  private static final String ACTION_ABOUT_ANALYZER = AnLocale.getString("About Gprofng GUI");
+  private static final String ACTION_ABOUT_ANALYZER = AnLocale.getString("About gprofng GUI");
 
   // Experiment status
   private static final int EXP_SUCCESS = 0;

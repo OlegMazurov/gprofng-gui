@@ -15,7 +15,7 @@ along with this program. If not, see <http://www.gnu.org/licenses>.  */
 
 package org.gprofng.collector;
 
-/** This class provides access to the Gprofng GUI collector API. */
+/** This class provides access to the gprofng GUI collector API. */
 public class CollectorAPI {
 
   private static boolean inited = false;

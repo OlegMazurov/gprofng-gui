@@ -32,7 +32,7 @@ public class CloseExperimentPanel extends JPanel {
     AnUtility.setTextAndAccessibleContext(
         label1,
         AnLocale.getString(
-            "Gprofng GUI cannot connect to a remote host when there are open"
+            "gprofng GUI cannot connect to a remote host when there are open"
                 + " experiments."));
     AnUtility.setTextAndAccessibleContext(
         label2, AnLocale.getString("Close the experiment(s) before continuing?"));

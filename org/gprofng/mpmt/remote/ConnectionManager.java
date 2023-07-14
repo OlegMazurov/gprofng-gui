@@ -63,8 +63,8 @@ public class ConnectionManager extends Thread {
     String err_cc_msg = "ERROR: Cannot create ConnectionChecker";
     String warn_msg = AnLocale.getString("Lost connection to remote host ");
     String warn_title = AnLocale.getString("Warning: Connection is lost");
-    String conf_msg = AnLocale.getString("Are you sure you want to exit Gprofng GUI");
-    String conf_title = AnLocale.getString("Exit Gprofng GUI?");
+    String conf_msg = AnLocale.getString("Are you sure you want to exit gprofng GUI");
+    String conf_title = AnLocale.getString("Exit gprofng GUI?");
     // System.err.println("ConnectionManager started"); // DEBUG
     try {
       String str = AnUtility.getenv("SP_ANALYZER_HEARTBEAT_DISABLE");

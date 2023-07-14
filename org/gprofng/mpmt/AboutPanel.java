@@ -113,7 +113,7 @@ public class AboutPanel extends JPanel {
 
   /** Show Version and Copyright Notice */
   public static void showDialog() throws HeadlessException {
-    String aTitle = AnLocale.getString("About Gprofng GUI");
+    String aTitle = AnLocale.getString("About gprofng GUI");
     AnDialog2 dialog2 =
         new AnDialog2(AnWindow.getInstance().getFrame(), AnWindow.getInstance().getFrame(), aTitle);
     dialog2.setCustomPanel(new AboutPanel());

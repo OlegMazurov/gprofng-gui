@@ -256,7 +256,7 @@ public class CompareSimplePanel extends javax.swing.JPanel {
         AnLocale.getString(
             "Comparing experiments. The Comparison experiment(s) are compared against the Baseline"
                 + " experiment. Most data views support comparing experiments. When you compare"
-                + " experiments, Gprofng GUI displays data from the experiments or groups"
+                + " experiments, gprofng GUI displays data from the experiments or groups"
                 + " in adjacent columns. The Advanced option allows grouping (aggregating) of"
                 + " experiments before comparing them."));
 
