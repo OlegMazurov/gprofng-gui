@@ -782,7 +782,7 @@ anmodule_RESOURCE = \
 anmodule_JAR = gprofng.jar
 
 #
-# Standalone Gprofng GUI
+# Standalone gprofng GUI
 #
 ANALYZER_SRC = AnEnvironment.java AnLog.java AnMain.java
 ANALYZER_FILES = $(ANALYZER_SRC:%.java=$(srcdir)/$(JAVA_ANALYZER_DIR)/%.java)
@@ -800,6 +800,11 @@ collector_CLASSES = $(collector_FILES:$(srcdir)/$(JAVA_PROFAPI_DIR)/%.java=$(JAV
 bin_SCRIPTS = gp-display-gui
 CLEANFILES = $(bin_SCRIPTS) $(ANALYZER_JAR) $(GPROFNG_CLASSES)
 dist_pkgdata_DATA = $(ANALYZER_JAR) $(collector_JAR) $(anmodule_JAR)
+DIST_FILES = aclocal.m4 analyzer_st.mf compile configure.ac configure \
+	gprofng-collector.mf gprofng-gui.mf gprofng-gui.sh gprofng-gui.spec \
+	gprofng.properties install-sh Makefile.am Makefile.in missing \
+	org README tools
+
 all: all-am
 
 .SUFFIXES:
@@ -1073,6 +1078,13 @@ gp-display-gui: $(srcdir)/gprofng-gui.sh
 	  | sed -e "s~GPROFNG_datadir=~GPROFNG_datadir='$(datadir)'~" \
 	  > $@
 	chmod +x $@
+
+dist:
+	@echo "================= $@"
+	rm -f $(PACKAGE_NAME).$(VERSION).tar.gz
+	( cd $(srcdir); gtar --transform "s/^/$(PACKAGE_NAME).$(VERSION)\//" \
+	  -cf - $(DIST_FILES) ) > $(PACKAGE_NAME).$(VERSION).tar
+	gzip $(PACKAGE_NAME).$(VERSION).tar
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.

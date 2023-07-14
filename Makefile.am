@@ -578,7 +578,7 @@ $(anmodule_JAR): $(JAVA_ANMODULE_DIR) $(anmodule_MF) $(anmodule_FILES) \
 		$(anmodule_RESOURCE:%=-C $(srcdir) %) $(anmodule_PROPERTIES)
 
 #
-# Standalone Gprofng GUI
+# Standalone gprofng GUI
 #
 ANALYZER_SRC    = AnEnvironment.java AnLog.java AnMain.java
 ANALYZER_FILES  = $(ANALYZER_SRC:%.java=$(srcdir)/$(JAVA_ANALYZER_DIR)/%.java)
@@ -631,4 +631,17 @@ gp-display-gui: $(srcdir)/gprofng-gui.sh
 	chmod +x $@
 
 dist_pkgdata_DATA = $(ANALYZER_JAR) $(collector_JAR) $(anmodule_JAR)
+
+DIST_FILES = aclocal.m4 analyzer_st.mf compile configure.ac configure \
+	gprofng-collector.mf gprofng-gui.mf gprofng-gui.sh gprofng-gui.spec \
+	gprofng.properties install-sh Makefile.am Makefile.in missing \
+	org README tools
+
+dist:
+	@echo "================= $@"
+	rm -f $(PACKAGE_NAME).$(VERSION).tar.gz
+	( cd $(srcdir); gtar --transform "s/^/$(PACKAGE_NAME).$(VERSION)\//" \
+	  -cf - $(DIST_FILES) ) > $(PACKAGE_NAME).$(VERSION).tar
+	gzip $(PACKAGE_NAME).$(VERSION).tar
+
 
