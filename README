@@ -3,7 +3,7 @@ The GNU gprofng GUI is a feature rich graphical user interface for the GNU
 gprofng tool. It makes it possible to interactively analyze and compare gprofng
 profiling experiments. Users can drill into an applications profile together
 with the applications code to gather an understanding and insight into
-what an application is doing throughout it's runtime.
+what an application is doing throughout its runtime.
 
 The GUI is a Java application utilizing the Swing GUI framework.
 
