@@ -2460,8 +2460,7 @@ public final class AnWindow implements AnChangeListener {
       final String confPath,
       final boolean alwaysUseThisConf) {
     //        AnUtility.checkIfOnAWTThread(false);
-    //        System.out.println("loadExperimentGroupsInternal");
-    final boolean restart = (experimentsLoaded()) ? restartEngine : false;
+    final boolean restart = experimentsLoaded() ? true : restartEngine;
     final boolean anyExperiments = groups.length > 0;
     final UserPref userPref = UserPref.getInstance();
 
@@ -2473,7 +2472,7 @@ public final class AnWindow implements AnChangeListener {
           getSettings().showDialog(false);
           colorChooser.setVisible(false);
           saveExperimentSettings(getExperimentGroups());
-          if (restartEngine) {
+          if (restart) {
             AnEventManager.getInstance()
                 .fireAnChangeEvent(
                     new AnChangeEvent(groups, AnChangeEvent.Type.EXPERIMENTS_LOADING_NEW));
@@ -2704,7 +2703,7 @@ public final class AnWindow implements AnChangeListener {
                         machineModel,
                         customIndexObjects,
                         customMemoryObjects);
-                if (restartEngine) {
+                if (restart) {
                   getToolBarPanel()
                       .getFindTextPanel()
                       .initializeFindTexts(userPref.getFindPickList(), null); // Find text
