@@ -55,9 +55,6 @@ public class DisasmDisp extends SourceDisp {
   private boolean inCompute = false;
   private int my_src_type = AnTable.AT_DIS;
   private int my_src_type_only = AnTable.AT_DIS_ONLY;
-  /** Keeps last warning to avoid showing the same warning message many times */
-  private String lastWarning = null;
-
   private long lastSelObj = 0;
 
   // Constructor
@@ -75,23 +72,15 @@ public class DisasmDisp extends SourceDisp {
   protected void initComponents() {
 
     setLayout(new BorderLayout());
-    String acName = null;
-    String acDesc = null;
-    JLabel acLabel = null;
-
-    acName = AnLocale.getString("Disassembly");
-    acDesc = AnLocale.getString("Show disassemled code for selected function");
-    if (acName != null) {
-      acLabel = new JLabel(acName, JLabel.RIGHT);
-    }
-    table =
-        new AnTable(type, true, true, can_sort, false, true, true, true, acName, acDesc, acLabel);
+    String acName = AnLocale.getString("Disassembly");
+    String acDesc = AnLocale.getString("Show disassemled code for selected function");
+    JLabel acLabel = new JLabel(acName, JLabel.RIGHT);
+    table = new AnTable(type, true, true, can_sort, false, true, true, true,
+        acName, acDesc, acLabel);
     table.setParent(this);
-    if (acLabel != null) {
-      acLabel.setVisible(false);
-      //            acLabel.setDisplayedMnemonic(acName.charAt(0));
-      table.add(acLabel);
-    }
+    acLabel.setVisible(false);
+    // acLabel.setDisplayedMnemonic(acName.charAt(0));
+    table.add(acLabel);
     table.addAnListener(new TableHandler());
     add(table, BorderLayout.CENTER);
     HotGapPanel hotGapPanel = new HotGapPanel(this);
@@ -190,8 +179,8 @@ public class DisasmDisp extends SourceDisp {
         int func_ind = (new_ind == -1) ? 0 : new_ind;
         new_ind = window.getSelectedObject().getSelIndex(sel_obj, type, subtype);
         new_ind = (new_ind == -1) ? func_ind : new_ind;
-        table.setData(
-            label, table_data, hdrContent, src_type, new_ind, name_col, sort_ind, marks, marks_inc);
+        table.setData(label, table_data, hdrContent, src_type, new_ind,
+            name_col, sort_ind, marks, marks_inc);
 
         if (sel_func == 0) {
           window.getSelectedObject().setSelObj(new_ind, type, subtype);
@@ -381,12 +370,6 @@ public class DisasmDisp extends SourceDisp {
             if (parent_type == DSP_SourceDisassembly) {
               window.getSourceDisassemblyView().syncHalf(AnTable.AT_SRC);
             }
-            //                        if ((type == DSP_SOURCE) || (type == DSP_DISASM)) {
-            //                            // fixme, xxxx to make MARTY and RDT people happy, Do not
-            // pop Summary Tab to top for Source or Disasm
-            //                        } else {
-            //                            window.showSummary();
-            //                        }
           } else // in other cases (eg. AT_SRC_ONLY), just update summary
           {
             window.getCalledByCallsDisassemblyView().setComputed(false);
@@ -402,10 +385,6 @@ public class DisasmDisp extends SourceDisp {
         case AnEvent.EVT_SORT: // Sorting
           // save current scroll location
           prevScroll = table.getScroll();
-          //                    int typeForPresentation = isOmpInxObj() ? AnDisplay.DSP_FUNCTION :
-          // type;
-          //                    getSettings().updateSortList(((Integer) event.getAux()).intValue(),
-          // typeForPresentation);
           int func_sort_col = getFuncSortColumn(((Integer) event.getAux()).intValue());
           getSettings()
               .getMetricsSetting()
@@ -454,100 +433,11 @@ public class DisasmDisp extends SourceDisp {
       "ifgt",
       "ifle",
       "ifnonnull",
-      "ifnull",
-      "fba", // float-point branch on SPARC
-      "fbn",
-      "fbu",
-      "fbg",
-      "fbug",
-      "fbl",
-      "fbul",
-      "flg",
-      "fbne",
-      "fbe",
-      "fbue",
-      "fbge",
-      "fbuge",
-      "fble",
-      "fbule",
-      "fbo",
-      "cbn", // coprocessor branch on SPARC
-      "cb123",
-      "cb12",
-      "cb13",
-      "cb1",
-      "cb23",
-      "cb2",
-      "cb3",
-      "cba",
-      "cb0",
-      "cb03",
-      "cb02",
-      "cb023",
-      "cb01",
-      "cb013",
-      "cb012",
-      "cwbne", // compare and branch on SPARC
-      "cwbe",
-      "cwbg",
-      "cwble",
-      "cwbge",
-      "cwbl",
-      "cwbgu",
-      "cwbleu",
-      "cwbcc",
-      "cwbcs",
-      "cwbpos",
-      "cwbneg",
-      "cwbvc",
-      "cwbvs",
-      "cxbne",
-      "cxbe",
-      "cxbg",
-      "cxble",
-      "cxbge",
-      "cxbl",
-      "cxbgu",
-      "cxbleu",
-      "cxbcc",
-      "cxbcs",
-      "cxbpos",
-      "cxbneg",
-      "cxbvc",
-      "cxbvs",
-      "jmpl", // jump on SPARC
-      "jmp",
-      "bne", // integer branch on SPARC
-      "ba",
-      "b",
-      "be",
-      "bn",
-      "bg",
-      "ble",
-      "blu",
-      "bgeu",
-      "bge",
-      "bgu",
-      "bleu",
-      "bcc",
-      "bcs",
-      "bpos",
-      "bneg",
-      "bvc",
-      "bvs",
-      "brz",
-      "brlez",
-      "brlz",
-      "brnz",
-      "brgz",
-      "brgez",
-      "bz",
-      "bnz",
-      "bl"
+      "ifnull"
     };
 
     private final String[] X86_BRANCH_INSTRS = {
-      "jmp", // branch on x86
+      "jmp",
       "jno",
       "jb",
       "jnae",
@@ -628,7 +518,6 @@ public class DisasmDisp extends SourceDisp {
     protected HashMap<String, Boolean> addrIsBranch = new HashMap<String, Boolean>();
 
     protected boolean isJavaByteCode = false;
-    protected boolean isSparc = false;
     protected boolean isX86 = false;
 
     protected boolean reachedMemLimit = false;
@@ -657,16 +546,6 @@ public class DisasmDisp extends SourceDisp {
       }
       String reg0 = r0.replaceFirst("%", "");
       String reg1 = r1.replaceFirst("%", "");
-      if (!isSparc) {
-        if (reg0.matches("[gG][0-7]") || reg0.matches("%[oO][0-7]")) {
-          isSparc = true;
-        }
-      }
-      if (isSparc) {
-        if (reg0.equalsIgnoreCase(reg1)) {
-          return true;
-        }
-      }
       if (reg0.equalsIgnoreCase(reg1)) {
         return true;
       } else {
@@ -703,14 +582,6 @@ public class DisasmDisp extends SourceDisp {
 
     public String regFullName(final String r) {
       if (r == null) {
-        return r;
-      }
-      if (!isSparc) {
-        if (r.matches("%[gG][0-7]") || r.matches("%[oO][0-7]")) {
-          isSparc = true;
-        }
-      }
-      if (isSparc) {
         return r;
       }
       String reg = r.replaceFirst("%", "");
@@ -762,7 +633,6 @@ public class DisasmDisp extends SourceDisp {
         rowToAddr.clear();
         addrIsBranch.clear();
         isJavaByteCode = false;
-        isSparc = false;
         isX86 = false;
         numRows = table_data[fl_table.getNameCol()].length;
         for (int i = 0; i < numRows; i++) {
@@ -948,28 +818,10 @@ public class DisasmDisp extends SourceDisp {
               }
             }
             if (dm != null) {
-              //                            if (funcStart == 1
-              //                                    && !dm.isBranchTargetMarker
-              //                                    && !dm.isNop) {
-              //                                funcStart = 0;
-              //                                dm.replaceMarkerStyle("address",
-              // "block_start_address");
-              //                            } else if (((!isSparc && seenCB == 1)
-              //                                    || (isSparc && seenCB == 2))
-              //                                    && (!dm.isBranchTargetMarker
-              //                                    && !dm.isNop)) {
-              //                                seenCB = 0;
-              //                                dm.replaceMarkerStyle("address",
-              // "block_start_address");
-              //                            } else {
               String addr = dm.getAddr();
               Boolean isBranch = addrIsBranch.get(addr);
               if (isBranch != null && isBranch == true) {
                 dm.replaceMarkerStyle("address", "block_start_address");
-              }
-              //                            }
-              if (isSparc && seenCB == 1) {
-                seenCB = 2;
               }
               if (dm.hasCall || dm.hasBranch || dm.isRet) {
                 seenCB = 1;
@@ -980,64 +832,11 @@ public class DisasmDisp extends SourceDisp {
       }
     }
 
-    /*private void renderFunction(final String content, final JComponent cmp, final Integer baseRow) {
-        if (baseRow != null) {
-            HashMap<String, ArrayList<Integer>> regRows = regsInFunction.get(baseRow);
-            if (regRows == null) {
-                regRows = new HashMap<String, ArrayList<Integer>>();
-                regsInFunction.put(baseRow, regRows);
-
-                for (int i = baseRow + 1; i < tableData[fl_table.getNameCol()].length; i++) {
-                    int type = srcTypeData[i] < 0 ? (-srcTypeData[i]) : srcTypeData[i];
-                    if (type == AnTable.AT_FUNC || i - baseRow > 100) {
-                        break;
-                    }
-                    Object value = tableData[fl_table.getNameCol()][i];
-                    if (value instanceof String && (type == AT_DIS || type == AT_DIS_ONLY)) {
-                        DisTextMarker dm = disRendered.get(i);
-                        DisTextPane dt = disPaneCreated.get(i);
-                        if (dm == null) {
-                            dm = new DisTextMarker(i, (String) value);
-                            disRendered.put(i, dm);
-                        }
-                        if (dt == null) { // only create JTextPanel when it needs to be shown
-                            if (dm != null) {
-                                dm.renderCode(i, true);
-                            }
-                            if (dm != null && calleeInfo.get(i) != null) {
-                                dm.isCallSite = true;
-                            }
-                            dt = new DisTextPane((String) value, cmp, dm);
-                            disPaneCreated.put(i, dt);
-                        }
-                        if (dm == null) {
-                            return;
-                        }
-                        Set<String> regs = dm.regPositions.keySet();
-                        if (regs != null) {
-                            for (final String r : regs) {
-                                ArrayList<Integer> list = regRows.get(regFullName(r));
-                                if (list == null) {
-                                    list = new ArrayList<Integer>();
-                                    regRows.put(regFullName(r), list);
-                                }
-                                if (!list.contains(i)) {
-                                    list.add(i);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
-
     public DisTextPane getDisTextPane(final String content, final JComponent cmp, final int row) {
       Integer function = getFunctionBaseRowWhenCompare(row);
       if (functionCallerCalleeAdded.get(function) == null) {
         addFunctionByRow(function);
       }
-      // renderFunction(content, cmp, function);
       DisTextMarker dm = disRendered.get(row);
       if (dm == null) {
         renderBlocks(
@@ -1504,11 +1303,11 @@ public class DisasmDisp extends SourceDisp {
                         ? (curPos + words[i].length())
                         : opcodeEnd;
                 seenOpcode = true;
-                if (words[i].equalsIgnoreCase("call")) { // call for x86 and sparc
+                if (words[i].equalsIgnoreCase("call")) {
                   seenCall = true;
                   hasCall = true;
                 } else if (branchInstrMap.get(words[i].toLowerCase()) != null
-                    || (!isSparc && x86BranchInstrMap.get(words[i].toLowerCase()) != null)) {
+                    || (isX86 && x86BranchInstrMap.get(words[i].toLowerCase()) != null)) {
                   seenBranch = true;
                   hasBranch = true;
                 }
@@ -1548,8 +1347,8 @@ public class DisasmDisp extends SourceDisp {
                 for (int temp = curPos; temp < curPos + words[i].length(); temp++) {
                   regMap.put(temp, words[i]);
                 }
-              } else if (!isSparc && !isX86) {
-                regFullName(words[i]); // detect whether it's sparc
+              } else if (!isX86) {
+                regFullName(words[i]); // detect whether it's X86
               }
             } else if (calleeInfo != null && calleeInfo.get(row) != null) { // it's a callsite
               if (words[i].charAt(0) == '0'
@@ -1626,12 +1425,6 @@ public class DisasmDisp extends SourceDisp {
           seenOpcode = true;
           seenBranch = false;
           int i = hexIdx;
-          if (words[i].equalsIgnoreCase("ba") // branch on SPARC
-              || words[i].equalsIgnoreCase("be")
-              || words[i].equalsIgnoreCase("b")) {
-            seenBranch = true;
-            hasBranch = true;
-          }
           for (i = hexIdx + 1; i < words.length; i++) {
             if (words[i].length() != 0
                 && words[i].charAt(0) == '0'
