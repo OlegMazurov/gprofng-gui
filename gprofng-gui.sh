@@ -161,11 +161,12 @@ USER_DIR=${DEFAULT_USER_DIR}
 
 whoami=`basename $PRG`
 # parse arguments
+endargs=false
 while [ $# -gt 0 ] ; do
     case "$1" in
-    --whoami=*)
-        whoami=`echo -- "$1" | sed -e 's/--whoami=//'`
-        ;;
+	--whoami=*)
+            whoami=`echo -- "$1" | sed -e 's/--whoami=//'`
+	    ;;
 	-j|--jdkhome) 
             CheckArgsCount "$1" $# ;
             shift;
@@ -190,12 +191,13 @@ while [ $# -gt 0 ] ; do
             args="$args \"$1\"" ; # user directory
             USER_DIR=$1
             ;;
+	--gprofngdir=*)
+	    args="$args \"$1\""
+	    ;;
 	-*) Message 11 $1; Usage; exit 1;;
-	*) args="$args \"$1\"" ; # target
-           shift
-           break; # Don't parse target options
-           ;;
+	*)  endargs=true ;;
     esac
+    [ $endargs = true ] && break
     shift
 done
 

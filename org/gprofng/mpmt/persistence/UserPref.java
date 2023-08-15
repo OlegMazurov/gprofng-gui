@@ -120,6 +120,7 @@ public class UserPref {
   private static String userDirFromCommandLine = null; // from gp-display-gui script
   public static String binDirFromCommandLine = null;
   public static String dataDirFromCommandLine = null;
+  public static String gprofngdir = null;  // Where gp-display-text is installed
   
   private static long threeMonth = 90l * 24l * 3600l * 1000l; // 3 month
 

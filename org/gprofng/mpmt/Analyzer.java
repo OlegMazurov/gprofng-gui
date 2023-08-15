@@ -36,6 +36,8 @@ import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -314,6 +316,13 @@ public final class Analyzer {
     }
   }
 
+  private String get_exe_name(String nm) {
+    if (nm != null && !nm.equals(emptyString) && Files.exists(Paths.get(nm))) {
+      return nm;
+    }
+    return null;
+  }
+  
   public void startIPC() throws Exception {
     if (IPC_started) {
       return;
@@ -369,15 +378,24 @@ public final class Analyzer {
       er_print = AnUtility.getenv("SP_ANALYZER_ER_PRINT");
     }
     if (er_print == null || er_print.equals(emptyString)) {
-      if (fdhome != null) {
-	er_print = fdhome + "/bin/" + DisplayAppName;
-      } else {
+      er_print = null;
+      if (UserPref.gprofngdir != null) {
+        er_print = get_exe_name(UserPref.gprofngdir + "/" + DisplayAppName);
+      }
+      if (er_print == null && fdhome != null) {
+	er_print = get_exe_name(fdhome + "/bin/" + DisplayAppName);
+      }
+      if (er_print == null) {
 	er_print = "" + DisplayAppName;
       }
     } else {
       IPCLogger.logTrace("\n" + "analyzer: SP_ANALYZER_ER_PRINT='" + er_print + "'");
       if (remoteConnection != null) {
-        str = remoteConnection + " " + str;
+        if (str.equals(emptyString)) {
+          str = remoteConnection;
+        } else {
+          str = remoteConnection + " " + str;
+        }
       }
     }
     System.err.println("fdhome: " + (fdhome == null ? "" : fdhome));
@@ -392,7 +410,12 @@ public final class Analyzer {
         throw new Exception("OS " + os_name + " is not supported yet.");
       }
     }
-    String er_printCmd = str + " " + er_print + " -" + cmode + "IPC";
+    String er_printCmd;
+    if (str.equals(emptyString)) {
+      er_printCmd = er_print + " -" + cmode + "IPC";
+    } else {
+      er_printCmd = str + " " + er_print + " -" + cmode + "IPC";
+    }
     // IPC_session.init(er_printCmd + " -" + cmode + "IPC");
     String tracelevel = null; // AnUtility.getenv("SP_ER_PRINT_TRACE_LEVEL");
     if (tracelevel != null) {

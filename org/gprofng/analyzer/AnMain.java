@@ -81,6 +81,8 @@ public final class AnMain {
         UserPref.binDirFromCommandLine = argvOrig.substring(argvOrig.indexOf("=") + 1);
       } else if (argvOrig.startsWith("--datadir=")) {
         UserPref.dataDirFromCommandLine = argvOrig.substring(argvOrig.indexOf("=") + 1);
+      } else if (argvOrig.startsWith("--gprofngdir=")) {
+        UserPref.gprofngdir = argvOrig.substring(argvOrig.indexOf("=") + 1);
       } else {
         argsExp.add(argvOrig);
         // This argument is an experiment name, or a name of a binary to profile
