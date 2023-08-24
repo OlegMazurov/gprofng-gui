@@ -644,4 +644,5 @@ dist:
 	  -cf - $(DIST_FILES) ) > $(PACKAGE_NAME).$(VERSION).tar
 	gzip $(PACKAGE_NAME).$(VERSION).tar
 
+include doc/local.mk
 

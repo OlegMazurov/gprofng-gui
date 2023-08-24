@@ -1,0 +1,347 @@
+@c ----------------------------------------------------------------------------
+@c This is the Texinfo source file for the gp-display-gui man page.
+@c
+@c Author: Ruud van der Pas
+@c ----------------------------------------------------------------------------
+@ifset man
+\input texinfo @c -*-texinfo-*-
+@setfilename gp-display-gui
+@settitle Graphical tool to analyze one or more gprofng experiments
+@include gp-macros.texi
+@end ifset
+
+@clear REMOTE_HOST
+
+@c ----------------------------------------------------------------------------
+@c This is from the man-pages(7) man page
+@c
+@c "The list below shows conventional or suggested sections.  Most manual pages
+@c  should include at least the highlighted sections.  Arrange a new manual
+@c  page so that sections are placed in the order shown in the list."
+@c
+@c              NAME
+@c              SYNOPSIS
+@c              CONFIGURATION    [Normally only in Section 4]
+@c              DESCRIPTION
+@c              OPTIONS          [Normally only in Sections 1, 8]
+@c              EXIT STATUS      [Normally only in Sections 1, 8]
+@c              RETURN VALUE     [Normally only in Sections 2, 3]
+@c              ERRORS           [Typically only in Sections 2, 3]
+@c              ENVIRONMENT
+@c              FILES
+@c              VERSIONS         [Normally only in Sections 2, 3]
+@c              ATTRIBUTES       [Normally only in Sections 2, 3]
+@c              CONFORMING TO
+@c              NOTES
+@c              BUGS
+@c              EXAMPLES
+@c              AUTHORS          [Discouraged]
+@c              REPORTING BUGS   [Not used in man-pages]
+@c              COPYRIGHT        [Not used in man-pages]
+@c              SEE ALSO
+@c
+@c This is what the texi2pod.pl tool recognizes:
+@c
+@c for $sect (qw(NAME SYNOPSIS TARGET DESCRIPTION OPTIONS ENVIRONMENT FILES
+@c               BUGS NOTES FOOTNOTES SEEALSO AUTHOR COPYRIGHT)) {
+@c
+@c What is interesting is that it places "SEE ALSO" before "COPYRIGHT", which
+@c makes sense and adhered to for the other formats.
+@c ----------------------------------------------------------------------------
+
+@c ----------------------------------------------------------------------------
+@c NAME section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{NAME}
+@c man begin NAME
+
+gp-display-gui - Graphical tool to analyze one or more gprofng experiments
+
+@c man end
+@ManPageEnd{}
+
+@c ----------------------------------------------------------------------------
+@c SYNOPSIS section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{SYNOPSIS}
+@c man begin SYNOPSIS
+
+@ifclear man
+@IndexSubentry{Options, @code{-c}}
+@end ifclear
+
+@iftex
+@command{gprofng display gui} [@var{option(s)}] \
+@indentedblock
+[[@option{-c}] @var{experiment(s)} | @var{target} [@var{target-options}]]
+@end indentedblock
+@end iftex
+@ifnottex
+@command{gprofng display gui} [@var{option(s)}] [[@option{-c}] @var{experiment(s)} | @var{target} [@var{target-options}]]
+@end ifnottex
+
+@c man end
+@ManPageEnd{}
+
+@c ----------------------------------------------------------------------------
+@c DESCRIPTION section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{DESCRIPTION}
+@c man begin DESCRIPTION
+
+The @command{gprofng display gui} tool starts the GUI, which is a Java based
+graphical tool that can be used to analyze performance data that has been
+collected with the @command{gprofng collect app} tool.
+
+Multiple experiments may be specified on the command line.  The data for
+all these experiments is loaded and ready for analysis.
+
+Once the tool has started, it is also possible to drop or load other
+experiments.
+
+By default, if multiple experiments are specified, the data is aggregated
+across the experiments.
+
+If the
+@ifclear man
+@IndexSubentry{Options, @code{-c}}
+@end ifclear
+@option{-c} option is used, the tool starts in comparison mode.  In this case,
+the data for the various experiments can be compared.
+If this option is used, at least two experiments must be specified on the
+command line.
+
+Alternatively, the tool can be invoked without specifying experiments.  In
+this case, a target program is expected to be specified.  Optionally, there
+may be options for the target.
+
+In this case, a window with user settings will be opened.  These may be
+used to specify the options and other preferences that define the data
+collection experiment.  The user can then run the experiment from this
+window and upon successful completion, analyze the results.
+
+If @command{gprofng display gui} is invoked without specifying one or more
+experiments, or a target, a welcome screen is shown.  In this screen, the
+user can specify whether to analyze an existing experiment, or to create a
+new experiment by specifying the data collection settings to define and run
+a new performance experiment.
+
+@c man end
+@ManPageEnd{}
+
+@c ----------------------------------------------------------------------------
+@c OPTIONS section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{OPTIONS}
+@c man begin OPTIONS
+
+@table @gcctabopt
+
+@item --version
+@ifclear man
+@IndexSubentry{Options, @code{--version}}
+@end ifclear
+
+Print the version number and exit.
+
+@item --help
+@ifclear man
+@IndexSubentry{Options, @code{--help}}
+@end ifclear
+
+Print usage information and exit.
+
+@item -v, --verbose
+@ifclear man
+@IndexSubentry{Options, @code{-v}}
+@IndexSubentry{Options, @code{--verbose}}
+@end ifclear
+
+By default, verbose mode is disabled.  This option enables it.
+
+@item -j, --jdkhome @var{jvmpath}
+@ifclear man
+@IndexSubentry{Options, @code{-j}}
+@IndexSubentry{Options, @code{--jdkhome}}
+@end ifclear
+
+Specify the path to the Java Virtual Machine (JVM) to be used for
+running @command{gprofng display gui}.
+The default path is taken first by examining environment variables
+for a path to the JVM, in the order @env{JDK_HOME}, and then @env{JAVA_PATH}.
+
+If neither environment variable is set, the version found in the search path set
+with the @env{PATH} environment variable is used.  If none is found,
+@command{/usr/java/bin/java} is tried.
+
+
+@item -J@var{jvm-setting}
+@ifclear man
+@IndexSubentry{Options, @code{-J}}
+@end ifclear
+
+Use this option to pass on settings to the JVM.  Multiple @option{-J} options
+and corresponding settings may be supplied.
+Note that there is @emph{no} space between the @option{-J} option and the
+@var{jvm-setting} setting to the JVM.
+
+@item -c @var{base-group compare-group}
+@ifclear man
+@IndexSubentry{Options, @code{-c}}
+@end ifclear
+
+By default, the results for multiple experiments are aggregated.  With this
+option, the GUI starts in comparison mode.  If this option is specified,
+two or more experiments must be provided as arguments.  The first experiment
+is the base group.  The results in the other experiment(s) are compared to
+this reference experiment.
+
+Note that the user can toggle between aggregation and comparison mode
+from within the GUI.
+
+@item -f, --fontsize @var{size}
+@ifclear man
+@IndexSubentry{Options, @code{-f}}
+@IndexSubentry{Options, @code{--fontsize}}
+@end ifclear
+
+Specify the font size to be used in the GUI.
+
+@item -u, --userdir @var{dir-path}
+@ifclear man
+@IndexSubentry{Options, @code{-u}}
+@IndexSubentry{Options, @code{--userdir}}
+@end ifclear
+
+Specify the path to the user directory in which to store user settings.
+
+@end table
+
+@c man end
+@ManPageEnd{}
+
+@ifset REMOTE_HOST
+@c -----------------------------------------------------------------------------
+@c ENVIRONMENT SECTION
+@c
+@c Temporarily disabled until the remote host feature has been implemented.
+@c Once this has been done, remove the ifset REMOTE_HOST/end ifset and the
+@c "@c deferred " strings.
+@c -----------------------------------------------------------------------------
+
+@c deferred @ManPageStart{ENVIRONMENT}
+@c deferred @c man begin ENVIRONMENT
+
+The following environment variables for connecting to a remote host are
+supported:
+
+@table @samp
+
+@item @env{GPROFNG_HEARTBEAT_DISABLE}
+@cindex Environment variables
+
+If defined, disable periodic checking of the connection between
+@command{gprofng} and the remote host.  By default, a heartbeat packet is sent
+periodically from @command{gprofng} to the remote back-end.  When enabled,
+the heartbeat packet can help to keep some SSH connections from automatically
+closing due to inactivity.
+
+@item @env{GPROFNG_HEARTBEAT_MSEC}
+@cindex Environment variables
+
+Set the interval for checking the connection between @command{gprofng} and
+the remote host. The default is 2000 milliseconds.
+
+@item @env{GPROFNG_REMOTE_SHELL}
+@cindex Environment variables
+
+Set this variable to @command{/usr/bin/ssh} to use @samp{/usr/bin/ssh} for
+connecting @command{gprofng} to a remote host. If this variable is not set,
+the internal tool to connect is used.
+
+For example:
+
+@smallexample
+$ export GPROFNG_REMOTE_SHELL="/usr/bin/ssh -u test-linux-nm1.pem"
+@end smallexample
+
+Note that this variable is only available on UNIX-based systems, and only
+for connections that do not require a password or passphrase.
+
+@end table
+
+@c deferred @c man end
+@c deferred @ManPageEnd{}
+@end ifset
+
+@c ----------------------------------------------------------------------------
+@c NOTES section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{NOTES}
+@c man begin NOTES
+
+The @command{gprofng display gui} tool relies on other @command{gprofng}
+components.  Therefore, it is necessary to also install the other components,
+either by using one of the available rpm's, install from a tar file
+distribution, or to build and install @command{gprofng} directly from the
+source.
+
+@c man end
+@ManPageEnd{}
+
+@c ----------------------------------------------------------------------------
+@c SEEALSO section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{SEE ALSO}
+@c man begin SEEALSO
+
+gprofng(1),
+gp-archive(1),
+gp-collect-app(1),
+gp-display-html(1),
+gp-display-src(1),
+gp-display-text(1)
+
+@iftex
+@vspace{1}
+@end iftex
+
+The user guide for gprofng is maintained as a Texinfo manual.  If the
+@command{info} and @command{gprofng} programs are correctly installed, the
+command @command{info gprofng} should give access to this document.
+
+@c man end
+@ManPageEnd{}
+
+@c ----------------------------------------------------------------------------
+@c COPYRIGHT section
+@c ----------------------------------------------------------------------------
+
+@ManPageStart{COPYRIGHT}
+@c man begin COPYRIGHT
+
+Copyright @copyright{} 2022-2023 Free Software Foundation, Inc.
+
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License, Version 1.3
+or any later version published by the Free Software Foundation;
+with no Invariant Sections, with no Front-Cover Texts, and with no
+Back-Cover Texts.  A copy of the license is included in the
+section entitled ``GNU Free Documentation License''.
+
+@c man end
+@ManPageEnd{}
+
+@c ----------------------------------------------------------------------------
+@c If this text is used for a man page, exit.  Otherwise we need to continue.
+@c ----------------------------------------------------------------------------
+
+@ifset man
+@bye
+@end ifset
