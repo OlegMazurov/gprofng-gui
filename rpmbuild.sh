@@ -46,7 +46,7 @@ doit "cp ${DIR}/gprofng-gui.spec ${RPM_DIR}/SPEC"
 VERSION=`grep ^Version: ${DIR}/gprofng-gui.spec | sed -e 's/^[^2]*//'`
 doit "( cd ${DIR}/..; tar --transform 's/^`basename ${DIR}`/gprofng-gui-${VERSION}/' \
   -cJf ${RPM_DIR}/SOURCES/gprofng-gui-${VERSION}.tar.xz `basename ${DIR}` )"
-doit "(cd ${RPM_DIR}; time rpmbuild --define='_topdir ${RPM_DIR}' \
+doit "(cd ${RPM_DIR}; rpmbuild --define='_topdir ${RPM_DIR}' \
     -vv -bb SPEC/gprofng-gui.spec >> ${F_LOG} 2>&1 )"
 
 #    -vv  --short-circuit -bc ${DIR}/linux.binutils.spec >> ${F_LOG} 2>&1 )"

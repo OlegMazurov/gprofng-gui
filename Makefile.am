@@ -554,7 +554,7 @@ $(JAVA_ANMODULE_DIR) $(JAVA_ANALYZER_DIR) $(JAVA_PROFAPI_DIR) $(JAVA_ANMODULES_D
 
 LocaleString.class: $(srcdir)/tools/LocaleString.java
 	@echo "================= $@"
-	time $(JAVAC) $(JAVAC_FLAGS) -d . $(srcdir)/tools/LocaleString.java
+	$(JAVAC) $(JAVAC_FLAGS) -d . $(srcdir)/tools/LocaleString.java
 
 $(anmodule_PROPERTIES): $(JAVA_ANMODULE_DIR) $(anmodule_FILES) LocaleString.class \
 		      $(srcdir)/gprofng.properties
@@ -573,7 +573,7 @@ anmodule_JAR = gprofng.jar
 $(anmodule_JAR): $(JAVA_ANMODULE_DIR) $(anmodule_MF) $(anmodule_FILES) \
 		 $(anmodule_PROPERTIES) $(anmodule_RESOURCE:%=$(srcdir)/%)
 	@echo "================= $@"
-	time $(JAVAC) -cp $(srcdir) $(JAVAC_FLAGS) -d . $(srcdir)/$(JAVA_ANMODULE_DIR)/Analyzer.java
+	$(JAVAC) -cp $(srcdir) $(JAVAC_FLAGS) -d . $(srcdir)/$(JAVA_ANMODULE_DIR)/Analyzer.java
 	$(JAR) $(JAR_FLAGS) $@ $(anmodule_MF) $(GPROFNG_CLASSES) \
 		$(anmodule_RESOURCE:%=-C $(srcdir) %) $(anmodule_PROPERTIES)
 
@@ -600,7 +600,7 @@ ANALYZER_JAR = gprofng-analyzer.jar
 $(ANALYZER_JAR): $(JAVA_ANALYZER_DIR) $(anmodule_JAR) \
 		    $(ANALYZER_MF) $(ANALYZER_FILES) $(ANALYZER_PROPERTIES)
 	@echo "================= $@"
-	time $(JAVAC) -classpath $(anmodule_JAR) $(JAVAC_FLAGS) -d . $(ANALYZER_FILES)
+	$(JAVAC) -classpath $(anmodule_JAR) $(JAVAC_FLAGS) -d . $(ANALYZER_FILES)
 	echo "Create $(ANALYZER_JAR) in `pwd`"
 	$(JAR) $(JAR_FLAGS) $@ $(ANALYZER_MF) $(ANALYZER_CLASSES) \
 			       $(ANALYZER_PROPERTIES)
