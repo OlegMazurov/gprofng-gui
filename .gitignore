@@ -11,3 +11,6 @@ config.cache
 core
 !core/
 
+Makefile.in
+aclocal.m4
+configure
