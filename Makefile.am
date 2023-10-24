@@ -19,10 +19,10 @@ ACLOCAL_AMFLAGS = -I .
 VPATH =
 SRC     = $(srcdir)
 JAVA    = java
-JAVAC   = javac
+JAVAC   = @JAVAC@
 JAVA_FLAGS =
 JAVAC_FLAGS =
-JAR = jar
+JAR = @JAR@
 
 JAVA_ANMODULES_DIR	= org/gprofng
 JAVA_ANMODULE_DIR	= $(JAVA_ANMODULES_DIR)/mpmt
@@ -640,7 +640,7 @@ DIST_FILES = aclocal.m4 analyzer_st.mf compile configure.ac configure \
 dist:
 	@echo "================= $@"
 	rm -f $(PACKAGE_NAME).$(VERSION).tar.gz
-	( cd $(srcdir); gtar --transform "s/^/$(PACKAGE_NAME).$(VERSION)\//" \
+	( cd $(srcdir); @TAR@ --transform "s/^/$(PACKAGE_NAME).$(VERSION)\//" \
 	  -cf - $(DIST_FILES) ) > $(PACKAGE_NAME).$(VERSION).tar
 	gzip $(PACKAGE_NAME).$(VERSION).tar
 

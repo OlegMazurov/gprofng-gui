@@ -16,6 +16,23 @@ dnl along with this program. If not, see <http://www.gnu.org/licenses/>.
 AC_INIT([gprofng-gui], 1.0)
 AM_INIT_AUTOMAKE
 AC_PROG_CC
+AC_CHECK_PROGS([JAVAC],[javac],[no])
+AC_CHECK_PROGS([JAR],[jar],[no])
+AC_CHECK_PROGS([TAR],[tar],[no])
 AC_CONFIG_FILES(Makefile)
 AC_OUTPUT
 
+if test "x$JAVAC" = "xno"; then
+   AC_ERROR([A java compiler is needed to build gprofng-gui.
+Please install the JDK.])
+fi
+
+if test "x$JAR" = "xno"; then
+   AC_ERROR([JAR is needed to buidl gprofng-guil.
+Please install the JDK.])
+fi
+
+if test "x$TAR" = "xno"; then
+   AC_ERROR([A tar command that understans --expression is required.
+Please install GNU tar.])
+fi
