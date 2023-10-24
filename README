@@ -1,24 +1,35 @@
-
-The GNU gprofng GUI is a feature rich graphical user interface for the GNU
-gprofng tool. It makes it possible to interactively analyze and compare gprofng
-profiling experiments. Users can drill into an applications profile together
-with the applications code to gather an understanding and insight into
-what an application is doing throughout its runtime.
+The GNU gprofng GUI is a feature rich graphical user interface for the
+GNU gprofng tool. It makes it possible to interactively analyze and
+compare gprofng profiling experiments. Users can drill into an
+applications profile together with the applications code to gather an
+understanding and insight into what an application is doing throughout
+its runtime.
 
 The GUI is a Java application utilizing the Swing GUI framework.
 
-To build and install gprofng GUI:
-  PREFIX=`pwd`/INSTALL
-  # Download and install gprofng (binutils-gdb):
-  git clone http://sourceware.org/git/binutils-gdb.git binutils-gdb.git
-  mkdir bld_binutils
-  ( cd bld_binutils && ../binutils-gdb.git/configure --prefix=$PREFIX && make && make install )
+To build gprofng-gui from a released tarball:
 
-  # Download and install gprofng GUI:
-  git clone http://PATH_TO_GPROFNG_GUI_REPO gprofng-gui.git
-  mkdir bld_gui
-  ( cd bld_gui && ../gprofng-gui.git/configure --prefix=$PREFIX  && make && make install )
+  $ wget https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui.VERSION.tar.gz
+  $ tar xzvf gprofng-gui.VERSION.tar.gz
+  $ cd gprofng-gui.VERSION
+  $ mkdir build && cd build/
+  $ ../configure --prefix=PREFIX && make && make install
 
-To run the GUI:
-  $PREFIX/bin/gprofng display gui [gui-options] [experiment]
+To build gprofn-gui from the development git repo:
 
+  $ git clone https://git.savannah.gnu.org/git/gprofng-gui.git
+  $ cd gprofng-gui
+  $ autoreconf -i
+  $ mkdir build && cd build/
+  $ ../configure --prefix=PREFIX && make && make install
+
+This GUI requires gprofng to be installed in the system to be used.
+The gprofng profiler is part of the GNU binutils.  Make sure to have
+installed in your system and available in your PATH.  Then you can
+launch the GUI using the following gprofng command:
+
+  $ gprofng display gui [GUI_OPTIONS] [EXPERIMENT]
+
+Note that it is also possible to invoke the GUI directly:
+
+  $ gp-display-gui [GUI_OPTIONS] [EXPERIMENT]
