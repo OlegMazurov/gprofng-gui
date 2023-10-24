@@ -3,6 +3,7 @@
 *.orig
 *~
 *%
+*.class
 
 autom4te.cache
 config.cache
