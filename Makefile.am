@@ -13,10 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-AUTOMAKE_OPTIONS = foreign no-dist
+AUTOMAKE_OPTIONS =
 ACLOCAL_AMFLAGS = -I . 
 
-VPATH =
 SRC     = $(srcdir)
 JAVA    = java
 JAVAC   = @JAVAC@
@@ -637,12 +636,4 @@ DIST_FILES = aclocal.m4 analyzer_st.mf compile configure.ac configure \
 	gprofng.properties install-sh Makefile.am Makefile.in missing \
 	org README tools
 
-dist:
-	@echo "================= $@"
-	rm -f $(PACKAGE_NAME).$(VERSION).tar.gz
-	( cd $(srcdir); @TAR@ --transform "s/^/$(PACKAGE_NAME).$(VERSION)\//" \
-	  -cf - $(DIST_FILES) ) > $(PACKAGE_NAME).$(VERSION).tar
-	gzip $(PACKAGE_NAME).$(VERSION).tar
-
 include doc/local.mk
-
