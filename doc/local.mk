@@ -45,3 +45,6 @@ $(man_MANS): $(docdir)/gp-macros.texi
 
 gp-display-gui.1: $(docdir)/gp-display-gui.texi
 
+EXTRA_DIST += $(man_MANS) $(docdir)/gp-macros.texi $(docdir)/gp-display-gui.texi
+CLEANFILES += $(man_MANS)
+

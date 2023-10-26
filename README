@@ -19,7 +19,7 @@ To build gprofn-gui from the development git repo:
 
   $ git clone https://git.savannah.gnu.org/git/gprofng-gui.git
   $ cd gprofng-gui
-  $ autoreconf -i
+  $ autoreconf -i -f
   $ mkdir build && cd build/
   $ ../configure --prefix=PREFIX && make && make install
 
