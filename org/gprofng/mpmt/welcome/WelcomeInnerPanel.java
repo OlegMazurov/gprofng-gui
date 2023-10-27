@@ -89,7 +89,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
       connectButton.setEnabled(false);
     } else {
       setConnected(Analyzer.getInstance().isConnected());
-      connectButton.setEnabled(true);
+      connectButton.setEnabled(false);
     }
   }
 
@@ -97,7 +97,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     createExperimentTitleLabel.setEnabled(connected);
     viewExperimentTitleLabel.setEnabled(connected);
     profileAppButton.setEnabled(connected);
-    profileRunningAppButton.setEnabled(connected);
+    profileRunningAppButton.setEnabled(false);
     //        profileKernelButton.setEnabled(connected &&
     // Analyzer.getInstance().isKernelProfilingEnabled());
     openExistingExperimentButton.setEnabled(connected);
