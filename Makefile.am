@@ -636,7 +636,8 @@ $(COLLECTOR_JAR): $(GPROFNG_JAR) $(collector_FILES) $(collector_MF)
 
 bin_SCRIPTS = gp-display-gui
 CLEANFILES = gp-display-gui $(GPROFNG_JAR) $(ANALYZER_JAR) $(COLLECTOR_JAR) \
-	$(GPROFNG_CLASSES) $(ANALYZER_CLASSES) $(collector_CLASSES)
+	$(GPROFNG_CLASSES) $(ANALYZER_CLASSES) $(collector_CLASSES) \
+	$(ANALYZER_PROPERTIES) $(MPMT_PROPERTIES) LocaleString*.class
 
 gp-display-gui: $(srcdir)/gprofng-gui.sh
 	@echo "================= $@"
