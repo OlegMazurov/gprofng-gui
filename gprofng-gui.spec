@@ -15,11 +15,11 @@
 
 Summary: Graphical User Interface for the gprofng profiler.
 Name: gprofng-gui
-Version: 2.40
+Version: 1.0
 Release: 1%{?dist}
 License: GPLv3+
-URL: FIX_ME:https://www.gnu.org/software/gprofng-gui
-Source: FIX_ME:https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-%{version}.tar.xz
+URL: https://www.gnu.org/software/gprofng-gui
+Source: https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-%{version}.tar.xz
 BuildRequires: autoconf automake make sed coreutils
 BuildRequires: java-devel
 
