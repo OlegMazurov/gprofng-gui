@@ -23,7 +23,7 @@ Source: https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-%{version}.tar.xz
 BuildRequires: autoconf automake make sed coreutils
 BuildRequires: java-devel
 
-Requires: binutils-gprofng >= %{Version}
+Requires: binutils-gprofng >= 2.40
 Requires: java-devel
 
 Provides: gprofng-gui = %{version}-%{release}
