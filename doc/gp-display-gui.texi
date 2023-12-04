@@ -79,7 +79,8 @@ gp-display-gui - Graphical tool to analyze one or more gprofng experiments
 @end indentedblock
 @end iftex
 @ifnottex
-@command{gprofng display gui} [@var{option(s)}] [[@option{-c}] @var{experiment(s)} | @var{target} [@var{target-options}]]
+@command{gprofng display gui} [@var{option(s)}] [[@option{-c}]
+@var{experiment(s)} | @var{target} [@var{target-options}]]
 @end ifnottex
 
 @c man end
@@ -118,7 +119,7 @@ Alternatively, the tool can be invoked without specifying experiments.  In
 this case, a target program is expected to be specified.  Optionally, there
 may be options for the target.
 
-In this case, a window with user settings will be opened.  These may be
+If started this way, a window with user settings will be opened.  These may be
 used to specify the options and other preferences that define the data
 collection experiment.  The user can then run the experiment from this
 window and upon successful completion, analyze the results.
@@ -163,7 +164,7 @@ Print usage information and exit.
 
 By default, verbose mode is disabled.  This option enables it.
 
-@item -j, --jdkhome @var{jvmpath}
+@item -j @var{jvmpath}, --jdkhome @var{jvmpath}
 @ifclear man
 @IndexSubentry{Options, @code{-j}}
 @IndexSubentry{Options, @code{--jdkhome}}
@@ -174,10 +175,9 @@ running @command{gprofng display gui}.
 The default path is taken first by examining environment variables
 for a path to the JVM, in the order @env{JDK_HOME}, and then @env{JAVA_PATH}.
 
-If neither environment variable is set, the version found in the search path set
-with the @env{PATH} environment variable is used.  If none is found,
+If neither environment variable is set, the version found in the search path
+set with the @env{PATH} environment variable is used.  If none is found,
 @command{/usr/java/bin/java} is tried.
-
 
 @item -J@var{jvm-setting}
 @ifclear man
@@ -203,7 +203,7 @@ this reference experiment.
 Note that the user can toggle between aggregation and comparison mode
 from within the GUI.
 
-@item -f, --fontsize @var{size}
+@item -f @var{size}, --fontsize @var{size}
 @ifclear man
 @IndexSubentry{Options, @code{-f}}
 @IndexSubentry{Options, @code{--fontsize}}
@@ -211,7 +211,7 @@ from within the GUI.
 
 Specify the font size to be used in the GUI.
 
-@item -u, --userdir @var{dir-path}
+@item -u @var{dir-path}, --userdir @var{dir-path}
 @ifclear man
 @IndexSubentry{Options, @code{-u}}
 @IndexSubentry{Options, @code{--userdir}}
@@ -225,13 +225,13 @@ Specify the path to the user directory in which to store user settings.
 @ManPageEnd{}
 
 @ifset REMOTE_HOST
-@c -----------------------------------------------------------------------------
+@c ----------------------------------------------------------------------------
 @c ENVIRONMENT SECTION
 @c
 @c Temporarily disabled until the remote host feature has been implemented.
 @c Once this has been done, remove the ifset REMOTE_HOST/end ifset and the
 @c "@c deferred " strings.
-@c -----------------------------------------------------------------------------
+@c ----------------------------------------------------------------------------
 
 @c deferred @ManPageStart{ENVIRONMENT}
 @c deferred @c man begin ENVIRONMENT
@@ -242,7 +242,10 @@ supported:
 @table @samp
 
 @item @env{GPROFNG_HEARTBEAT_DISABLE}
-@cindex Environment variables
+
+@ifclear man
+@IndexSubentry{Environment variables, @code{GPROFNG_HEARTBEAT_DISABLE}}
+@end ifclear
 
 If defined, disable periodic checking of the connection between
 @command{gprofng} and the remote host.  By default, a heartbeat packet is sent
@@ -251,16 +254,22 @@ the heartbeat packet can help to keep some SSH connections from automatically
 closing due to inactivity.
 
 @item @env{GPROFNG_HEARTBEAT_MSEC}
-@cindex Environment variables
+
+@ifclear man
+@IndexSubentry{Environment variables, @code{GPROFNG_HEARTBEAT_MSEC}}
+@end ifclear
 
 Set the interval for checking the connection between @command{gprofng} and
-the remote host. The default is 2000 milliseconds.
+the remote host.  The default is 2000 milliseconds.
 
 @item @env{GPROFNG_REMOTE_SHELL}
-@cindex Environment variables
+
+@ifclear man
+@IndexSubentry{Environment variables, @code{GPROFNG_REMOTE_SHELL}}
+@end ifclear
 
 Set this variable to @command{/usr/bin/ssh} to use @samp{/usr/bin/ssh} for
-connecting @command{gprofng} to a remote host. If this variable is not set,
+connecting @command{gprofng} to a remote host.  If this variable is not set,
 the internal tool to connect is used.
 
 For example:
@@ -287,7 +296,7 @@ for connections that do not require a password or passphrase.
 
 The @command{gprofng display gui} tool relies on other @command{gprofng}
 components.  Therefore, it is necessary to also install the other components,
-either by using one of the available rpm's, install from a tar file
+either by using one of the available RPM's, install from a tar file
 distribution, or to build and install @command{gprofng} directly from the
 source.
 

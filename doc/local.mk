@@ -24,7 +24,7 @@ MANCONF = -Dman
 
 TEXI2POD = perl $(srcdir)/etc/texi2pod.pl $(AM_MAKEINFOFLAGS)
 POD2MAN = pod2man --center="User Commands" \
-	--release="binutils-$(VERSION)" --section=1
+	--release="gprofng-gui-$(VERSION)" --section=1
 
 #info_TEXINFOS       = gp-display-gui.texi
 TEXINFO_TEX         = .
