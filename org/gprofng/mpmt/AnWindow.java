@@ -2161,14 +2161,16 @@ public final class AnWindow implements AnChangeListener {
     }
 
     // Disable during experiment loading
-    connectAction.setEnabled(!loadingExperiments);
+    connectAction.setEnabled(!loadingExperiments &&
+        Analyzer.getInstance().connectingToRemoteHostEnabled);
     remoteHostStatusHandle.setEnabled(!loadingExperiments);
 
     // Disable during experiment loading and enabled only if connected
     profileApplicationAction.setEnabled(!loadingExperiments && connected);
     profileKernelAction.setEnabled(
         !loadingExperiments && connected && Analyzer.getInstance().isKernelProfilingEnabled());
-    profileRunningProcessAction.setEnabled(!loadingExperiments && connected);
+    profileRunningProcessAction.setEnabled(!loadingExperiments && connected &&
+        Analyzer.getInstance().profileRunningProcessEnabled);
     openExperimentAction.setEnabled(!loadingExperiments && connected);
     recentExperimentsMenu.setEnabled(!loadingExperiments && connected);
     compareExperimentsAction.setEnabled(!loadingExperiments && connected);

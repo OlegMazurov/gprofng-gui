@@ -64,8 +64,8 @@ public final class Analyzer {
   public boolean normalSelection = false; // Right click changes selection
   public boolean IPC_started = false;
   public boolean connectingToRemoteHost = false; // true during the connecting process
-  //    public int kernelProfilingEnabled = 0; // 0 - not initialized, 1 - "er_kernel" is available,
-  // 2 - not available
+  public boolean connectingToRemoteHostEnabled = false;
+  public boolean profileRunningProcessEnabled = false;
   public Boolean kernelProfilingEnabled = null;
   public boolean old_IPC_status = false;
   public int cur_id = 0;

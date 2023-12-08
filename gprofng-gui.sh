@@ -36,7 +36,7 @@ GTXT "\t-j|--jdkhome <path>\n\t    specify the JVM directory\n" 3 17 3
 GTXT "\t-J<jvm_options>\n\t    pass <jvm_options> to JVM\n" 4 17 4
 GTXT "\t-v|--verbose\n\t    enable verbose output\n" 5 17 5
 GTXT "\t-V|--version\n\t    show version and exit\n" 6 17 6
-GTXT "\nAll other options and arguments are passed to the Analyzer.\nSee documentations for details.\n" 7 17 7
+GTXT "\nAll other options and arguments are passed to gprofng GUI.\nSee documentations for details.\n" 7 17 7
 GTXT "Cannot find JVM. Please set the JAVA_PATH environment variable to point\nto your JVM installation directory, or use the -j switch.\n" 8 17 8
 GTXT "Cannot find JVM at \"%s\". Please set the JAVA_PATH\nenvironment variable to point to your JVM installation directory,\nor use the -j switch.\n" 9 17 9
 GTXT "\t-f|--fontsize <size>\n\t    specify the font size to be used in the gprofng GUI\n" 10 17 10
@@ -75,12 +75,12 @@ Usage()
     Message 2       # "\t-?|-h|--help\n\t    show usage and exit\n"
     Message 3       # "\t-j|--jdkhome <path>\n\t    specify the JVM directory\n"
     Message 4       # "\t-J<jvm_options>\n\t    pass <jvm_options> to JVM\n"
-    Message 10      # "\t-f|--fontsize <size>\n\t    specify the font size to be used in the Analyzer\n"
+    Message 10      # "\t-f|--fontsize <size>\n\t    specify the font size to be used in gprofng GUI\n"
     Message 5       # "\t-v|--verbose\n\t    enable verbose output\n"
     Message 6       # "\t-V|--version\n\t    show version and exit\n"
     Message 19      # -c|--compare
     Message 20      # -u|--userdir
-    Message 7       # "\nAll other options and arguments are passed to the Analyzer.\nSee documentations for details.\n"
+    Message 7       # "\nAll other options and arguments are passed to gprofng GUI.\nSee documentations for details.\n"
 }
 
 ###########################################################################
@@ -324,14 +324,11 @@ if [ ${err} -eq 0 ]; then
             exit ${res}
         fi
         Message 27 "$jdkhome/bin/java"
-        # /bin/echo "Error: java from PATH cannot be used to run Performance Analyzer GUI (unrecognized class file version)"
     else
         Message 22 "$jdkhome/bin/java"
-        # /bin/echo "Error: java from PATH cannot be used to run Performance Analyzer GUI (command not found)"
     fi
 else
     Message 23 "$jdkhome/bin/java"
-    # /bin/echo "Error: java from PATH cannot be used to run Performance Analyzer GUI (Unsupported major.minor version)"
 fi
 Message 24
 Message 25
