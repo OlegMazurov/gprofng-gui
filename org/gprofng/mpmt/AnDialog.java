@@ -168,6 +168,7 @@ public abstract class AnDialog extends JDialog implements ActionListener {
       response.add(
           help = new ResponseAction(command, AnLocale.getString('H', "MNEM_DIALOG_HELP")),
           gridBagConstraints);
+      help.setEnabled(false);
       //            ((JComponent) cnt).registerKeyboardAction(help, command,
       // KeyboardShortcuts.helpActionShortcut, JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
       //            ((JComponent) cnt).registerKeyboardAction(help, command,
