@@ -176,6 +176,7 @@ public final class CompareAdvancedDialog extends JDialog implements ItemListener
     btnAddGrp.setToolTipText(AnLocale.getString("Add a group"));
     btnHelp = newButton(AnLocale.getString("Help"), "btnHelp");
     btnHelp.setMnemonic(AnLocale.getString('H', "CompareDialogHelpButtonMN"));
+    btnHelp.setEnabled(false);
 
     getRootPane().setDefaultButton(btnOk); // default action (Return key)
 

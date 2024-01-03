@@ -35,6 +35,7 @@ class AnDialogOuterPanel extends javax.swing.JPanel {
     this.dialog = dialog;
     initComponents();
     helpButton.setVisible(false);
+    helpButton.setEnabled(false);
     panel.setLayout(new BorderLayout());
     okButton.setText(AnLocale.getString("OK")); // NOI18N);
     //        okButton.setMnemonic(AnLocale.getString('O', "EXPORT_DIALOG_OK_MN")); // NOI18N);
