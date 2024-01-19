@@ -7,5 +7,12 @@ See the manual for detailed information.
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+ Version 1.1 (19 January 2024)
+- Disable help buttons in the interface, as these are not
+  useful at this point.
+- Disable buttons for remote profiling features, as these are
+  not implemented yet.
+- Manual pages upgraded and improved.
+
  Version 1.0 (30 October 2023)
 - Initial release.

@@ -1,4 +1,4 @@
-dnl Copyright (C) 2022 Free Software Foundation
+dnl Copyright (C) 2022-2024 Free Software Foundation
 dnl
 dnl This program is free software: you can redistribute it and/or modify
 dnl it under the terms of the GNU General Public License as published by
@@ -13,7 +13,7 @@ dnl
 dnl You should have received a copy of the GNU General Public License
 dnl along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-AC_INIT([gprofng-gui], 1.0)
+AC_INIT([gprofng-gui], 1.1)
 AM_INIT_AUTOMAKE
 AC_PROG_CC
 AC_CHECK_PROGS([JAVA],[java],[no])
