@@ -47,8 +47,6 @@ public final class Analyzer {
 
   // Runtime environment
   public static final String PERFORMANCE_ANALYZER_RELEASE_NAME = "gprofng GUI";
-  public static final String THIS_VERSION = "12.6";
-
   public static final String jvm_ver = System.getProperty("java.version", "unknown");
   public static final String jvm_home = System.getProperty("java.home", "unknown");
   public static final String home_dir =
@@ -398,8 +396,6 @@ public final class Analyzer {
         }
       }
     }
-    System.err.println("fdhome: " + (fdhome == null ? "" : fdhome));
-    System.err.println("gp-display-text: " + er_print);
     AnLog.log("analyzer: gp-display-text=" + er_print + "\n");
     // Check the OS - only Solaris and Linux are supported
     if (remoteHost == null) {
@@ -1833,8 +1829,8 @@ public final class Analyzer {
    */
   private String initIPC() throws Exception {
     AnUtility.checkIPCOnWrongThread(false);
-    String temporaryRemoteVersion = getAnalyzerReleaseName() + " " + THIS_VERSION;
-    fdversion = temporaryRemoteVersion;
+    String temporaryRemoteVersion = getAnalyzerReleaseName();
+    fdversion = "";
     String emsg = null;
     startIPC();
     // Version Handshake

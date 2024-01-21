@@ -242,7 +242,7 @@ public final class AnWindow implements AnChangeListener {
       AnLocale.getString("Opens a documentation window in the gprofng GUI");
   private static final String ACTION_HELP_AC = ACTION_HELP_TT;
   private static final String ACTION_HELP_PERFORMANCE_ANALYZER =
-      AnLocale.getString("gprofng Analyzer");
+      AnLocale.getString("gprofng GUI");
   private static final String ACTION_HELP_NEW_FEATURES = AnLocale.getString("New Features");
   private static final String ACTION_HELP_INFORMATION_MAP = AnLocale.getString("Information Map");
   private static final String ACTION_HELP_KEYBOARD_SHORTCUTS =

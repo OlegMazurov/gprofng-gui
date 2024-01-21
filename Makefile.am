@@ -581,6 +581,7 @@ $(MPMT_PROPERTIES): $(MPMT_FILES) LocaleString.class \
 	mkdir -m 777 -p $(@D)
 	echo "# THIS FILE IS AUTO-GENERATED. DON'T EDIT IT." > $@
 	echo "" >> $@
+	echo "gui_version=$(VERSION)" >> $@
 	cat $(srcdir)/gprofng.properties >> $@
 	cat $(MPMT_FILES) | $(JAVA) $(JAVA_FLAGS) -cp . LocaleString >> $@
 

@@ -31,12 +31,12 @@ import javax.swing.text.StyleContext;
 import javax.swing.text.StyledDocument;
 
 public class AboutPanel extends JPanel {
-
+  private static final String GUI_VERSION = "gui_version";
   private static final String REGULAR = "regular";
   private static final String BOLD = "bold";
   private static final String ITALIC = "italic";
   private static final String strLegalNotice =
-      "Copyright (C) 2022 Free Software Foundation\n\n"
+      "Copyright (C) 2022-2024 Free Software Foundation\n\n"
       + "This program is free software; you can redistribute it and/or modify\n"
       + "it under the terms of the GNU General Public License as published by\n"
       + "the Free Software Foundation, either version 3 of the License, or\n"
@@ -78,33 +78,39 @@ public class AboutPanel extends JPanel {
     Style boldStyle = doc.addStyle(BOLD, regularStyle);
     StyleConstants.setBold(boldStyle, true);
 
+    String gui_version = AnLocale.getString(GUI_VERSION);
+    if (gui_version.compareTo(GUI_VERSION) == 0) // Did not find
+      gui_version = "";
     try {
-      doc.insertString(doc.getLength(), AnLocale.getString("Version: "), doc.getStyle(BOLD));
-      doc.insertString(doc.getLength(), Analyzer.fdversion + "\n", doc.getStyle(REGULAR));
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("Version: "), boldStyle);
+      doc.insertString(doc.getLength(), gui_version + "\n", regularStyle);
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("GUI protocol version: "), boldStyle);
+      doc.insertString(doc.getLength(),
+          IPCProtocol.version + "\n", regularStyle);
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("Install: "), boldStyle);
+      doc.insertString(doc.getLength(), Analyzer.fdhome + "\n", regularStyle);
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("Working directory: "), boldStyle);
+      doc.insertString(doc.getLength(),
+          Analyzer.getInstance().getWorkingDirectory() + "\n", regularStyle);
+      doc.insertString(doc.getLength(), AnLocale.getString("Java: "), boldStyle);
+      doc.insertString(doc.getLength(), Analyzer.jvm_ver + "\n", regularStyle);
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("Java home: "), boldStyle);
+      doc.insertString(doc.getLength(), Analyzer.jvm_home + "\n", regularStyle);
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("User directory: "), boldStyle);
+      doc.insertString(doc.getLength(),
+          UserPref.getInstance().getAnalyzerDirPath() + "\n", regularStyle);
+      doc.insertString(doc.getLength(), "gp-display-text: ", boldStyle);
       doc.insertString(
-          doc.getLength(), AnLocale.getString("GUI protocol version: "), doc.getStyle(BOLD));
-      doc.insertString(doc.getLength(), IPCProtocol.version + "\n", doc.getStyle(REGULAR));
-      doc.insertString(doc.getLength(), AnLocale.getString("Install: "), doc.getStyle(BOLD));
-      doc.insertString(doc.getLength(), Analyzer.fdhome + "\n", doc.getStyle(REGULAR));
-      doc.insertString(
-          doc.getLength(), AnLocale.getString("Working directory: "), doc.getStyle(BOLD));
-      doc.insertString(
-          doc.getLength(),
-          Analyzer.getInstance().getWorkingDirectory() + "\n",
-          doc.getStyle(REGULAR));
-      doc.insertString(doc.getLength(), AnLocale.getString("Java: "), doc.getStyle(BOLD));
-      doc.insertString(
-          doc.getLength(), "J2SE[tm] " + Analyzer.jvm_ver + "\n", doc.getStyle(REGULAR));
-      doc.insertString(doc.getLength(), AnLocale.getString("Java home: "), doc.getStyle(BOLD));
-      doc.insertString(doc.getLength(), Analyzer.jvm_home + "\n", doc.getStyle(REGULAR));
-      doc.insertString(doc.getLength(), AnLocale.getString("User directory: "), doc.getStyle(BOLD));
-      doc.insertString(
-          doc.getLength(),
-          UserPref.getInstance().getAnalyzerDirPath() + "\n",
-          doc.getStyle(REGULAR));
-      doc.insertString(doc.getLength(), "gp-display-text: ", doc.getStyle(BOLD));
-      doc.insertString(
-          doc.getLength(), Analyzer.getInstance().er_print + "\n", doc.getStyle(REGULAR));
+          doc.getLength(), Analyzer.getInstance().er_print + "\n", regularStyle);
+      doc.insertString(doc.getLength(),
+          AnLocale.getString("gp-display-text version: "), boldStyle);
+      doc.insertString(doc.getLength(), Analyzer.fdversion + "\n", regularStyle);
     } catch (BadLocationException ble) {
     }
     AnUtility.setAccessibleContext(
