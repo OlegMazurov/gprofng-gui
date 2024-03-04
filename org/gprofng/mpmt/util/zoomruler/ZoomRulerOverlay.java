@@ -788,8 +788,8 @@ public class ZoomRulerOverlay {
     }
 
     /* if PANNING is supported, handle it here */
-
-    if (nlevels <= 0) return ZoomRulerEvent.UNKNOWN;
+    if (nlevels <= 0)
+      return ZoomRulerEvent.UNKNOWN;
 
     /* check for click on ZoomOut Anchor */
     if (xl >= ANCHOR1_OFFSET_LD
@@ -825,7 +825,6 @@ public class ZoomRulerOverlay {
     }
     /* check for a click on the ruler */
     if (hasSlider
-        && nlevels > 0
         && xl > ANCHOR1_OFFSET_LD + ANCHOR_SIZE
         && xl < ANCHOR2_OFFSET_LD
         && yl > ANCHOR1_OFFSET_SD

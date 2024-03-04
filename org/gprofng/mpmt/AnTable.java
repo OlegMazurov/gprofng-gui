@@ -1489,10 +1489,8 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
           } else {
             panel.setBackground(AnEnvironment.TABLE_LINE_BACKGROUND_SELECTED_COLUMN_COLOR_1);
           }
-        } else {
-          if (!isSelected && row % 2 == 1) {
-            panel.setBackground(AnEnvironment.TABLE_LINE_BACKGROUND_COLOR_2);
-          }
+        } else if (row % 2 == 1) {
+          panel.setBackground(AnEnvironment.TABLE_LINE_BACKGROUND_COLOR_2);
         }
       }
       mcolumn = table.convertColumnIndexToModel(column);
