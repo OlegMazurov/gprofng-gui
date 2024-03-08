@@ -173,13 +173,6 @@ public final class IPCProcess extends Process {
       if (exit_value != -1) {
         msg += AnLocale.getString(" Exit status is ") + exit_value;
       }
-      // msg += AnLocale.getString("\nAnalyzer session will be reinitialized.");
-
-      // if (!Analyzer.inNetBeans() && Analyzer.gui_initialized)
-      //  AnWindow.getRootWindow().reinit(); // analyzer cleanup
-
-      //            if (parent_Analyzer.get_win_size() != 0) // No SIGTERM occured (netbeans only)
-      //                parent_Analyzer.endIPC(msg);
       try {
         stdin.close();
         stdout.close();
@@ -189,16 +182,14 @@ public final class IPCProcess extends Process {
       }
       if (parent_Analyzer.isConnected() && (!parent_Analyzer.isRemote())) {
         if (!parent_Analyzer.connectingToRemoteHost) { // not connecting?
-          // Show error message and save it in the log file
-          AnWindow.getInstance()
-              .getExperimentsView()
-              .appendLog(AnLocale.getString("Error: ") + msg);
-          System.err.println(AnLocale.getString("Error: ") + msg);
-          JOptionPane.showMessageDialog(
-              (AnWindow.getInstance()).getFrame(),
-              msg,
-              AnLocale.getString("Error"),
-              JOptionPane.ERROR_MESSAGE);
+          if (msg != null) {
+            // Show error message and save it in the log file
+            AnWindow.getInstance().getExperimentsView()
+                .appendLog(AnLocale.getString("Error: ") + msg);
+            System.err.println(AnLocale.getString("Error: ") + msg);
+            JOptionPane.showMessageDialog((AnWindow.getInstance()).getFrame(),
+                msg, AnLocale.getString("Error"), JOptionPane.ERROR_MESSAGE);
+          }
           System.exit(1);
         }
       }
