@@ -30,6 +30,3 @@ launch the GUI using the following gprofng command:
 
   $ gprofng display gui [GUI_OPTIONS] [EXPERIMENT]
 
-Note that it is also possible to invoke the GUI directly:
-
-  $ gp-display-gui [GUI_OPTIONS] [EXPERIMENT]
