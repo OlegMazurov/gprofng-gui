@@ -278,6 +278,13 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     compareExperimentsButton =
         addActionButton(panel, gridy++, action.getTextNoDots(), action.getTooltipText(), action);
 
+    addSpace(panel, 14, gridy++);
+	
+    addSectionTitleLabel(panel, AnLocale.getString("Remote"), gridy++);
+    action = AnWindow.getInstance().getConnectAction();
+    connectButton =
+        addActionButton(panel, gridy++, action.getTextNoDots(), action.getTooltipText(), action);
+
     addButtomFill(panel, gridy++);
     addRightFill(panel);
   }
@@ -286,12 +293,16 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     AnAction action;
     int gridy = 0;
 
+    /*
     addSectionTitleLabel(panel, AnLocale.getString("Remote"), gridy++);
     action = AnWindow.getInstance().getConnectAction();
     connectButton =
         addActionButton(panel, gridy++, action.getTextNoDots(), action.getTooltipText(), action);
+    */
 
     addSpace(panel, 14, gridy++);
+
+    /*
     addSectionTitleLabel(panel, AnLocale.getString("Learn More"), gridy++);
 
     action = AnWindow.getInstance().getHelpAnalyzerAction();
@@ -300,7 +311,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     addActionButton(panel, gridy++, action.getTextNoDots(), action.getTooltipText(), action);
     action = AnWindow.getInstance().getHelpInformationMapAction();
     addActionButton(panel, gridy++, action.getTextNoDots(), action.getTooltipText(), action);
-
+    */
     addButtomFill(panel, gridy++);
   }
 
