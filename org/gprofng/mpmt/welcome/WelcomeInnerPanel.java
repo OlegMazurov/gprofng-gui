@@ -226,6 +226,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     AnAction action;
     panel.removeAll();
     int gridy = 0;
+    int count = 0;
 
     createExperimentTitleLabel =
         addSectionTitleLabel(panel, AnLocale.getString("Create Experiments"), gridy++);
@@ -258,7 +259,11 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
       if (Analyzer.getInstance().isConnected()) {
         recentExperimentsButtons = new ArrayList<WelcomeButton>();
         for (ExperimentPickListElement experimentElement : recentExperiments) {
-          String displayName = AnUtility.basename(experimentElement.getPath());
+          count = count + 1;
+	  if (count == 6) {
+	      break;
+	  }	  
+	  String displayName = AnUtility.basename(experimentElement.getPath());
           int length = displayName.length();
           if (length > 25) {
             displayName = displayName.substring(0, 16) + "..." + displayName.substring(length - 7);
