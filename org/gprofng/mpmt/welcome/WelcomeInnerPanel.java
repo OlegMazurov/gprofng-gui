@@ -41,7 +41,7 @@ import javax.swing.JPanel;
 
 public class WelcomeInnerPanel extends javax.swing.JPanel {
 
-  private final int MOST_RECENT_EXP_LIST_SIZE = 8;
+  private final int MOST_RECENT_EXP_LIST_SIZE = 7;
   private static final Font font12 = new JLabel().getFont().deriveFont(12f);
   private static final Font bold12Font = font12.deriveFont(Font.BOLD);
   private static final Font plain12Font = font12.deriveFont(Font.PLAIN);
@@ -193,7 +193,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     gridBagConstraints.gridy = 1;
     gridBagConstraints.gridwidth = GridBagConstraints.REMAINDER;
     gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-    gridBagConstraints.insets = new Insets(50, 75, 0, 0);
+    gridBagConstraints.insets = new Insets(20, 75, 0, 0);
     foregroundPanel.add(label3, gridBagConstraints);
 
     leftPanel = new JPanel();
@@ -226,7 +226,6 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     AnAction action;
     panel.removeAll();
     int gridy = 0;
-    int count = 0;
 
     createExperimentTitleLabel =
         addSectionTitleLabel(panel, AnLocale.getString("Create Experiments"), gridy++);
@@ -258,11 +257,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
       openRecentExperimentButton = addActionButton(panel, gridy++, buttonText, buttonTT, null);
       if (Analyzer.getInstance().isConnected()) {
         recentExperimentsButtons = new ArrayList<WelcomeButton>();
-        for (ExperimentPickListElement experimentElement : recentExperiments) {
-          count = count + 1;
-	  if (count == 6) {
-	      break;
-	  }	  
+        for (ExperimentPickListElement experimentElement : recentExperiments) {  
 	  String displayName = AnUtility.basename(experimentElement.getPath());
           int length = displayName.length();
           if (length > 25) {
