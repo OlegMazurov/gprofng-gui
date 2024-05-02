@@ -19,4 +19,5 @@ INSTALL
 compile
 install-sh
 missing
+mdate-sh
 
