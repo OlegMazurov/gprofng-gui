@@ -89,7 +89,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
       connectButton.setEnabled(false);
     } else {
       setConnected(Analyzer.getInstance().isConnected());
-      connectButton.setEnabled(false);
+      connectButton.setEnabled(true);
     }
   }
 

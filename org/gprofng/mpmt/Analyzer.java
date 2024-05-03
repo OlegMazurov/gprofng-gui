@@ -62,7 +62,7 @@ public final class Analyzer {
   public boolean normalSelection = false; // Right click changes selection
   public boolean IPC_started = false;
   public boolean connectingToRemoteHost = false; // true during the connecting process
-  public boolean connectingToRemoteHostEnabled = false;
+  public boolean connectingToRemoteHostEnabled = true;
   public boolean profileRunningProcessEnabled = false;
   public Boolean kernelProfilingEnabled = null;
   public boolean old_IPC_status = false;
@@ -151,7 +151,6 @@ public final class Analyzer {
   private static String IPC_PROTOCOL = IPCProtocol.IPC_PROTOCOL_STR;
   private final String ipc_protocol = IPC_PROTOCOL;
 
-  private static final String JSSH_jar = "/share/gprofng-gui/JSSH3.jar";
   private static final String DisplayAppName = "gp-display-text";
   private static final String CollectAppName = "gp-collect-app";
   private static final String KernelAppName = "gp-collect-kernel";
@@ -236,11 +235,10 @@ public final class Analyzer {
    *     "localhost"
    */
   public String getHost() {
-    String host = "localhost";
-    if (remoteConnection != null) {
-      host = remoteHost;
+    if (remoteHost != null) {
+      return remoteHost;
     }
-    return host;
+    return "localhost";
   }
 
   /**
@@ -487,56 +485,41 @@ public final class Analyzer {
     String rc = null;
     String emsg = null;
     // Authentication
-    String ra = emptyString; // default - password
-    if (null != connectionProperties) {
-      ra = Authentication.toKeyString(connectionProperties.getAuthentications());
-      if (null == ra) {
-        ra = emptyString;
-      } else {
-        ra = " -a " + ra;
-      }
-    }
     String rh = host;
     if (rh != null) {
       rh = rh.trim(); // remove spaces
     }
     // Empty host name is not accepted
-    if ((rh == null) || (rh.equals(emptyString))) {
-      return (known_problem_0);
+    if (rh == null || rh.length() == 0) {
+      return AnLocale.getString("Empty host name is not valid.");
     }
-    if ((!rh.equals(emptyString)) && (!rh.equals("localhost"))) {
+    if (rh.length() > 0 && !rh.equals("localhost")) {
       // Add user name if it is not empty
-      if ((name != null)) {
+      if (name != null) {
         name = name.trim(); // remove spaces
-        if (!name.equals(emptyString)) {
+        if (name.length() > 0) {
           rh = name + "@" + rh;
         }
       }
       String rs = AnUtility.getenv("SP_ANALYZER_REMOTE_SHELL");
       if (rs != null) { // Special way to login
-        rc = remoteShell + " " + rh;
+        er_printCmd = rs + " " + rh + " " + er_printCmd;
       } else {
-        rc = remoteShell + ra + " " + rh;
+        er_printCmd = remoteShell + " " + rh + " " + er_printCmd;
       }
-      er_printCmd = rc + " " + path_to_er_print;
     }
-    String cmode = AnUtility.getenv("SP_ANALYZER_CONFIG_MODE");
-    if ((cmode != null) && (cmode.equals("R"))) {
-      er_printCmd = er_printCmd + " -RIPC";
-    } else {
-      er_printCmd = er_printCmd + " -IPC";
-    }
+    rc = er_printCmd;
+    er_printCmd = er_printCmd + " -IPC";
     String tracelevel = null; // AnUtility.getenv("SP_ER_PRINT_TRACE_LEVEL");
     if (tracelevel != null) {
-      String er_printCmd_extn = " -E SP_ER_PRINT_TRACE_LEVEL=" + tracelevel;
-      er_printCmd = er_printCmd + er_printCmd_extn;
+      er_printCmd = er_printCmd + " -E SP_ER_PRINT_TRACE_LEVEL=" + tracelevel;
     }
     if (ipc_protocol != null) {
-      String er_printCmd_extn = " -E SP_IPC_PROTOCOL=" + ipc_protocol;
-      er_printCmd = er_printCmd + er_printCmd_extn;
+      er_printCmd = er_printCmd + " -E SP_IPC_PROTOCOL=" + ipc_protocol;
     }
     // Initialize new IPC connection - start gp-display-text
     try {
+      System.out.println("Start connection:\n" + er_printCmd);
       newIPC.init(er_printCmd, false);
       sendP(newIPC, p, cc);
       er_print = path_to_er_print;
@@ -803,7 +786,6 @@ public final class Analyzer {
             + ts); // DEBUG
     cc.updateConnectionStatus(status1);
     if ((null != pass) && (pass.length > 0)) {
-      // this hangs if jssh+er_print do not send anything
       int c = 190; // timeout 19 seconds
       // Don't read - another thread (IPCReader) is already reading it.
       while (c-- > 0) {
@@ -1733,9 +1715,11 @@ public final class Analyzer {
     //     remoteHost = AnUtility.getenv("SP_ANALYZER_REMOTE_HOST");
     // }
     String specialRemoteShell = AnUtility.getenv("SP_ANALYZER_REMOTE_SHELL");
-    if (specialRemoteShell != null && !specialRemoteShell.equals(emptyString)) {
+    if (specialRemoteShell != null && specialRemoteShell.length() > 0) {
       remoteShell = specialRemoteShell;
-    } else {
+    }
+    AnLog.log("MEZ:: remoteShell = " + remoteShell + "\n");
+    if (remoteShell == null) {
       if (fdhome.charAt(2) == ':') {
         if (fdhome.charAt(0) == '/') {
           String os_name = System.getProperty("os.name");
@@ -1745,29 +1729,6 @@ public final class Analyzer {
           }
         }
       }
-      // if ( ("SunOS".equals(os_name)) || ("Linux".equals(os_name)) ) {
-      //   remoteShell = fdhome + "/../../../bin/jssh";
-      // } else {
-      // remoteShell = "java -Djava.awt.headless=true -cp " + fdhome +
-      // "/../../../lib/analyzer/lib/jssh/lib/jssh.jar jssh.Main ";
-      // remoteShell = "java -cp " + fdhome + "/../../../lib/analyzer/lib/jssh/lib/jssh.jar
-      // jssh.Main ";
-      // }
-      String jar_name = fdhome + JSSH_jar;
-      // Escape spaces
-      if (jar_name.contains("%20")) {
-        jar_name = jar_name.replace("%20", " ");
-      }
-      if (jar_name.contains(" ")) {
-        jar_name = emptyString + '"' + jar_name + '"';
-      }
-      // System.err.println("Java home: "+Analyzer.jvm_home);
-      // String java = emptyString + Analyzer.jvm_home + "/bin/java";
-      // System.err.println("Java : "+java);
-      // remoteShell = emptyString + java + " -jar " + jar_name;
-      remoteShell = "java -jar " + jar_name;
-      // System.err.println("remoteShell = " + remoteShell);
-      AnLog.log("analyzer: remoteShell = " + remoteShell + "\n");
     }
     if (remoteHost != null && !remoteHost.equals(emptyString)) {
       // System.err.println("analyzer: SP_ANALYZER_REMOTE_HOST `" + remoteHost + "'");
