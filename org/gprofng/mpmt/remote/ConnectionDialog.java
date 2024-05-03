@@ -318,7 +318,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
         path = path.trim();
       }
       if ((path == null) || (path.length() < 1)) {
-        return (AnLocale.getString("Error: Installation Path is not specified."));
+        return (AnLocale.getString("Error: remote gprofng path is not specified."));
       }
       if (!path.endsWith("gp-display-text")) {
         if (path.endsWith("bin") || path.endsWith("bin/")) {

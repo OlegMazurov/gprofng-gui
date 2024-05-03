@@ -137,16 +137,16 @@ public final class Analyzer {
   private String explanation_3_1 =
       AnLocale.getString(
           "gprofng GUI did not get a reply from the remote host. Please check that the"
-              + " specified remote host exists, and the specified Installation Path exists on the"
+              + " specified remote host exists, and the specified remote gprofng path exists on the"
               + " remote host.");
   private String explanation_3_2 =
       AnLocale.getString(
           "gprofng GUI did not get a reply from the remote host. Please check that the"
-              + " specified Installation Path exists on the remote host.");
+              + " specified remote gprofng path exists on the remote host.");
   private String explanation_9 =
       AnLocale.getString(
           "gprofng GUI version does not match version on the remote host as specified by"
-              + " the Installation Path.");
+              + " the remote gprofng path.");
   // Connection protocol version
   private static String IPC_PROTOCOL = IPCProtocol.IPC_PROTOCOL_STR;
   private final String ipc_protocol = IPC_PROTOCOL;

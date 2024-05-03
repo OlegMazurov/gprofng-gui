@@ -4129,7 +4129,7 @@ public final class AnWindow implements AnChangeListener {
   }
 
   /**
-   * A generic method to get data for Analyzer tabs.
+   * A generic method to get data for gprofng-gui tabs.
    *
    * @param mlistStr metric list: "MET_NORMAL", "MET_CALL", "MET_CALL_AGR", ...
    * @param modeStr mode: "ALL", "CALLERS", "CALLEES", "SELF"
