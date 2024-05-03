@@ -194,7 +194,7 @@ public final class AnMain {
               }
               String msg =
                   AnLocale.getString(
-                      "Settings created by a previous version of Analyzer were found on your system"
+                      "Settings created by a previous version of gprofng were found on your system"
                           + " at %s.\n"
                           + "They have been imported into %s.");
               String formattedMsg = String.format(msg, userDirPath, actualUserDirPath);

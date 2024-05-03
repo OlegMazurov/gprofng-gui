@@ -821,11 +821,11 @@ public class AnChooser extends JFileChooser implements PropertyChangeListener {
     public String getDescription() {
       switch (chooser_type) {
         case EXP_GROUP_CHOOSER:
-          return AnLocale.getString("Analyzer Experiment Group (*.erg)");
+          return AnLocale.getString("gprofng experiment group (*.erg)");
         case TARGET_CHOOSER:
-          return AnLocale.getString("Analyzer Target (executable files)");
+          return AnLocale.getString("gprofng target (executable files)");
         default: // EXP_CHOOSER
-          return AnLocale.getString("Analyzer Experiment (*.er, *.erg)");
+          return AnLocale.getString("gprofng experiment (*.er, *.erg)");
       }
     }
   }

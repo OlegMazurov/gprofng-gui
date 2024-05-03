@@ -1188,7 +1188,7 @@ public final class AnWindow implements AnChangeListener {
     // Views
     viewDisplayPanel = new ViewDisplayPanel();
     AccessibleContext context = viewDisplayPanel.getAccessibleContext();
-    String loc_string = AnLocale.getString("Analyzer Main Window");
+    String loc_string = AnLocale.getString("gprofng Main Window");
     context.setAccessibleName(loc_string);
     context.setAccessibleDescription(loc_string);
     standardDisplayList = new ArrayList<AnDisplay>();
