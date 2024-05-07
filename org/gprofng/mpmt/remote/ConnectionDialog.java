@@ -251,8 +251,8 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     } else {
       String lastPath = solstudioPathTextField.getText();
       if (hostName.equals(local_host) || hostName.length() == 0) {
-        solstudioPathTextField.setText(
-            getDefaultSolStudioPath()); // Default path (same as local path)
+        solstudioPathTextField.setText("/usr/bin");
+        //    getDefaultSolStudioPath()); // Default path (same as local path)
         setAuthentications(null);
       } else {
         if (getDefaultSolStudioPath().equals(lastPath)) {

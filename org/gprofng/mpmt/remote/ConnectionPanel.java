@@ -71,7 +71,7 @@ public class ConnectionPanel extends JPanel {
     passWordLabel.setDisplayedMnemonic(AnLocale.getString('p', "RemoteDialogPasswordLabelMN"));
     passWordLabel.setLabelFor(passwordField);
 
-    solstudioPathLabel.setText(AnLocale.getString("gprofng path:"));
+    solstudioPathLabel.setText(AnLocale.getString("gprofng Path:"));
     solstudioPathLabel.setToolTipText(
         AnLocale.getString(
             "Full path to the gprofng installation accessible on the remote system"));
