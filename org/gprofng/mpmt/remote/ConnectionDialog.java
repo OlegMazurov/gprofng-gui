@@ -228,7 +228,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     ConnectionProperties connectionProperties =
         UserPref.getInstance().getConnectionPropertiesMap().get(hostName);
     String empty = "";
-    if (connectionProperties != null) {
+    if (connectionProperties != null) {     
       String path = connectionProperties.getPath();
       if (path != null && path.length() > 0) {
         solstudioPathTextField.setText(path);
@@ -240,7 +240,8 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
       if (userName != null && userName.length() > 0) {
         usernameTextField.setText(userName);
       } else {
-        usernameTextField.setText(empty);
+        // usernameTextField.setText(empty);
+	usernameTextField.setText(AnUtility.getenv("USER"));
       }
 
       if (hostName.equals(local_host) || hostName.length() == 0) {
@@ -251,8 +252,8 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     } else {
       String lastPath = solstudioPathTextField.getText();
       if (hostName.equals(local_host) || hostName.length() == 0) {
-        solstudioPathTextField.setText("/usr/bin");
-        //    getDefaultSolStudioPath()); // Default path (same as local path)
+        solstudioPathTextField.setText(
+            getDefaultSolStudioPath()); // Default path (same as local path)
         setAuthentications(null);
       } else {
         if (getDefaultSolStudioPath().equals(lastPath)) {
@@ -328,13 +329,13 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
         }
       }
       String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, path, connectionProperties);
-      // usernameTextField.setText("");
+      // usernameTextField.setText(un);
       passwordField.setText("");
       if (s != null) {
         return (s);
       }
     } catch (Exception e) {
-      return ("Exception during connectiing."); // Cancel
+      return ("Exception during connecting."); // Cancel
     }
     return null; // Successfully connected
   }

@@ -92,7 +92,7 @@ public class ConnectionPanel extends JPanel {
         connectionProgressBar.getAccessibleContext(), AnLocale.getString("Progress"));
 
     // For now
-    userNameTextField.setText("");
+    userNameTextField.setText(AnUtility.getenv("USER"));
     passwordField.setText("");
   }
 
