@@ -228,7 +228,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     ConnectionProperties connectionProperties =
         UserPref.getInstance().getConnectionPropertiesMap().get(hostName);
     String empty = "";
-    if (connectionProperties != null) {     
+    if (connectionProperties != null) {       
       String path = connectionProperties.getPath();
       if (path != null && path.length() > 0) {
         solstudioPathTextField.setText(path);
@@ -252,13 +252,12 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     } else {
       String lastPath = solstudioPathTextField.getText();
       if (hostName.equals(local_host) || hostName.length() == 0) {
-        solstudioPathTextField.setText(
-            getDefaultSolStudioPath()); // Default path (same as local path)
+        solstudioPathTextField.setText("/usr/bin");
         setAuthentications(null);
       } else {
-        if (getDefaultSolStudioPath().equals(lastPath)) {
-          solstudioPathTextField.setText(empty);
-        }
+        // if (getDefaultSolStudioPath().equals(lastPath)) {
+        //   solstudioPathTextField.setText(empty);
+        // }
         setAuthentications(UserPref.getDefaultAuthentications());
       }
     }
