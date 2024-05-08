@@ -1,0 +1,1464 @@
+\input texinfo @c -*-texinfo-*-
+
+@c ----------------------------------------------------------------------------
+@c This is the Texinfo source file for the GPROFNG manual.  This manual
+@c includes the man pages for the various tools.
+@c
+@c Author: Ruud van der Pas
+@c ----------------------------------------------------------------------------
+
+@c %**start of header
+
+@setfilename gp-gui-ug.info
+@settitle The GNU gprofng GUI
+
+@c -- Set the indent for the @example command to 1 space, not 5 ---------------
+@exampleindent 1
+
+@paragraphindent 3
+
+@c %**end of header
+
+@c -- Start a new chapter on a new, odd numbered, page ------------------------
+@c -- @setchapternewpage odd
+@c -- Start new chapters on new pages and to format page headers for
+@c -- single-sided printing.
+@c -- @setchapternewpage on
+@setchapternewpage odd
+
+@c -- Merge all index entries into the Concepts Index -------------------------
+@syncodeindex fn cp
+@syncodeindex ky cp
+@syncodeindex pg cp
+@syncodeindex vr cp
+
+@c -- Macros specific to gprofng ----------------------------------------------
+@include gp-macros.texi
+
+@c -- Get the version information ---------------------------------------------
+@c -- @include version-gui-ug.texi
+@include version.texi
+
+@c -- Entry for the Info dir structure ----------------------------------------
+@ifnottex
+@dircategory Software development
+@direntry
+* gprofng-gui: (gprofng-gui).  The GNU gprofng Graphical User Interface
+@end direntry
+@end ifnottex
+
+@c -- Copyright stuff ---------------------------------------------------------
+@copying
+This document is the manual for the GNU gprofng Graphical User Interface,
+last updated @value{UPDATED}.
+
+Copyright @copyright{} 2024 Free Software Foundation, Inc.
+
+@c -- @quotation
+Permission is granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free Software
+Foundation; with no Invariant Sections, with no Front-Cover texts,
+and with no Back-Cover Texts.  A copy of the license is included in the
+section entitled ``GNU Free Documentation License.''
+
+@c -- @end quotation
+@end copying
+
+@finalout
+@smallbook
+
+@c -- Define the title page ---------------------------------------------------
+@titlepage
+@title The GNU gprofng GUI
+@subtitle The graphical user interface for gprofng
+@subtitle version @value{VERSION} (last updated @value{UPDATED})
+@author Ruud van der Pas
+@page
+@vskip 0pt plus 1filll
+@insertcopying
+@end titlepage
+
+@c -- Generate the Table of Contents ------------------------------------------
+@contents
+
+@c -- The Top node ------------------------------------------------------------
+@c Should contain a short summary, copying permissions and a master menu.
+@c ----------------------------------------------------------------------------
+@ifnottex
+@node Top
+@top  GNU gprofng GUI
+
+@insertcopying
+@end ifnottex
+
+@ifinfo
+
+@c -- The menu entries --------------------------------------------------------
+
+@menu
+* Introduction::             About this manual.
+* Overview::                 A brief overview of the GUI.
+* Prerequisites::            What is required to install and use the GUI.
+* How to Install the GUI::   Build and install the GUI.
+* Getting Started::          How get started with the GUI.
+* Create an Experiment::     Set up and run a performance experiment.
+* The Default Views::        The default views into the data.
+* The Additional Views::     The non-default views that are available.
+* The gprofng GUI Man Page:: The man page for the gprofng GUI.
+* Index::                    The index.
+
+@detailmenu
+
+--- The Detailed Node Listing ---
+
+Introduction
+
+Overview
+
+Prerequisites
+
+* Build Requirements::   What is needed to build the GUI code?
+* Runtime Requirements:: What is needed when executing the GUI?
+
+How to Install the GUI
+
+* Prepare the Build from the Tar File::       Getting ready to build.
+* Prepare the Build from the Git Repository:: Getting ready to build.
+* Build and Install from Source::             Get ready to run the GUI.
+
+Getting Started
+
+* Start the GUI::      Different ways to invoke the GUI.
+* The Initial Screen:: What is shown initially?
+
+Create an Experiment
+
+The Default Views
+
+* Callers-Callees::    The calling relationships between the functions.
+* Call Tree::          A graphical representation of the call structure.
+* Disassembly::        Shows the metrics at the instruction level.
+* Experiments::        An overview of the experiments loaded.
+* Flame Graph::        A compact representation of the call tree.
+* Functions::          A function level overview where the time has been spent.
+* Processes::          Shows a list of the processes and their metrics.
+* Source/Disassembly:: Split window source and disassembly view.
+* Threads::            Show a list of the threads and their metrics.
+* Timeline::           A graphical representation of the program behaviour.
+* More ...::           Enable or disable views.
+
+The Additional Views
+
+* CPUs::           The CPUs used while executing the application, plus metrics.
+* Datasize::       Show data statistics for Heap and I/O tracing.
+* Duration::       Show durations for Heap, I/O and Synchronization tracing.
+* Experiment IDs:: List of processes created and metrics collected.
+* GCEvents::       List of Garbage Collection events.
+* Lines::          A sorted view with the source lines and their metric values.
+* PCs::            A sorted view with the Program Counters and their metrics.
+* Samples::        Show the samples plus the total CPU time.
+* Seconds::        Show the seconds plus the total CPU time.
+* Source::         Source listing with the metrics to the left of the lines.
+* Statistics::     Execution statistics for the application.
+
+The gprofng GUI Man Page
+
+Index
+
+@end detailmenu
+@end menu
+@end ifinfo
+
+@c -- A new node --------------------------------------------------------------
+@node    Introduction
+@chapter Introduction
+@c ----------------------------------------------------------------------------
+The gprofng GUI is GNU project.  It is a graphical tool to create, view, or
+both create as well as view, gprofng performance experiments.
+All the information about this project can be found at
+@url{https://savannah.gnu.org/projects/gprofng-gui, the gprofng GUI home page}.
+
+This tool, hereafter also referred to as ``the GUI'', provides multiple views
+into the data.  While some views are similar to what is shown with the command
+line tools, there are also features that are unique to the GUI.
+Examples are the Timeline and Flame Chart.
+
+The experiments do not need to be created with the GUI though.  Experiments
+generated using the @command{gprofng collect app} tool may also be analyzed
+and combined with experiments generated from within the GUI.
+
+In the remainder of this user guide, we first cover what is required in order
+to install and use the GUI.  This is followed by a chapter how to invoke the
+GUI and load an experiment for subsequent analysis.  The features and how
+to use them are the topics of the remainder of this guide.
+
+@c -- A new node --------------------------------------------------------------
+@node    Overview
+@chapter Overview
+@c ----------------------------------------------------------------------------
+@noindent
+Before we cover this tool in quite some detail, we start with a brief overview
+of the main features of the GUI:
+
+@itemize @bullet
+
+@item
+One or more experiments created with the GUI, or through the
+@CollectApp{} tool, may be loaded into the GUI and analyzed.
+
+Within the GUI, experiments may be dropped, or additional experiments can
+be added by loading them into the GUI.
+
+@item
+Many of the GUI settings are customizable and preferences may be saved
+in a configuration file that is read upon starting the GUI.
+
+@item
+@cindex Aggregation mode
+If multiple experiments have been loaded, the data is aggregated by default,
+@cindex Comparison mode
+but the user can change this to instead compare the data.  In this mode, the
+results are compared against the reference experiment, which is the first
+experiment loaded.  The reference experiment can be changed by modifying
+the order of the experiments on the command line, or within the GUI.
+
+Alternatively, the @code{-c} option may be used to start the GUI in
+comparison mode.
+
+@item
+All the views available through various @DisplayText{} commands are supported.
+A subset of these commands is avaible through entries in the sidebar.  The
+user can modify (and save) what is shown in the sidebar, but all features
+are available regardless of this.
+
+@item
+Through filters, the user may zoom in on an area of interest.
+
+@end itemize
+
+@c -- A new node --------------------------------------------------------------
+@c -- @node    Prerequisites
+@c -- @chapter Prerequisites
+@c ----------------------------------------------------------------------------
+@c -- @cindex Prerequisites
+@c -- The GUI is a Java application.  In order to use it, Java needs to be installed
+@c -- on the system used to execute the GUI.  The minimum Java version required is 8.
+
+@c -- The GUI utilizes the Java Swing framework and needs the X Window System
+@c -- (@samp{X11}, or simply @samp{X}).  It is
+@c -- commonly available for Linux systems, but may not be installed by default.
+@c -- Please make sure to install this before using the GUI.
+
+@c -- Since the GUI uses some of the tools that come with the core part of
+@c -- @code{gprofng}, it is necessary to also install this tool.  Make sure to
+@c -- include these tools in the search path as set with environment variable
+@c -- @code{PATH}.
+
+@c -- @ifset OLDOC
+@c -- @include gp-install-gui-rpm.texi
+@c -- @end ifset
+
+@c -- @ifset UPSTREAM
+@c -- @include gp-install-gui-src.texi
+@c -- @end ifset
+
+@c -- A new node --------------------------------------------------------------
+@node    Prerequisites
+@chapter Prerequisites
+@c ----------------------------------------------------------------------------
+@cindex Prerequisites
+
+In this chapter it is explained what is needed in order to build the GUI.
+After this we cover what is needed to execute the GUI.
+
+@menu
+* Build Requirements::   What is needed to build the GUI?
+* Runtime Requirements:: What is needed when executing the GUI?
+@end menu
+
+@c -- A new node --------------------------------------------------------------
+@node    Build Requirements
+@section Build Requirements
+@c ----------------------------------------------------------------------------
+
+The GUI is a Java application.  In order to build it, the @code{javac}
+Java compiler and developer classes are needed.  The compiler reads the
+source files for the GUI and compiles them into bytecode class files.
+
+For this, the @code{java-devel} package needs to be installed in order
+to build and execute the GUI.  The minimum Java version required is 8.
+
+If the git repository is used to build and install the GUI, the
+@command{autoconf}
+and @command{automake} tools need to be installed.  This is @emph{not} needed
+when using the tar file.
+
+@c -- A new node --------------------------------------------------------------
+@node    Runtime Requirements
+@section Runtime Requirements
+@c ----------------------------------------------------------------------------
+
+The GUI utilizes the Java Swing framework, and needs the X Window System
+(@samp{X11}, or simply @samp{X}).
+It is commonly available for Linux systems, but may not be installed by
+default.  Please make sure that it is installed before using the GUI.
+
+There are two common scenarios regarding accessing a system remotely
+(e.g. a cloud instance) where the GUI is to be executed:
+
+@itemize
+
+@item
+If @command{ssh} is used to access the remote system, make sure to have
+the correct access permissions and to set environment variable
+@code{DISPLAY} accordingly.
+
+@item
+If a remote desktop like @command{vnc} is used, the GUI can be executed
+from within this desktop.  No additional settings are needed.
+
+@end itemize
+
+Since the GUI uses some of the tools that come with the core part of
+@code{gprofng}, it is necessary to also install this tool.  Make sure to
+include these tools in the search path as set with environment variable
+@code{PATH}.
+
+@c -- A new node --------------------------------------------------------------
+@node    How to Install the GUI
+@chapter How to Install the GUI
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Installation, Getting ready}
+
+The GUI can be built and installed from the Java source.  The source code is
+available as a tar file, and as a git repository.  A tar file based
+installation has the advantage that tools like @command{autoconf} and
+@command{automake} have already been applied.  With an installation from the
+repository, these tools are used and therefore need to be installed.
+
+@noindent
+Below we explain how
+to get the source and build, as well as install, the GUI.
+
+@menu
+* Prepare the Build from the Tar File::       Getting ready to build.
+* Prepare the Build from the Git Repository:: Getting ready to build.
+* Build and Install from Source::             Get ready to run the GUI.
+@end menu
+
+@c -- A new node --------------------------------------------------------------
+@node    Prepare the Build from the Tar File
+@section Prepare the Build from the Tar File
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Installation, Use the tar file}
+
+In general it is recommended to use the most recent version, but there
+may be a reason to use an older release.
+This is why various releases of the GUI are available on
+@url{https://ftp.gnu.org/gnu/gprofng-gui, the GNU ftp site}.
+The files have been compressed and are available in different formats.
+From this web site, the code may be downloaded directly.  Alternatively, the
+@command{wget} command can be used to download the tar file from the
+command line.
+
+To build the gprofng GUI from a released tar file, get your copy of the
+tar file first.  In the example below we assume that version @code{1.1}
+has been selected, but the process is identical for other versions.
+
+@noindent
+Below we show how the @command{wget} command can be used to download a specific
+version.  Below this, we show the output for a specific release.
+For lay-out reasons it has been slightly shortened and modified.
+
+@cartouche
+@smallexample
+$ wget https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-1.1.tar.gz
+@end smallexample
+@end cartouche
+
+@smallexample
+@verbatim
+wget https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-1.1.tar.gz
+--2024-03-19  https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui-1.1.tar.gz
+       ...
+Proxy request sent, awaiting response... 200 OK
+Length: 1576556 (1.5M) [application/x-gzip]
+Saving to: 'gprofng-gui-1.1.tar.gz'
+
+gprofng-gui-1.1.tar.gz   100%[========================>] 1.50M 2.00MB/s in 0.8s
+
+2024-03-19 (2.00 MB/s) - 'gprofng-gui-1.1.tar.gz' saved [1576556/1576556]
+@end verbatim
+@end smallexample
+
+The next step is to unpack the compressed tar file and go into the
+newly created directory with the name @file{gprofng-gui-1.1}.
+Make sure that the target directory name, @file{gprofng-gui-1.1} in
+this example, does not exist already.  If so, remove it first.
+
+@noindent
+Unpack the tar file:
+
+@cartouche
+@smallexample
+$ tar xzvf gprofng-gui-1.1.tar.gz
+@end smallexample
+@end cartouche
+
+@noindent
+This is sample output from the command:
+
+@smallexample
+@verbatim
+gprofng-gui-1.1/
+gprofng-gui-1.1/compile
+gprofng-gui-1.1/ChangeLog
+...
+gprofng-gui-1.1/gp-display-gui.1
+gprofng-gui-1.1/gprofng-gui.sh
+@end verbatim
+@end smallexample
+
+@noindent
+Next, go into the newly created directory:
+
+@cartouche
+@smallexample
+@verbatim
+$ cd gprofng-gui-1.1
+@end verbatim
+@end smallexample
+@end cartouche
+
+This directory with the name @file{gprofng-gui-1.1} has everything needed
+to build and install the GUI.
+@xref{Build and Install from Source} how to proceed next.
+
+@c -- A new node --------------------------------------------------------------
+@node    Prepare the Build from the Git Repository
+@section Prepare the Build from the Git Repository
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Installation, Use the git repository}
+
+The development git repository contains the most recent version of the GUI.
+If this
+@IndexSubentry{Installation, @command{autoconf}}
+is used to build and installed the GUI, make sure that the @command{autoconf}
+@IndexSubentry{Installation, @command{automake}}
+and @command{automake} tools are installed and in the search path.
+
+
+Before cloning the
+git repository, make
+sure that a directory with the name @file{gprofng-gui} does not
+exist.  If so, the clone command fails with an error message.
+The next step is to clone the git repository:
+
+@cartouche
+@smallexample
+@verbatim
+$ git clone https://git.savannah.gnu.org/git/gprofng-gui.git
+@end verbatim
+@end smallexample
+@end cartouche
+
+@noindent
+There should be diagnostic messages similar to what is shown below:
+
+@cartouche
+@smallexample
+@verbatim
+Cloning into 'gprofng-gui'...
+remote: Counting objects: 1334, done.
+remote: Compressing objects: 100% (605/605), done.
+remote: Total 1334 (delta 777), reused 1222 (delta 696)
+Receiving objects: 100% (1334/1334), 1.77 MiB | 4.29 MiB/s, done.
+Resolving deltas: 100% (777/777), done.
+@end verbatim
+@end smallexample
+@end cartouche
+
+@noindent
+The clone command succeeded and the newly created @file{gprofng-gui}
+directory should be present.  The @command{ls} command may be used
+to verify this:
+
+@cartouche
+@smallexample
+@verbatim
+$ ls
+gprofng-gui
+@end verbatim
+@end smallexample
+@end cartouche
+
+Go into this directory and execute the @command{autoreconf} command:
+
+@cartouche
+@smallexample
+@verbatim
+$ cd gprofng-gui
+$ autoreconf -i -f
+@end verbatim
+@end smallexample
+@end cartouche
+
+@noindent
+The output from this command should be similar to this:
+
+@cartouche
+@smallexample
+@verbatim
+configure.ac:18: installing './compile'
+configure.ac:17: installing './install-sh'
+configure.ac:17: installing './missing'
+Makefile.am: installing './INSTALL'
+@end verbatim
+@end smallexample
+@end cartouche
+
+We are now ready to build and install the GUI.
+@xref{Build and Install from Source} how to proceed next.
+
+@c -- A new node --------------------------------------------------------------
+@node    Build and Install from Source
+@section Build and Install from Source
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Installation, Build from source}
+
+Whether the sources originate from a tar file, or a git repository, the steps
+to build and install the code are the same.  They are covered in this section.
+
+By default, the GUI related files are installed in @file{/usr/local}, but
+through the @code{--prefix} option, this can be changed.
+
+As a first step, a build location needs to be selected.  This is the
+directory where, among other files, the generated files like the Java classes
+and jar files will be placed.
+
+Before the code can be built, a configuration step is needed.  This is
+handled by the @code{configure} tool that comes with the distribution.  This
+is also where an alternate location for the installation needs to be
+specified.
+
+In the example below, it is assumed that the current directory is
+at the same level as where the source directory is located.  This is where
+we create the build directory.  It is called @file{build} in this
+example, but any other name may be chosen.
+
+In the next step, the @command{configure} tool is used to set up the
+configuration details.
+@emph{This tool is located in the source directory}, but is executed
+from the build directory.
+
+By default, the necessary files will be installed in @file{/usr/local}.
+In the example the @code{--prefix} option is used to change this and
+set the installation directory to
+@file{/home/demo/gui-install}.  This is where the files needed to
+execute the @command{gprofng display gui} command will be installed.
+Make sure to set the correct permissions such that the installation
+process is allowed to write to directory @file{/home/demo}.
+
+As an example, below it is assumed that a tar file with version
+@code{1.1} has been used.
+The following commands create the build directory and configure the
+settings:
+
+@cartouche
+@smallexample
+@verbatim
+$ mkdir build
+$ cd build
+$ ../gprofng-gui-1.1/configure --prefix=/home/demo/gui-install
+@end verbatim
+@end smallexample
+@end cartouche
+
+The command for the git repository is nearly identical.  The only
+difference is that the @command{configure} tool is executed from
+directory @file{gprofng-gui}:
+
+@cartouche
+@smallexample
+@verbatim
+$ ../gprofng-gui/configure --prefix=/home/demo/gui-install
+@end verbatim
+@end smallexample
+@end cartouche
+
+The @command{configure} command prints messages on the screen, but
+also produces a @file{config.log} file.  It is strongly recommended
+to check this file to make sure the configuration phase was successful.
+Any error should be resolved and warnings need to be checked.
+If there are no errors and warnings, the next step is to build the
+code using the @command{make} command.
+
+If the build has been successful, the next thing to do is to
+use the @command{make install} command to install the files.
+Make sure that the correct write permissions are set on the
+installation
+directory, or use the @command{sudo} command when executing
+@command{make install}:
+
+@cartouche
+@smallexample
+@verbatim
+$ make
+$ make install
+@end verbatim
+@end smallexample
+@end cartouche
+
+The very last steps are to make sure that the @code{bin}
+directory in the installation directory is in the search
+path as set through the @code{PATH} environment variable
+and to adjust variable @code{MANPATH} to include the
+man page for the GUI.
+For example @file{/home/demo/gui-install/bin}.
+
+@cartouche
+@smallexample
+@verbatim
+$ export PATH=/home/demo/gui-install/bin:$PATH
+$ export MANPATH=/home/demo/gui-install/share/man:$MANPATH
+@end verbatim
+@end smallexample
+@end cartouche
+@IndexSubentry{Installation, Verify the installation}
+
+To verify that the GUI has been installed successfully, use the
+following command:
+
+@cartouche
+@smallexample
+$ gprofng display gui --version
+@end smallexample
+@end cartouche
+
+@noindent
+If the installation has been successful, a diagnostic message is printed.
+
+@c -- A new node --------------------------------------------------------------
+@node    Getting Started
+@chapter Getting Started
+@c ----------------------------------------------------------------------------
+@cindex Getting started
+In this chapter the steps needed to start the GUI, load an experiment, and
+use some of the menus to provide a first view into the performance data,
+are explained.  This is sufficient to get started.  In subsequent chapters,
+more details on the features and the results displayed are prodvided.
+
+@menu
+* Start the GUI::      Different ways to invoke the GUI.
+* The Initial Screen:: What is shown initially?
+@end menu
+
+@c -- A new node --------------------------------------------------------------
+@node    Start the GUI
+@section Start the GUI
+@c ----------------------------------------------------------------------------
+@cindex Start the GUI
+
+The details of the usage information and an overview of the options supported,
+can be found in the man page for the GUI.
+For convenience a brief description is provided here.  For more details
+@xref{The gprofng GUI Man Page}.
+
+The GUI is invoked through the @command{gprofng display gui} command.  Among
+other things, one or more experiments can be included on the command line.
+All experiments listed will be opened and loaded into the GUI.
+For example, this command starts the GUI and loads an experiment called
+@file{experiment_1.er}:
+
+@cartouche
+@smallexample
+@verbatim
+$ gprofng display gui experiment_1.er
+@end verbatim
+@end smallexample
+@end cartouche
+
+The GUI main window will be displayed.  This includes a summary of the
+experiments loaded.
+
+Loading multiple experiments is very similar.  Simply add the experiments
+on the command line.
+@IndexSubentry{Options,  @code{-c}}
+@cindex Comparison mode
+By default, the data shown is aggregated across all the experiments that
+have been loaded, but with the
+@code{-c} option, the GUI starts up in comparison mode.  For example, this
+command loads two experiments in comparison mode, where the first experiment
+is used as the reference.  The data in the second experiment will be shown
+relative to this reference:
+
+@cartouche
+@smallexample
+@verbatim
+$ gprofng display gui -c experiment_1.er experiment_2.er
+@end verbatim
+@end smallexample
+@end cartouche
+
+Alternatively, the GUI may be started without experiments.  This will cause
+a window to appear that shows previously loaded experiments.  If none have
+been loaded in the past, the list is empty.
+
+Once the GUI is running and one or more experiments have been loaded, it is
+possible to remove or add experiments from within the GUI.
+@cindex Toggle the mode
+Under the @samp{File} menu, there are entries to manage the experiments.
+For example to load, or remove, one or more experiments, but also to
+toggle the mode from aggregation to comparison, and viceversa.
+
+If menu entry @samp{Aggregate Experiments @dots{}} is selected, a list with
+the currently loaded experiments is shown.  This list may be modified by
+adding, or removing experiments.  The comparison mode is enabled by
+selecting @samp{Compare Experiments @dots{}}.  In this menu, the experiments
+loaded can be modified.  The reference experiment may also be changed here.
+
+@c --  @image{images/gp-gui-opening-screen,,150pt,"opening screen"}
+@c -- @ifhtml
+@c -- @center @image{images/gp-gui-opening-screen-scaled,10pt,50pt,"opening"}
+@c -- @center @image{images/gp-gui-opening-screen-scaled,,,"image of opening screen"}
+@c -- @end ifhtml
+
+@c -- @ifnothtml
+@c -- @center @image{images/gp-gui-opening-screen-scaled,,150pt,"image of opening screen"}
+@c -- @center @image{images/gp-gui-opening-screen-scaled,,150pt,"image of opening screen"}
+@c -- @end ifnothtml
+
+@c -- A new node --------------------------------------------------------------
+@node    The Initial Screen
+@section The Initial Screen
+@c ----------------------------------------------------------------------------
+@cindex Initial Screen
+
+This is the screen that is shown when the GUI is started.
+The top bar shows the menus that are available.  Below this, there are icons
+that represent shortcuts to specific features.  For example, adding or
+removing filters is activated by clicking on the funnel icon.  Tooltips
+provide a brief description of each icon.
+
+This is followed by a window with a dashboard overview of the experiment(s)
+loaded.
+
+The top panel is titled @samp{Experiment(s)}, and shows a summary of the
+experiment(s).  By clicking on the little black arrow, more information is
+displayed.
+
+This info panel is followed by a second panel titled @samp{Metrics} that
+provides a summary of the metrics collected.  This includes the duration
+of the experiment, or the maximum duration if multiple experiments have
+been loaded, and the aggregated CPU time.  In case hardware events have
+been collected, the total values will be displayed here too.
+
+The third panel, @samp{Metrics Preview}, shows how the metrics will look
+in the data views.
+
+The metrics that are displayed can also be configured.  There is a menu
+entry called @samp{Metrics} at the top that is a shortcut to one of the
+settings.  If selected, it shows a table with the metrics that should
+be enabled, or disabled.
+
+@IndexSubentry{Overview Window, Default views}
+The panel on the left hand side lists the various views that are available.
+For example there is a @samp{Functions} view that provides a function
+overview, or the
+@samp{Timeline} to get a color coded execution overview of the
+application.
+
+This panel also has a very useful entry at the very top.  It
+is titled @samp{Views}
+and through green colored navigation errors, one can go back and forth between
+views that have been selected earlier.
+
+@IndexSubentry{Overview Window, Enable views}
+It is important to note that by default the list with the views shows a
+subset of the available views only.
+By clicking on the last entry (@samp{More @dots{}}), additional views
+may be enabled, or disabled, by clicking on the checkbox to the left of the
+view.
+
+The view(s) selected will be added to the list on the left.  The (updated)
+list will be stored transparently as part of the settings for the experiment.
+In case the settings should be accessible to other experiments, they can be
+saved in a different location.  For this, select @samp{Tools} in the top level
+menu bar.  From there, the @samp{Export} feature can be used to select where
+the preferences need to be stored.  Several choices for the location are
+supported.
+Earlier saved preferences may be imported through the @samp{Import} feature.
+
+The initial screen is meant to provide a quick overview and point at the
+first possible area(s) of interest.  From there, further exploration is
+probably warranted.
+
+@c -- A new node --------------------------------------------------------------
+@node    Create an Experiment
+@chapter Create an Experiment
+@c ----------------------------------------------------------------------------
+@cindex Create an experiment
+
+In many cases, the @command{gprofng collect app} tool will be used to generate
+the performance data, but it is also
+possible to set up an experiment and execute it from within the GUI.
+To access this feature, select the @samp{Profile Application @dots{}}
+menu item under the top level @samp{File} menu.
+This opens a separate window that is used to define and run the experiment.
+
+The first tab titled @samp{General} is used to specify the application to be
+profiled, options (if any), and environment variables.  Below this, the
+details of the experiment directory, like the name, need to be set.  The
+@samp{Preview command} field shows the generated command.
+
+The second tab (@samp{Data to Collect}) is used to define what kind of data
+needs to be collected.  In this window, click on the @samp{Run} button to
+start the program and the performance data collection process.
+
+The third tab is titled @samp{Output}.  It displays the output from the data
+collection process in the top window, and the program output in the window
+below.
+
+@c -- A new node --------------------------------------------------------------
+@node    The Default Views
+@chapter The Default Views
+@c ----------------------------------------------------------------------------
+@cindex Default views
+
+Many views into the performance data are available.  The panel on the lefthand
+side shows a selection.  This list can be managed by clicking on the
+@samp{More @dots{}} entry at the bottom.  There, additional views may be
+enabled, or existing views may be removed from the current list.
+
+@noindent
+Note that adding a view is persistent.  It will stay there, until it has
+been deselected through the checkbox in the corresponding entry in the
+@samp{More @dots{}} view.
+
+@noindent
+In this chapter we list and briefly describe the default set of views.
+
+@menu
+* Callers-Callees::    The calling relationships between the functions.
+* Call Tree::          A graphical representation of the call structure.
+* Disassembly::        Shows the metrics at the instruction level.
+* Experiments::        An overview of the experiments loaded.
+* Flame Graph::        A compact representation of the call tree.
+* Functions::          A function level overview where the time has been spent.
+* Processes::          Shows a list of the processes and their metrics.
+* Source/Disassembly:: Split window source and disassembly view.
+* Threads::            Show a list of the threads and their metrics.
+* Timeline::           A graphical representation of the program behaviour.
+* More ...::           Enable or disable views.
+@end menu
+
+@c -- A new node --------------------------------------------------------------
+@node    Callers-Callees
+@section Callers-Callees
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Callers-callees}
+
+This view shows the calling relationships between the functions executed,
+along with the performance metrics.
+
+The selected function is shown in the center panel.  The function(s) in the
+panel above
+(the @samp{callers}) are those that call the target function.  The ones in
+the panel below
+(the @samp{callees}), are called by this function.
+On the righthand side, the @samp{Selection Details} window displays more
+details of the function selected.
+
+@c -- A new node --------------------------------------------------------------
+@node    Call Tree
+@section Call Tree
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Call tree}
+
+This view displays a dynamic call graph of the program as a tree.  It is
+useful to see the details of branches in the call tree
+that have the greatest impact on the performance.
+
+Each function call is shown as a node that can be expanded, or collapsed, by
+clicking on the key-like icon to the left of the node.
+An expanded function node shows all the function calls made by the function,
+plus performance metrics for those function calls.
+@IndexSubentry{Call Tree, Selection details}
+When a function is selected, the @emph{Selection Details} window displays
+the metrics for the function call and its callees.
+The percentages given for attributed metrics are the percentages of the total
+program metrics.  The default root of the tree is @code{<Total>}, which is a
+pseudo function that represents 100% of the performance metrics of all the
+functions executed.
+
+To easily find the branch that is consuming the most time, right-click any
+@IndexSubentry{Call Tree, Expand hottest branch}
+node and in the pulldown menu, select @samp{Expand Hottest Branch}.
+@IndexSubentry{Call Tree, Apply filters}
+In this menu, predefined filters are available to narrow down the view.
+
+@c -- A new node --------------------------------------------------------------
+@node    Disassembly
+@section Disassembly
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Disassembly}
+
+The instructions for the selected function are shown.  The metrics that have
+been measured are displayed to the left.  The source line number where an
+instruction originates from is shown in square brackets.
+
+@c -- A new node --------------------------------------------------------------
+@node    Experiments
+@section Experiments
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Experiments}
+
+This view displays more details on the experiment(s) and the load objects
+that have been used.
+
+For each experiment, a @samp{Notes} and @samp{Info} section are shown.  The
+@samp{Notes} section allows text to be added, or modified.  This may be used
+to annotate the experiment.
+
+Note that such comments can also be added by using the @code{-C} option
+on the @CollectApp{} tool.
+
+@c -- A new node --------------------------------------------------------------
+@node    Flame Graph
+@section Flame Graph
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Flame graph}
+
+The flame graph is a compact graphical representation of the call tree.  The
+call stacks are organized vertically.  Frames
+include the name a function and the width of the frame is a relative measure
+of the inclusive CPU time for that function.
+Just as with the call tree, right-clicking on a frame, shows a pulldown menu
+with filters and navigation controls.
+The zoom function at the top may be used to zoom in, or out.
+
+@c -- A new node --------------------------------------------------------------
+@node    Functions
+@section Functions
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Functions}
+
+@IndexSubentry{Function View, Function overview}
+One common view to explore is the function overview.  By selecting the
+@samp{Functions} feature, a list with the functions that have been executed,
+as well as the metrics that have been recorded, is displayed.
+
+By default, the exclusive and inclusive CPU times are displayed, both as a
+number and a percentage.  If hardware events have been collected, these will
+be shown as well.  The data is sorted with respect to the exclusive
+timings.  By clicking on a different column, the data is sorted according
+to that metric.
+
+@IndexSubentry{Function View, More details}
+Most likely more details are needed.  To see more details for a function,
+select the function name shown under column @samp{Name}.  This will show
+several characteristics of the function, including the metrics, in a
+window to the right.
+
+@IndexSubentry{Function View, Source information}
+By double clicking a function name, control is transferred and the view
+changes to display the source lines of the function, annotated with the
+performance metrics that are shown to the right.  The most expensive
+source lines are highlighted.  Colored markers to the right indicate
+where the expensive lines are.  By clicking on one of those, the
+display is changed to show the source code fragment with the target
+line included.
+
+This action automatically adds the @emph{Source} view to the
+list in the righthand side panel.  This is a persistent change.  A next
+time the same experiment is loaded, this view is included in the list.
+
+The source view can also be selected by clicking on @emph{Source/Disassembly}
+in the panel on the lefthand side.  This will show a split window with the
+source code at the top and the disassembly with the instructions underneath.
+In both windows the source lines and instructions are annotated with the
+performance metric(s).
+
+@c -- A new node --------------------------------------------------------------
+@node    Processes
+@section Processes
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Processes}
+
+This view shows a list of processes that were created by the application,
+along with their metrics.
+In this view, it is easy to find those processes that used the most resources.
+Filters may be used to select a particular set of processes.  This selection
+is used in other views.
+
+The processes are represented by process ID (PID) numbers and show the Total
+CPU time metric by default.
+Other metrics might also be displayed if the metrics are present in the loaded
+experiment(s).
+If other metrics have been selected in the @samp{Overview} view, or by using
+the @samp{Settings} dialog, those metrics are also displayed.
+
+@c -- A new node --------------------------------------------------------------
+@node    Source/Disassembly
+@section Source/Disassembly
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Source/disassembly}
+
+This shows two windows, each with their own scrollbar.  The top window
+shows the source code, annotated with the values for the metrics selected.
+The window below lists the instructions with the metrics to the left.
+In both cases, the expensive parts are highlighted.
+
+@c -- A new node --------------------------------------------------------------
+@node    Threads
+@section Threads
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Threads}
+
+This view shows a list of the threads that have been created together with
+their metrics.  The threads are represented by a process plus thread pair and
+show the Total CPU time.
+Other metrics might also be displayed if the metrics are present in
+the loaded experiments.
+The filter button may be used to filter the data shown.
+
+@c -- A new node --------------------------------------------------------------
+@node    Timeline
+@section Timeline
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Timeline}
+
+The timeline view is shown by selecting @samp{Timeline} in the panel on the
+lefthandside.  This displays the color coded dynamic behavior of the
+application as a function of time.
+
+@menu
+* The Default View:: Description of the main Timeline window and tabs.
+* More Details::     Expand the view and zoom in to get more details.
+* Customization::    Change some views.
+* Filters::          Apply filters to select a section of interest.
+@end menu
+
+@c -- A new node --------------------------------------------------------------
+@node       The Default View
+@subsection The Default View
+@c ----------------------------------------------------------------------------
+
+The top line shows a color coded representation of the operating system
+(or OS for short).
+For example, a bright green color means the OS is in user mode.
+This data
+is sampled every second and each block represents one second of execution.
+By clicking on such a block in the top level bar, a legend is shown, plus
+a summary with the metrics and states for the selected block.
+
+The horizontal bar with the OS overview is followed by a bar for each thread
+that has been created when the program was running.  Every function in the
+application has been assigned a
+unique color.  What is shown in these bars is the color coded
+representation of the dynamic behaviour of the application.  These
+vertical call stacks show all the functions that were executed by the
+top level function.
+In case no
+colors are shown
+for a period of time, it means that the thread was not active during that
+period.
+
+By clicking anywhere in the area with the horizontal bars, a point in time
+is selected.  On the righthand side, details at this point are displayed.
+For example, if a thread was selected, the thread and CPU IDs are displayed.
+Below this information, the call stack is shown.  Double clicking on a
+function in this list transfers the view to the source level view.
+To return to the timeline, click on the green arrow in the @samp{Views}
+tab in the panel on the left hand side.
+
+For a given point in time selected, the orange arrows shown at the top
+change the view to go to the next, or previous thread, or to select the
+next, or previous point in time.
+
+@c -- A new node --------------------------------------------------------------
+@node       More Details
+@subsection More Details
+@c ----------------------------------------------------------------------------
+
+While the default view gives a good first impression of the behavior of the
+application, often more details are needed.
+
+Through the control part shown in the bar just above the timelines, it is
+possible to zoom in, or out, in both the vertical, as well as the horizontal
+direction.
+Next to the zoom controls there are two icons to undo or redo
+a zoom action.  Repeated selection of these functions allows the view to
+be rolled back, or forward.
+
+@IndexSubentry{Timeline, Call stack depth}
+@IndexSubentry{Timeline, Vertical zoom}
+The vertical zoom increases the depth of the call stack.  By default it is
+set to a specific limit.  This may cause the call stack(s) to be truncated.
+By increasing the vertical zoom, more of the call stack is shown.
+@IndexSubentry{Timeline, Horizontal zoom}
+The horizontal zoom increases the space between the samples, up to the point
+that the individual samples are shown.  This allows for a very detailed
+analysis of the runtime behavior.
+
+@IndexSubentry{Timeline, Select time window}
+Another way to see more details is to select a window of time.  Position
+the cursor on the bar titled @samp{Time(sec)}.  This bar shows the elapsed
+time, starting at zero.  Select a region by selecting a range with the cursor
+and press return on the keyboard.  This displays the selected region.
+
+@c -- A new node --------------------------------------------------------------
+@node       Customization
+@subsection Customization
+@c ----------------------------------------------------------------------------
+
+@IndexSubentry{Timeline, CPU view}
+@IndexSubentry{Timeline, LWP view}
+@IndexSubentry{Timeline, Process view}
+By default the horizontal bars in the main display are
+thread based.  To change this, use the pull down menu labelled
+@emph{Group Data by} to select @emph{LWP}, @emph{CPU}, or @emph{Process}
+instead.
+For example, by
+selecting @samp{CPU}, the view is adjusted to show which CPU(s) have been
+used.
+
+@IndexSubentry{Timeline, Change stack colors}
+Another feature that can be customized is the colors used for the call
+stacks.
+The top bar has an icon with three small colored circles that opens a new
+window titled @samp{Function Colors}.
+This window allows the user to change the colors of selected, or all of the,
+functions.
+
+One use for this is to select a light color, gray say, for all functions and
+then select specific colors for the function(s) of interest.  In this way,
+it is often easier to see how the most time consuming functions behave over
+time.
+
+@c -- A new node --------------------------------------------------------------
+@node       Filters
+@subsection Filters
+@c ----------------------------------------------------------------------------
+
+@IndexSubentry{Timeline, Filters}
+Filters provide a way to focus on a particular area of interest.  For example,
+to select one or more threads, or to restrict the view to a specific window
+in time, or a combination of these two.
+
+The top level @samp{Tools} menu includes an entry for filters.  Alternatively,
+the icon of a funnel can be used to directly access the filter part.
+Several filters have been preprogrammed and these can be used repeatedly to
+combine the various filters.
+
+@IndexSubentry{Timeline, Customize filters}
+Use entry @samp{Additional Filters} to go to @samp{Advanced Custom Filter}.
+Under this menu, customized filters can be defined and applied.
+
+Note that a filter action can be undone and existing filters can be removed.
+
+@c -- A new node --------------------------------------------------------------
+@node    More ...
+@section More ...
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, More}
+
+Several other views are available.  Through this view, they can be enabled,
+or already visible views may be disabled.
+The choices available are documented in the next chapter.
+
+@c -- @include gp-gui-more.texi
+
+@c -- A new node --------------------------------------------------------------
+@node    The Additional Views
+@chapter The Additional Views
+@c ----------------------------------------------------------------------------
+
+In addition to the default views, additional views are available.  These may be
+enabled through the @samp{More @dots{}} entry.
+
+@menu
+* CPUs::           The CPUs used while executing the application, plus metrics.
+* Datasize::       Show data statistics for Heap and I/O tracing.
+* Duration::       Show durations for Heap, I/O and Synchronization tracing.
+* Experiment IDs:: List of processes created and metrics collected.
+* GCEvents::       List of Garbage Collection events.
+* Lines::          A sorted view with the source lines and their metric values.
+* PCs::            A sorted view with the Program Counters and their metrics.
+* Samples::        Show the samples plus the total CPU time.
+* Seconds::        Show the seconds plus the total CPU time.
+* Source::         Source listing with the metrics to the left of the lines.
+* Statistics::     Execution statistics for the application.
+@end menu
+
+@c -- A new node --------------------------------------------------------------
+@node    CPUs
+@section CPUs
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, CPUs}
+
+This view shows a list of CPUs that have been used while executing the
+application.  This is shown along with the metrics that have been enabled
+for the data collection.
+
+The CPUs are represented by a CPU number.  By default, the
+@samp{Total CPU time} is shown.  Other metrics might also be displayed by
+default if the metrics are present in the loaded experiments.
+Filters may be applied to the data shown.
+
+@c -- A new node --------------------------------------------------------------
+@node    Datasize
+@section Datasize
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Datasize}
+@IndexSubentry{Tracing experiments, Heap}
+@IndexSubentry{Tracing experiments, I/O}
+
+This view is available for @samp{Heap Tracing}, and @samp{I/O Tracing}
+experiments.  They contain data that has a size element, such as the number of
+bytes.
+
+The data is organized into ranges of data sizes.  The metrics for the events
+whose data falls into a given range are shown.  Data without a size element is
+attributed to data size 0.
+
+This view can be used to filter the data.  For example, in an experiment that
+contains heap tracing data, you could select a size range line that has high
+metrics for @samp{Bytes Leaked} and add the filter
+@samp{Include only events with selected items}.
+In other data views, the data is then filtered to only show events that
+produced memory leaks of the size range that was selected.
+
+@c -- A new node --------------------------------------------------------------
+@node    Duration
+@section Duration
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Duration}
+@IndexSubentry{Tracing experiments, I/O}
+@IndexSubentry{Tracing experiments, Heap}
+@IndexSubentry{Tracing experiments, Synchronization}
+
+This view is available for @samp{Heap Tracing}, @samp{I/O Tracing}, and
+@samp{Synchronization Tracing} experiments.  They contain data that has a
+duration.
+
+The data is organized into ranges of the duration time.  The metrics for the
+events whose data falls into each range of duration time are shown.
+
+The duration of the function call is recorded for I/O and Synchronization
+tracing.  For heap tracing, the duration is the time between the allocation
+and release of memory.
+Data without a duration element is attributed to duration 0.
+
+This view may be used to filter the data.  For example, in an experiment
+that contains heap tracing data, you could select a duration range line that
+has high metrics for @samp{Bytes Allocated} and add the filter
+@samp{Include only events with selected items}.
+In other data views, the data is then filtered to show only events whose
+duration matched the range that was selected.  This might reveal memory
+allocations that have a longer than expected duration.
+
+@c -- A new node --------------------------------------------------------------
+@node    Experiment IDs
+@section Experiment IDs
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Experiment IDs}
+
+This view shows a list of processes that were created by the application,
+along with its metrics.  The @samp{IDs} are represented by process ID
+(@samp{PID}) numbers and show the @samp{Total CPU time} metric by default.
+
+Other metrics might also be displayed if the metrics are present in the
+experiment(s) loaded.  If other metrics have been selected in the
+@samp{Overview} view, or by using the @samp{Settings} dialog, those metrics
+are also displayed.
+
+The metrics values reflect the states recorded at each sample point in the
+loaded experiment(s).  The numbers reflect the value, or percentage, of the
+metrics that were recorded in each of the loaded experiments.
+
+@c -- A new node --------------------------------------------------------------
+@node    GCEvents
+@section GCEvents
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, GCEvents}
+
+This view shows a summary of the Garbage Collection (@samp{GC}) events that
+occurred while the program was executing.
+
+@c -- A new node --------------------------------------------------------------
+@node    Lines
+@section Lines
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Lines}
+
+This view shows a list consisting of source lines and their metrics.
+Source lines are labeled with the function from which they came, plus the line
+number and source file name.
+
+Selecting a line shows all the metrics for a given line in the
+@samp{Selection Details} tab.  Selecting the @samp{Source} or
+@samp{Disassembly} view after selecting a line, positions the display at
+the appropriate line.
+
+If no line number information is available for a function, or if the source
+file for the function is not known, all of the function's Program Counters
+(@samp{PCs}) appear aggregated into a single entry for the functions.
+
+PCs from functions that are from load objects whose functions are hidden,
+appear aggregated as a single entry for the load object.
+
+@c -- A new node --------------------------------------------------------------
+@node    PCs
+@section PCs
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, PCs}
+
+This view is similar to the @emph{Lines} view, but instead of source lines,
+lists Program Counters (@samp{PCs}) and their metrics.
+
+Selecting a line shows all the metrics for that PC in the @emph{Summary} tab.
+Selecting the @samp{Source}, or @samp{Disassembly} view after selecting a
+line, positions the display at the appropriate line.
+
+PCs are labeled with the function from which they came and the offset within
+that function.  PCs from functions that are from load objects whose functions
+are hidden appear aggregated as a single entry for the load object.
+
+@c -- TBD Expand
+@c -- See the section Call Stacks and Program Execution for more
+@c -- information about PCs.
+
+@c -- A new node --------------------------------------------------------------
+@node    Samples
+@section Samples
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Samples}
+
+This view shows a list of (Operating System) sample points and their metrics,
+which reflect the states recorded at each sample point in the loaded
+experiments.
+
+The samples are represented by sample numbers and by default show the
+@samp{Total CPU time}.  Other metrics might also be displayed if they have
+been selected in the @samp{Overview} view, or in the @samp{Settings}
+dialog box.
+Filters may be applied to the data shown.
+
+@c -- A new node --------------------------------------------------------------
+@node    Seconds
+@section Seconds
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Seconds}
+
+This view shows each second of the program run that was captured in the
+experiment, along with metrics collected in that second.
+
+The @samp{Seconds} view lists the seconds of execution with the
+@samp{Total CPU time} by default.  Other metrics might also be displayed if
+the metrics are present in the loaded experiments.
+If other metrics have been selected in the @samp{Overview} view, or by
+using the @samp{Settings} dialog, those metrics are also displayed.
+Filters may be applied to the data shown.
+
+The @samp{Seconds} view differs from the @samp{Samples} view in
+that it shows periodic samples that occur every second beginning at 0 and
+the interval cannot be changed.
+
+@c -- A new node --------------------------------------------------------------
+@node    Source
+@section Source
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Source}
+
+If the source code is available, this view shows the source lines of the
+selected function, annotated with performance metrics to the left of the
+lines.
+
+High metrics are highlighted in yellow to indicate lines that are expensive
+regarding the metric(s) used.  For each of such lines, an orange navigation
+marker is shown in a margin next to the scrollbar on the right.
+Non-zero metrics that are below the threshold are not highlighted, but they
+are flagged with grey navigation markers.
+The threshold for highlighting metrics can be set in the
+@samp{Settings dialog box}, or in the @samp{Source/Disassembly} view.
+
+To quickly navigate to source lines with metrics, click the yellow markers in
+the right margin to jump to the lines with metrics.  To jump to the next line
+with metrics, right-click the metrics themselves and select an option such as
+@samp{Next Hot Line}, or @samp{Next Non-Zero Metric Line}.
+
+In the column heading for the source code, the full path to the source file
+is shown, plus the corresponding object file, and the name of the load object
+In case where the same source file is used to compile more than
+one object file, the source view shows the performance data for the object
+file containing the selected function.
+
+If a source file cannot be located, the @samp{Resolve} button may be used
+to browse to the source file, or type the path to the source, or browse to it.
+The source code is then displayed from the new location.
+
+Optionally, @samp{Archive Source Files Inside Experiment} can be selected to
+copy the source files into the experiment.
+
+When double clicking on a function in the @samp{Functions view}, the source
+view is opened.  The source file displayed is the default source context
+for that function.
+@cindex Default source context
+The default source context of a function is the file
+containing the function's first instruction.  For example, for C code
+this is the
+function's opening brace.  Immediately following the first instruction,
+the annotated source file adds an index line for the function.  The source
+window displays index lines as text in red italics within angle brackets
+in the form: @code{<Function: f_name>}.
+
+@cindex Alternate source context
+A function might have an alternate source context, which is another file
+that contains instructions attributed to the function.  Such instructions
+might come from include files, or from other functions inlined into the
+selected function.  If there are any alternate source contexts,
+the beginning of the default source context includes a list of extended
+index lines that indicate where the alternate source contexts are located:
+@code{<Function: f, instructions from source file src.h>}.
+
+Double-click an index line that refers to another source context to open
+the file containing that source context at the location associated with the
+indexed function.
+
+To aid navigation, alternate source contexts also start with a list of index
+lines that refer back to functions defined in the default source context
+and other alternate source contexts.
+
+@c -- TBD Expand on this:
+@c -- The metrics displayed in the source view can be changed or reorganized.
+@c -- For detailed information about the content of the "Source View Layout".
+
+@c -- A new node --------------------------------------------------------------
+@node    Statistics
+@section Statistics
+@c ----------------------------------------------------------------------------
+@IndexSubentry{Views, Statistics}
+
+This view shows the totals for various system statistics aggregated over the
+experiments loaded and samples.  These totals are followed by the statistics
+for the selected samples of each experiment.
+
+@c -- TBD Verify
+@c -- For information on the statistics presented, see the
+@c -- getrusage(3C) and proc (4) man pages.
+@c -- An appendix -------------------------------------------------------------
+@node     The gprofng GUI Man Page
+@appendix The gprofng GUI Man Page
+@c ----------------------------------------------------------------------------
+
+@include gp-display-gui.texi
+
+@ifnothtml
+@node       Index
+@unnumbered Index
+@printindex cp
+@end ifnothtml
+
+@bye

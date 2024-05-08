@@ -19,6 +19,8 @@
 
 docdir = $(srcdir)/doc
 
+AUTOMAKE_OPTIONS += info-in-builddir foreign no-texinfo.tex
+
 # Options to extract the man page
 MANCONF = -Dman
 
@@ -26,7 +28,8 @@ TEXI2POD = perl $(srcdir)/etc/texi2pod.pl $(AM_MAKEINFOFLAGS)
 POD2MAN = pod2man --center="User Commands" \
 	--release="gprofng-gui-$(VERSION)" --section=1
 
-#info_TEXINFOS       = gp-display-gui.texi
+info_TEXINFOS       = %D%/gp-gui-ug.texi
+gp_gui_ug_TEXINFOS  = gp-display-gui.texi gp-macros.texi
 TEXINFO_TEX         = .
 MAKEINFOHTML        = $(MAKEINFO) --html --no-split
 
