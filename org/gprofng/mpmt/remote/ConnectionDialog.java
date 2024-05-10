@@ -99,14 +99,14 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     getContentPane().setBackground(AnEnvironment.DEFAULT_PANEL_BACKGROUND);
     connectionPanel = new ConnectionPanel(this);
     hostNameComboBox = connectionPanel.getHostNameComboBox();
-    // hostNameComboBox.addItem(local_host);
-    String os_name = Analyzer.getInstance().os_name;
-    String lh = local_host;
-    if (null != os_name) {
-      if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux"))) {
-        lh = "";
-      }
-    }
+    // String os_name = Analyzer.getInstance().os_name;
+    // String lh = local_host;
+    // if (null != os_name) {
+    //   if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux"))) {
+    //     lh = "";
+    //   }
+    // }
+    String lh = "";
     hostNameComboBox.addItem(lh);
     for (StringPickListElement hostElement :
         UserPref.getInstance().getHostNamePicklist().getStringElements()) {
@@ -372,7 +372,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
             .removeDocumentListener(comboboxDocumentListener);
       }
       hostNameComboBox.removeAllItems();
-      hostNameComboBox.addItem(local_host);
+      // hostNameComboBox.addItem(local_host);
       for (StringPickListElement hostElement :
           UserPref.getInstance().getHostNamePicklist().getStringElements()) {
         hostNameComboBox.addItem(hostElement.getString());
