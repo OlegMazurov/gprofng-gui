@@ -207,7 +207,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     gridBagConstraints.gridx = 0;
     gridBagConstraints.gridy = 2;
     gridBagConstraints.anchor = GridBagConstraints.NORTHWEST;
-    gridBagConstraints.insets = new Insets(16, 132, 0, 0);
+    gridBagConstraints.insets = new Insets(16, 122, 0, 0);
     foregroundPanel.add(leftPanel, gridBagConstraints);
 
     rightPanel = new JPanel();

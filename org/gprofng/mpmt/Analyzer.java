@@ -460,12 +460,6 @@ public final class Analyzer {
     String str_gp_display_text = "gp-display-text";
     String path_to_er_print = str_gp_display_text;
     String l_fdhome = emptyString;
-    if (null != connectCommand) {
-      System.out.println("connect command: " + connectCommand);
-    }
-    else {
-      System.out.println("connect command: " + remoteShell);
-    }
     if (null != path) {
       l_fdhome = path.trim();
       if (l_fdhome.length() > 0) {
