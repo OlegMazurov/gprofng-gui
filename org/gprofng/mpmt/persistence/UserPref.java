@@ -388,18 +388,24 @@ public class UserPref {
   public static class ConnectionProperties {
 
     private String path;
+    private String connectCommand;
     private String userName;
     private List<Authentication> authentications;
 
     public ConnectionProperties(
-        String path, String userName, List<Authentication> authentications) {
+        String path, String connectCommand, String userName, List<Authentication> authentications) {
       this.path = path;
+      this.connectCommand = connectCommand;
       this.userName = userName;
       this.authentications = authentications;
     }
 
     public String getPath() {
       return path;
+    }
+
+    public String getConnectCommand() {
+      return connectCommand;
     }
 
     public String getUserName() {

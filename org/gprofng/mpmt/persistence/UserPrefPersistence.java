@@ -65,13 +65,14 @@ import org.xml.sax.helpers.DefaultHandler;
 public class UserPrefPersistence {
 
   /**
+   * V16: HOSTNAME_CONNECT_COMMAND_ATTR
    * V15: HOSTNAME_AUTH_ATTR V14: LIBRARY_VISIBILITY_JAVA V13: FULL_METRIC_NAME_IN_TABLES_ELEM V12:
    * Metric sorting, direction, and order V11: changed order and added sections V10: call stack
    * threshold V9 : working directory V8 : find history V7 : splitpane(123) size V6 : navigation
    * panel splitpane position V5 : recent experiments per host V4 : added userName attr to host V3 :
    * added hostNamePath maps V2 : added most recent experiments V1 : initial version
    */
-  private static final int version = 15;
+  private static final int version = 16;
 
   private static final String spaces = "                                  ";
   // Elements
@@ -103,6 +104,7 @@ public class UserPrefPersistence {
   private static final String HOSTNAME_ELEM = "host";
   private static final String HOSTNAME_NAME_ATTR = "name";
   private static final String HOSTNAME_PATH_ATTR = "path";
+  private static final String HOSTNAME_CONNECT_COMMAND_ATTR = "connectCommand";
   private static final String HOSTNAME_AUTH_ATTR = "auth";
   private static final String HOSTNAME_USERNAME_ATTR = "username";
   private static final String HOST_NAME_ATTR = "host";
@@ -538,7 +540,11 @@ public class UserPrefPersistence {
         StringPickListElement hostElement = elements.get(i);
         String hostName = hostElement.getString();
         String path = userPref.getConnectionPropertiesMap().get(hostName).getPath();
-        String userName = userPref.getConnectionPropertiesMap().get(hostName).getUserName();
+	String connectCommand = userPref.getConnectionPropertiesMap().get(hostName).getConnectCommand();
+	if (connectCommand == null) {
+	   connectCommand = "";
+	}
+	String userName = userPref.getConnectionPropertiesMap().get(hostName).getUserName();
         List<Authentication> authentications =
             userPref.getConnectionPropertiesMap().get(hostName).getAuthentications();
         if (userName == null) {
@@ -548,6 +554,7 @@ public class UserPrefPersistence {
           List<AttrValuePair> attrValues = new ArrayList<AttrValuePair>();
           attrValues.add(new AttrValuePair(HOSTNAME_NAME_ATTR, hostName));
           attrValues.add(new AttrValuePair(HOSTNAME_PATH_ATTR, path));
+	  attrValues.add(new AttrValuePair(HOSTNAME_CONNECT_COMMAND_ATTR, connectCommand));
           attrValues.add(new AttrValuePair(HOSTNAME_USERNAME_ATTR, userName));
           if (!Authentication.toXMLString(UserPref.getDefaultAuthentications())
               .equals(Authentication.toXMLString(authentications))) {
@@ -1019,7 +1026,11 @@ public class UserPrefPersistence {
       } else if (element.equals(HOSTNAME_ELEM)) {
         String name = atts.getValue(HOSTNAME_NAME_ATTR);
         String path = atts.getValue(HOSTNAME_PATH_ATTR);
-        String userName = null;
+	String connectCommand = null;
+	if (userPref.getVersion() >= 16) {
+	  connectCommand = atts.getValue(HOSTNAME_CONNECT_COMMAND_ATTR);
+	}
+	String userName = null;
         if (userPref.getVersion() >= 4) {
           userName = atts.getValue(HOSTNAME_USERNAME_ATTR);
         }
@@ -1032,7 +1043,7 @@ public class UserPrefPersistence {
           authentications = UserPref.getDefaultAuthentications();
         }
         connectionPropertiesMap.put(
-            name, new ConnectionProperties(path, userName, authentications));
+            name, new ConnectionProperties(path, connectCommand, userName, authentications));
         hostNamePickList.addElement(name);
       } else if (element.equals(METRIC_COLOR_ITEM_ELEM)) {
         String name = atts.getValue(METRIC_COLOR_NAME_ATTR);

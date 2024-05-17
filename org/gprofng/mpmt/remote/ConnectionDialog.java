@@ -39,7 +39,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-import javax.swing.JPasswordField;
+// import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -52,11 +52,18 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
   private static String startDir = null;
   private JComboBox hostNameComboBox;
   private JTextField file;
+  /*
+  private JLabel passwordLabel;
   private JPasswordField passwordField;
+  */
   private JTextField usernameTextField;
   private JTextField solstudioPathTextField;
+  private JTextField connectCommandTextField;
+  /*
+  private JLabel authenticationLabel;
   private JTextField authenticationTextField;
   private JButton authenticationManageButton;
+  */
   private JLabel statusValueLabel;
   private JTextArea messageTextArea;
   private AnWindow m_window;
@@ -99,30 +106,43 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     getContentPane().setBackground(AnEnvironment.DEFAULT_PANEL_BACKGROUND);
     connectionPanel = new ConnectionPanel(this);
     hostNameComboBox = connectionPanel.getHostNameComboBox();
-    // String os_name = Analyzer.getInstance().os_name;
-    // String lh = local_host;
-    // if (null != os_name) {
-    //   if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux"))) {
-    //     lh = "";
-    //   }
-    // }
-    String lh = "";
+    String os_name = Analyzer.getInstance().os_name;
+    String lh = local_host;
+    if (null != os_name) {
+      if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux"))) {
+        lh = "";
+      }
+    }
     hostNameComboBox.addItem(lh);
+    int count = 0;
     for (StringPickListElement hostElement :
         UserPref.getInstance().getHostNamePicklist().getStringElements()) {
       hostNameComboBox.addItem(hostElement.getString());
+      count = count + 1;
     }
-    hostNameComboBox.setSelectedIndex(0);
+    if (count > 0) {
+      hostNameComboBox.setSelectedIndex(1);
+    }    
+    else {
+      hostNameComboBox.setSelectedIndex(0);
+    }
     hostNameComboBox.setEditable(true);
     ((JTextField) hostNameComboBox.getEditor().getEditorComponent())
         .getDocument()
         .addDocumentListener(comboboxDocumentListener = new ComboBoxDocumentListener());
 
     usernameTextField = connectionPanel.getUserNameTextField();
+    /*
+    passwordLabel = connectionPanel.getPasswordLabel();
     passwordField = connectionPanel.getPasswordField();
+    */
     solstudioPathTextField = connectionPanel.getSolstudioPathTextField();
+    connectCommandTextField = connectionPanel.getConnectCommandTextField();
+    /*
+    authenticationLabel = connectionPanel.getAuthenticationLabel();
     authenticationTextField = connectionPanel.getAuthenticationTextField();
     authenticationManageButton = connectionPanel.getAuthenticationManageButton();
+    */
     statusValueLabel = connectionPanel.getConnectionStatusValueLabel();
     statusValueLabel.setForeground(Color.BLACK);
     messageTextArea = connectionPanel.getMessageTextArea();
@@ -172,22 +192,29 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
   protected void setAuthentications(List<Authentication> authentications) {
     this.authentications = authentications;
 
+    /*
+    passwordLabel.setEnabled(false);
     passwordField.setEnabled(false);
     passwordField.setText("");
     if (authentications != null) {
       authenticationTextField.setText(Authentication.toString(authentications));
+      authenticationLabel.setEnabled(true);
       authenticationManageButton.setEnabled(true);
       for (Authentication auth : authentications) {
         if (auth.isOn() && auth.getType() == Authentication.Type.PASSWORD) {
-          passwordField.setEnabled(true);
+          passwordLabel.setEnabled(true);
+	  passwordField.setEnabled(true);
           break;
         }
       }
     } else {
       authenticationTextField.setText("");
+      authenticationLabel.setEnabled(false);
       authenticationManageButton.setEnabled(false);
+      passwordLabel.setEnabled(false);
       passwordField.setEnabled(false);
     }
+    */
   }
 
   class ComboBoxDocumentListener implements DocumentListener {
@@ -229,6 +256,12 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
         UserPref.getInstance().getConnectionPropertiesMap().get(hostName);
     String empty = "";
     if (connectionProperties != null) {       
+      String connectCommand = connectionProperties.getConnectCommand();
+      if (connectCommand != null && connectCommand.length() > 0) {
+        connectCommandTextField.setText(connectCommand);
+      } else {
+        connectCommandTextField.setText(empty);
+      }
       String path = connectionProperties.getPath();
       if (path != null && path.length() > 0) {
         solstudioPathTextField.setText(path);
@@ -244,21 +277,27 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
 	usernameTextField.setText(AnUtility.getenv("USER"));
       }
 
-      if (hostName.equals(local_host) || hostName.length() == 0) {
+      // hostName.equals(local_host) ||
+      if (hostName.length() == 0) {
         setAuthentications(null);
       } else {
         setAuthentications(connectionProperties.getAuthentications());
       }
     } else {
-      String lastPath = solstudioPathTextField.getText();
+      // String lastPath = solstudioPathTextField.getText();
       if (hostName.equals(local_host) || hostName.length() == 0) {
         solstudioPathTextField.setText("/usr/bin");
-        setAuthentications(null);
-      } else {
-        // if (getDefaultSolStudioPath().equals(lastPath)) {
-        //   solstudioPathTextField.setText(empty);
-        // }
-        setAuthentications(UserPref.getDefaultAuthentications());
+	connectCommandTextField.setText("/usr/bin/ssh ");
+      }
+      else {
+	if (hostName.length() == 0) {
+          setAuthentications(null);
+        } else {
+          // if (getDefaultSolStudioPath().equals(lastPath)) {
+          //   solstudioPathTextField.setText(empty);
+          // }
+          setAuthentications(UserPref.getDefaultAuthentications());
+        }
       }
     }
     if (hostName.equals(local_host)) {
@@ -309,9 +348,16 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
       if (un != null) {
         un = un.trim();
       }
+      char[] p = null;
+      /*
       char[] p = passwordField.getPassword();
       if (p.length <= 0) {
         p = null;
+      }
+      */
+      String connectCommand = connectCommandTextField.getText();
+      if ((connectCommand == null) || (connectCommand.length() < 1)) {
+        return (AnLocale.getString("Error: connection command is not specified."));
       }
       String path = solstudioPathTextField.getText();
       if (path != null) {
@@ -327,9 +373,9 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
           path = path + "/bin/gp-display-text";
         }
       }
-      String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, path, connectionProperties);
+      String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, connectCommand, path, connectionProperties);
       // usernameTextField.setText(un);
-      passwordField.setText("");
+      // passwordField.setText("");
       if (s != null) {
         return (s);
       }
@@ -363,18 +409,20 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
       Map<String, ConnectionProperties> map = UserPref.getInstance().getConnectionPropertiesMap();
       connectionProperties =
           new ConnectionProperties(
-              solstudioPathTextField.getText(), usernameTextField.getText(), authentications);
+              solstudioPathTextField.getText(), connectCommandTextField.getText(), usernameTextField.getText(), authentications);
       map.put(hostName, connectionProperties);
       UserPref.getInstance().getHostNamePicklist().addElement(hostName);
+      // System.out.println("Connect to host: " + hostName);
       if (comboboxDocumentListener != null) {
         ((JTextField) hostNameComboBox.getEditor().getEditorComponent())
             .getDocument()
             .removeDocumentListener(comboboxDocumentListener);
       }
       hostNameComboBox.removeAllItems();
-      // hostNameComboBox.addItem(local_host);
+      hostNameComboBox.addItem(local_host);
       for (StringPickListElement hostElement :
           UserPref.getInstance().getHostNamePicklist().getStringElements()) {
+	// System.out.println("past remote host: " + hostElement.getString());
         hostNameComboBox.addItem(hostElement.getString());
       }
       hostNameComboBox.setSelectedItem(hostName);
@@ -451,9 +499,10 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     was_ok.setEnabled(false);
     was_apply.setEnabled(true);
     hostNameComboBox.setEditable(false);
-    passwordField.setEditable(false);
+    // passwordField.setEditable(false);
     usernameTextField.setEditable(false);
     solstudioPathTextField.setEditable(false);
+    connectCommandTextField.setEditable(false);
     // fld_status.setFont() // bold
     statusValueLabel.setForeground(Color.black);
     statusValueLabel.setText(connecting);
@@ -471,9 +520,10 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     was_ok.setEnabled(true);
     was_apply.setEnabled(false);
     hostNameComboBox.setEditable(true);
-    passwordField.setEditable(true);
+    // passwordField.setEditable(true);
     usernameTextField.setEditable(true);
     solstudioPathTextField.setEditable(true);
+    connectCommandTextField.setEditable(true);
     if (result == null) {
       String hostName = hostNameComboBox.getSelectedItem().toString();
       //            if (hostName.equals(local_host)) {

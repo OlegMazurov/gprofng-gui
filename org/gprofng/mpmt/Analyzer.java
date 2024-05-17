@@ -437,6 +437,7 @@ public final class Analyzer {
       String host,
       String name,
       char[] p,
+      String connectCommand,
       String path,
       ConnectionProperties connectionProperties) {
     AnUtility.checkIPCOnWrongThread(false);
@@ -459,6 +460,12 @@ public final class Analyzer {
     String str_gp_display_text = "gp-display-text";
     String path_to_er_print = str_gp_display_text;
     String l_fdhome = emptyString;
+    if (null != connectCommand) {
+      System.out.println("connect command: " + connectCommand);
+    }
+    else {
+      System.out.println("connect command: " + remoteShell);
+    }
     if (null != path) {
       l_fdhome = path.trim();
       if (l_fdhome.length() > 0) {
@@ -505,7 +512,12 @@ public final class Analyzer {
       if (rs != null) { // Special way to login
         er_printCmd = rs + " " + rh + " " + er_printCmd;
       } else {
-        er_printCmd = remoteShell + " " + rh + " " + er_printCmd;
+        if (null != connectCommand) {
+	  er_printCmd = connectCommand + " " + rh + " " + er_printCmd;	
+	}
+	else {
+          er_printCmd = remoteShell + " " + rh + " " + er_printCmd;
+        }
       }
     }
     rc = er_printCmd;

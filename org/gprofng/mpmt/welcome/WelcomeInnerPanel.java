@@ -41,7 +41,7 @@ import javax.swing.JPanel;
 
 public class WelcomeInnerPanel extends javax.swing.JPanel {
 
-  private final int MOST_RECENT_EXP_LIST_SIZE = 7;
+  private final int MOST_RECENT_EXP_LIST_SIZE = 9;
   private static final Font font12 = new JLabel().getFont().deriveFont(12f);
   private static final Font bold12Font = font12.deriveFont(Font.BOLD);
   private static final Font plain12Font = font12.deriveFont(Font.PLAIN);
@@ -72,7 +72,9 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
   public WelcomeInnerPanel() {
     backgroundImageIcon =
         new ImageIcon(
-            getClass().getResource("/org/gprofng/mpmt/icons/welcomeBackgroundShadow.png"));
+//          getClass().getResource("/org/gprofng/mpmt/icons/welcomeScreenNoDivider.png"));			
+          getClass().getResource("/org/gprofng/mpmt/icons/welcomeBackgroundShadow.png"));
+//          getClass().getResource("/org/gprofng/mpmt/icons/welcomeAlternate.png"));
     initComponents();
     buildForeground();
     buildBackground();
@@ -261,7 +263,8 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
 	  String displayName = AnUtility.basename(experimentElement.getPath());
           int length = displayName.length();
           if (length > 25) {
-            displayName = displayName.substring(0, 16) + "..." + displayName.substring(length - 7);
+		  // 16
+            displayName = displayName.substring(0, 54) + "..." + displayName.substring(length - 7);
           }
           recentExperimentsButtons.add(
               addExperimentButton(
