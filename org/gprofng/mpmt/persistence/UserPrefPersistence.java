@@ -556,17 +556,16 @@ public class UserPrefPersistence {
           attrValues.add(new AttrValuePair(HOSTNAME_PATH_ATTR, path));
 	  attrValues.add(new AttrValuePair(HOSTNAME_CONNECT_COMMAND_ATTR, connectCommand));
           attrValues.add(new AttrValuePair(HOSTNAME_USERNAME_ATTR, userName));
-          if (!Authentication.toXMLString(UserPref.getDefaultAuthentications())
-              .equals(Authentication.toXMLString(authentications))) {
-            attrValues.add(
-                new AttrValuePair(HOSTNAME_AUTH_ATTR, Authentication.toXMLString(authentications)));
+          if (authentications != null) {
+            String auth = Authentication.toXMLString(authentications);
+            if (auth != null && UserPref.getDefaultAuthentications() != null
+                && !Authentication.toXMLString(UserPref.getDefaultAuthentications())
+                    .equals(auth)) {
+              attrValues.add(new AttrValuePair(HOSTNAME_AUTH_ATTR, auth));
+            }
           }
-          writeEntry(
-              out,
-              indent + 4,
-              HOSTNAME_ELEM,
-              attrValues.toArray(new AttrValuePair[attrValues.size()]),
-              true);
+          writeEntry(out, indent + 4, HOSTNAME_ELEM,
+              attrValues.toArray(new AttrValuePair[attrValues.size()]), true);
         }
       }
       writeEntry(out, indent, HOSTNAME_LIST_ELEM, true);
