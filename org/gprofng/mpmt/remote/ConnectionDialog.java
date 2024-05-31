@@ -411,7 +411,9 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
           new ConnectionProperties(
               solstudioPathTextField.getText(), connectCommandTextField.getText(), usernameTextField.getText(), authentications);
       map.put(hostName, connectionProperties);
-      UserPref.getInstance().getHostNamePicklist().addElement(hostName);
+      if (!(hostName.equals(local_host))) {
+          UserPref.getInstance().getHostNamePicklist().addElement(hostName);
+      }
       // System.out.println("Connect to host: " + hostName);
       if (comboboxDocumentListener != null) {
         ((JTextField) hostNameComboBox.getEditor().getEditorComponent())
