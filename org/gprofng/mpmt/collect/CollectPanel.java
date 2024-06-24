@@ -48,10 +48,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PipedInputStream;
 import java.io.PipedOutputStream;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -102,8 +104,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
   public CollectExp target,
       args,
       exp_name,
-      exp_dir,
-      exp_group,
       work_dir,
       env_vars,
       launcher,
@@ -294,6 +294,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
   private final AnDialog m_dialog;
   private final Provider m_prov;
   private Thread output_thread;
+  private Thread read_file_thread = null;  // Read collect_output_file
   private int autoUpdaterState = 0;
   // Interface constants
   /* Interface strings GUI <-> CLI */
@@ -710,10 +711,9 @@ public final class CollectPanel extends JPanel implements ActionListener {
             line_number++;
             if (line_number < 100) {
               // XXX: TEMPORARY HACK!!!
-              String pattern = "Creating experiment database ";
+              String pattern = "Creating experiment directory ";
               int idx = line.indexOf(pattern);
               if (idx >= 0) {
-                write /*ln*/(line, getOutLog());
                 idx += pattern.length();
                 String substr = line.substring(idx);
                 idx = substr.indexOf(ipc_str_space);
@@ -792,10 +792,9 @@ public final class CollectPanel extends JPanel implements ActionListener {
             line_number++;
             if (line_number < 100) {
               // XXX: TEMPORARY HACK!!!
-              String pattern = "Creating experiment database ";
+              String pattern = "Creating experiment directory ";
               int idx = line.indexOf(pattern);
               if (idx >= 0) {
-                write /*ln*/(line, getOutLog());
                 idx += pattern.length();
                 String substr = line.substring(idx);
                 idx = substr.indexOf(ipc_str_space);
@@ -891,8 +890,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
       cmd_list.add(cmd);
       addOne(cmd_list, "-P", collectPanel2.getProcessID());
       addOne(cmd_list, "-o", collectPanel2.getExperimentName());
-      addOne(cmd_list, "-d", collectPanel2.getExperimentDirectory());
-      addOne(cmd_list, "-g", collectPanel2.getExperimentGroup());
     } else if (system_profiling) {
       cmd = Analyzer.getInstance().getPathToCollectKernel();
       cmd_list.add(cmd);
@@ -908,14 +905,10 @@ public final class CollectPanel extends JPanel implements ActionListener {
         }
       }
       addOne(cmd_list, "-o", collectPanel3.getExperimentName());
-      addOne(cmd_list, "-d", collectPanel3.getExperimentDirectory());
-      addOne(cmd_list, "-g", collectPanel3.getExperimentGroup());
       addOne(cmd_list, "-x", prof_idle.getValue());
     } else { // profile application
       cmd_list.add(cmd);
       addOne(cmd_list, "-o", exp_name.getText());
-      addOne(cmd_list, "-d", exp_dir.getText());
-      addOne(cmd_list, "-g", exp_group.getText());
     }
 
     // don't add default limit value (now it's 2000 MB)
@@ -1497,6 +1490,46 @@ public final class CollectPanel extends JPanel implements ActionListener {
       int theState = event.getID(); // state change event
 
       if (theState == Collector.COLLECTING_RUNNING) {
+        if (read_file_thread == null && collect_output_file != null) {
+          // Create thread to read collect output file
+          read_file_thread = new Thread("Read Collector Output Thread") {
+            @Override
+            public void run() {
+              try {
+                File f = new File(collect_output_file);
+                while (collector.getCollectorState() == Collector.COLLECTING_RUNNING
+                    || collector.getCollectorState() == Collector.COLLECTING_PAUSED) {
+                  sleep(10);
+                  if (f.exists()) {
+                    break;
+                  }
+                }
+                if (!f.exists()) {
+                  return;
+                }
+                long len = 0;
+                while (f.exists()) {
+                  if (f.length() > len) {
+                    BufferedReader in = new BufferedReader(new FileReader(f));
+                    in.skip(len);
+                    String line;
+                    while ((line = in.readLine()) != null) {
+                      writeln(line, getOutLog());
+                    }
+                    len = f.length();
+                    in.close();
+                    collector.read_collect_output_file(collect_output_file);
+                  }
+                  sleep(10);
+                }
+              } catch (Exception e) {
+                printException(e, AnLocale.getString("Collector: Exeption in Read Collector Output Thread:"));
+              }
+            }
+          };
+          read_file_thread.start();
+        }
+        
         if (buttons[0].isEnabled()) { // the collection has just started
           String current_target_name = target.getText();
           if (!profile_running_process && !system_profiling) {
@@ -1522,7 +1555,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
 
       } else if ((theState == Collector.COLLECTING_TERMINATED)
           || (theState == Collector.COLLECTING_COMPLETED)) {
-
+        read_file_thread = null;
         if (theState == Collector.COLLECTING_TERMINATED) {
           writeln(sdate + ": " + AnLocale.getString("Data collection terminated"), getOutLog());
         }
@@ -1546,7 +1579,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
           output_thread = null;
         }
 
-        collector.read_collect_output_file(collect_output_file);
         collector.removeTempFile(collect_output_file);
         collector.removeTempFile(temp_file_name);
 
@@ -1562,29 +1594,12 @@ public final class CollectPanel extends JPanel implements ActionListener {
         }
 
         writeln(AnLocale.getString("Process ID: ") + collector.getProcessPID(), getOutLog());
-        writeln(
-            AnLocale.getString("Elapsed Time: ") + collector.getElapsedTime() + " ms", getOutLog());
-
-        String s = collector.getCollectOutput();
-        if (s.length() > 0) {
-          writeln(s, getOutLog());
-        }
         String actualExperimentName = collector.getActualExpName();
-        String experimentGroup = collector.getExperimentGroup();
-        if (experimentGroup != null && experimentGroup.length() > 0) {
-          actualExperimentName = experimentGroup; // Open group instead of experiment
-        }
-
         getBtClear().setEnabled(true);
 
         if (collector.getProcessPID() > 0) {
           if (actualExperimentName != null) {
-            String wd;
-            if (exp_dir.getText().length() > 0) {
-              wd = exp_dir.getText();
-            } else {
-              wd = work_dir.getText();
-            }
+            String wd = work_dir.getText();
             final String experimentPath = getExperimentPath(actualExperimentName);
             AnDialog2 openDialog =
                 new AnDialog2(m_dialog, m_dialog, AnLocale.getString("Open Experiment"));
@@ -1604,8 +1619,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
                         final List<String> exp_list =
                             AnUtility.getExpList(new String[] {experimentPath});
                         if (anWindow != null) {
-                          //                                            String workingDirectory =
-                          // collectorOpenPanel.getWorkingDirectory();
                           String configurationPath = collectorOpenPanel.getConfiguration();
                           boolean alwaysUseThisConfiguration =
                               collectorOpenPanel.alwaysUseThisConfiguration();
@@ -1673,23 +1686,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
           AnUtility.showMessage(work_panel, errorMessage, JOptionPane.ERROR_MESSAGE);
           return;
         }
-        if ((exp_dir.getText() != null) && exp_dir.getText().length() > 0) {
-          if (!collector.checkWorkDir(exp_dir.getText())) {
-            String errorMessage = AnLocale.getString("The experiment directory does not exist");
-            if (null != anWindow.getAnalyzer().remoteConnection) {
-              errorMessage =
-                  AnLocale.getString("The experiment directory does not exist on remote system");
-            }
-            AnUtility.showMessage(work_panel, errorMessage, JOptionPane.ERROR_MESSAGE);
-            return;
-          }
-        }
-
-        // THIS CHECK IS NOT CORRECT - commented out (NM)
-        // if (target_type < 0) {
-        //    showError(target_type);
-        //    return;
-        // }
         if (!checkSignals()) {
           return;
         }
@@ -1786,20 +1782,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
         run_cmd = envs + " " + col_cmd;
       }
       if ((null != input_output_btn1) && input_output_btn1.isSelected()) {
-        // Use external terminal
-        // String gt_options = " --disable-factory ";
-        String gt_options = " --window "; // New window
         // Create temporary script
-        String s1 = "#!/bin/sh\n";
-        String s2 = "echo \"" + run_cmd + "\"\n";
-        String s3 = run_cmd;
-        String l4 = AnLocale.getString("Exit status:");
-        String s4 = "\necho \"" + l4 + " $?\"\n";
-        String l5 = AnLocale.getString("Profiling is done, you can close this window.");
-        String s5 = "echo \"# " + l5 + "\"\n";
-        String l6 = AnLocale.getString("The window will be automatically closed in 5 seconds.");
-        String s6 = "echo \"# " + l6 + "\"\n";
-        String s7 = "sleep 5\n";
         if (temp_file_name == null) {
           try {
             File tempFile = File.createTempFile("collect", ".tmp");
@@ -1808,12 +1791,17 @@ public final class CollectPanel extends JPanel implements ActionListener {
             temp_file_name = "/tmp/collect.sh.tmp"; // Use default name
           }
         }
-        String contents = s1 + s2 + s3 + s4 + s5 + s6 + s7;
+        String contents = "#!/bin/sh\n"
+            + "echo \"% cat -n " + temp_file_name + "\"\n"
+            + "cat -n " + temp_file_name + "\n"
+            + "cd " + work_dir.getText() + "\n"
+            + "echo % pwd\npwd\n\n"
+            + "echo \"% " + run_cmd + "\"\n"
+            + run_cmd + "\n";
         AnUtility.checkIPCOnWrongThread(false);
         anWindow.writeFile(temp_file_name, contents);
         AnUtility.checkIPCOnWrongThread(true);
-        String tmp_cmd = "\" /bin/sh " + temp_file_name + " \"";
-        run_cmd = external_terminal + gt_options + " -e " + tmp_cmd;
+        run_cmd = temp_file_name;
       }
       // Clean output window
       if (null != pioTextArea) {
@@ -1823,9 +1811,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
         getOutLog().setText(empty);
       }
       String experimentGroup = "";
-      if (!profile_running_process && !system_profiling) {
-        experimentGroup = exp_group.getText();
-      } else if (profile_running_process) {
+      if (profile_running_process) {
         experimentGroup = collectPanel2.getExperimentGroup();
       } else if (system_profiling) {
         experimentGroup = collectPanel3.getExperimentGroup();
@@ -1835,12 +1821,10 @@ public final class CollectPanel extends JPanel implements ActionListener {
         target.setText(run_cmd); // This is used to print what is running
         work_dir.text.setText(collectPanel2.getExperimentDirectory());
         work_dir.setText(collectPanel2.getExperimentDirectory());
-        exp_dir.text.setText(collectPanel2.getExperimentDirectory());
         exp_name.text.setText(collectPanel2.getExperimentName());
         env_vars.text.setText(empty);
       }
       if (system_profiling) { // fill fields
-        exp_dir.text.setText(collectPanel3.getExperimentDirectory());
         exp_name.text.setText(collectPanel3.getExperimentName());
       }
       collect_output_file = output_file_name;
@@ -1849,7 +1833,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
           run_cmd,
           work_dir.getText(),
           exp_name.getText(),
-          exp_dir.getText(),
+          "",
           env_vars.getText().trim(),
           output_file_name,
           experimentGroup);
@@ -2000,12 +1984,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
   private String getExperimentPath(String actual_expname) {
     String experimentPath = actual_expname;
     if (!actual_expname.startsWith("/")) {
-      String path = exp_dir.getText();
-      if (path.length() > 0) {
-        experimentPath = path + "/" + actual_expname;
-      } else {
-        // Get full path
-        path = work_dir.getText();
+      String path = path = work_dir.getText();
         if (null == path) {
           path = Analyzer.getInstance().getWorkingDirectory();
         }
@@ -2018,7 +1997,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
           work_dir.setValue(path);
           experimentPath = path + "/" + actual_expname;
         }
-      }
     }
     return experimentPath;
   }
@@ -2723,29 +2701,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
               '0');
       exp_name.text.setToolTipText(
           AnLocale.getString("File name ending in .er to store collected data as an experiment"));
-      exp_dir =
-          new CollectExp(
-              CEXP_DIR,
-              list,
-              ipc_str_empty,
-              AnLocale.getString('y', "MNEM_COLLECTOR_EXPERIMENT_DIR"),
-              CSTR_DIR,
-              true,
-              '5');
-      exp_dir.text.setToolTipText(
-          AnLocale.getString("Full path of the directory to store the experiment"));
-      exp_group =
-          new CollectExp(
-              CEXP_GROUP,
-              list,
-              ipc_str_empty,
-              AnLocale.getString('o', "MNEM_COLLECTOR_EXPERIMENT_GROUP"),
-              CSTR_GROUP,
-              true,
-              '6');
-      exp_group.text.setToolTipText(
-          AnLocale.getString(
-              "Full path of file name ending in .erg for grouping related experiments"));
     } else {
       if (profile_running_process) {
         // AnLog.log("analyzer: profiling running process.\n");
@@ -2787,15 +2742,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
                 false,
                 '0');
       }
-      exp_dir =
-          new CollectExp(
-              CEXP_DIR,
-              list_dbx,
-              ipc_str_empty,
-              AnLocale.getString('y', "MNEM_COLLECTOR_EXPERIMENT_DIR"),
-              CSTR_DIR,
-              true,
-              '5');
       exp_name =
           new CollectExp(
               CEXP_NAME,
@@ -4623,8 +4569,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
     }
 
     exp_name.setVisibleAlign(CollectUtility.TEXT_RIGHT, true);
-    exp_dir.setVisibleAlign(CollectUtility.TEXT_RIGHT, true);
-    exp_group.setVisibleAlign(CollectUtility.TEXT_RIGHT, true);
     work_dir.setVisibleAlign(CollectUtility.TEXT_RIGHT, false);
   }
 
@@ -4666,39 +4610,18 @@ public final class CollectPanel extends JPanel implements ActionListener {
         if (path.equals(ipc_str_empty) || !path.startsWith("/" /*File.separator*/)) {
           path = work_dir.getText();
           if (!path.equals(ipc_str_empty)) {
-            path_file = new AnFile(path); // NM replace
+            path_file = new AnFile(path);
           } else {
-            path = exp_dir.getText();
-            path_file = new AnFile(path); // NM replace
+            path = "./";
+            path_file = new AnFile(path);
           }
         } else {
-          path_file = new AnFile(path); // NM replace
+          path_file = new AnFile(path);
           if (path_file.isFile()) {
             path_file = (AnFile) path_file.getParentFile();
           }
         }
         ac.setFileSelectionMode(AnChooser.FILES_ONLY);
-      } else if (cmd.equals(CSTR_DIR)) {
-        text = exp_dir;
-        path = text.getValue();
-        if (path.equals(ipc_str_empty)) {
-          path = work_dir.getText();
-        }
-        path_file = new AnFile(path); // NM replace
-      } else if (cmd.equals(CSTR_GROUP)) {
-        text = exp_group;
-        path = text.getValue();
-        if (!path.equals(ipc_str_empty)) {
-          path_file = (AnFile) new AnFile(path).getParentFile(); // NM replace
-        } else {
-          path = exp_dir.getText();
-          if (!path.equals(ipc_str_empty)) {
-            path_file = new AnFile(path); // NM replace
-          } else {
-            path = work_dir.getText();
-            path_file = new AnFile(path); // NM replace
-          }
-        }
       } else if (cmd.equals(CSTR_WORK)) {
         text = work_dir;
         path_file = new AnFile(text.getValue()); // NM replace

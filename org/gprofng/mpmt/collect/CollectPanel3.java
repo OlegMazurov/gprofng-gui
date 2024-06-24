@@ -670,9 +670,7 @@ public class CollectPanel3 extends JPanel {
     if ((null != pid) && (pid.length() > 0)) {
       col_cmd += " -F =" + pid;
     }
-    col_cmd += " -d " + getExperimentDirectory(); // jComboBox3.getItemAt(0);
     col_cmd += " -o " + getExperimentName(); // jComboBox2.getItemAt(0);
-    col_cmd += " -g " + getExperimentGroup(); // jComboBox4.getItemAt(0);
     System.out.println(col_cmd); // DEBUG
     return col_cmd;
   }

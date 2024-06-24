@@ -55,6 +55,8 @@ public final class Analyzer {
   public String os_name = null;
   public String er_print = null;
   public String localHost = null;
+  public String remoteConnectCommand = null; // For example, "ssh USER@HOST"
+  public String remoteGprofngPath = null;
   public String remoteConnection = null;
   public String remoteHost = null;
   public String remoteShell = "/usr/bin/ssh";
@@ -504,15 +506,14 @@ public final class Analyzer {
       }
       String rs = AnUtility.getenv("SP_ANALYZER_REMOTE_SHELL");
       if (rs != null) { // Special way to login
-        er_printCmd = rs + " " + rh + " " + er_printCmd;
+        remoteConnectCommand = rs;
+      } else if (null != connectCommand) {
+        remoteConnectCommand = connectCommand;
       } else {
-        if (null != connectCommand) {
-	  er_printCmd = connectCommand + " " + rh + " " + er_printCmd;	
-	}
-	else {
-          er_printCmd = remoteShell + " " + rh + " " + er_printCmd;
-        }
+        remoteConnectCommand = remoteShell;
       }
+      remoteConnectCommand += " " + rh;
+      er_printCmd = remoteConnectCommand + " " + er_printCmd;
     }
     rc = er_printCmd;
     er_printCmd = er_printCmd + " -IPC";
@@ -1724,7 +1725,6 @@ public final class Analyzer {
     if (specialRemoteShell != null && specialRemoteShell.length() > 0) {
       remoteShell = specialRemoteShell;
     }
-    AnLog.log("MEZ:: remoteShell = " + remoteShell + "\n");
     if (remoteShell == null) {
       if (fdhome.charAt(2) == ':') {
         if (fdhome.charAt(0) == '/') {

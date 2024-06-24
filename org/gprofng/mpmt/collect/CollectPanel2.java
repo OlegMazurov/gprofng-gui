@@ -633,9 +633,7 @@ public class CollectPanel2 extends JPanel {
   public String getPreviewCommand() {
     String col_cmd = "collect";
     col_cmd += " -P " + getProcessID(); // jTextField1.getText();
-    col_cmd += " -d " + getExperimentDirectory(); // jComboBox3.getItemAt(0);
     col_cmd += " -o " + getExperimentName(); // jComboBox2.getItemAt(0);
-    col_cmd += " -g " + getExperimentGroup(); // jComboBox4.getItemAt(0);
     System.out.println(col_cmd); // DEBUG
     return col_cmd;
   }

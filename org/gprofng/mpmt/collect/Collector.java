@@ -74,7 +74,6 @@ public class Collector {
   private String errorMessage = null;
   private final String eol = "\n";
   private final String empty_string = "";
-  private String collect_output;
   private int shortDelay = 10; // 10 milliseconds
 
   public long getElapsedTime() {
@@ -147,10 +146,6 @@ public class Collector {
 
   public int getCollectorState() {
     return collectorState;
-  }
-
-  public String getCollectOutput() {
-    return collect_output;
   }
 
   private void setCollectorState(final int newSt) {
@@ -281,7 +276,6 @@ public class Collector {
     }
 
     curr_exp_name = exp_name;
-    collect_output = empty_string;
     worker =
         new Thread("Collector Process Thread") {
           @Override
@@ -290,7 +284,7 @@ public class Collector {
             try {
               stderr_stdout = new ArrayList();
               AnUtility.setLibPath();
-              String remoteConnection = window.getAnalyzer().remoteConnection;
+              String remoteConnection = window.getAnalyzer().remoteConnectCommand;
               String remoteShell = window.getAnalyzer().remoteShell;
               String remoteHost = window.getAnalyzer().remoteHost;
               String cmd = exec_cmd;
@@ -299,18 +293,11 @@ public class Collector {
               ShellCommand sc = new ShellCommand();
               shellCommand = sc;
               sc.setRemoteConnection(remoteConnection, remoteShell, remoteHost);
-              // try { // TEMPORARY
               if (null == remoteConnection) {
-                sc.run(dir, cmd);
+                sc.run(cmd);
               } else {
-                sc.runCmdStr(dir, cmd);
+                sc.runRemoteCmd(dir, cmd);
               }
-              // } catch (Exception e) {
-              //    e.printStackTrace();
-              //    //    return/*(reply)*/;
-              //    collect_failed = true;
-              // }
-
               setCollectorState(COLLECTING_RUNNING);
 
               final String STDIN_WRITER = "Collector Stdin Writer";
@@ -389,14 +376,7 @@ public class Collector {
               elapsedTime = System.currentTimeMillis() - time;
               exitValue = sc.exitValue();
               setCollectorState(COLLECTING_COMPLETED);
-              // Remove collect output file
-              if (collect_output_file != null) {
-                // Remove local temporary file
-                File f = new File(collect_output_file);
-                if (f.exists()) {
-                  f.delete();
-                }
-              }
+              removeTempFile(collect_output_file);
             } catch (/*IO*/ Exception e) {
               collect_failed = true;
               // e.printStackTrace();
@@ -440,27 +420,6 @@ public class Collector {
             shellCommand = null;
           }
         };
-    if (collect_output_file != null) {
-      // Create thread to read collect output file
-      Thread read_output_file =
-          new Thread("Read Collector Output Thread") {
-            public void run() {
-              try {
-                sleep(shortDelay); // sleep 10 milliseconds
-                File f = new File(collect_output_file);
-                while (f.exists()) {
-                  // open file, read, try to find process ID
-                  read_collect_output_file(collect_output_file);
-                  sleep(shortDelay); // sleep 10 milliseconds
-                }
-              } catch (/*IO*/ Exception e) {
-                printException(e, AnLocale.getString("Collector.collect: I/O exception 3"));
-                System.err.println("Collector.collect: cannot read file " + collect_output_file);
-              }
-            }
-          };
-      read_output_file.start();
-    }
     worker.start();
   }
 
@@ -483,9 +442,6 @@ public class Collector {
         String line;
         BufferedReader br = new BufferedReader(new FileReader(f));
         while ((line = br.readLine()) != null) {
-          if (line.length() > 0) {
-            collect_output += line + eol;
-          }
           String pattern1 = "Creating experiment directory ";
           int idx = line.indexOf(pattern1);
           if (idx >= 0) {
@@ -860,23 +816,10 @@ public class Collector {
      */
     public void run(String cmnd) throws Exception {
       String[] ss = new String[3];
-      if (null != remoteConnection) {
-        ss[0] = remoteShell;
-        ss[1] = remoteHost;
-        cmnd = " ' " + cmnd + " '";
-      } else {
-        ss[0] = "sh"; // NM ss[0] = "/bin/sh";
-        if (shArgs == null) {
-          ss[1] = new String("-ec");
-        } else {
-          ss[1] = new String(shArgs);
-        }
-      }
-      // ss[2] = new String(cmnd + " 2>&1");
-      ss[2] = new String(cmnd);
-
+      ss[0] = "sh"; // NM ss[0] = "/bin/sh";
+      ss[1] = "-e";
+      ss[2] = cmnd;
       interrupted = false;
-
       try {
         // System.err.println("DEBUG:run rt.exec(): " + ss[0] + " " + ss[1] + " " + ss[2]); // DEBUG
         // (perf test)
@@ -898,28 +841,14 @@ public class Collector {
      *
      * @param cmnd - command line
      */
-    public void runCmdStr(String dir, String cmnd) throws Exception {
-      String ss;
-      if (null != remoteConnection) {
-        ss = remoteConnection;
-        if (dir != null) {
-          ss += " /bin/sh -ec '( cd " + dir + " && " + cmnd + " )'";
-        } else {
-          ss += " " + cmnd;
-        }
-      } else {
-        ss = "sh"; // NM ss = "/bin/sh -ec";
-        if (shArgs == null) {
-          ss += " -ec " + cmnd;
-        } else {
-          ss += " " + shArgs + " " + cmnd;
-        }
+    public void runRemoteCmd(String dir, String cmnd) throws Exception {
+      String ss = remoteConnection + " sh -ec \"(";
+      if (dir != null) {
+        ss += "cd " + dir + " && ";
       }
-
+      ss += cmnd + ")\"";
       interrupted = false;
-
       try {
-        // System.err.println("DEBUG:runCmdStr rt.exec(): " + ss); // DEBUG (perf test)
         thisProcess = rt.exec(ss);
         InputStream os = thisProcess.getInputStream();
         InputStream os_err = thisProcess.getErrorStream();
@@ -928,7 +857,7 @@ public class Collector {
         processError = new BufferedReader(new InputStreamReader(os_err));
         processInput = new PrintStream(is, true);
       } catch (Exception ee) {
-        String msg = "Command \"" + cmnd + "\" failed:\n" + ee.toString();
+        String msg = "Command \"" + ss + "\" failed:\n" + ee.toString();
         throw new Exception(msg);
       }
     }

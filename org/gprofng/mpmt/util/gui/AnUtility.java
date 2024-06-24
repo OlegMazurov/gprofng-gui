@@ -1058,8 +1058,8 @@ public final class AnUtility {
       s.append(se[i].toString() + "\n");
     }
     AnLog.log(s.toString());
-    System.err.println(
-        "analyzer: Invalid use of AWT thread. See log file: " + AnLog.getLogFilePath());
+//    System.err.println("DEBUG: Invalid use of AWT thread. See log file: "
+//        + AnLog.getLogFilePath());
   }
 
   public static void checkIPCOnWrongThread(boolean set) {

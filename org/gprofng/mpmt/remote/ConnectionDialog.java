@@ -373,6 +373,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
           path = path + "/bin/gp-display-text";
         }
       }
+      window.getAnalyzer().remoteGprofngPath = path.substring(0, path.length() - 16);
       String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, connectCommand, path, connectionProperties);
       // usernameTextField.setText(un);
       // passwordField.setText("");
