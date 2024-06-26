@@ -143,8 +143,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
   public JTabbedPane tab_pane;
   public JRadioButton startPaused, startResumed;
   public JLabel start_state;
-  public JRadioButton input_output_btn1, input_output_btn2;
-  public JLabel input_output_lbl;
 
   public List<HWCEntry> selectedHWCList;
   public JList hwcList;
@@ -1735,15 +1733,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
       }
 
       preview_cmd.setText(col_cmd);
-
-      if ((null != input_output_btn1) && input_output_btn1.isSelected()) {
-        // Use external terminal
-        // - Show Output tab, because it may show gnome-terminal errors
-        tab_pane.setSelectedIndex(2);
-      } else {
-        // Show Output tab
-        tab_pane.setSelectedIndex(2);
-      }
+      tab_pane.setSelectedIndex(2);
 
       // Create a pipe and read stdout
       try {
@@ -1781,7 +1771,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
       if (null != envs && envs.length() > 0) {
         run_cmd = envs + " " + col_cmd;
       }
-      if ((null != input_output_btn1) && input_output_btn1.isSelected()) {
+      if (!Analyzer.getInstance().isRemote()) {
         // Create temporary script
         if (temp_file_name == null) {
           try {
@@ -2638,55 +2628,6 @@ public final class CollectPanel extends JPanel implements ActionListener {
       targetPanel.setBorder(titleBorder);
       targetPanel.setLayout(new BoxLayout(targetPanel, BoxLayout.Y_AXIS));
       targetPanel.add(list_target);
-      if (!Analyzer.getInstance().isRemote()) { // not remote
-        // Allow user to specify external terminal for Input/Output
-        final ButtonGroup group = new ButtonGroup();
-        group.add(
-            input_output_btn1 =
-                new JRadioButton(AnLocale.getString("Use External Terminal"), true));
-        //                input_output_btn1.setMnemonic(getLocaleStr('X',
-        // "MNEM_EXTERNAL_TERMINAL"));
-        input_output_btn1.setToolTipText(
-            AnLocale.getString("Use External Terminal for input/output"));
-        group.add(
-            input_output_btn2 =
-                new JRadioButton(AnLocale.getString("Use Built-in Output Window"), false));
-        //                input_output_btn2.setMnemonic(getLocaleStr('U', "MNEM_BUILT_IN_WINDOW"));
-        input_output_btn2.setToolTipText(
-            AnLocale.getString("Use Built-in Output Window for output (no input)"));
-        final JPanel io_panel = new JPanel();
-        input_output_lbl = new JLabel(AnLocale.getString("Target Input/Output: "));
-        input_output_lbl.setToolTipText(AnLocale.getString("Specify Input/Output"));
-        io_panel.add(input_output_lbl);
-        io_panel.add(input_output_btn1);
-        io_panel.add(input_output_btn2);
-        targetPanel.add(io_panel);
-        // Check if /bin/gnome-terminal is available
-        File f = new File(external_terminal);
-        if (f.exists()) {
-          // Allow external terminal
-          if (system_profiling) {
-            // TEMPORARY: use built-in window by default
-            input_output_btn1.setSelected(false);
-            input_output_btn2.setSelected(true);
-          }
-        } else {
-          // disable external terminal option
-          input_output_lbl.setToolTipText(
-              AnLocale.getString(
-                  "External terminal is not available ("
-                      + external_terminal
-                      + " is not installed)"));
-          input_output_btn1.setToolTipText(
-              AnLocale.getString(
-                  "Use External Terminal for input/output (currently disabled because "
-                      + external_terminal
-                      + " is not installed)"));
-          input_output_btn1.setEnabled(false);
-          input_output_btn1.setSelected(false);
-          input_output_btn2.setSelected(true);
-        }
-      }
     }
     if (!profile_running_process && !system_profiling) {
       // Add experiment name/directory/group
