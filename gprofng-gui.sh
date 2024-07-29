@@ -301,8 +301,13 @@ if [ $verbose = "true" ] ; then
 #    exit
 fi
 
-eval "'$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args > "${LOG}" 2>&1
-res=$?
+if [ x"${GPROFNG_DEBUG}" == "x" ]; then
+    eval "'$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args > "${LOG}" 2>&1
+    res=$?
+else
+    eval "'$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args
+    res=$?
+fi
 
 if [ ${res} -eq 0 ]; then
     /bin/cat -- "${LOG}"

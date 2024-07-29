@@ -26,8 +26,6 @@ import org.gprofng.mpmt.ipc.IPCResult;
 import org.gprofng.mpmt.metrics.MetricColors;
 import org.gprofng.mpmt.metrics.MetricColors.MetricColor;
 import org.gprofng.mpmt.persistence.UserPref;
-import org.gprofng.mpmt.persistence.UserPref.ConnectionProperties;
-import org.gprofng.mpmt.remote.Authentication;
 import org.gprofng.mpmt.remote.ConnectionDialog;
 import org.gprofng.mpmt.remote.ConnectionManager;
 import org.gprofng.mpmt.util.gui.AnUtility;
@@ -66,13 +64,13 @@ public final class Analyzer {
   public boolean connectingToRemoteHost = false; // true during the connecting process
   public boolean connectingToRemoteHostEnabled = true;
   public boolean profileRunningProcessEnabled = false;
-  public Boolean kernelProfilingEnabled = null;
+  public boolean kernelProfilingEnabled = false;
   public boolean old_IPC_status = false;
   public int cur_id = 0;
   public static boolean compareMode = false;
 
   public static String fdversion, fdhome, licpath, licsts;
-  public IPC IPC_session;
+  public IPC IPC_session = null;
   public IPC old_IPC_session = null;
   // the variables to control the availability of certain menus and toolbars
   // these are default values for all IPC sessions
@@ -159,6 +157,13 @@ public final class Analyzer {
 
   public Analyzer() {
     instance = this;
+    String s = AnUtility.getenv("GPROFNG_DEBUG");
+    if (s != null) {
+      try {
+        AnUtility.debugFlags = Integer.parseInt(s);
+      } catch (NumberFormatException e) {
+      }
+    }
     IPC_session = new IPC(this);
   }
 
@@ -225,10 +230,14 @@ public final class Analyzer {
    * @param workingDirectory the workingDirectory to set
    */
   public void initWorkingDirectory() {
-    String wd = getCurrentDirectory(); // IPC call!
-    //        System.out.println("initWorkingDirectory: " + wd);
-    if (wd != null) {
-      this.workingDirectory = wd;
+    if (IPC_session == null) {
+      workingDirectory = System.getProperty("user.dir", ".");
+    } else {
+      String wd = getCurrentDirectory(); // IPC call!
+      if (wd == null) {
+        wd = System.getProperty("user.dir", ".");
+      }
+      workingDirectory = wd;
     }
   }
 
@@ -279,18 +288,6 @@ public final class Analyzer {
    * @return returns whether kernel profiling is enabled
    */
   public boolean isKernelProfilingEnabled() {
-    if (kernelProfilingEnabled == null) {
-      if (IPC_started) {
-        if (er_print != null) {
-          kernelProfilingEnabled = false; // not enabled
-          String er_kernel = er_print.replace("/gp-display-text", "/er_kernel");
-          AnFile ek = new AnFile(er_kernel);
-          if (ek.exists()) {
-            kernelProfilingEnabled = true; // enabled
-          }
-        }
-      }
-    }
     return kernelProfilingEnabled;
   }
 
@@ -440,10 +437,8 @@ public final class Analyzer {
       String name,
       char[] p,
       String connectCommand,
-      String path,
-      ConnectionProperties connectionProperties) {
-    AnUtility.checkIPCOnWrongThread(false);
-    kernelProfilingEnabled = null;
+      String path) {
+    kernelProfilingEnabled = false;
     fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CHANGING);
     stopConnectionManager();
     // Destroy old IPC session
@@ -723,7 +718,6 @@ public final class Analyzer {
     Thread createCollectorDialog =
         new Thread(
             new Runnable() {
-              // @Override
               @Override
               public void run() {
                 AnWindow.getInstance().resetProfileDialogs();
@@ -731,7 +725,6 @@ public final class Analyzer {
               }
             });
     createCollectorDialog.run();
-    AnUtility.checkIPCOnWrongThread(false);
     return null;
   }
 
@@ -863,9 +856,6 @@ public final class Analyzer {
           cc.updateConnectionStatus(known_problem_6);
           throw new Exception(known_problem_6);
         }
-        // if (ask.length() > 100000) {
-        //    break; // Why so many? Something wrong.
-        // }
       }
       if (!skip_pass) { // got request for the password
         ts = System.currentTimeMillis();
@@ -1222,8 +1212,6 @@ public final class Analyzer {
     }
     long totalBytes = IPC_session.getIPCReader().getTotalReceivedBytes();
     long totalMsg = IPC_session.getIPCReader().getTotalReceivedMessages();
-    // System.err.println("Connection performance (SYNC): Total bytes 1=" + totalBytes + " bytes.
-    // Total messages 1=" + totalMsg + " msg.");  // DEBUG
     long t1 = System.currentTimeMillis();
     int max = 100;
     Integer k = new Integer(runTest);
@@ -1910,10 +1898,6 @@ public final class Analyzer {
                           UserPref.getHomeConfigurationDirPath()
                               + "/"
                               + UserPref.getDefaultConfigurationName();
-                      //                                if (!new File(configurationPath).exists()) {
-                      //                                    configurationPath =
-                      // UserPref.getInstance().getLastClosedExpConfPath();
-                      //                                }
                     }
                   }
                 }
@@ -1949,8 +1933,6 @@ public final class Analyzer {
                   Dimension d1 = new Dimension(d0.width + 1, d0.height + 1);
                   anFrame.setSize(d1);
                   anFrame.setSize(d0);
-                  // System.out.println("Resized: old size=("+d0.width+","+d0.height+") new
-                  // size=("+d1.width+","+d1.height+")");
                 }
                 // Show pop-up
                 // String msg = "The Analyzer is now running in remote mode. You can connect to a

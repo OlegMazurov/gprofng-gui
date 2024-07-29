@@ -224,6 +224,7 @@ public class IPCResult implements Cancellable {
   }
 
   protected void waitForResult() {
+    AnUtility.checkIfOnAWTThread(false);
     waitOrNotify(true);
     if (ipcResponse == null) {
       System.out.println("" + requestID + " ipcResponse1 " + ipcResponse);

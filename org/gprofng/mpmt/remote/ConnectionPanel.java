@@ -17,16 +17,11 @@ package org.gprofng.mpmt.remote;
 
 import org.gprofng.analyzer.AnEnvironment;
 import org.gprofng.mpmt.AnLocale;
-import org.gprofng.mpmt.AnVariable;
-import org.gprofng.mpmt.util.gui.AnDialog2;
 import org.gprofng.mpmt.util.gui.AnUtility;
 import java.awt.Font;
-import java.util.List;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-// import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -51,15 +46,6 @@ public class ConnectionPanel extends JPanel {
     hostNameLabel.setToolTipText(AnLocale.getString("Name of the remote system"));
     hostNameLabel.setDisplayedMnemonic(AnLocale.getString('o', "RemoteDialogHostNameLabelMN"));
     hostNameLabel.setLabelFor(hostNameComboBox);
-
-    /*
-    authenticationLabel.setText(AnLocale.getString("Authentication:"));
-    authenticationLabel.setToolTipText(AnLocale.getString("Autentication methods"));
-
-    authenticationManageButton.setText(AnLocale.getString("Manage"));
-    authenticationManageButton.setToolTipText(AnLocale.getString("Manage authentication methods"));
-    authenticationManageButton.setMnemonic(AnLocale.getString('M', "AuthenticationManageButton"));
-    */
     
     connectCommandLabel.setText(AnLocale.getString("Connect Command:"));
     connectCommandLabel.setToolTipText(
@@ -74,14 +60,6 @@ public class ConnectionPanel extends JPanel {
     userNameLabel.setDisplayedMnemonic(AnLocale.getString('u', "RemoteDialogUserNameLabelMN"));
     userNameLabel.setLabelFor(userNameTextField);
 
-    /*
-    passWordLabel.setText(AnLocale.getString("Password:"));
-    passWordLabel.setToolTipText(
-        AnLocale.getString("Password for the account to log in to the remote system"));
-    passWordLabel.setDisplayedMnemonic(AnLocale.getString('p', "RemoteDialogPasswordLabelMN"));
-    passWordLabel.setLabelFor(passwordField);
-    */
-
     solstudioPathLabel.setText(AnLocale.getString("Remote gprofng Path:"));
     solstudioPathLabel.setToolTipText(
         AnLocale.getString(
@@ -94,10 +72,6 @@ public class ConnectionPanel extends JPanel {
 
     connectionStatusValueLabel.setFont(connectionStatusValueLabel.getFont().deriveFont(Font.PLAIN));
 
-    /*
-    AnUtility.setAccessibleContext(
-        authenticationTextField.getAccessibleContext(), AnLocale.getString("Authentications"));
-    */
     AnUtility.setAccessibleContext(
         connectionStatusValueLabel.getAccessibleContext(),
         AnLocale.getString("Status of connection"));
@@ -106,19 +80,16 @@ public class ConnectionPanel extends JPanel {
 
     // For now
     userNameTextField.setText(AnUtility.getenv("USER"));
-    // passwordField.setText("");
   }
 
   public void setLoginFieldsEnabled(boolean remote) {
 
     if (!remote) { // local host
-      // authenticationLabel.setEnabled(false);
       solstudioPathLabel.setEnabled(false);
       solstudioPathTextField.setEnabled(false);
       connectCommandLabel.setEnabled(false);
       connectCommandTextField.setEnabled(false);
     } else {
-      // authenticationLabel.setEnabled(true);
       solstudioPathLabel.setEnabled(true);
       solstudioPathTextField.setEnabled(true);
       connectCommandLabel.setEnabled(true);
@@ -142,16 +113,6 @@ public class ConnectionPanel extends JPanel {
     return hostNameComboBox;
   }
 
-  /*
-  public JLabel getPasswordLabel() {
-    return passWordLabel;
-  }
-
-  public JPasswordField getPasswordField() {
-    return passwordField;
-  }
-  */
-
   public JTextField getSolstudioPathTextField() {
     return solstudioPathTextField;
   }
@@ -159,20 +120,6 @@ public class ConnectionPanel extends JPanel {
     public JTextField getConnectCommandTextField() {
     return connectCommandTextField;
   }
-
-  /*
-  public JLabel getAuthenticationLabel() {
-    return authenticationLabel;
-  }
-
-  public JTextField getAuthenticationTextField() {
-    return authenticationTextField;
-  }
-
-  public JButton getAuthenticationManageButton() {
-    return authenticationManageButton;
-  }
-  */
 
   public JTextField getUserNameTextField() {
     return userNameTextField;
@@ -311,23 +258,6 @@ public class ConnectionPanel extends JPanel {
     private void connectCommandTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectCommandTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_connectCommandTextFieldActionPerformed
-
-  /*
-  private void authenticationManageButtonActionPerformed(
-      java.awt.event.ActionEvent evt) { // GEN-FIRST:event_authenticationManageButtonActionPerformed
-    AnDialog2 dialog =
-        new AnDialog2(connectionDialog, this, AnLocale.getString("Manage Authentications"));
-    AuthenticationPanel authenticationsPanel =
-        new AuthenticationPanel(dialog, connectionDialog.getAuthenticationsCopy());
-    dialog.setCustomPanel(authenticationsPanel);
-    dialog.setHelpTag(AnVariable.HELP_ConnectAuthentication);
-    dialog.setVisible(true);
-    if (dialog.getStatus() == AnDialog2.Status.OK) { // Not Cancel
-      List<Authentication> authentications = authenticationsPanel.getAuthentications();
-      connectionDialog.setAuthentications(authentications);
-    }
-  } // GEN-LAST:event_authenticationManageButtonActionPerformed
-  */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel connectCommandLabel;

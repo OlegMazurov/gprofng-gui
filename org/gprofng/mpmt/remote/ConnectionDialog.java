@@ -39,7 +39,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
-// import javax.swing.JPasswordField;
 import javax.swing.JProgressBar;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -52,18 +51,9 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
   private static String startDir = null;
   private JComboBox hostNameComboBox;
   private JTextField file;
-  /*
-  private JLabel passwordLabel;
-  private JPasswordField passwordField;
-  */
   private JTextField usernameTextField;
   private JTextField solstudioPathTextField;
   private JTextField connectCommandTextField;
-  /*
-  private JLabel authenticationLabel;
-  private JTextField authenticationTextField;
-  private JButton authenticationManageButton;
-  */
   private JLabel statusValueLabel;
   private JTextArea messageTextArea;
   private AnWindow m_window;
@@ -83,20 +73,12 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
   private List<Authentication> authentications = null;
 
   // Constructor
-  public ConnectionDialog(
-      final AnWindow window, final Frame frame, StatusLabelValueHandle connectedStatusHandle) {
-    super(
-        window,
-        frame,
-        AnLocale.getString("Connect to Remote Host"),
-        false,
-        null,
-        null,
-        help_id,
-        false);
+  public ConnectionDialog(final AnWindow window, final Frame frame,
+      StatusLabelValueHandle connectedStatusHandle) {
+    super(window, frame, AnLocale.getString("Connect to Remote Host"), false,
+        null, null, help_id, false);
     this.connectedStatusHandle = connectedStatusHandle;
     m_window = window;
-    //        active_id = window.getWindowID();
     initComponents();
     updateStatus();
   }
@@ -132,17 +114,8 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
         .addDocumentListener(comboboxDocumentListener = new ComboBoxDocumentListener());
 
     usernameTextField = connectionPanel.getUserNameTextField();
-    /*
-    passwordLabel = connectionPanel.getPasswordLabel();
-    passwordField = connectionPanel.getPasswordField();
-    */
     solstudioPathTextField = connectionPanel.getSolstudioPathTextField();
     connectCommandTextField = connectionPanel.getConnectCommandTextField();
-    /*
-    authenticationLabel = connectionPanel.getAuthenticationLabel();
-    authenticationTextField = connectionPanel.getAuthenticationTextField();
-    authenticationManageButton = connectionPanel.getAuthenticationManageButton();
-    */
     statusValueLabel = connectionPanel.getConnectionStatusValueLabel();
     statusValueLabel.setForeground(Color.BLACK);
     messageTextArea = connectionPanel.getMessageTextArea();
@@ -157,16 +130,13 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     }
     statusValueLabel.setText(status);
     progressBar = connectionPanel.getConnectionProgressBar();
-    //        progressBar.setVisible(false);
-    //        pack();
+    connectCommandTextField.setText(an.remoteShell);
 
     // Change buttons
     JButton[] buttons = getDefaultButtons();
     if (buttons.length > 2) {
       was_ok = buttons[0];
       was_ok.setText(AnLocale.getString("Connect"));
-      //            was_ok.setMnemonic(AnLocale.getString('n',
-      // "RemoteConnectDialogConnectButtonMN"));
       was_ok.setEnabled(true);
       close_on_enter = false;
       was_apply = buttons[1];
@@ -191,120 +161,55 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
 
   protected void setAuthentications(List<Authentication> authentications) {
     this.authentications = authentications;
-
-    /*
-    passwordLabel.setEnabled(false);
-    passwordField.setEnabled(false);
-    passwordField.setText("");
-    if (authentications != null) {
-      authenticationTextField.setText(Authentication.toString(authentications));
-      authenticationLabel.setEnabled(true);
-      authenticationManageButton.setEnabled(true);
-      for (Authentication auth : authentications) {
-        if (auth.isOn() && auth.getType() == Authentication.Type.PASSWORD) {
-          passwordLabel.setEnabled(true);
-	  passwordField.setEnabled(true);
-          break;
-        }
-      }
-    } else {
-      authenticationTextField.setText("");
-      authenticationLabel.setEnabled(false);
-      authenticationManageButton.setEnabled(false);
-      passwordLabel.setEnabled(false);
-      passwordField.setEnabled(false);
-    }
-    */
   }
 
   class ComboBoxDocumentListener implements DocumentListener {
 
-    //        @Override
     @Override
     public void changedUpdate(DocumentEvent e) {
       updateStatus();
     }
 
-    //        @Override
     @Override
     public void insertUpdate(DocumentEvent e) {
       updateStatus();
     }
 
-    //        @Override
     @Override
     public void removeUpdate(DocumentEvent e) {
       updateStatus();
     }
   }
 
-  private String getDefaultSolStudioPath() {
-    if (defaultSolstudioPath == null) {
-      String er_print = Analyzer.getInstance().er_print;
-      int index = er_print.lastIndexOf("bin");
-      if (index > 0) {
-        defaultSolstudioPath = er_print.substring(0, index - 1);
-      }
-    }
-    return defaultSolstudioPath;
-  }
-
   private void updateStatus() {
     AnUtility.checkIfOnAWTThread(true);
     String hostName = ((JTextField) hostNameComboBox.getEditor().getEditorComponent()).getText();
+    String ssh_cmd = window.getAnalyzer().remoteShell;
+    String install_dir = "/usr/bin";
+    String user_name = AnUtility.getenv("USER");
+    if (user_name == null) {
+      user_name = "";
+    }
+
     ConnectionProperties connectionProperties =
         UserPref.getInstance().getConnectionPropertiesMap().get(hostName);
-    String empty = "";
-    if (connectionProperties != null) {       
-      String connectCommand = connectionProperties.getConnectCommand();
-      if (connectCommand != null && connectCommand.length() > 0) {
-        connectCommandTextField.setText(connectCommand);
-      } else {
-        connectCommandTextField.setText(empty);
+    if (connectionProperties != null) {
+      String s = connectionProperties.getConnectCommand();
+      if (s != null && s.length() > 0) {
+        ssh_cmd = s;
       }
-      String path = connectionProperties.getPath();
-      if (path != null && path.length() > 0) {
-        solstudioPathTextField.setText(path);
-      } else {
-        solstudioPathTextField.setText(empty);
+      s = connectionProperties.getPath();
+      if (s != null && s.length() > 0) {
+        install_dir = s;
       }
-
-      String userName = connectionProperties.getUserName();
-      if (userName != null && userName.length() > 0) {
-        usernameTextField.setText(userName);
-      } else {
-        // usernameTextField.setText(empty);
-	usernameTextField.setText(AnUtility.getenv("USER"));
-      }
-
-      // hostName.equals(local_host) ||
-      if (hostName.length() == 0) {
-        setAuthentications(null);
-      } else {
-        setAuthentications(connectionProperties.getAuthentications());
-      }
-    } else {
-      // String lastPath = solstudioPathTextField.getText();
-      if (hostName.equals(local_host) || hostName.length() == 0) {
-        solstudioPathTextField.setText("/usr/bin");
-	connectCommandTextField.setText("/usr/bin/ssh ");
-      }
-      else {
-	if (hostName.length() == 0) {
-          setAuthentications(null);
-        } else {
-          // if (getDefaultSolStudioPath().equals(lastPath)) {
-          //   solstudioPathTextField.setText(empty);
-          // }
-          setAuthentications(UserPref.getDefaultAuthentications());
-        }
+      s = connectionProperties.getUserName();
+      if (s != null && s.length() > 0) {
+        user_name = s;
       }
     }
-    if (hostName.equals(local_host)) {
-      connectionPanel.setLoginFieldsEnabled(false);
-    } else {
-      connectionPanel.setLoginFieldsEnabled(true);
-    }
+    connectionPanel.setLoginFieldsEnabled(!hostName.equals(local_host));
+    connectCommandTextField.setText(ssh_cmd);
+    solstudioPathTextField.setText(install_dir);
   }
 
   // Set visible
@@ -323,15 +228,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
   /*
    * Connect to remote host
    */
-  public String connectToRemoteHost(ConnectionProperties connectionProperties, int timeout) {
-    //        if (connectionProperties != null) {
-    //            System.out.println("User Name:           " + connectionProperties.getUserName());
-    //            System.out.println("Path:                " + connectionProperties.getPath());
-    //            String authenticationMethodKeys =
-    // Authentication.toKeyString(connectionProperties.getAuthentications());
-    //            System.out.println("Authentication Keys: " + authenticationMethodKeys);
-    //        }
-
+  public String connectToRemoteHost(int timeout) {
     try {
       if (!isVisible()) {
         setVisible(true);
@@ -374,9 +271,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
         }
       }
       window.getAnalyzer().remoteGprofngPath = path.substring(0, path.length() - 16);
-      String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, connectCommand, path, connectionProperties);
-      // usernameTextField.setText(un);
-      // passwordField.setText("");
+      String s = m_window.getAnalyzer().createNewIPC(this, host, un, p, connectCommand, path);
       if (s != null) {
         return (s);
       }
@@ -449,8 +344,8 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
               /* synchronized (AnVariable.worker_lock) */ {
                 threadConnector = this;
                 cancelRequest = false;
-                String res = connectToRemoteHost(connectionProperties, timeout);
-                if (true == cancelRequest) {
+                String res = connectToRemoteHost(timeout);
+                if (cancelRequest) {
                   cancelRequest = false;
                   res += ". Connection canceled";
                 }
@@ -459,17 +354,10 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
             }
           };
       worker.start();
-    }
-    if (cmd.equals(AnLocale.getString("Apply")) || cmd.equals(AnLocale.getString("Cancel"))) {
-      // TEMPORARY: Cancel
-      if (connectedStatusHandle
-          .get()
-          .equals(connecting) /* statusValueLabel.getText().equals(connecting) */) {
+    } else if (cmd.equals(AnLocale.getString("Apply"))
+        || cmd.equals(AnLocale.getString("Cancel"))) {
+      if (connectedStatusHandle.get().equals(connecting)) {
         cancelRequest = true;
-        // m_window.getAnalyzer().IPC_session = m_window.getAnalyzer().old_IPC_session;
-        // m_window.getAnalyzer().IPC_started = m_window.getAnalyzer().old_IPC_status;
-        // fld_status.setText(disconnected);
-        // progressBar.setIndeterminate(false);
         if (threadConnector != null) {
           try {
             threadConnector.interrupt();
@@ -477,6 +365,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
           } catch (Exception e) {
             // thread may already had gone
           }
+          threadConnector = null;
         }
       } else {
         setVisible(false);

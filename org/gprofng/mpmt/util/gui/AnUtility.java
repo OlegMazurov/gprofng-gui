@@ -1048,6 +1048,9 @@ public final class AnUtility {
   }
 
   private static void reportWrongThread(boolean shouldBe) {
+    if ((debugFlags & DEBUG_AWT_THR) == 0) {
+      return;
+    }
     Exception awtException = new Exception();
     StackTraceElement[] se = awtException.getStackTrace();
     StringBuilder s = new StringBuilder();
@@ -1058,8 +1061,8 @@ public final class AnUtility {
       s.append(se[i].toString() + "\n");
     }
     AnLog.log(s.toString());
-//    System.err.println("DEBUG: Invalid use of AWT thread. See log file: "
-//        + AnLog.getLogFilePath());
+    System.err.println("DEBUG: Invalid use of AWT thread. See log file: "
+        + AnLog.getLogFilePath());
   }
 
   public static void checkIPCOnWrongThread(boolean set) {
@@ -1239,4 +1242,7 @@ public final class AnUtility {
     s = s.replace("\"", "&quot;"); // NOI18N
     return s;
   }
+
+  public static int debugFlags = 0;
+  public static int DEBUG_AWT_THR = 1;
 }

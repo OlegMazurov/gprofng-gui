@@ -20,6 +20,7 @@ import org.gprofng.mpmt.ipc.IPCErrorReader;
 import org.gprofng.mpmt.ipc.IPCHandle;
 import org.gprofng.mpmt.ipc.IPCReader;
 import org.gprofng.mpmt.ipc.IPCResult;
+import org.gprofng.mpmt.util.gui.AnUtility;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -174,6 +175,7 @@ public final class IPC {
 
   private void sendIPCRequest() {
     if (ipcHandle != null) {
+      AnUtility.checkIfOnAWTThread(false);
       ipcResult = ipcHandle.sendRequest();
     } else {
       System.err.println("********************ERROR: IPC: ipcRequest==null");
