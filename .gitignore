@@ -20,4 +20,5 @@ compile
 install-sh
 missing
 mdate-sh
+stamp-*
 

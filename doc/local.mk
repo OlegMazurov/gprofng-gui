@@ -17,8 +17,6 @@
 # <http://www.gnu.org/licenses/>.
 #
 
-docdir = $(srcdir)/doc
-
 AUTOMAKE_OPTIONS += info-in-builddir foreign no-texinfo.tex
 
 # Options to extract the man page
@@ -38,16 +36,16 @@ man_MANS = gp-display-gui.1
 # Build the man page from the texinfo file
 # The sed command removes the no-adjust Nroff command so that
 # the man output looks standard.
-$(man_MANS): $(docdir)/gp-macros.texi
+$(man_MANS): $(srcdir)/doc/gp-macros.texi
 	$(AM_V_GEN)touch $@
 	( nm=`basename $@ .1` ; \
-	  $(AM_V_at)$(TEXI2POD) $(MANCONF) < $(docdir)/$$nm.texi > $$nm.pod ; \
+	  $(AM_V_at)$(TEXI2POD) $(MANCONF) < $(srcdir)/doc/$$nm.texi > $$nm.pod ; \
 	  $(AM_V_at)($(POD2MAN) $$nm.pod | sed -e '/^.if n .na/d' > $@.tmp && \
 	    mv -f $@.tmp $@) || (rm -f $@.tmp && exit 1) ; \
 	  $(AM_V_at)rm -f $$nm.pod )
 
-gp-display-gui.1: $(docdir)/gp-display-gui.texi
+gp-display-gui.1: $(srcdir)/doc/gp-display-gui.texi
 
-EXTRA_DIST += $(man_MANS) $(docdir)/gp-macros.texi $(docdir)/gp-display-gui.texi
+EXTRA_DIST += $(man_MANS) $(srcdir)/doc/gp-macros.texi $(srcdir)/doc/gp-display-gui.texi
 CLEANFILES += $(man_MANS)
 

@@ -21,6 +21,7 @@ AC_CHECK_PROGS([JAVAC],[javac],[no])
 AC_CHECK_PROGS([JAR],[jar],[no])
 AC_CONFIG_FILES(Makefile)
 AC_OUTPUT
+AM_MAINTAINER_MODE
 
 if test "x$JAVA" = "xno"; then
    AC_ERROR([java is needed to build gprofng-gui.
