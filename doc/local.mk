@@ -26,12 +26,12 @@ TEXI2POD = perl $(srcdir)/etc/texi2pod.pl $(AM_MAKEINFOFLAGS)
 POD2MAN = pod2man --center="User Commands" \
 	--release="gprofng-gui-$(VERSION)" --section=1
 
-info_TEXINFOS       = %D%/gp-gui-ug.texi
-gp_gui_ug_TEXINFOS  = gp-display-gui.texi gp-macros.texi
+info_TEXINFOS       = %D%/gprofng-gui.texi
+gprofng_gui_TEXINFOS  = gprofng-gui.texi gp-macros.texi
 TEXINFO_TEX         = .
 MAKEINFOHTML        = $(MAKEINFO) --html --no-split
 
-man_MANS = gp-display-gui.1
+man_MANS = gprofng-display-gui.1
 
 # Build the man page from the texinfo file
 # The sed command removes the no-adjust Nroff command so that
@@ -44,7 +44,7 @@ $(man_MANS): $(srcdir)/doc/gp-macros.texi
 	    mv -f $@.tmp $@) || (rm -f $@.tmp && exit 1) ; \
 	  $(AM_V_at)rm -f $$nm.pod )
 
-gp-display-gui.1: $(srcdir)/doc/gp-display-gui.texi
+gprofng-display-gui.1: $(srcdir)/doc/gprofng-gui.texi
 
 EXTRA_DIST += $(man_MANS) $(srcdir)/doc/gp-macros.texi $(srcdir)/doc/gp-display-gui.texi
 CLEANFILES += $(man_MANS)

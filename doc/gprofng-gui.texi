@@ -9,7 +9,7 @@
 
 @c %**start of header
 
-@setfilename gp-gui-ug.info
+@setfilename gprofng-gui.info
 @settitle The GNU gprofng GUI
 
 @c -- Set the indent for the @example command to 1 space, not 5 ---------------
@@ -415,7 +415,6 @@ gprofng-gui-1.1/
 gprofng-gui-1.1/compile
 gprofng-gui-1.1/ChangeLog
 ...
-gprofng-gui-1.1/gp-display-gui.1
 gprofng-gui-1.1/gprofng-gui.sh
 @end verbatim
 @end smallexample
@@ -1453,7 +1452,7 @@ for the selected samples of each experiment.
 @appendix The gprofng GUI Man Page
 @c ----------------------------------------------------------------------------
 
-@include gp-display-gui.texi
+@include gprofng-display-gui.texi
 
 @ifnothtml
 @node       Index
