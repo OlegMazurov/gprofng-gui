@@ -373,16 +373,7 @@ public final class Analyzer {
       er_print = AnUtility.getenv("SP_ANALYZER_ER_PRINT");
     }
     if (er_print == null || er_print.equals(emptyString)) {
-      er_print = null;
-      if (UserPref.gprofngdir != null) {
-        er_print = get_exe_name(UserPref.gprofngdir + "/" + DisplayAppName);
-      }
-      if (er_print == null && fdhome != null) {
-	er_print = get_exe_name(fdhome + "/bin/" + DisplayAppName);
-      }
-      if (er_print == null) {
-	er_print = "" + DisplayAppName;
-      }
+      er_print = getPathToApp(DisplayAppName);
     } else {
       IPCLogger.logTrace("\n" + "analyzer: SP_ANALYZER_ER_PRINT='" + er_print + "'");
       if (remoteConnection != null) {
@@ -1353,17 +1344,34 @@ public final class Analyzer {
     sendPCollect(collector, p, cc);
   }
 
+  private String getPathToApp(String appName) {
+    String path;
+    if (UserPref.gprofngdir != null) {
+      path = UserPref.gprofngdir + "/" + appName;
+      if (Files.exists(Paths.get(path))) {
+        return path;
+      }
+    }
+    if (UserPref.binDirFromCommandLine != null) {
+      path = UserPref.binDirFromCommandLine + "/" + appName;
+      if (Files.exists(Paths.get(path))) {
+        return path;
+      }
+    }
+    if (fdhome != null) {
+      path = fdhome + "/bin/" + appName;
+      if (Files.exists(Paths.get(path))) {
+        return path;
+      }
+    }
+    return appName;
+  }
+
   /** Get path to local or remote collect */
   public String getPathToCollect() {
     if (!isRemote()) {
-      String collectPath = null; // AnUtility.getenv("SP_ANALYZER_COLLECT");
-      if (collectPath == null || collectPath.length() == 0) {
-        collectPath = UserPref.binDirFromCommandLine != null ?
-          UserPref.binDirFromCommandLine + "/" + CollectAppName : CollectAppName;
-        AnLog.log("analyzer: collect=" + collectPath + "\n");
-      } else {
-        AnLog.log("analyzer: SP_ANALYZER_COLLECT=" + collectPath + "\n"); // DEBUG
-      }
+      String collectPath = getPathToApp(CollectAppName);
+      AnLog.log("analyzer: COLLECT=" + collectPath + "\n");
       return collectPath;
     }
     return last_CC_collect;
@@ -1375,11 +1383,7 @@ public final class Analyzer {
    * @return
    */
   public String getPathToCollectKernel() {
-    String cmd = getPathToCollect();
-    if (cmd.endsWith(CollectAppName)) {
-      cmd = cmd.substring(0, cmd.length() - CollectAppName.length()) + KernelAppName;
-    }
-    return cmd;
+    return getPathToApp(KernelAppName);
   }
 
   /**
