@@ -635,12 +635,12 @@ $(COLLECTOR_JAR): $(GPROFNG_JAR) $(collector_FILES) $(collector_MF)
 	$(JAVAC) $(JAVAC_FLAGS) -d . $(collector_FILES)
 	$(JAR) $(JAR_FLAGS) $@ $(collector_MF) $(collector_CLASSES)
 
-bin_SCRIPTS = gp-display-gui
-CLEANFILES = gp-display-gui $(GPROFNG_JAR) $(ANALYZER_JAR) $(COLLECTOR_JAR) \
+bin_SCRIPTS = gprofng-display-gui
+CLEANFILES = gprofng-display-gui $(GPROFNG_JAR) $(ANALYZER_JAR) $(COLLECTOR_JAR) \
 	$(GPROFNG_CLASSES) $(ANALYZER_CLASSES) $(collector_CLASSES) \
 	$(ANALYZER_PROPERTIES) $(MPMT_PROPERTIES) LocaleString*.class
 
-gp-display-gui: $(srcdir)/gprofng-gui.sh
+gprofng-display-gui: $(srcdir)/gprofng-gui.sh
 	@echo "================= $@"
 	sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh \
 	  | sed -e "s~GPROFNG_bindir=~GPROFNG_bindir='$(bindir)'~" \
@@ -657,5 +657,11 @@ EXTRA_DIST = $(MPMT_SRC) $(ANALYZER_SRC) $(COLLECTOR_SRC) \
 	gprofng-collector.mf gprofng-gui.mf gprofng-gui.sh gprofng-gui.spec \
 	gprofng.properties INSTALL install-sh Makefile.am Makefile.in missing \
 	README AUTHORS NEWS tools
+
+PHONY: install-exec-local
+install-exec-local:
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	rm -f $(DESTDIR)$(bindir)/gp-display-gui
+	ln -s gprofng-display-gui $(DESTDIR)$(bindir)/gp-display-gui
 
 include doc/local.mk
