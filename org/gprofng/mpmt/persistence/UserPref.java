@@ -104,7 +104,6 @@ public class UserPref {
   }
 
   private static UserPref instance = null;
-  private static final String THA_INIT_FILE = "tha.xml";
   private static final String ANALYZER_INIT_FILE = "analyzer.xml";
   /* Update OldUserDirs with old user dirs it should search for settings */
   private static final String UserDir = ".gprofng/gui";
@@ -121,8 +120,8 @@ public class UserPref {
   public static String binDirFromCommandLine = null;
   public static String dataDirFromCommandLine = null;
   public static String gprofngdir = null;  // Where gp-display-text is installed
-  
-  private static long threeMonth = 90l * 24l * 3600l * 1000l; // 3 month
+  public static boolean verbose = false;
+  private static final long threeMonth = 90l * 24l * 3600l * 1000l; // 3 month
 
   private int version;
 
@@ -132,11 +131,11 @@ public class UserPref {
   // System settings
   private Dimension frameSize;
   private Point frameLocation;
-  private SplitPaneFixedRightSizeProp splitPane1 = new SplitPaneFixedRightSizeProp(375);
-  private SplitPaneFixedRightSizeProp splitPane2 = new SplitPaneFixedRightSizeProp(160);
-  private SplitPaneFixedRightSizeProp splitPane3 =
+  private final SplitPaneFixedRightSizeProp splitPane1 = new SplitPaneFixedRightSizeProp(375);
+  private final SplitPaneFixedRightSizeProp splitPane2 = new SplitPaneFixedRightSizeProp(160);
+  private final SplitPaneFixedRightSizeProp splitPane3 =
       new SplitPaneFixedRightSizeProp(getDefaultSplitPane3RightSize());
-  private SplitPaneFixedRightSizeProp navigationFilterSplitPane =
+  private final SplitPaneFixedRightSizeProp navigationFilterSplitPane =
       new SplitPaneFixedRightSizeProp(160);
   private Integer navigationPanelDividerPosition;
   private ExperimentPickLists experimentsPicklists;

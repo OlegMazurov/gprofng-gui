@@ -252,22 +252,26 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
         p = null;
       }
       */
-      String connectCommand = connectCommandTextField.getText();
-      if ((connectCommand == null) || (connectCommand.length() < 1)) {
+      String connectCommand = connectCommandTextField.getText().trim();
+      if (connectCommand.length() < 1) {
         return (AnLocale.getString("Error: connection command is not specified."));
       }
-      String path = solstudioPathTextField.getText();
-      if (path != null) {
-        path = path.trim();
-      }
-      if ((path == null) || (path.length() < 1)) {
+      connectCommand += " -o PasswordAuthentication=no " + 
+          "-o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no";
+      String path = solstudioPathTextField.getText().trim();
+      if (path.length() < 1) {
         return (AnLocale.getString("Error: remote gprofng path is not specified."));
       }
-      if (!path.endsWith("gp-display-text")) {
-        if (path.endsWith("bin") || path.endsWith("bin/")) {
-          path = path + "/gp-display-text";
+      String appName = Analyzer.DisplayAppName;
+      if (!path.endsWith("/" + appName)) {
+        if (path.endsWith("/bin")) {
+          path = path + "/" + appName;
+        } else if (path.endsWith("/bin/")) {
+          path = path + appName;
+        } else if (path.endsWith("/")) {
+          path = path + "bin/" + appName;
         } else {
-          path = path + "/bin/gp-display-text";
+          path = path + "/bin/" + appName;
         }
       }
       window.getAnalyzer().remoteGprofngPath = path.substring(0, path.length() - 16);

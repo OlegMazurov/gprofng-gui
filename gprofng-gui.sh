@@ -83,6 +83,20 @@ Usage()
     Message 7       # "\nAll other options and arguments are passed to gprofng GUI.\nSee documentations for details.\n"
 }
 
+ShowLogs()
+{
+  if [ -s "$1" ]; then
+    echo "===== /bin/cat -- $1: ======"
+    /bin/cat -- "$1"
+    echo ""
+  fi
+  if [ -s $1.err ]; then
+    echo "===== /bin/cat -- $1.err: ======"
+    /bin/cat -- "$1".err
+    echo ""
+  fi
+}
+
 ###########################################################################
 # main program starts here
 
@@ -174,7 +188,10 @@ while [ $# -gt 0 ] ; do
             jdkhome=$1; # jdk home
             ;;
 	-J*) jopt=`expr $1 : '-J\(.*\)'`; jargs="$jargs \"$jopt\"";;
-	-v|--verbose) verbose="true";;
+	-v|--verbose)
+	    args="$args --verbose"
+	    verbose="true"
+	    ;;
 	-V|--version) echo GNU `basename $PRG`: "REPLACE_ME_WITH_VERSION"; exit 0;;
 	-\?|-h|--help) Usage; exit 0;;
 	-f|--fontsize) 
@@ -291,27 +308,23 @@ export SP_COLLECTOR_FROM_GUI
 
 PID=$$
 LOG="${USER_DIR}/an.${PID}.log"
-/bin/rm -f -- "${LOG}"
+/bin/rm -f -- "${LOG}" "${LOG}.err"
 
 gprofng_jar="${GPROFNG_datadir}/gprofng-gui/gprofng-analyzer.jar"
-if [ $verbose = "true" ] ; then
-    echo "Run java:"
-    echo "'$jdkhome/bin/java' $jargs -jar ${gprofng_jar} $args > ${LOG} 2>&1"
+if [ $verbose = "true" ]; then
+    echo "% '$jdkhome/bin/java' $jargs -jar '${gprofng_jar}' $args >${LOG} 2>${LOG}.err"
 #    eval "/usr/bin/strace -v -f -t -o ${USER_DIR}/truss.log '$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args
 #    exit
 fi
+eval "'$jdkhome/bin/java'" $jargs -jar "'${gprofng_jar}'" $args >"${LOG}" 2>"${LOG}.err"
+res=$?
 
-if [ x"${GPROFNG_DEBUG}" == "x" ]; then
-    eval "'$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args > "${LOG}" 2>&1
-    res=$?
-else
-    eval "'$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args
-    res=$?
+if [ $verbose = "true" ]; then
+    ShowLogs "${LOG}"
 fi
 
 if [ ${res} -eq 0 ]; then
-    /bin/cat -- "${LOG}"
-    /bin/rm -f -- "${LOG}"
+    /bin/rm -f -- "${LOG}" "${LOG}.err"
     exit ${res}
 fi
 
@@ -324,20 +337,22 @@ if [ ${err} -eq 0 ]; then
         err=`/bin/cat -- "${LOG}" | /bin/grep ClassFormatError | wc -l`
         if [ ${err} -eq 0 ]; then
             # unknown error
-            /bin/cat -- "${LOG}"
-            /bin/rm -f -- "${LOG}"
+            if [ $verbose != "true" ]; then
+                ShowLogs "${LOG}"
+            fi
+            /bin/rm -f -- "${LOG}" "${LOG}.err"
             exit ${res}
         fi
         Message 27 "$jdkhome/bin/java"
     else
         Message 22 "$jdkhome/bin/java"
     fi
-else
+  else
     Message 23 "$jdkhome/bin/java"
 fi
 Message 24
 Message 25
 Message 26
-/bin/rm -f -- "${LOG}"
+/bin/rm -f -- "${LOG}" "${LOG}.err"
 exit ${res}
 

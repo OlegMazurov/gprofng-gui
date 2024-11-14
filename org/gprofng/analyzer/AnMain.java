@@ -83,6 +83,8 @@ public final class AnMain {
         UserPref.dataDirFromCommandLine = argvOrig.substring(argvOrig.indexOf("=") + 1);
       } else if (argvOrig.startsWith("--gprofngdir=")) {
         UserPref.gprofngdir = argvOrig.substring(argvOrig.indexOf("=") + 1);
+      } else if (argvOrig.equals("--verbose")) {
+        UserPref.verbose = true;
       } else {
         argsExp.add(argvOrig);
         // This argument is an experiment name, or a name of a binary to profile
@@ -91,6 +93,11 @@ public final class AnMain {
           argsExp.add(args[j]);
         }
         break;
+      }
+    }
+    if (UserPref.verbose) {
+      for (int i = 0; i < args.length; i++) {
+        AnLog.log(String.format("%2d %s", i, args[i]));
       }
     }
     return argsExp.toArray(new String[argsExp.size()]);

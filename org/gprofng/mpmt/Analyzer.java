@@ -151,7 +151,7 @@ public final class Analyzer {
   private static String IPC_PROTOCOL = IPCProtocol.IPC_PROTOCOL_STR;
   private final String ipc_protocol = IPC_PROTOCOL;
 
-  private static final String DisplayAppName = "gp-display-text";
+  public static final String DisplayAppName = "gp-display-text";
   private static final String CollectAppName = "gp-collect-app";
   private static final String KernelAppName = "gp-collect-kernel";
 
@@ -420,6 +420,7 @@ public final class Analyzer {
    * @param host
    * @param name
    * @param p
+   * @param connectCommand
    * @param path
    */
   public String createNewIPC(
@@ -430,6 +431,12 @@ public final class Analyzer {
       String connectCommand,
       String path) {
     kernelProfilingEnabled = false;
+    AnLog.log("host: " + host);
+    AnLog.log("name: " + name);
+    AnLog.log("p: " + (p == null ? "NULL" : String.valueOf(p)));
+    AnLog.log("connectCommand: " + connectCommand);
+    AnLog.log("path: " + path);
+
     fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CHANGING);
     stopConnectionManager();
     // Destroy old IPC session
@@ -437,7 +444,6 @@ public final class Analyzer {
       IPC new_IPC_session = IPC_session;
       IPC_session = old_IPC_session;
       setIPCStarted(old_IPC_status);
-      // win.QUIT();
       old_IPC_session.destroyIPCProc();
       IPC_session = new_IPC_session;
     }
@@ -445,31 +451,31 @@ public final class Analyzer {
     old_IPC_session = IPC_session;
     old_IPC_status = IPC_started;
     IPC newIPC = new IPC(this);
-    String str_gp_display_text = "gp-display-text";
-    String path_to_er_print = str_gp_display_text;
+    String path_to_er_print = DisplayAppName;
     String l_fdhome = emptyString;
     if (null != path) {
       l_fdhome = path.trim();
       if (l_fdhome.length() > 0) {
         if (!l_fdhome.equals(path_to_er_print)) {
-          if (l_fdhome.endsWith("/" + str_gp_display_text)) {
+          if (l_fdhome.endsWith("/" + DisplayAppName)) {
             path_to_er_print = l_fdhome;
+          } else if (l_fdhome.endsWith("/bin/")) {
+            path_to_er_print = l_fdhome + DisplayAppName;
+          } else if (l_fdhome.endsWith("/bin")) {
+            path_to_er_print = l_fdhome + "/" + DisplayAppName;
+          } else if (l_fdhome.endsWith("/")) {
+            path_to_er_print = l_fdhome + "bin/" + DisplayAppName;
           } else {
-            if (l_fdhome.endsWith("/bin") || l_fdhome.endsWith("/bin/")) {
-              path_to_er_print = l_fdhome + "/" + str_gp_display_text;
-            } else {
-              path_to_er_print = l_fdhome + "/bin/" + str_gp_display_text;
-            }
+            path_to_er_print = l_fdhome + "/bin/" + DisplayAppName;
           }
         }
       }
-      System.out.println("path: " + path);
+      AnLog.log("path: " + path);
     }
-    System.out.println("l_fdhome: " + l_fdhome);
-    System.out.println("str_gp_display_text: " + str_gp_display_text);
-    String str_collect = "gp-collect-app";
-    int i = path_to_er_print.lastIndexOf(str_gp_display_text);
-    String path_to_collect = path_to_er_print.substring(0, i) + str_collect;
+    AnLog.log("l_fdhome: " + l_fdhome);
+    AnLog.log("str_gp_display_text: " + DisplayAppName);
+    int i = path_to_er_print.lastIndexOf(DisplayAppName);
+    String path_to_collect = path_to_er_print.substring(0, i) + CollectAppName;
     String er_printCmd = path_to_er_print;
     String rc = null;
     String emsg = null;
@@ -512,7 +518,7 @@ public final class Analyzer {
     }
     // Initialize new IPC connection - start gp-display-text
     try {
-      System.out.println("Start connection:\n" + er_printCmd);
+      AnLog.log("Start connection:\n" + er_printCmd);
       newIPC.init(er_printCmd, false);
       sendP(newIPC, p, cc);
       er_print = path_to_er_print;
@@ -523,7 +529,6 @@ public final class Analyzer {
     }
     newIPC.getIPCReader().runThread(); // TEMPORARY FOR DEBUG
 
-    AnWindow win = AnWindow.getInstance();
     if (IPC_started) { // see newinit()
       // AnFrame if fully initialized
       try {
@@ -545,7 +550,6 @@ public final class Analyzer {
         // Could not establish new connection
         IPC_session = old_IPC_session;
         setIPCStarted(old_IPC_status);
-        // win.QUIT();
         newIPC.destroyIPCProc();
         fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CANCELLED_OR_FAILED);
         return (emsg);
@@ -645,7 +649,6 @@ public final class Analyzer {
         // Restore old IPC_session
         IPC_session = old_IPC_session;
         setIPCStarted(old_IPC_status);
-        // win.QUIT();
         newIPC.destroyIPCProc();
         fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CANCELLED_OR_FAILED);
         return (emsg);
@@ -663,7 +666,6 @@ public final class Analyzer {
           fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CANCELLED_OR_FAILED);
           return AnLocale.getString("Initialization failed");
         }
-        win = AnWindow.getInstance();
         if (cc.cancelRequest) {
           emsg = AnLocale.getString("Connection canceled");
         }
@@ -674,7 +676,6 @@ public final class Analyzer {
         // Could not establish new connection
         IPC_session = old_IPC_session;
         setIPCStarted(old_IPC_status);
-        // win.QUIT();
         newIPC.destroyIPCProc();
         fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CANCELLED_OR_FAILED);
         return (emsg);
@@ -782,6 +783,7 @@ public final class Analyzer {
       while (c-- > 0) {
         Thread.sleep(100);
         ask = ipc.getIPCReader().getUnknownInput();
+    AnLog.log(String.format("connectionID=%d Timestamp=%ld ask=%s;\n", ts));
         if (ask.contains(pattern2)) {
           break;
         }
@@ -1810,29 +1812,14 @@ public final class Analyzer {
     licsts = license_info[0];
     fdversion = license_info[1];
 
-    String oldVersion = "Sun Analyzer";
-    String temporaryNewVersion = getAnalyzerReleaseName();
-    if ((null != fdversion) && (fdversion.startsWith(oldVersion))) {
-      int c1 = oldVersion.length();
-      fdversion = temporaryNewVersion + fdversion.substring(c1);
-    }
-
-    if (licsts.equals("ERROR")) {
-      emsg =
-          AnLocale.getString("License Path: ")
-              + licpath
-              + "\n"
-              + AnLocale.getString("Error: ")
-              + fdversion;
+    if (licsts.equals("ERROR") || licsts.equals("FATAL")) {
+      emsg = String.format(AnLocale.getString("License Path: %s\nError: %s"),
+          licpath, fdversion);
       System.err.println(emsg);
       System.exit(1);
-    } else if (licsts.equals("WARN") || licsts.equals("FATAL")) {
-      emsg =
-          AnLocale.getString("License Path: ")
-              + licpath
-              + "\n"
-              + AnLocale.getString("Warning: ")
-              + fdversion;
+    } else if (licsts.equals("WARN")) {
+      emsg = String.format(AnLocale.getString("License Path: %s\nWarning: %s"),
+          licpath, fdversion);
       System.err.println(emsg);
     }
     if (IPC_started) {
