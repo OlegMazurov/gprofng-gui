@@ -48,10 +48,12 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -89,6 +91,8 @@ public final class AnUtility {
   public static final int MIME_JAVA_CLASS_FILE = 0xcafebabe;
   public static final int MIME_JAR_FILE = 0x504b0304;
   private static final int MIME_UNKNOWN_FILE_TYPE = 0x00000000;
+  public static final int MIME_DIRECTORY = 1;
+  public static final int MIME_EXECUTABLE = 2;
   public static final int MIME_CANNOT_READ_FILE = 0xFFFFFFFF;
   public static final Cursor norm_cursor = Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR);
   public static final Cursor wait_cursor = Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR);
@@ -213,31 +217,71 @@ public final class AnUtility {
   private static AnThreadGroup threadGroup = new AnThreadGroup();
 
   public static int getMimeFormat(final File file) {
-    try {
-      if (!file.isFile()) {
-        return MIME_UNKNOWN_FILE_TYPE;
-      }
-      final DataInputStream dis =
-          new DataInputStream(new BufferedInputStream(new FileInputStream(file)));
-      int iMagicNumber = dis.readInt();
-      if (iMagicNumber == MIME_ELF_EXECUTABLE) { // reading elf header
-        dis.skipBytes(12);
-        final int elf_type = dis.readShort(); // check for elf executable
-        if (elf_type != 0x0002 && elf_type != 0x0200) // Not MSB or LSB elf executable
-        {
-          iMagicNumber = MIME_UNKNOWN_FILE_TYPE;
+    if (file.isDirectory()) {
+      return MIME_DIRECTORY;
+    }
+    if (file.canExecute()) {
+      if (Analyzer.getInstance().remoteConnection == null) {
+        try {
+          final DataInputStream dis = new DataInputStream(
+              new BufferedInputStream(new FileInputStream(file)));
+          int elf_type = 0;
+          int iMagicNumber = dis.readInt();
+          if (iMagicNumber == MIME_ELF_EXECUTABLE) { // reading elf header
+            dis.skipBytes(12);
+            elf_type = dis.readShort(); // check for elf executable
+          }
+          dis.close();
+          if (elf_type == 0x0002 || elf_type != 0x0200) { // MSB or LSB elf
+            return MIME_ELF_EXECUTABLE;
+          }
+        } catch (IOException e) {
+          return MIME_CANNOT_READ_FILE;
         }
       }
-      dis.close();
-      return iMagicNumber;
-    } catch (IOException e) {
-      return MIME_CANNOT_READ_FILE;
+      return MIME_EXECUTABLE;
     }
+    String nm = file.getName();
+    if (nm.endsWith(".class'")) {
+      return MIME_JAVA_CLASS_FILE;
+    }
+    if (nm.endsWith(".jar'")) {
+      return MIME_JAR_FILE;
+    }
+    return MIME_UNKNOWN_FILE_TYPE;
   }
 
   public static boolean isTarget(final File file) {
     final int type = getMimeFormat(file);
     return (type == MIME_ELF_EXECUTABLE || type == MIME_JAVA_CLASS_FILE || type == MIME_JAR_FILE);
+  }
+
+  public static String getRemoteOutput(String cmd) {
+    String rc = Analyzer.getInstance().remoteConnectCommand;
+    ArrayList<String> args = new ArrayList<String>(
+        Arrays.asList(rc.split("\\s+")));
+    args.add(cmd);
+
+    ProcessBuilder processBuilder = new ProcessBuilder(args);
+    String lines = "";
+    try {
+      Process process = processBuilder.start();
+
+      // Read standard output
+      BufferedReader stdoutReader = new BufferedReader(
+          new InputStreamReader(process.getInputStream()));
+      for (;;) {
+        String line;
+        line = stdoutReader.readLine();
+        if (line == null) {
+          break;
+        }
+        lines += line + "\n";
+      }
+      process.waitFor();
+    } catch (IOException | InterruptedException ex) {
+    }
+    return lines;
   }
 
   // General check box

@@ -18,28 +18,23 @@ package org.gprofng.mpmt;
 import org.gprofng.mpmt.IPC.AnIPCException;
 import org.gprofng.mpmt.ipc.IPCContext;
 import org.gprofng.mpmt.ipc.IPCHandle;
-import org.gprofng.mpmt.ipc.IPCLogger;
 import org.gprofng.mpmt.ipc.IPCResult;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Vector;
+import javax.swing.JFileChooser;
 import javax.swing.UIManager;
 import javax.swing.filechooser.FileSystemView;
+import org.gprofng.analyzer.AnLog;
+import org.gprofng.mpmt.util.gui.AnUtility;
 
 /** AnFileSystemView - File System View for remote experiments */
 public class AnFileSystemView extends FileSystemView {
 
   private AnWindow anWindow = null;
   private AnChooser anChooser = null;
-  // private int TIMEOUT = 2000; // default timeout 2 seconds
-  // private int SLEEPTIME = 10; // default sleep time 10 milliseconds
-  private String lastRequest = null;
-  private String lastResponse = null;
-  private boolean firstEntry = false; // true;
   private static final String SLASH = "/";
   private static final String DOUBLE_SLASH = "//";
   private static final char SLASH_CHAR = '/';
@@ -52,13 +47,14 @@ public class AnFileSystemView extends FileSystemView {
   static AnFileSystemView remoteFileSystemView = null;
   static boolean useSystemExtensionsHiding = false;
 
-  private boolean DONT_USE_LS = true; // false;
+  private final boolean DONT_USE_LS = false;
 
   public static AnFileSystemView getFileSystemView() {
     useSystemExtensionsHiding =
         UIManager.getDefaults().getBoolean("FileChooser.useSystemExtensionHiding");
     UIManager.addPropertyChangeListener(
         new PropertyChangeListener() {
+          @Override
           public void propertyChange(PropertyChangeEvent e) {
             if (e.getPropertyName().equals("lookAndFeel")) {
               useSystemExtensionsHiding =
@@ -75,7 +71,10 @@ public class AnFileSystemView extends FileSystemView {
   /**
    * Returns all root partitions on this system. For example, on Windows, this would be the
    * "Desktop" folder, while on DOS this would be the A: through Z: drives.
+   *
+   * @return 
    */
+  @Override
   public File[] getRoots() {
     if (null != roots) {
       return roots;
@@ -95,6 +94,7 @@ public class AnFileSystemView extends FileSystemView {
    * @see #isRoot
    * @since 1.4
    */
+  @Override
   public boolean isFileSystemRoot(File dir) {
     if (dir != null) {
       String p = dir.getAbsolutePath();
@@ -105,202 +105,61 @@ public class AnFileSystemView extends FileSystemView {
     return false;
   }
 
-  private File[] filterHiddenFiles(File[] files, boolean isFileHidingEnabled) {
-    File[] filesOut = files;
-    if (isFileHidingEnabled) {
-      List list = new ArrayList();
-      for (File file : files) {
-        if (!file.getName().startsWith(".")) {
-          list.add(file);
-        }
-      }
-      filesOut = (File[]) list.toArray(new File[list.size()]);
-    }
-    return filesOut;
-  }
-
   /**
-   * Gets the list of shown (i.e. not hidden) files. Use '/bin/ls' or
-   * 'gp-display-text' to get the list of remote files
+   * Gets the list of shown (i.e.not hidden) files.
+   * Use IPC_getFiles to get the list of remote files
+   * 
+   * @param directory
+   * @param isFileHidingEnabled
+   * @return 
    */
   @Override
   public synchronized File[] getFiles(File directory, boolean isFileHidingEnabled) {
-    long start, end;
-    start = System.currentTimeMillis();
     // Temporary fix for Windows
     String path = slashifyPath(directory.getPath());
     AnFile dir = new AnFile(path);
+    dir.isDirectoryFlag = true;
+    dir.attributesReady = true;
     ThreadID++;
-    // System.err.println("AnFileSystemView.getFiles: Thread ID="+ThreadID);
-    if (firstEntry) { // First time run some useless command
-      String s = getRemoteHostInfo();
-      end = System.currentTimeMillis();
-      // System.out.println("getRemoteHostInfo() [Duration: " + (end - start) + " ms.] returned: " +
-      // s);
-      firstEntry = false;
-    }
-    File[] files = new AnFile[0];
+    ArrayList<AnFile> anFiles = new ArrayList<>();
+    String dirname = dir.getAbsolutePath(); // dir.getCanonicalPath();
     try {
-      String cmd = "/bin/ls -a";
-      String dirname = dir.getAbsolutePath(); // dir.getCanonicalPath();
-      // Try to get directory contents
-      if (firstEntry) { // First time try to use /bin/ls
-        // firstEntry = false;
-      } else { // Try to get directory contents from gp-display-text
-        try {
-          String filenames = lastResponse; // Debug optimization
-          // Debug optimization
-          if ((null == lastRequest) || (!lastRequest.equals(dirname))) {
-            // filenames = anWindow.getFiles(dirname, cmd);
-            // System.err.println("AnFileSystemView.getFiles: call IPC_getFiles() Thread
-            // ID="+ThreadID+" File:"+dirname);
-            filenames = IPC_getFiles(dirname, cmd);
-          }
-          Vector<AnFile> v = new Vector();
-          if (null != filenames) {
-            String fn = filenames;
-            while (fn.length() > 0) {
-              int j = fn.indexOf("\n");
-              if (j <= 0) {
-                break;
-              }
-              String fname = fn.substring(0, j);
-              fn = fn.substring(j + 1);
-              AnFile af = new AnFile(dirname, fname);
-              v.add(af);
-            }
-            if (v.size() > 0) {
-              files = new AnFile[v.size()];
-              for (int i = 0; i < v.size(); i++) {
-                AnFile af = v.elementAt(i);
-                // updateFileAttributes(dir, af); // too slow
-                files[i] = af;
-              }
-              updateFileAttributes(dir, (AnFile[]) files);
-              lastRequest = dirname; // Debug optimization
-              lastResponse = filenames; // Debug optimization
-              end = System.currentTimeMillis();
-              return filterHiddenFiles(files, isFileHidingEnabled);
-            }
-          }
-        } catch (AnIPCException e) {
-          // e.printStackTrace();
-          // System.err.println("AnFileSystemView.getFiles: AnIPCException CR 7199013 Thread
-          // ID="+ThreadID);
-          IPCLogger.logTrace(
-              "\nAnFileSystemView.getFiles: AnIPCException CR 7199013 Thread ID=" + ThreadID);
-        } catch (Exception e) {
-          e.printStackTrace();
-          // continue using /bin/ls
-        }
-      }
+      String filenames;
       if (DONT_USE_LS) {
-        return filterHiddenFiles(files, isFileHidingEnabled);
+        filenames = IPC_getFiles(dirname, "/bin/ls -aF");
+      } else {
+        String cmd = "/usr/bin/ls -";
+        if (isFileHidingEnabled) {
+          cmd += "a";
+        }
+        filenames = AnUtility.getRemoteOutput(cmd + "F1 " + dirname);
       }
-      // Try to get directory contents from /bin/ls
-      AnShellCommand sc = new AnShellCommand();
-      sc.setRemoteConnection(anWindow.getAnalyzer().remoteConnection);
-      try {
-        sc.run(dirname, cmd);
-        Vector<AnFile> v = new Vector();
-        String fn;
-        while (sc.isRunning()) {
-          // Parse /bin/ls output
-          try {
-            fn = sc.readOutput(true);
-            if (fn == null) {
-              break;
-            }
-            if (fn.length() <= 0) {
-              continue;
-            }
-            int j = fn.indexOf("\n");
-            if (j > 0) {
-              fn = fn.substring(0, j);
-            }
-            AnFile af = new AnFile(dirname, fn);
-            v.add(af);
-          } catch (Exception e) {
-            // done?
-          }
+//      AnLog.log(String.format("getFiles: %d %s\n%s", ThreadID, path, filenames));
+      while (filenames.length() > 0) {
+        int j = filenames.indexOf("\n");
+        if (j <= 0) {
+          break;
         }
-        fn = sc.readOutput(false);
-        while (fn != null) {
-          // Parse /bin/ls output
-          if (fn.length() <= 0) {
-            fn = sc.readOutput(false);
-            continue;
-          }
-          int j = fn.indexOf("\n");
-          if (j > 0) {
-            fn = fn.substring(0, j);
-          }
-          AnFile af = new AnFile(dirname, fn);
-          v.add(af);
-          fn = sc.readOutput(false);
+        String fn = filenames.substring(0, j);
+        filenames = filenames.substring(j + 1);
+        char sym = fn.charAt(j - 1);
+        if (sym == '/' || sym == '*' || sym == '@') {
+          fn = fn.substring(0, j - 1);
         }
-        if (v.size() < 1) {
-          return filterHiddenFiles(files, isFileHidingEnabled);
+        if (fn.equals(".") || fn.equals("..") ||
+            (!isFileHidingEnabled && fn.startsWith("."))) {
+          continue;
         }
-        files = new AnFile[v.size()];
-        for (int i = 0; i < v.size(); i++) {
-          AnFile af = v.elementAt(i);
-          // updateFileAttributes(dir, af); // too slow
-          files[i] = af;
-        }
-        updateFileAttributes(dir, (AnFile[]) files);
-        end = System.currentTimeMillis();
-        // System.out.println("getFiles(" + dirname + ") using /bin/ls: " + (end - start) + " ms.");
-      } catch (Exception e) {
-        return filterHiddenFiles(files, isFileHidingEnabled);
+        AnFile f = new AnFile(fn);
+        anFiles.add(f);
+        f.executableFlag = sym == '*';
+        f.setAttributes(path, sym == '/', true);
       }
+    } catch (AnIPCException e) {
+      AnLog.log("AnFileSystemView.getFiles: Thread ID=" + ThreadID + " " + e);
     } catch (Exception e) {
-      return filterHiddenFiles(files, isFileHidingEnabled);
     }
-    /*
-    // add all files in dir
-    if (!(dir instanceof ShellFolder)) {
-    try {
-    dir = getShellFolder(dir);
-    } catch (FileNotFoundException e) {
-    return new File[0];
-    }
-    }
-
-    File[] names = ((ShellFolder) dir).listFiles(!useFileHiding);
-
-    if (names == null) {
-    return new File[0];
-    }
-
-    for (File f : names) {
-    if (Thread.currentThread().isInterrupted()) {
-    break;
-    }
-
-    if (!(f instanceof ShellFolder)) {
-    if (isFileSystemRoot(f)) {
-    f = createFileSystemRoot(f);
-    }
-    try {
-    f = ShellFolder.getShellFolder(f);
-    } catch (FileNotFoundException e) {
-    // Not a valid file (wouldn't show in native file chooser)
-    // Example: C:\pagefile.sys
-    continue;
-    } catch (InternalError e) {
-    // Not a valid file (wouldn't show in native file chooser)
-    // Example C:\Winnt\Profiles\joe\history\History.IE5
-    continue;
-    }
-    }
-    if (!useFileHiding || !isHiddenFile(f)) {
-    files.add(f);
-    }
-    }
-     */
-    // firstEntry = false;
-    return filterHiddenFiles(files, isFileHidingEnabled);
+    return (File[]) anFiles.toArray(new File[anFiles.size()]);
   }
 
   /**
@@ -319,17 +178,11 @@ public class AnFileSystemView extends FileSystemView {
       fattr = fattr.substring(0, j);
     }
     if (fattr.endsWith(filename)) {
-      boolean isDir = false;
-      boolean exists = false;
       if (fattr.startsWith("d")) {
-        isDir = true;
-        exists = true;
-        file.setAttributes(dir, isDir, exists);
+        file.setAttributes(dir, true, true);
       }
       if (fattr.startsWith("-")) {
-        isDir = false;
-        exists = true;
-        file.setAttributes(dir, isDir, exists);
+        file.setAttributes(dir, false, true);
       }
       file.attributesReady = true;
       return true;
@@ -379,7 +232,6 @@ public class AnFileSystemView extends FileSystemView {
           fullfilename = SLASH + filename; // BUG!
         }
       }
-      // String fattr = anWindow.getFileAttributes(fullfilename, LS_CMD);
       String fattr = IPC_getFileAttributes(fullfilename, LS_CMD);
       if (null != fattr) {
         if (fattr.length() > 0) {
@@ -393,40 +245,6 @@ public class AnFileSystemView extends FileSystemView {
         file.existsFlag = false;
         file.isDirectoryFlag = false;
         file.attributesReady = true;
-      }
-      if (DONT_USE_LS) { // TEMPORARY: don't use /bin/ls
-        return false;
-      }
-      AnShellCommand sc = new AnShellCommand();
-      sc.setRemoteConnection(anWindow.getAnalyzer().remoteConnection);
-      String cmd = LS_CMD + filename;
-      sc.run(dirname, cmd);
-      while (sc.isRunning()) {
-        try {
-          fattr = sc.readOutput(true);
-          if (fattr == null) {
-            break;
-          }
-          if (fattr.length() > 0) {
-            // Parse /bin/ls output
-            if (processFileAttributes(/*dir*/ dirname, file, filename, fattr)) {
-              return true;
-            }
-          }
-        } catch (Exception e) {
-          // done?
-          break;
-        }
-      }
-      fattr = sc.readOutput(false);
-      while (fattr != null) {
-        if (fattr.length() > 0) {
-          // Parse /bin/ls output
-          if (processFileAttributes(/*dir*/ dirname, file, filename, fattr)) {
-            return true;
-          }
-        }
-        fattr = sc.readOutput(false);
       }
     } catch (Exception e) {
       // e.printStackTrace();
@@ -487,7 +305,8 @@ public class AnFileSystemView extends FileSystemView {
    * @param filenames
    * @return
    */
-  private boolean processFileAttributes(/*AnFile*/ String dir, AnFile[] files, String filenames) {
+  private boolean processFileAttributes(String dir, AnFile[] files,
+      String filenames) {
     int index = 0;
     String fn = filenames;
     while (filenames.length() > 0) {
@@ -513,84 +332,9 @@ public class AnFileSystemView extends FileSystemView {
       }
       if (i < files.length - 1) {
         index = i + 1;
-      } else {
-        // skip this file
-        i = 0; // for breakpoint
       }
     }
     return true;
-  }
-
-  /**
-   * Update file attributes for the whole directory
-   *
-   * @param File dir
-   * @param AnFile[] files
-   * @return
-   */
-  public boolean updateFileAttributes(AnFile dir, AnFile[] files) {
-    if (files.length <= 0) {
-      return false;
-    }
-    String filenames = "";
-    String dirname = null;
-    try {
-      if (dir == null) {
-        return false;
-      }
-      dirname = dir.getAbsolutePath();
-      // Temporary fix for Windows
-      dirname = slashifyPath(dirname);
-      String cmd = "/bin/ls -aF";
-      // Try to get this info from gp-display-text
-      // filenames = anWindow.getFiles(dirname, cmd);
-      filenames = IPC_getFiles(dirname, cmd);
-      if (filenames.length() > 0) {
-        return (processFileAttributes(dirname, files, filenames));
-      }
-      if (DONT_USE_LS) {
-        return false; // NM don't use /bin/ls
-      }
-      // Try to get this info from /bin/ls
-      AnShellCommand sc = new AnShellCommand();
-      sc.setRemoteConnection(anWindow.getAnalyzer().remoteConnection);
-      sc.run(dirname, cmd);
-      String fattr = null;
-      while (sc.isRunning()) {
-        // Read output
-        try {
-          fattr = sc.readOutput(true);
-          if (fattr == null) {
-            break;
-          }
-          if (fattr.length() <= 0) {
-            continue;
-          }
-          filenames += fattr;
-        } catch (Exception e) {
-          // done?
-        }
-      }
-      fattr = sc.readOutput(false);
-      while (fattr != null) {
-        // Read output
-        if (fattr.length() <= 0) {
-          fattr = sc.readOutput(false);
-          continue;
-        }
-        filenames += fattr;
-        fattr = sc.readOutput(false);
-      }
-    } catch (Exception e) {
-    }
-    if (filenames.indexOf("\n") > 0) {
-      if (null != dirname) {
-        return (processFileAttributes(dirname, files, filenames));
-      } else {
-        return false; // for debug
-      }
-    }
-    return false;
   }
 
   /**
@@ -604,29 +348,12 @@ public class AnFileSystemView extends FileSystemView {
    * @see JFileChooser#getName
    * @since 1.4
    */
+  @Override
   public String getSystemDisplayName(File f) {
     if (f == null) {
       return null;
     }
-
-    String name = f.getName();
-    /* NM Temporary
-    if (!name.equals("..") && !name.equals(".") &&
-    (useSystemExtensionsHiding || !isFileSystem(f) || isFileSystemRoot(f)) &&
-    (f instanceof ShellFolder || f.exists())) {
-
-    try {
-    name = getShellFolder(f).getDisplayName();
-    } catch (FileNotFoundException e) {
-    return null;
-    }
-
-    if (name == null || name.length() == 0) {
-    name = f.getPath(); // e.g. "/"
-    }
-    }
-    NM */
-    return name;
+    return f.getName();
   }
 
   /** Creates a new folder with a default folder name. */
@@ -636,61 +363,22 @@ public class AnFileSystemView extends FileSystemView {
     throw new UnsupportedOperationException("Not supported yet.");
   }
 
-  /** Sets AnWindows. */
+  /** Sets AnWindows.
+   * @param a
+   */
   public void setAnWindow(AnWindow a) {
     anWindow = a;
   }
 
-  /** Gets AnWindows. */
+  /** Gets AnWindows.
+   * @return
+   */
   public AnWindow getAnWindow() {
     return (anWindow);
   }
 
   public void setAnChooser(AnChooser c) {
     anChooser = c;
-  }
-
-  /**
-   * Run "/bin/uname -a" command
-   *
-   * @return output
-   */
-  String getRemoteHostInfo() {
-    String hostInfo = "";
-    AnShellCommand sc = new AnShellCommand();
-    sc.setRemoteConnection(anWindow.getAnalyzer().remoteConnection);
-    String cmd = "/bin/uname -a";
-    try {
-      sc.run(cmd);
-      String str = null;
-      while (sc.isRunning()) {
-        // Read output
-        try {
-          str = sc.readOutput(true);
-          if (str == null) {
-            break;
-          }
-          if (str.length() <= 0) {
-            continue;
-          }
-          hostInfo += str;
-        } catch (Exception e) {
-          break;
-        }
-      }
-      str = sc.readOutput(false);
-      while (str != null) {
-        // Read output
-        if (str.length() <= 0) {
-          str = sc.readOutput(false);
-          continue;
-        }
-        hostInfo += str;
-        str = sc.readOutput(false);
-      }
-    } catch (Exception e) {
-    }
-    return hostInfo;
   }
 
   /**
@@ -786,12 +474,9 @@ class RemoteFileSystemView extends AnFileSystemView {
   private AnFile home = null;
 
   /** Returns a File object constructed from the given path string. */
+  @Override
   public File createFileObject(String path) {
     AnFile f = new AnFile(path);
-    // if (isFileSystemRoot(f)) {
-    //    f = createFileSystemRoot(f);
-    // }
-    // Update file attributes
     updateFileAttributes(f);
     return f;
   }
@@ -808,6 +493,7 @@ class RemoteFileSystemView extends AnFileSystemView {
   }
 
   /** Creates a new folder with a default folder name. */
+  @Override
   public File createNewFolder(File containingDir) throws IOException {
     if (containingDir == null) {
       throw new IOException("Containing directory is null:");
@@ -839,10 +525,12 @@ class RemoteFileSystemView extends AnFileSystemView {
    *     case the <code>File</code> is a wrapper containing a <code>ShellFolder</code> object.
    * @since 1.4
    */
+  @Override
   public File getChild(File parent, String fileName) {
     return createFileObject(parent, fileName);
   }
 
+  @Override
   public File getHomeDirectory() {
     if (null == home) {
       String HomeDir = AnWindow.getInstance().getHomeDir();
@@ -865,6 +553,7 @@ class RemoteFileSystemView extends AnFileSystemView {
    * @return a <code>File</code> object representing the default starting folder
    * @since 1.4
    */
+  @Override
   public File getDefaultDirectory() {
     if (null == root) {
       root = new AnFile(SLASH);
@@ -879,6 +568,7 @@ class RemoteFileSystemView extends AnFileSystemView {
    * @return the parent directory of <code>dir</code>, or <code>null</code> if <code>dir</code> is
    *     <code>null</code>
    */
+  @Override
   public File getParentDirectory(File dir) {
     if (dir == null || !dir.exists()) {
       return null;
@@ -905,6 +595,7 @@ class RemoteFileSystemView extends AnFileSystemView {
    *     <code>file</code>.
    * @since 1.4
    */
+  @Override
   public boolean isParent(File folder, File file) {
     if (folder == null || file == null) {
       return false;
@@ -935,6 +626,7 @@ class RemoteFileSystemView extends AnFileSystemView {
    * @return <code>false</code> always
    * @since 1.4
    */
+  @Override
   public boolean isComputerNode(File dir) {
     // return ShellFolder.isComputerNode(dir);
     return false;
@@ -949,16 +641,8 @@ class RemoteFileSystemView extends AnFileSystemView {
    * @return <code>true</code> if <code>f</code> is a real file or directory.
    * @since 1.4
    */
+  @Override
   public boolean isFileSystem(File f) {
-    // NM if (f instanceof ShellFolder) {
-    // NM     ShellFolder sf = (ShellFolder)f;
-    // Shortcuts to directories are treated as not being file system objects,
-    // so that they are never returned by JFileChooser.
-    // NM     return sf.isFileSystem() && !(sf.isLink() && sf.isDirectory());
-    // NM } else {
-    // NM     return true;
-    // NM }
-    // NM TEMPORARY: return true
     if (f.isDirectory()) {
       return true;
     }
@@ -972,7 +656,7 @@ class RemoteFileSystemView extends AnFileSystemView {
     int n = len;
     while ((n > 0) && (pathname.charAt(n - 1) == SLASH_CHAR)) n--;
     if (n == 0) return SLASH;
-    StringBuffer sb = new StringBuffer(pathname.length());
+    StringBuilder sb = new StringBuilder(pathname.length());
     if (off > 0) sb.append(pathname.substring(0, off));
     char prevChar = 0;
     for (int i = off; i < n; i++) {

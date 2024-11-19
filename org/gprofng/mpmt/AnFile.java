@@ -23,7 +23,8 @@ import java.io.IOException;
 public class AnFile extends File {
   public static final char separatorChar = '/';
   boolean attributesReady = false;
-  boolean isDirectoryFlag = true;
+  boolean isDirectoryFlag = false;
+  boolean executableFlag = false;
   boolean existsFlag = true;
   private String directory = null;
   private String fullpath = null;
@@ -39,13 +40,10 @@ public class AnFile extends File {
     super(pathname);
     if (Analyzer.getInstance().remoteConnection == null) {
       File f = new File(pathname);
-      if (f.exists()) {
-        if (!f.isDirectory()) {
-          isDirectoryFlag = false;
-        }
-      } else {
-        existsFlag = false;
-        isDirectoryFlag = false;
+      existsFlag = f.exists();
+      if (existsFlag) {
+        isDirectoryFlag = f.isDirectory();
+        executableFlag = f.canExecute();
       }
       fullpath = f.getAbsolutePath();
       directory = f.getParent();
@@ -54,9 +52,11 @@ public class AnFile extends File {
     }
     pathname = AnFileSystemView.slashifyPath(pathname);
     if (pathname.equals(SLASH)) {
+      isDirectoryFlag = true;
+      attributesReady = true;
       fullpath = SLASH;
-      directory = SLASH; // NM TEMPORARY
-      return; // Special case: leave directory = null
+      directory = SLASH;
+      return;
     }
     if (pathname.startsWith(SLASH)) {
       fullpath = pathname;
@@ -67,17 +67,13 @@ public class AnFile extends File {
         directory = SLASH;
       }
     } else {
-      if (Analyzer.getInstance().remoteConnection != null) {
-        AnWindow aw = AnWindow.getInstance();
-        directory = aw.getCurrentRemoteDirectory();
-        if (directory == null) {
-          directory = DOT; // NM TEMPORARY
-        }
-        if (!directory.endsWith(SLASH)) {
-          directory += SLASH;
-        }
-      } else {
-        directory = SLASH; // ? BUG!
+      AnWindow aw = AnWindow.getInstance();
+      directory = aw.getCurrentRemoteDirectory();
+      if (directory == null) {
+        directory = SLASH;
+      }
+      if (!directory.endsWith(SLASH)) {
+        directory += SLASH;
       }
       fullpath = directory + pathname;
     }
@@ -149,6 +145,19 @@ public class AnFile extends File {
     }
 
     return ret;
+  }
+
+  /**
+   * Checks if remote file is executable.
+   *
+   * @return
+   */
+  @Override
+  public boolean canExecute() {
+    if (!attributesReady) {
+      updateAttributes();
+    }
+    return executableFlag;
   }
 
   /**

@@ -422,6 +422,7 @@ public final class Analyzer {
    * @param p
    * @param connectCommand
    * @param path
+   * @return 
    */
   public String createNewIPC(
       ConnectionDialog cc,
@@ -496,15 +497,7 @@ public final class Analyzer {
           rh = name + "@" + rh;
         }
       }
-      String rs = AnUtility.getenv("SP_ANALYZER_REMOTE_SHELL");
-      if (rs != null) { // Special way to login
-        remoteConnectCommand = rs;
-      } else if (null != connectCommand) {
-        remoteConnectCommand = connectCommand;
-      } else {
-        remoteConnectCommand = remoteShell;
-      }
-      remoteConnectCommand += " " + rh;
+      remoteConnectCommand = connectCommand + " " + rh;
       er_printCmd = remoteConnectCommand + " " + er_printCmd;
     }
     rc = er_printCmd;

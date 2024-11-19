@@ -836,22 +836,20 @@ public class AnChooser extends JFileChooser implements PropertyChangeListener {
     @Override
     public Icon getIcon(final File file) {
       if (chooser_type == TARGET_CHOOSER) {
-        if (!file.isFile()) {
-          return getExperimentIcon(file);
-        }
         switch (AnUtility.getMimeFormat(file)) {
+          case AnUtility.MIME_DIRECTORY:
+            return getExperimentIcon(file);
           case AnUtility.MIME_ELF_EXECUTABLE:
+          case AnUtility.MIME_EXECUTABLE:
             return AnUtility.elf_icon;
           case AnUtility.MIME_JAVA_CLASS_FILE:
             return AnUtility.cls_icon;
           case AnUtility.MIME_JAR_FILE:
             return AnUtility.jar_icon;
-          default:
-            return getExperimentIcon(file);
         }
-      } else {
-        return getExperimentIcon(file);
+        return null;
       }
+      return getExperimentIcon(file);
     }
 
     private Icon getExperimentIcon(final File file) {
