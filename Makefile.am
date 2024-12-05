@@ -638,7 +638,8 @@ $(COLLECTOR_JAR): $(GPROFNG_JAR) $(collector_FILES) $(collector_MF)
 bin_SCRIPTS = gprofng-display-gui
 CLEANFILES = gprofng-display-gui $(GPROFNG_JAR) $(ANALYZER_JAR) $(COLLECTOR_JAR) \
 	$(GPROFNG_CLASSES) $(ANALYZER_CLASSES) $(collector_CLASSES) \
-	$(ANALYZER_PROPERTIES) $(MPMT_PROPERTIES) LocaleString*.class
+	$(ANALYZER_PROPERTIES) $(MPMT_PROPERTIES) LocaleString*.class \
+	$(DesktopLauncher)
 
 gprofng-display-gui: $(srcdir)/gprofng-gui.sh
 	@echo "================= $@"
@@ -651,17 +652,47 @@ gprofng-display-gui: $(srcdir)/gprofng-gui.sh
 
 pkgdata_DATA = $(ANALYZER_JAR) $(COLLECTOR_JAR) $(GPROFNG_JAR)
 
+PNG_DIR = $(srcdir)/images
+PNG_FILES = $(PNG_DIR)/gprofng-32x32.png $(PNG_DIR)/gprofng-48x48.png \
+	$(PNG_DIR)/gprofng-48x48.png $(PNG_DIR)/gprofng-64x64.png \
+	$(PNG_DIR)/gprofng-128x128.png $(PNG_DIR)/gprofng-256x256.png
+CLR_DIR = $(DESTDIR)$(datarootdir)/icons/hicolor
+
 EXTRA_DIST = $(MPMT_SRC) $(ANALYZER_SRC) $(COLLECTOR_SRC) \
-	$(ICONS) $(GPROFNG_FORMS) \
+	$(ICONS) $(GPROFNG_FORMS) $(PNG_FILES) \
 	aclocal.m4 analyzer_st.mf compile configure.ac configure \
 	gprofng-collector.mf gprofng-gui.mf gprofng-gui.sh gprofng-gui.spec \
 	gprofng.properties INSTALL install-sh Makefile.am Makefile.in missing \
 	README AUTHORS NEWS tools
 
+DesktopLauncher = gprofng-gui.desktop
+$(DesktopLauncher):
+	@echo '[Desktop Entry]' > $@
+	@echo "Encoding=UTF-8" >> $@
+	@echo "Version=$(VERSION)" >> $@
+	@echo "Type=Application" >> $@
+	@echo "Name=gprofngg gui" >> $@
+	@echo "Exec=$(prefix)/bin/gprofng-display-gui" >> $@
+	@echo "Icon=gprofng" >> $@
+	@echo "Categories=Profiling;" >> $@
+	@echo "Comment=Graphical tool to create and analyze gprofng experiments" >> $@
+
 PHONY: install-exec-local
-install-exec-local:
+install-exec-local: $(DesktopLauncher) $(PNG_FILES)
+	for d in 32x32 48x48 64x64 128x128 256x256 ; do \
+	  $(mkinstalldirs) $(CLR_DIR)/$$d/apps ; \
+	  cp $(PNG_DIR)/gprofng-$$d.png $(CLR_DIR)/$$d/apps/gprofng.png ; \
+	  chmod 644 $(CLR_DIR)/$$d/apps/gprofng.png ; \
+	done
+	$(mkinstalldirs) $(DESTDIR)$(datarootdir)/applications
+	cp $(DesktopLauncher) $(DESTDIR)$(datarootdir)/applications/
+	chmod 644 $(DESTDIR)$(datarootdir)/applications/$(DesktopLauncher)
 	$(mkinstalldirs) $(DESTDIR)$(bindir)
 	rm -f $(DESTDIR)$(bindir)/gp-display-gui
 	ln -s gprofng-display-gui $(DESTDIR)$(bindir)/gp-display-gui
+
+uninstall-local:
+	rm -f $(CLR_DIR)/*/gprofng.png $(DESTDIR)$(bindir)/gp-display-gui \
+	  $(DESTDIR)$(datarootdir)/applications/$(DesktopLauncher)
 
 include doc/local.mk

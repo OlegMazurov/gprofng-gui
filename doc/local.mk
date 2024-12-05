@@ -46,6 +46,6 @@ $(man_MANS): $(srcdir)/doc/gp-macros.texi
 
 gprofng-display-gui.1: $(srcdir)/doc/gprofng-gui.texi
 
-EXTRA_DIST += $(man_MANS) $(srcdir)/doc/gp-macros.texi $(srcdir)/doc/gp-display-gui.texi
+EXTRA_DIST += $(man_MANS) $(srcdir)/doc/gp-macros.texi $(srcdir)/doc/gprofng-display-gui.texi
 CLEANFILES += $(man_MANS)
 
