@@ -692,7 +692,7 @@ install-exec-local: $(DesktopLauncher) $(PNG_FILES)
 	ln -s gprofng-display-gui $(DESTDIR)$(bindir)/gp-display-gui
 
 uninstall-local:
-	rm -f $(CLR_DIR)/*/gprofng.png $(DESTDIR)$(bindir)/gp-display-gui \
+	rm -f $(CLR_DIR)/*/apps/gprofng.png $(DESTDIR)$(bindir)/gp-display-gui \
 	  $(DESTDIR)$(datarootdir)/applications/$(DesktopLauncher)
 
 include doc/local.mk
