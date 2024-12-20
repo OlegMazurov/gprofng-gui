@@ -321,10 +321,11 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
             .removeDocumentListener(comboboxDocumentListener);
       }
       hostNameComboBox.removeAllItems();
-      hostNameComboBox.addItem(local_host);
+      if (Analyzer.getInstance().os_name.contains("Linux")) {
+        hostNameComboBox.addItem(local_host);
+      }
       for (StringPickListElement hostElement :
           UserPref.getInstance().getHostNamePicklist().getStringElements()) {
-	// System.out.println("past remote host: " + hostElement.getString());
         hostNameComboBox.addItem(hostElement.getString());
       }
       hostNameComboBox.setSelectedItem(hostName);
@@ -333,13 +334,10 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
             .getDocument()
             .addDocumentListener(comboboxDocumentListener);
       }
-      //            } else {
-      //                connectionProperties = null;
-      //            }
       connectionStarted();
       // Connect to remote host
       Thread worker =
-          new Thread(/*m_window.getAnalyzer().tgroup, */ "Connection_thread") {
+          new Thread("Connection_thread") {
 
             final int timeout = 3;
 
@@ -377,15 +375,6 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
     }
   }
 
-  /**
-   * Gets host name
-   *
-   * @return String host name
-   */
-  //    public String getHost() {
-  //        String host = fld_host.getSelectedItem().toString();
-  //        return host;
-  //    }
   /** Sets buttons and fields states as they should be during connecting */
   private void connectionStarted() {
     Analyzer.getInstance().connectingToRemoteHost = true;
