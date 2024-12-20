@@ -72,43 +72,6 @@ public final class Analyzer {
   public static String fdversion, fdhome, licpath, licsts;
   public IPC IPC_session = null;
   public IPC old_IPC_session = null;
-  // the variables to control the availability of certain menus and toolbars
-  // these are default values for all IPC sessions
-  public static boolean m_is_open_exp_avail_default = true;
-  public static boolean m_is_aggregate_exp_avail_default = true;
-  public static boolean m_is_compare_exp_avail_default = true;
-  public static boolean m_is_print_dsp_avail_default = true;
-  public static boolean m_is_new_win_avail_default = true;
-  public static boolean m_is_close_act_avail_default = true;
-  public static boolean m_is_exit_act_avail_default = true;
-  public static boolean m_is_sel_present_avail_default = true;
-  public static boolean m_is_sel_filter_avail_default = true;
-  public static boolean m_is_show_hide_obj_avail_default = true;
-  public static boolean m_is_tbar_color_avail_default = true;
-  public static boolean m_is_find_avail_default = true;
-  public static boolean m_is_find_up_avail_default = true;
-  public static boolean m_is_find_down_avail_default = true;
-  public static boolean m_is_edit_filter_avail_default = true;
-  public static boolean m_is_collect_exp_avail_default = true;
-  public static boolean m_exit_as_last_win_closed = true;
-  public static boolean m_dispose_frame_as_win_closed = true;
-  // these are values for the IPC session
-  public boolean m_is_open_exp_avail_session = m_is_open_exp_avail_default;
-  public boolean m_is_aggregate_exp_avail_session = m_is_aggregate_exp_avail_default;
-  public boolean m_is_compare_exp_avail_session = m_is_compare_exp_avail_default;
-  public boolean m_is_print_dsp_avail_session = m_is_print_dsp_avail_default;
-  public boolean m_is_new_win_avail_session = m_is_new_win_avail_default;
-  public boolean m_is_close_act_avail_session = m_is_close_act_avail_default;
-  public boolean m_is_exit_act_avail_session = m_is_exit_act_avail_default;
-  public boolean m_is_sel_present_avail_session = m_is_sel_present_avail_default;
-  public boolean m_is_sel_filter_avail_session = m_is_sel_filter_avail_default;
-  public boolean m_is_show_hide_obj_avail_session = m_is_show_hide_obj_avail_default;
-  public boolean m_is_tbar_color_avail_session = m_is_tbar_color_avail_default;
-  public boolean m_is_find_avail_session = m_is_find_avail_default;
-  public boolean m_is_find_up_avail_session = m_is_find_up_avail_default;
-  public boolean m_is_find_down_avail_session = m_is_find_down_avail_default;
-  public boolean m_is_edit_filter_avail_session = m_is_edit_filter_avail_default;
-  public boolean m_is_collect_exp_avail_session = m_is_collect_exp_avail_default;
   private static Analyzer instance;
   private static String[] arguments = null;
   private AnFrame anFrame = null;
@@ -157,6 +120,23 @@ public final class Analyzer {
 
   public Analyzer() {
     instance = this;
+    // Find installed directory fdhome & nbhome
+    cls_loader = Analyzer.class.getClassLoader();
+    fdhome = AnUtility.findResourceHome(cls_loader, "org/gprofng/mpmt/Analyzer.class");
+
+    // Method AnUtility.findResourceHome()returns wrong path on Windows
+    // System.err.println("AnUtility.findResourceHome returned fdhome = " + fdhome);
+    os_name = System.getProperty("os.name");
+    if (os_name.contains("Windows")) {
+      remoteShell = "ssh";
+      if (fdhome.length() > 2 && fdhome.charAt(2) == ':'
+          && fdhome.charAt(0) == '/') {
+        fdhome = fdhome.substring(1);
+      }
+    }
+
+    licpath = System.getProperty("analyzer.licpath", fdhome + "/lib/serial.dat");
+
     String s = AnUtility.getenv("GPROFNG_DEBUG");
     if (s != null) {
       try {
@@ -178,34 +158,6 @@ public final class Analyzer {
         MetricColors.setCustomMetricColor(metricColor.getMetricName(), metricColor.getColor());
       }
     }
-  }
-
-  public static boolean initPath(final boolean in_netbeans) {
-    // Analyzer.in_netbeans = in_netbeans;
-
-    // Done initialize
-    if (cls_loader != null) {
-      return in_netbeans; // Analyzer.in_netbeans;
-    }
-    // Find installed directory fdhome & nbhome
-    cls_loader = Analyzer.class.getClassLoader();
-    fdhome = AnUtility.findResourceHome(cls_loader, "org/gprofng/mpmt/Analyzer.class");
-
-    // Method AnUtility.findResourceHome()returns wrong path on Windows
-    // System.err.println("AnUtility.findResourceHome returned fdhome = " + fdhome);
-    if (fdhome.charAt(2) == ':') {
-      if (fdhome.charAt(0) == '/') {
-        String os_name = System.getProperty("os.name");
-        if (os_name.contains("Windows")) {
-          fdhome = fdhome.substring(1);
-          // System.err.println("Corrected for Windows fdhome = " + fdhome);
-        }
-      }
-    }
-
-    licpath = System.getProperty("analyzer.licpath", fdhome + "/lib/serial.dat");
-
-    return in_netbeans; // Analyzer.in_netbeans;
   }
 
   /**
@@ -1711,17 +1663,6 @@ public final class Analyzer {
     String specialRemoteShell = AnUtility.getenv("SP_ANALYZER_REMOTE_SHELL");
     if (specialRemoteShell != null && specialRemoteShell.length() > 0) {
       remoteShell = specialRemoteShell;
-    }
-    if (remoteShell == null) {
-      if (fdhome.charAt(2) == ':') {
-        if (fdhome.charAt(0) == '/') {
-          String os_name = System.getProperty("os.name");
-          if (os_name.contains("Windows")) {
-            fdhome = fdhome.substring(1);
-            AnLog.log("analyzer: Corrected path for Windows: fdhome = " + fdhome + "\n");
-          }
-        }
-      }
     }
     if (remoteHost != null && !remoteHost.equals(emptyString)) {
       // System.err.println("analyzer: SP_ANALYZER_REMOTE_HOST `" + remoteHost + "'");

@@ -270,8 +270,6 @@ public final class AnMain {
       setFontSize(uiFontSize);
     }
 
-    boolean in_netbeans = false;
-    Analyzer.initPath(in_netbeans);
     analyzer.initMetricColors();
 
     SwingUtilities.invokeLater(

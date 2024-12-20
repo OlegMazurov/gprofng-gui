@@ -46,29 +46,18 @@ public final class AnLocale {
     String path;
     URL[] urls;
 
-    if (null == Analyzer.fdhome) {
-      Analyzer.initPath(false); // Initialize Analyzer.fdhome
-    }
     if (name.equals("analyzer_help")) {
       path = "file:" + Analyzer.fdhome + "/modules/docs/";
     } else {
       path = "file:" + Analyzer.fdhome + "/modules/autoload/";
     }
     try {
-      urls =
-          new URL[] {
-            new URL(path + "locale/" + name + "_" + locale.getLanguage() + ".jar"),
-            new URL(
-                path
-                    + "locale/"
-                    + name
-                    + "_"
-                    + locale.getLanguage()
-                    + "_"
-                    + locale.getCountry()
-                    + ".jar"),
-            new URL(path + name + ".jar")
-          };
+      urls = new URL[] {
+        new URL(path + "locale/" + name + "_" + locale.getLanguage() + ".jar"),
+        new URL(path + "locale/" + name + "_" + locale.getLanguage() + "_"
+                + locale.getCountry() + ".jar"),
+        new URL(path + name + ".jar")
+      };
     } catch (MalformedURLException e) {
       return null;
     }
