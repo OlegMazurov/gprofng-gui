@@ -33,6 +33,9 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.InputEvent;
@@ -86,6 +89,9 @@ public final class AnUtility {
   public static final int WARNING_MSG = 2;
   public static final int PSTAT_MSG = 3;
   public static final int PWARN_MSG = 4;
+  public static final int SPACES_BETWEEN_COLUMNS = 3;
+  public static final String SPACE = " ";
+  public static final String EOL = "\n";
   // mime types for files
   public static final int MIME_ELF_EXECUTABLE = 0x7f454c46;
   public static final int MIME_JAVA_CLASS_FILE = 0xcafebabe;
@@ -1174,6 +1180,14 @@ public final class AnUtility {
       outputStream.close();
     } else {
       // FIXUP: do something reasonable
+    }
+  }
+
+  public static void copyToClipboard(String text) {
+    if (text != null && text.length() > 0) {
+      StringSelection data = new StringSelection(text);
+      Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+      clipboard.setContents(data, data);
     }
   }
 

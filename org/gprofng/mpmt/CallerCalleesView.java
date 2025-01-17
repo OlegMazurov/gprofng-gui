@@ -19,6 +19,8 @@ import static org.gprofng.mpmt.AnDisplay.DSP_Callees;
 import static org.gprofng.mpmt.AnDisplay.DSP_CallerCalleeSelf;
 import static org.gprofng.mpmt.AnDisplay.DSP_Callers;
 import static org.gprofng.mpmt.event.AnChangeEvent.Type.SETTING_CHANGED;
+import static org.gprofng.mpmt.util.gui.AnUtility.EOL;
+import static org.gprofng.mpmt.util.gui.AnUtility.SPACES_BETWEEN_COLUMNS;
 
 import org.gprofng.analyzer.AnEnvironment;
 import org.gprofng.mpmt.event.AnChangeEvent;
@@ -406,62 +408,53 @@ public final class CallerCalleesView extends FuncListDisp
   private String exportAsText(Integer limit) {
     // Prepare text presentation of the table
     String sortedby = AnLocale.getString("sorted by metric:");
-    String eol = "\n";
-    String empty = "";
-    String space = " ";
-    String textImage = null;
-    String separator = empty;
     String No = AnLocale.getString("No ");
+
+    MetricLabel[] labels = func_item.getTableModel().metricLabels;
+    MetricLabel[] labels1 = caller.getTableModel().metricLabels;
+    MetricLabel[] labels2 = callee.getTableModel().metricLabels;
+    int width = -1;
+    for (int i = 0; i < labels.length; i++) {
+      labels[i].updateWidth(labels1[i], labels2[i]);
+      if (i + 1 < labels.length) {
+        width += labels[i].getColumnWidth() + SPACES_BETWEEN_COLUMNS;
+      }
+    }
+    String separator = "";
+    for (int i = 0; i < width; i++) {
+      separator += "=";
+    }
+    separator += " ";
+
     String title1 = caller.getAccessibleContext().getAccessibleName();
     String title2 = func_item.getAccessibleContext().getAccessibleName();
     String title3 = callee.getAccessibleContext().getAccessibleName();
     AnTable tbl = func_item;
     Object[][] total_max = getCurrentTotalMax();
-    textImage = tbl.printTableHeader(title2, sortedby, total_max);
-    boolean[] show_percentage = tbl.getPercentageArray();
-    int[] maxh = tbl.getTableHeaderWidths();
-    if (null == MaximumValues) {
-      return textImage; // empty report
-    }
-    for (int i = 0; i < maxh.length - 1; i++) {
-      int j = 0;
-      if (i + 2 == maxh.length) {
-        j = 1; // Cosmetic
-      }
-      for (; j < maxh[i]; j++) {
-        separator += "=";
-      }
-    }
-    separator += space; // Cosmetic
+    String textImage = tbl.printTableHeader(title2, sortedby, total_max);
     int printLimit = limit != null ? limit : 0;
     tbl = caller;
     textImage += separator;
     if (tbl.getRowCount() == 0) {
       textImage += No;
     }
-    textImage += title1 + eol;
+    textImage += title1 + EOL;
     boolean last_only = false;
     boolean selected_only = false;
-    textImage +=
-        tbl.printTableContents(
-            total_max, maxh, printLimit, show_percentage, last_only, selected_only);
+    textImage += tbl.printTableContents(printLimit, last_only, selected_only);
     tbl = func_item;
     textImage += separator;
-    textImage += title2 + eol;
+    textImage += title2 + EOL;
     last_only = true;
-    textImage +=
-        tbl.printTableContents(
-            total_max, maxh, printLimit, show_percentage, last_only, selected_only);
+    textImage += tbl.printTableContents(printLimit, last_only, selected_only);
     tbl = callee;
     textImage += separator;
     if (tbl.getRowCount() == 0) {
       textImage += No;
     }
-    textImage += title3 + eol;
+    textImage += title3 + EOL;
     last_only = false;
-    textImage +=
-        tbl.printTableContents(
-            total_max, maxh, printLimit, show_percentage, last_only, selected_only);
+    textImage += tbl.printTableContents(printLimit, last_only, selected_only);
     return textImage;
   }
 

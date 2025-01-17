@@ -29,9 +29,6 @@ import org.gprofng.mpmt.ipc.IPCContext;
 import org.gprofng.mpmt.mainview.Subview;
 import org.gprofng.mpmt.util.gui.AnUtility;
 import java.awt.Component;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
 import java.util.List;
 import javax.accessibility.AccessibleContext;
@@ -104,12 +101,6 @@ public abstract class AnDisplay extends JPanel {
   // Should be overridden if ...
   public JPopupMenu getFilterPopup() {
     return null;
-  }
-
-  protected void copyToClipboard(String text) {
-    StringSelection data = new StringSelection(text);
-    Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-    clipboard.setContents(data, data);
   }
 
   //    abstract JPopupMenu getFilterPopup();

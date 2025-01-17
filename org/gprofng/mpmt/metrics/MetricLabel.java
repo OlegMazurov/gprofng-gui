@@ -21,6 +21,7 @@ import org.gprofng.mpmt.AnObject;
 import org.gprofng.mpmt.settings.CompareModeSetting.CompareMode;
 import org.gprofng.mpmt.util.gui.AnUtility;
 import javax.swing.ImageIcon;
+import static org.gprofng.mpmt.util.gui.AnUtility.SPACES_BETWEEN_COLUMNS;
 
 public class MetricLabel {
 
@@ -71,8 +72,6 @@ public class MetricLabel {
       titleLines[0] = "";
       icon = null;
     }
-
-    //        }
   }
 
   public String getText() {
@@ -134,6 +133,94 @@ public class MetricLabel {
    */
   public void setMaxAnObject(AnObject maxAnObject) {
     this.maxAnObject = maxAnObject;
+  }
+
+  private int columnWidth = 0;
+  private int headerWidth = 0;
+  private int valWidth = 0;
+  private int percentWidth = 0;
+
+  public void init_width() {
+    if (columnWidth > 0) {
+      return;
+    }
+    AnMetric m = getAnMetric();
+    AnObject obj = getMaxAnObject();
+    if (m.isTVisible() || m.isVVisible()) {
+      valWidth = obj.toString().length();
+      if (unit != null && valWidth < unit.length()) {
+        valWidth = unit.length();
+      }
+    }
+    if (m.isPVisible()) {
+      if (valWidth > 0) {
+        columnWidth += SPACES_BETWEEN_COLUMNS;
+      }
+      percentWidth = obj.toPercent(getTotal()).length();
+    }
+    columnWidth += valWidth + percentWidth;
+
+    if (unit != null) {
+      headerWidth = unit.length();
+    }
+    String[] titles = getLegendAndTitleLines();
+    for (int i = 0; i < titles.length; i++) {
+      if (headerWidth < titles[i].length()) {
+        headerWidth = titles[i].length();
+      }
+    }
+    if (columnWidth < headerWidth) {
+      columnWidth = headerWidth;
+    }
+  }
+  
+  private int max_val(int i1, int i2, int i3) {
+    int cnt = i1;
+    if (cnt < i2) {
+      cnt = i2;
+    }
+    return i3 > cnt ? i3 : cnt;
+  }
+
+  // Make the caller and callee views the same width
+  public void updateWidth(MetricLabel m1, MetricLabel m2) {
+    init_width();
+    m1.init_width();
+    m2.init_width();
+    valWidth = max_val(valWidth, m1.valWidth, m2.valWidth);
+    percentWidth = max_val(percentWidth, m1.percentWidth, m2.percentWidth);
+    headerWidth = max_val(headerWidth, m1.headerWidth, m2.headerWidth);
+    columnWidth = valWidth + percentWidth;
+    if (valWidth > 0) {
+      columnWidth += SPACES_BETWEEN_COLUMNS;
+    }
+    if (columnWidth < headerWidth) {
+      columnWidth = headerWidth;
+    }
+    m1.valWidth = m2.valWidth = valWidth;
+    m1.percentWidth = m2.percentWidth = percentWidth;
+    m1.headerWidth = m2.headerWidth = headerWidth;
+    m1.columnWidth = m2.columnWidth = columnWidth;
+  }
+
+  public int getValWidth() {
+    init_width();
+    return valWidth;
+  }
+
+  public int getPercentWidth() {
+    init_width();
+    return percentWidth;
+  }
+
+  public int getHeaderWidth() {
+    init_width();
+    return headerWidth;
+  }
+
+  public int getColumnWidth() {
+    init_width();
+    return columnWidth;
   }
 
   public void dump() {

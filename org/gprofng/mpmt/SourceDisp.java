@@ -247,11 +247,9 @@ public class SourceDisp extends FuncListDisp {
         marks_inc[0] = (int[]) raw_marks_inc[0];
         marks_inc[1] = (int[]) raw_marks_inc[1];
         final AnMetric[] mlist = getSettings().getMetricsSetting().getMetricListByDType(type);
-        table_data =
-            localProcessData(
-                mlist, raw_data); // first index is for column, second index is for rows
-        src_type =
-            (int[]) raw_data[raw_data.length - 1]; // AnTable.AnTable.AT_SRC, DIS, QUOTE, etc.
+        table_data = localProcessData(mlist, raw_data);
+        // first index is for column, second index is for rows
+        src_type = (int[]) raw_data[raw_data.length - 1]; // AT_SRC, DIS, QUOTE, etc.
         String[] hdrContent = getNames(type, 0); // name column table header contents (?)
         label = getSettings().getMetricsSetting().getLabel(table_data, null, type, table);
         name_col = getSettings().getMetricsSetting().getNameColumnIndexByDType(type);
@@ -267,8 +265,8 @@ public class SourceDisp extends FuncListDisp {
           sel_func = getFuncObj(); // inside doCompute, on worker thread and synchronized
           // (AnVariable.mainFlowLock)
         }
-        table.setData(
-            label, table_data, hdrContent, src_type, new_ind, name_col, sort_ind, marks, marks_inc);
+        table.setData(label, table_data, hdrContent, src_type, new_ind,
+            name_col, sort_ind, marks, marks_inc);
 
         if (sel_func == 0) {
           // XXX we should not call setSelObj when we go to the Source tab
@@ -1666,14 +1664,17 @@ public class SourceDisp extends FuncListDisp {
         parentComponent.dispatchEvent(e);
       }
 
+      @Override
       public void keyTyped(KeyEvent e) {
         propagateToTable(e);
       }
 
+      @Override
       public void keyPressed(KeyEvent e) {
         propagateToTable(e);
       }
 
+      @Override
       public void keyReleased(KeyEvent e) {
         propagateToTable(e);
       }

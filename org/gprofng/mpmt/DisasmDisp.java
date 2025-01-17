@@ -168,9 +168,7 @@ public class DisasmDisp extends SourceDisp {
         marks_inc[0] = (int[]) raw_marks_inc[0];
         marks_inc[1] = (int[]) raw_marks_inc[1];
         final AnMetric[] mlist = getSettings().getMetricsSetting().getMetricListByDType(type);
-        table_data =
-            localProcessData(
-                mlist, raw_data); // first index is for column, second index is for rows
+        table_data = localProcessData(mlist, raw_data);
         src_type = (int[]) raw_data[raw_data.length - 1]; // AnTable.AT_SRC, DIS, QUOTE, etc.
         String[] hdrContent = getNames(type, 0); // name column table header contents (?)
         label = getSettings().getMetricsSetting().getLabel(table_data, null, type, table);

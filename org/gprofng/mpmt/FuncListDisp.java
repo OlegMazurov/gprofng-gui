@@ -357,51 +357,19 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
     }
   }
 
-  /*
-   * Returns Total values for MET_CALL metric list (Temporary solution)
-   */
-  public Object[] getCurrentTotal() {
-    final String mlistStr = "MET_CALL";
-    final String typeStrFunc = "FUNCTION";
-    final String subtypeStr = "0"; // + DSP_SOURCE;
-    // final String stab_callers = "CALLERS";
-    final String stab_callees = "CALLEES";
-    // final String stab_self = "SELF";
-    Object[] total = null;
-    Object[] raw_data_with_ids =
-        window.getTableDataV2(mlistStr, stab_callees, typeStrFunc, subtypeStr, null /*cstack*/);
-    if (null == raw_data_with_ids) {
-      return total;
-    }
-    final AnMetric[] mlist = getSettings().getMetricsSetting().getMetricListByDType(type);
-    Object[][] processed_data = localProcessData(mlist, raw_data_with_ids);
-    int len = processed_data.length;
-    if (len > 0) {
-      total = new Object[len];
-      for (int i = 0; i < len; i++) {
-        total[i] = processed_data[i][0];
-      }
-    }
-    return total;
-  }
-
   /** Copy all lines to the system clipboard */
   protected void copyAll() {
     String text = exportAsText(null, ExportFormat.TEXT, null);
-    copyToClipboard(text);
+    AnUtility.copyToClipboard(text);
   }
 
   /** Copy selected lines to the system clipboard */
   protected void copySelected() {
     String sortedby = AnLocale.getString("sorted by metric:");
-    String textImage = "";
-    textImage = table.printTableHeader(sortedby, MaximumValues);
-    if (null == MaximumValues) {
-      return; // empty report
-    }
+    String textImage = table.printTableHeader(sortedby, MaximumValues);
     int printLimit = 0;
     textImage += table.printSelectedTableContents(MaximumValues, printLimit);
-    copyToClipboard(textImage);
+    AnUtility.copyToClipboard(textImage);
   }
 
   @Override
@@ -586,12 +554,9 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
           raw_data = getFuncList(type, subtype);
           if (raw_data != null && raw_data.length > 0) {
             raw_data_length = raw_data.length;
-            table_data =
-                localProcessData(
-                    mlist, raw_data); // first index is for column, second index is for rows
-            // System.err.println("XXX after processData table_data.length = " + table_data.length +
-            // "; row_length " + table_data[0].length );
-            src_type = (int[]) raw_data[raw_data.length - 1]; // AnTable.AT_SRC, DIS, QUOTE, etc.
+            table_data = localProcessData(mlist, raw_data);
+            // first index is for column, second index is for rows:
+            src_type = (int[]) raw_data[raw_data.length - 1]; // AT_SRC, DIS, QUOTE, etc.
           } else {
             // Should never happen but it does sometimes if you quickly select/deselect metrics in
             // overview // Changdao?
@@ -610,9 +575,7 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
         // String[] hdrContent = getNames(typeForPresentation, 0); // name column table header
         // contents (?) // SYNC IPC
         String[] hdrContent = ipcr_getNames.getStrings();
-        label =
-            getSettings()
-                .getMetricsSetting()
+        label = getSettings().getMetricsSetting()
                 .getLabel(table_data, null, typeForPresentation, table);
         name_col = getSettings().getMetricsSetting().getNameColumnIndexByDType(getMetricMType());
         sort_ind = getSettings().getMetricsSetting().getSortColumnByDType(typeForPresentation);

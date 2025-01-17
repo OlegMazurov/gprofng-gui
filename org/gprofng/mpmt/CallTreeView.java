@@ -397,7 +397,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
   /** Copy all lines to the system clipboard */
   protected void copyAll() {
     String text = exportAsText(null, ExportFormat.TEXT, null);
-    copyToClipboard(text);
+    AnUtility.copyToClipboard(text);
   }
 
   @Override

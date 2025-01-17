@@ -34,6 +34,8 @@ import static org.gprofng.mpmt.event.AnChangeEvent.Type.SETTING_CHANGED;
 import static org.gprofng.mpmt.event.AnChangeEvent.Type.SETTING_CHANGING;
 import static org.gprofng.mpmt.event.AnChangeEvent.Type.SOURCE_FINDING_CHANGED;
 import static org.gprofng.mpmt.event.AnChangeEvent.Type.SOURCE_FINDING_CHANGING;
+import static org.gprofng.mpmt.util.gui.AnUtility.SPACES_BETWEEN_COLUMNS;
+import static org.gprofng.mpmt.util.gui.AnUtility.EOL;
 
 import org.gprofng.analyzer.AnEnvironment;
 import org.gprofng.mpmt.DisasmDisp.DisRenderer;
@@ -63,11 +65,11 @@ import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.Serializable;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -596,10 +598,11 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
     }
 
     callHandler = new CallHandler();
-    table.registerKeyboardAction(
-        new CallHandler(),
-        "ENTER",
+    table.registerKeyboardAction(callHandler, "ENTER",
         KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+        JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+    table.registerKeyboardAction(callHandler, "CNTRL_C",
+        KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.CTRL_DOWN_MASK),
         JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
 
     // Popup menu
@@ -740,9 +743,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
 
     if (!hasSelect) {
       table.addMouseListener(callHandler);
-      table.registerKeyboardAction(
-          callHandler,
-          "SPACE",
+      table.registerKeyboardAction(callHandler, "SPACE",
           KeyStroke.getKeyStroke(KeyEvent.VK_SPACE, 0),
           JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
     } else {
@@ -914,214 +915,170 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
     return printTableHeader(tname, sortedby, MaximumValues);
   }
 
-  private int spacesBetweenColumns = 3;
-  private int spacesForPercentage = 10;
+  private static void append_blanks(StringBuilder sb, int n) {
+    for (int i = 0; i < n; i++) {
+      sb.append(' ');
+    }
+  }
+
+  private static void stripTrailing(StringBuilder sb) {
+    int length = sb.length();
+    while (length > 0 && Character.isWhitespace(sb.charAt(length - 1))) {
+        length--;
+    }
+    sb.setLength(length);
+  }
 
   /** Create text presentation of the table header. */
   protected synchronized String printTableHeader(
       String tname, String sortedby, Object[][] MaximumValues) {
     // Prepare text presentation of the table
-    String space = " ";
-    String eol = "\n";
-    String empty = "";
-    String text = tname;
+    StringBuilder sb = new StringBuilder();
     if (canSort) {
       // text = "Functions sorted by metric: Exclusive Total CPU Time\n"
       int sc = getSortColumn();
       if (sc >= 0) {
         MetricLabel m = getTableModel().getLabel(sc);
         String ltext = m.getAnMetric().getName();
-        text += space + sortedby + space + ltext + eol;
+        if (tname != null && tname.length() > 0) {
+          sb.append(tname);
+          sb.append(" ");
+        }
+        sb.append(sortedby);
+        sb.append(" ");
+        sb.append(ltext);
+        sb.append(EOL);
       }
-    }
-    if ((type == AnDisplay.DSP_Source) || (type == AnDisplay.DSP_SourceV2)) {
+    } else if (type == AnDisplay.DSP_Source || type == AnDisplay.DSP_SourceV2) {
       // Print Source File name
-      if (this.names != null && this.names.length > 0) {
-        text = this.names[0]; // Source File: ...
-        text += eol;
+      if (names != null && names.length > 0) {
+        sb.append(names[0]); // Source File: ...
       }
-    }
-    if ((type == AnDisplay.DSP_Disassembly) || (type == AnDisplay.DSP_DisassemblyV2)) {
+    } else if (type == AnDisplay.DSP_Disassembly || type == AnDisplay.DSP_DisassemblyV2) {
       // Print Load Object name
-      if (this.names != null && this.names.length > 2) {
-        text = this.names[2]; // Load Object: ...
-        text += eol;
+      if (names != null && names.length > 2) {
+        sb.append(names[2]); // Load Object: ...
       }
     }
-    text += eol;
+    if (sb.length() > 0) {
+      sb.append(EOL);
+    } else if (tname != null && tname.length() > 0) {
+      sb.append(tname);
+      sb.append(EOL);
+    }
+
+    StringBuilder line = new StringBuilder();
+    StringBuilder column = new StringBuilder();
     MetricLabel[] labels = tableModel.metricLabels;
-    String[][] s = new String[labels.length][];
-    show_percentage = new boolean[labels.length];
-    for (int j = 0; j < labels.length; j++) {
-      s[j] = labels[j].getLegendAndTitleLines();
-      if (labels[j].getAnMetric().isPVisible()) { // Show percentage
-        show_percentage[j] = true;
-      } else {
-        show_percentage[j] = false;
-      }
-    }
-    if (null != s) {
-      int maxh[] = new int[s.length];
-      int maxv = 0;
-      for (int i = 0; i < s.length; i++) {
-        if (s[i].length > maxv) {
-          maxv = s[i].length;
-        }
-        maxh[i] = 0;
-        for (int j = 0; j < s[i].length; j++) {
-          if (s[i][j].length() > maxh[i]) {
-            maxh[i] = s[i][j].length();
-          }
-        }
-      }
-      for (int i = 0; i < maxh.length; i++) {
-        // choose max width between the label length and max value length
-        int maxvalen = 0;
-        if (null != MaximumValues) {
-          if (labels[i].getAnMetric().isVVisible()) { // Show Value
-            maxvalen = MaximumValues[1][i].toString().length();
-          }
-          String value = empty;
-          if (labels[i].getAnMetric().isTVisible()) { // Show Time
-            if (labels[i].getClock() != -1.0) { // Can convert cycles to time
-              value = ((AnObject) MaximumValues[1][i]).toFormTime(labels[i].getClock());
-            } else {
-              value = MaximumValues[1][i].toString();
-            }
-          }
-          maxvalen += value.length();
-          if (labels[i].getAnMetric().isVVisible()
-              && labels[i].getAnMetric().isTVisible()) { // Show Value and Time
-            maxvalen += 1; // space between them
-          }
-        }
-        if (labels[i].getAnMetric().isPVisible()) { // Show percentage
-          maxvalen += spacesForPercentage;
-        }
-        if (maxvalen > maxh[i]) {
-          maxh[i] = maxvalen;
-        }
-        // add spaces to separate header labels
-        maxh[i] += spacesBetweenColumns;
-      }
-      for (int i = 0; i < maxv; i++) {
-        for (int j = 0; j < s.length; j++) {
-          int k = 0;
-          if (s[j].length > i) {
-            text += s[j][i]; // Print header label
-            k = s[j][i].length();
-          }
-          if (j + 1 < s.length) { // do not add spaces to the end
-            // print formatting spaces
-            for (; k < maxh[j]; k++) {
-              text += space;
-            }
-          }
-        }
-        text += eol;
-      }
-      boolean needeol = false;
-      String units = empty;
+    for (int lineN = 0;; lineN++) {
+      line.setLength(0);
       for (int i = 0; i < labels.length; i++) {
-        String un = labels[i].getUnit();
-        if (null == un) {
-          un = empty;
+        MetricLabel ml = labels[i];
+        String[] titles = ml.getLegendAndTitleLines();
+        String s = "";
+        if (lineN < titles.length && titles[lineN] != null) {
+          s = titles[lineN];
         }
-        if (un.length() > 0) {
-          needeol = true;
-        }
-        units += un;
-        if (i + 1 < labels.length) { // do not add spaces to the end
-          for (int k = un.length(); k < maxh[i]; k++) {
-            // print formatting spaces
-            units += space;
-          }
+        line.append(s);
+        if (i + 1 < labels.length) {
+          append_blanks(line, ml.getColumnWidth() + SPACES_BETWEEN_COLUMNS
+              - s.length());
         }
       }
-      if (needeol) {
-        text += units;
-        text += eol;
+      stripTrailing(line);
+      if (line.length() == 0) {
+        break;
       }
-      header_widths = maxh;
+      sb.append(line);
+      sb.append(EOL);
     }
-    return text;
-  }
 
-  // Temporary solution. This array should be local variable of function, that includes function
-  // above and below
-  private int[] header_widths = null;
-  private boolean[] show_percentage = null;
-
-  /** Create text presentation of the table. */
-  protected int[] getTableHeaderWidths() {
-    return header_widths;
-  }
-
-  /** Create text presentation of the table. */
-  protected boolean[] getPercentageArray() {
-    return show_percentage;
+    line.setLength(0);
+    for (int i = 0; i < labels.length; i++) {
+      MetricLabel ml = labels[i];
+      AnMetric m = ml.getAnMetric();
+      column.setLength(0);
+      String s = ml.getUnit();
+      if (s == null || s.length() == 0) {
+        if (!m.isNameMetric() && (m.isTVisible() || m.isVVisible())) {
+          column.append("#");
+        }
+      } else {
+        column.append(s);
+      }
+      if (m.isPVisible()) {
+        append_blanks(column, ml.getValWidth() - column.length());
+        if (ml.getValWidth() > 0) {
+          append_blanks(column, SPACES_BETWEEN_COLUMNS);
+        }
+        append_blanks(column, ml.getPercentWidth() - 3);
+        column.append("%");
+      }
+      if (i + 1 < labels.length) {
+        append_blanks(column, ml.getColumnWidth() + SPACES_BETWEEN_COLUMNS
+            - column.length());
+      }
+      line.append(column);
+    }
+    stripTrailing(line);
+    if (line.length() != 0) {
+      sb.append(line);
+      sb.append(EOL);
+    }
+    return sb.toString();
   }
 
   /** Create text presentation of the table. */
   protected String printTableContents(Object[][] MaximumValues, int printLimit) {
     boolean last_only = false;
     boolean selected_only = false;
-    return printTableContents(
-        MaximumValues, header_widths, printLimit, show_percentage, last_only, selected_only);
+    return printTableContents(printLimit, last_only, selected_only);
   }
 
   /** Create text presentation of the selected rows of the table. */
   protected String printSelectedTableContents(Object[][] MaximumValues, int printLimit) {
     boolean last_only = false;
     boolean selected_only = true;
-    return printTableContents(
-        MaximumValues, header_widths, printLimit, show_percentage, last_only, selected_only);
+    return printTableContents(printLimit, last_only, selected_only);
   }
 
-  /** Create text presentation of the table. */
-  protected synchronized String printTableContents(
-      Object[][] MaximumValues,
-      int[] header_widths,
-      int printLimit,
-      boolean[] show_percentage,
-      boolean last_only,
-      boolean selected_only) {
-    // Prepare text presentation of the table
-    JTable t = table;
-    String space = " ";
-    String empty = "";
-    String eol = "\n";
-    StringBuilder fileContent = new StringBuilder();
-    TableModel tModel = t.getModel();
-    int namecol = getNameCol();
+  /** Create text presentation of the table.
+   * @param printLimit
+   * @param last_only
+   * @param selected_only
+   * @return  */
+  public synchronized String printTableContents(int printLimit,
+      boolean last_only, boolean selected_only) {
+    if (printLimit < 0) {
+      return "";
+    }
+    TableModel tModel = table.getModel();
     int rows = tModel.getRowCount();
     if (columnWidth.length <= 1) {
-      return "\n" + AnLocale.getString("No metrics selected for this view") + "\n";
+      return EOL + AnLocale.getString("No metrics selected for this view") + EOL;
     }
-    if (printLimit > 0) {
-      // print max printLimit
-      if (printLimit < rows) {
-        rows = printLimit;
-      }
-    } else if (printLimit < 0) {
-      // print headers only
-      rows = 0;
+    if (printLimit > 0 && rows < printLimit) {
+      rows = printLimit;  // print max printLimit
     }
 
+    MetricLabel[] labels = tableModel.metricLabels;
     int sz = rows;
+    int[] selected_ind = null;
     if (selected_only) {
-      if (null == selected_indices) {
-        selected_indices = table.getSelectedRows();
+      selected_ind = table.getSelectedRows();
+      if (null == selected_ind) {
+        return "";
       }
-      if (null == selected_indices) {
-        return empty;
-      }
-      sz = selected_indices.length;
+      sz = selected_ind.length;
     }
+    StringBuilder sb = new StringBuilder();
+    StringBuilder line = new StringBuilder();
+    StringBuilder column = new StringBuilder();
+
     for (int index = 0; index < sz; index++) {
       int i = index;
       if (selected_only) {
-        i = selected_indices[index];
+        i = selected_ind[index];
       }
 
       // Check if all values are empty
@@ -1137,173 +1094,44 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
           || (src_type == AT_DIS_ONLY)) {
         emptyValues = true;
       }
-      for (int j = 0; j < tModel.getColumnCount(); j++) {
-        // get the cell value
+
+      line.setLength(0);
+      for (int j = 0; j < labels.length; j++) {
+        MetricLabel ml = labels[j];
+        AnMetric m = ml.getAnMetric();
         Object cellValue = tModel.getValueAt(i, j);
-        MetricLabel label = tableModel.getLabel(j);
-        boolean showPercentage = false;
-        String value = empty; // Used for empty values
-        if (j == namecol) { // Name
-          value = cellValue.toString();
-        } else {
-          if (!emptyValues) {
-            if (label.getAnMetric().isTVisible()) { // Show time
-              value = cellValue.toString();
-              if (label.getClock() != -1.0) { // Can convert cycles to time
-                value = ((AnObject) cellValue).toFormTime(label.getClock());
-              }
+        column.setLength(0);
+        if (m.isNameMetric()) {
+          column.append(cellValue.toString());
+        } else if (!emptyValues && !(last_only && (i + 1 != rows))) {
+          if (m.isTVisible() || m.isVVisible()) {
+            String s = cellValue.toString();
+            append_blanks(column, ml.getValWidth() - s.length());
+            column.append(s);
+          } else if (ml.getValWidth() > 0) {
+            append_blanks(column, ml.getValWidth());
+          }
+          if (m.isPVisible()) {
+            if (ml.getValWidth() > 0) {
+              append_blanks(column, SPACES_BETWEEN_COLUMNS);
             }
-            String value1 = empty;
-            if (label.getAnMetric().isVVisible()) { // Show value
-              value1 = cellValue.toString(); // number of cycles
-            }
-            if (label.getAnMetric().isPVisible()) { // Show percentage
-              showPercentage = true;
-            }
-            if ((label.getClock() != -1.0) /* || (label.unit != null) */) { // CPU cycles
-              String value2 = empty;
-              if (showPercentage) {
-                // calculate the weight of one percent
-                double onepercent = 0.0;
-                double total = 0.0;
-                if (MaximumValues != null) {
-                  total = ((AnObject) MaximumValues[0][j]).doubleValue();
-                }
-                if (total > 0.0) {
-                  onepercent = 100.0 / total;
-                }
-                // calculate the percentage
-                value2 = ((AnObject) cellValue).toPercent(onepercent);
-                value2 = "(" + value2 + "%)";
-              }
-              // Insert formatting spaces
-              int k = value.length() + value1.length() + value2.length() + 4; // 4 spaces
-              if (k < header_widths[j]) {
-                int len2 = 9 - value2.length(); // 9 - max percent length "(100.00%)"
-                String maxvalue = ((AnObject) MaximumValues[1][j]).toFormTime(label.getClock());
-                int len = maxvalue.length() - value.length();
-                String spaces = empty;
-                while (k++ < header_widths[j]) {
-                  spaces += space;
-                  if (showPercentage) {
-                    if (len2 > 0) { // percentage
-                      len2--;
-                      if (len2 == 0) { // add spaces to percentage
-                        value2 = spaces + value2;
-                        spaces = empty;
-                      }
-                      continue;
-                    }
-                  }
-                  if (len > 0) { // value
-                    len--;
-                    if (len == 0) { // add spaces to the left
-                      value = spaces + value;
-                      spaces = empty;
-                    }
-                    continue;
-                  }
-                }
-                value1 = spaces + value1; // add spaces to the middle
-              } else {
-                if (k > header_widths[j]) {
-                  String spaces = empty; // Is it a bug that we are here?
-                  while (k++ < header_widths[j]) {
-                    spaces += space;
-                  }
-                  value1 = spaces + value1; // add spaces to the middle
-                }
-              }
-              value += space + value1 + space + value2 + space + space;
-            } else { // Not CPU cycles
-              if (showPercentage) { // Show pecentage
-                double total = 0.0;
-                if (MaximumValues != null) {
-                  total = ((AnObject) MaximumValues[0][j]).doubleValue();
-                }
-                double percent = 0.0;
-                if (total > 0.0) {
-                  percent = (((AnObject) cellValue).doubleValue() / total) * 100;
-                }
-                if (label.getAnMetric().isVVisible()
-                    || label.getAnMetric().isTVisible()) { // Show value and percentage
-                  value = ((AnObject) cellValue).toPercentQuote(percent);
-                } else { // Show only percentage
-                  DecimalFormat format_percent = new DecimalFormat("0.00");
-                  value = format_percent.format(percent);
-                  // Add formatting spaces
-                  int k = 6 - value.length();
-                  String spaces = empty;
-                  while (k-- > 0) {
-                    spaces += space;
-                  }
-                  value = spaces + value; // add spaces to the left
-                  value = "(" + value + "%)";
-                  k = 9;
-                  spaces = empty;
-                  while (k++ < header_widths[j]) {
-                    spaces += space;
-                  }
-                  value += spaces; // add spaces to the right
-                }
-              } else { // Show value
-                value = cellValue.toString();
-              }
-            }
-          } else { // Do not show empty values
-            // value = empty;
+            String s = ((AnObject) cellValue).toPercent(ml.getTotal());
+            append_blanks(column, ml.getPercentWidth() - s.length());
+            column.append(s);
           }
         }
-        // calculate formatting spaces
-        int needspaces = 0;
-        if (label.getAnMetric().isVVisible() || label.getAnMetric().isTVisible()) { // Show value
-          if (MaximumValues != null) {
-            needspaces = MaximumValues[1][j].toString().length();
-          }
+        if (j + 1 < labels.length) {
+          append_blanks(column, ml.getColumnWidth() + SPACES_BETWEEN_COLUMNS
+              - column.length());
         }
-        if (showPercentage) {
-          needspaces += spacesForPercentage;
-        }
-        int maxvalen = needspaces;
-        if ((null != header_widths) && (needspaces < header_widths[j])) {
-          needspaces = header_widths[j];
-        }
-        if (j != namecol) {
-          int k = maxvalen - value.length();
-          if (k > 0) {
-            // insert formatting spaces
-            needspaces -= k;
-            while (k > 0) {
-              fileContent.append(space);
-              k--;
-            }
-          }
-        }
-        needspaces -= value.length();
-        if ((last_only) && (j != namecol) && (i + 1 != rows)) {
-          // print spaces instead of values
-          for (int k = 0; k < value.length(); k++) {
-            fileContent.append(space);
-          }
-        } else {
-          // append the cell value
-          fileContent.append(value);
-        }
-        // append formatting spaces
-        if (needspaces < 1) {
-          needspaces = 1;
-        }
-        if ((j + 1) < tModel.getColumnCount()) {
-          for (int k = 0; k < needspaces; k++) {
-            fileContent.append(space);
-          }
-        }
+        line.append(column);
       }
-      fileContent.append(eol);
+      stripTrailing(line);
+      sb.append(line);
+      sb.append(EOL);
     }
-    fileContent.append(eol);
-    String text = fileContent.toString();
-    return text;
+    sb.append(EOL);
+    return sb.toString();
   }
 
   // Listener for resize
@@ -2267,7 +2095,6 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
       if (cmd.equals("SPACE")) {
         setSelectedRow(table.getSelectedRow());
       } else if (cmd.equals("ENTER")) {
-        //                System.out.println("ENTER" + event.getSource());
         int table_row = table.getSelectedRow();
         if (table_row == -1) {
           return;
@@ -2277,6 +2104,10 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
           return;
         }
         performDefaultAction();
+      } else if (cmd.equals("CNTRL_C")) {
+        int printLimit = 0;
+        String text = anTable.printSelectedTableContents(null, printLimit);
+        AnUtility.copyToClipboard(text);
       }
     }
 
@@ -2306,12 +2137,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
       System.out.println("AnTable.CallHandler.updateSelectedRow() org_row=" + orgRow);
       return;
     }
-    fireAnEvent(
-        new AnEvent(
-            anTable,
-            AnEvent.EVT_COMPUTE, // AnEvent.EVT_UPDATE,
-            orgRow,
-            null));
+    fireAnEvent(new AnEvent(anTable, AnEvent.EVT_COMPUTE, orgRow, null));
   }
 
   private final class TableAdapter extends MouseAdapter {
@@ -2440,7 +2266,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
   // Table Model for Function List
   public final class FListTableModel extends AbstractTableModel { // public for memobj/indexobj
 
-    private MetricLabel[] metricLabels;
+    public MetricLabel[] metricLabels;
     private Object[][] data;
     private int[] src_type;
     private Row[] rows;
@@ -2519,9 +2345,8 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
       this.src_type = src_type;
 
       // Get numbers of rows/columns
-      columnCount =
-          metricLabels
-              .length; // FIXUP: sometimes label == null if you quickly select/deselect metrics in
+      columnCount = metricLabels.length;
+      // FIXUP: sometimes label == null if you quickly select/deselect metrics in
       // overview
       rowCount = data[0].length;
 
@@ -2531,9 +2356,6 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
         rows[i] = new Row(i);
       }
 
-      // for (int i=0; i< label.length; i  ++) {
-      // System.err.println("XXX Metric Label[" + i + "] = " + label[i].getText());
-      // }
       setLabel(metricLabels);
       if (marks != null && marks_inc != null) {
         for (int i = 0; i < marks[0].length; i++) {
