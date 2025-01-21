@@ -1,0 +1,35 @@
+
+     gprofng-gui is a Java application that can run on a standard Java implementation.
+
+     This makes it possible to run on Java implementations for Windows and MacOS.
+
+     The remote analysis feature added to gprofng-gui 2.0 makes it possible to run
+     the gprofng-gui on a client and connect with ssh to remote servers where gprofng
+     is installed.
+
+     In order to install the gprofng-gui on these clients running Java, we provide native
+     installers built with the Java jpackage application. Below we give the commands we
+     execute on the native OSs to create the native installers.
+
+     MacOS:
+         jpackage --name gprofng-gui --java-options "-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -Xmx1024m" --main-jar gprofng-analyzer.jar --input lib --icon gprofng.icns --about-url https://www.gnu.org/software/gprofng-gui/ --app-version 2.0
+
+
+     Windows:
+         jpackage --name gprofng-gui --java-options "-Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -Xmx1024m" --main-jar gprofng-analyzer.jar --input lib --icon gprofng-128x128.ico --about-url https://www.gnu.org/software/gprofng-gui/ --app-version 2.0 --win-shortcut --win-menu --win-shortcut-prompt
+
+     Notes:
+         - gprofng-analyzer.jar is the main jar for gprofng-gui
+         - a directory on the native OS named "lib" needs to be created
+         - the gprofng gui jar files need to be copied into this directory
+         - the icons used by the installers are located in the images directory
+         - the format of icons is native OS specific, but all are derived from common gprofng.png using gimp
+         - a native MacOS utility, iconutil, was used to create the gprofng.icns file from several .png files
+
+             iconutil -c icns gprofng.iconset
+
+             $ ls gprofng.iconset
+             icon_128.png       icon_256.png    icon_32.png     icon_48.png     icon_64.png
+
+         - For Windows, jpackage requires WiX 3.0 or later
+
