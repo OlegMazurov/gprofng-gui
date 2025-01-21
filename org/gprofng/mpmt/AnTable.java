@@ -410,14 +410,15 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
    *
    * @param type Type of AnDisplay, that creates AnTable (parent type)
    * @param hasHeader Boolean flag: if true, AnTable has header
+   * @param hasColumnButton
    * @param can_sort Boolean flag: if true, information can be sorted
    * @param isSingle Boolean flag: if true, the table does not allow multiselection
    * @param colScroll Boolean flag: if true, set HorizontalScrollBar as needed (false - never)
    * @param hasSelect Boolean flag: if true, show selection
+   * @param wrapMetricNames
    * @param accessibleName Accessible Name for JTable
    * @param accessibleDescr Accessible Description for JTable
    * @param LabelFor Label for JTable
-   * @return a new instance of AnTable
    * @see AnTable
    */
   public AnTable(
@@ -648,15 +649,6 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
               }
             });
 
-    //        // Add hot keys for sorting
-    //        for (int i = 1; i < 10; i++) {
-    //            s = "ALT_" + i;
-    //            ks = KeyStroke.getKeyStroke(KeyEvent.VK_0 + i, InputEvent.ALT_DOWN_MASK, false);
-    //            SortMenu sortMenu = new SortMenu(i - 1);
-    //            table.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(ks, s);
-    //            table.getActionMap().put(s, sortMenu);
-    //        }
-    // Add hot keys for navigation
     switch (type) {
       case AnDisplay.DSP_Source:
       case AnDisplay.DSP_SourceV2:
@@ -2497,7 +2489,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
         if (data[i] instanceof String[]) {
           FListLabel fListLabel =
               new FListLabel(lb.getMaxAnObject().toString(), table, JLabel.LEFT);
-          int cellwidth = fListLabel.getPreferredSize().width;
+          int cellwidth = fListLabel.getPreferredSize().width + 15;
           totalColumnWidth += cellwidth;
           cellPanel.add(fListLabel);
           columnWidth[i][1] = cellwidth;
