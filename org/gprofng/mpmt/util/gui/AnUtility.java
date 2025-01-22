@@ -1135,6 +1135,22 @@ public final class AnUtility {
     return ret;
   }
 
+  /**
+   * Remove duplicate '/' characters in path:
+   * @param path
+   * @return
+   */
+  public static String clearPath(String path) {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 0; i < path.length(); i++) {
+      if (path.charAt(i) == '/' && i > 0 && path.charAt(i - 1) == '/') {
+          continue;
+      }
+      sb.append(path.charAt(i));
+    }
+    return sb.toString();
+  }
+
   public static String getShortString(String string, int maxLength) {
     int len = string.length();
     if ((len - 1) <= maxLength) {
