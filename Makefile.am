@@ -662,7 +662,7 @@ EXTRA_DIST = $(MPMT_SRC) $(ANALYZER_SRC) $(COLLECTOR_SRC) \
 	$(ICONS) $(GPROFNG_FORMS) $(PNG_FILES) \
 	aclocal.m4 analyzer_st.mf compile configure.ac configure \
 	gprofng-collector.mf gprofng-gui.mf gprofng-gui.sh gprofng-gui.spec \
-	gprofng.properties INSTALL install-sh Makefile.am Makefile.in missing \
+	gprofng.properties install-sh Makefile.am Makefile.in missing \
 	$(PNG_DIR)/gprofng-128x128.ico $(PNG_DIR)/gprofng.icns \
 	$(PNG_DIR)/installer-README $(PNG_DIR)/gprofng.iconset/icon_32.png \
 	$(PNG_DIR)/gprofng.iconset/icon_48.png \
