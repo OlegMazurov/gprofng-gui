@@ -20,7 +20,6 @@ AC_CHECK_PROGS([JAVA],[java],[no])
 AC_CHECK_PROGS([JAVAC],[javac],[no])
 AC_CHECK_PROGS([JAR],[jar],[no])
 AC_CONFIG_FILES(Makefile)
-AC_OUTPUT
 AM_MAINTAINER_MODE
 
 if test "x$JAVA" = "xno"; then
@@ -38,3 +37,27 @@ if test "x$JAR" = "xno"; then
 Please install the JDK.])
 fi
 
+AC_CANONICAL_HOST
+build_linux=no
+build_windows=no
+build_mac=no
+echo "host_os=${host_os}" 
+case "${host_os}" in
+  linux*)
+    build_linux=yes
+    ;;
+  cygwin*|mingw*)
+    build_windows=yes
+    ;;
+  darwin*)
+    build_mac=yes
+    ;;
+  *)
+    AC_MSG_ERROR(["OS $host_os is not supported"])
+    ;;
+esac
+AM_CONDITIONAL([BUILD_LINUX], [test "$build_linux" = "yes"])
+AM_CONDITIONAL([BUILD_WINDOWS], [test "$build_windows" = "yes"])
+AM_CONDITIONAL([BUILD_OSX], [test "$build_mac" = "yes"])
+
+AC_OUTPUT

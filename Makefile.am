@@ -31,6 +31,22 @@ ANALYZER_JAR = gprofng-analyzer.jar
 GPROFNG_JAR = gprofng.jar
 COLLECTOR_JAR = gprofng-collector.jar
 
+if BUILD_LINUX
+GPROFNG_DISPLAY_GUI = gprofng-display-gui
+INSTAL_EXEC_OS = install-exec-local-linux
+DesktopLauncher = gprofng-gui.desktop
+endif
+if BUILD_OSX
+GPROFNG_DISPLAY_GUI = gprofng-gui
+INSTAL_EXEC_OS = install-exec-local-osx
+DesktopLauncher = 
+endif
+if BUILD_WINDOWS
+GPROFNG_DISPLAY_GUI = gprofng-gui.ps1
+INSTAL_EXEC_OS = install-exec-local-windows
+DesktopLauncher =
+endif
+
 MPMT_SRC  = \
 	$(MPMT_DIR)/AboutPanel.java \
 	$(MPMT_DIR)/AnAction.java \
@@ -572,26 +588,23 @@ anmodule_MF		= $(srcdir)/gprofng-gui.mf
 MPMT_PROPERTIES = $(MPMT_DIR)/Bundle.properties
 
 LocaleString.class: $(srcdir)/tools/LocaleString.java
-	@echo "================= $@"
-	$(JAVAC) $(JAVAC_FLAGS) -d . $(srcdir)/tools/LocaleString.java
+	$(AM_V_GEN)$(JAVAC) $(JAVAC_FLAGS) -d . $(srcdir)/tools/LocaleString.java
 
 $(MPMT_PROPERTIES): $(MPMT_FILES) LocaleString.class \
 		      $(srcdir)/gprofng.properties
-	@echo "================= $@"
-	mkdir -m 777 -p $(@D)
+	$(AM_V_GEN)mkdir -m 777 -p $(@D) || echo "mkdir -m 777 -p $(@D) failed"
 	echo "# THIS FILE IS AUTO-GENERATED. DON'T EDIT IT." > $@
 	echo "" >> $@
 	echo "gui_version=$(VERSION)" >> $@
 	cat $(srcdir)/gprofng.properties >> $@
-	cat $(MPMT_FILES) | $(JAVA) $(JAVA_FLAGS) -cp . LocaleString >> $@
+	( cd $(srcdir); cat $(MPMT_SRC) $(ANALYZER_SRC) ) | $(JAVA) $(JAVA_FLAGS) -cp . LocaleString >> $@
 
 $(GPROFNG_JAR): $(anmodule_MF) $(MPMT_FILES) \
 		 $(MPMT_PROPERTIES) $(ICONS:%=$(srcdir)/%)
-	@echo "================= $@"
-	rm -f $(GPROFNG_CLASSES)
-	$(JAVAC) -cp $(srcdir) $(JAVAC_FLAGS) -d . $(srcdir)/$(MPMT_DIR)/Analyzer.java
-	$(JAR) $(JAR_FLAGS) $@ $(anmodule_MF) $(GPROFNG_CLASSES) \
-		$(ICONS:%=-C $(srcdir) %) $(MPMT_PROPERTIES)
+	$(AM_V_GEN)rm -f $(GPROFNG_CLASSES)
+	$(AM_V_at)$(JAVAC) -cp $(srcdir) $(JAVAC_FLAGS) -d . $(srcdir)/$(MPMT_DIR)/Analyzer.java
+	$(AM_V_at)$(JAR) $(JAR_FLAGS) $@ $(anmodule_MF) $(MPMT_PROPERTIES) $(MPMT_DIR) \
+		-C $(srcdir) $(MPMT_DIR)/icons
 
 #
 # Standalone gprofng GUI
@@ -607,19 +620,19 @@ ANALYZER_CLASSES = $(ANALYZER_DIR)/*.class
 ANALYZER_PROPERTIES = $(ANALYZER_DIR)/Bundle.properties
 
 $(ANALYZER_PROPERTIES): $(ANALYZER_FILES) LocaleString.class
-	@echo "================= $@"
-	mkdir -m 777 -p $(@D)
-	echo "# THIS FILE IS AUTO-GENERATED. DON'T EDIT IT." > $@
-	echo "" >> $@
-	cat $(ANALYZER_FILES) | $(JAVA) $(JAVA_FLAGS) -cp . LocaleString >> $@
+	$(AM_V_GEN)mkdir -m 777 -p $(@D) || echo "mkdir -m 777 -p $(@D) failed"
+	@echo "# THIS FILE IS AUTO-GENERATED. DON'T EDIT IT." > $@
+	@echo "" >> $@
+	$(AM_V_GEN)( cd $(srcdir); cat $(ANALYZER_SRC) ) | \
+	  $(JAVA) $(JAVA_FLAGS) -cp . LocaleString >> $@
 
 $(ANALYZER_JAR): $(GPROFNG_JAR) \
 		    $(ANALYZER_MF) $(ANALYZER_FILES) $(ANALYZER_PROPERTIES)
 	@echo "================= $@"
-	rm -f $(ANALYZER_CLASSES)
-	$(JAVAC) -classpath $(GPROFNG_JAR) $(JAVAC_FLAGS) -d . $(ANALYZER_FILES)
-	echo "Create $(ANALYZER_JAR) in `pwd`"
-	$(JAR) $(JAR_FLAGS) $@ $(ANALYZER_MF) $(ANALYZER_CLASSES) \
+	$(AM_V_GEN)rm -f $(ANALYZER_CLASSES)
+	$(AM_V_at)d=`pwd` ; (cd $(srcdir) ; $(JAVAC) -classpath $$d/$(GPROFNG_JAR) \
+	  $(JAVAC_FLAGS) -d $$d $(ANALYZER_SRC) )
+	$(AM_V_at)$(JAR) $(JAR_FLAGS) $@ $(ANALYZER_MF) $(ANALYZER_CLASSES) \
 			       $(ANALYZER_PROPERTIES)
 
 # Rules for generating a jar file implementing Java collector API
@@ -631,24 +644,32 @@ collector_CLASSES  = $(COLLECTOR_DIR)/*.class
 
 $(COLLECTOR_JAR): $(GPROFNG_JAR) $(collector_FILES) $(collector_MF)
 	@echo "================= $@"
-	rm -f $(collector_CLASSES)
-	$(JAVAC) $(JAVAC_FLAGS) -d . $(collector_FILES)
-	$(JAR) $(JAR_FLAGS) $@ $(collector_MF) $(collector_CLASSES)
+	$(AM_V_GEN)rm -f $(collector_CLASSES)
+	$(AM_V_at)$(JAVAC) $(JAVAC_FLAGS) -d . $(collector_FILES)
+	$(AM_V_at)$(JAR) $(JAR_FLAGS) $@ $(collector_MF) $(collector_CLASSES)
 
-bin_SCRIPTS = gprofng-display-gui
-CLEANFILES = gprofng-display-gui $(GPROFNG_JAR) $(ANALYZER_JAR) $(COLLECTOR_JAR) \
+bin_SCRIPTS = $(GPROFNG_DISPLAY_GUI)
+CLEANFILES = $(GPROFNG_DISPLAY_GUI) $(GPROFNG_JAR) $(ANALYZER_JAR) $(COLLECTOR_JAR) \
 	$(GPROFNG_CLASSES) $(ANALYZER_CLASSES) $(collector_CLASSES) \
 	$(ANALYZER_PROPERTIES) $(MPMT_PROPERTIES) LocaleString*.class \
 	$(DesktopLauncher)
 
 gprofng-display-gui: $(srcdir)/gprofng-gui.sh
-	@echo "================= $@"
-	sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh \
+	$(AM_V_GEN)sed -e "s~REPLACE_ME_WITH_VERSION~$(VERSION)~" < $(srcdir)/gprofng-gui.sh \
 	  | sed -e "s~GPROFNG_bindir=~GPROFNG_bindir='$(bindir)'~" \
 	  | sed -e "s~GPROFNG_libdir=~GPROFNG_libdir='$(libdir)'~" \
 	  | sed -e "s~GPROFNG_datadir=~GPROFNG_datadir='$(datadir)'~" \
 	  > $@
-	chmod +x $@
+	$(AM_V_at)chmod +x $@
+
+gprofng-gui.ps1:
+	@echo "java -Xmx1024m -jar $(datadir)/$(PACKAGE)/gprofng-analyzer.jar \$Args" > $@
+	$(AM_V_GEN)chmod +x $@
+
+gprofng-gui:
+	@echo "#!/bin/sh" > $@
+	@echo "java -Xmx1024m -jar $(datadir)/$(PACKAGE)/gprofng-analyzer.jar \$@" >> $@
+	$(AM_V_GEN)chmod +x $@
 
 pkgdata_DATA = $(ANALYZER_JAR) $(COLLECTOR_JAR) $(GPROFNG_JAR)
 
@@ -671,7 +692,6 @@ EXTRA_DIST = $(MPMT_SRC) $(ANALYZER_SRC) $(COLLECTOR_SRC) \
 	$(PNG_DIR)/gprofng.iconset/icon_256.png \
 	README AUTHORS NEWS tools
 
-DesktopLauncher = gprofng-gui.desktop
 $(DesktopLauncher):
 	@echo '[Desktop Entry]' > $@
 	@echo "Encoding=UTF-8" >> $@
@@ -683,19 +703,25 @@ $(DesktopLauncher):
 	@echo "Categories=Profiling;" >> $@
 	@echo "Comment=Graphical tool to create and analyze gprofng experiments" >> $@
 
-PHONY: install-exec-local
-install-exec-local: $(DesktopLauncher) $(PNG_FILES)
-	for d in 32x32 48x48 64x64 128x128 256x256 ; do \
+PHONY: install-exec-local install-exec-local-linux install-exec-local-windows \
+	install-exec-local-osx
+install-exec-local: $(INSTAL_EXEC_OS)
+
+install-exec-local-linux: $(DesktopLauncher) $(PNG_FILES)
+	$(AM_V_GEN)for d in 32x32 48x48 64x64 128x128 256x256 ; do \
 	  $(mkinstalldirs) $(CLR_DIR)/$$d/apps ; \
 	  cp $(PNG_DIR)/gprofng-$$d.png $(CLR_DIR)/$$d/apps/gprofng.png ; \
 	  chmod 644 $(CLR_DIR)/$$d/apps/gprofng.png ; \
 	done
-	$(mkinstalldirs) $(DESTDIR)$(datarootdir)/applications
-	cp $(DesktopLauncher) $(DESTDIR)$(datarootdir)/applications/
-	chmod 644 $(DESTDIR)$(datarootdir)/applications/$(DesktopLauncher)
-	$(mkinstalldirs) $(DESTDIR)$(bindir)
-	rm -f $(DESTDIR)$(bindir)/gp-display-gui
-	ln -s gprofng-display-gui $(DESTDIR)$(bindir)/gp-display-gui
+	$(AM_V_at)$(mkinstalldirs) $(DESTDIR)$(datarootdir)/applications
+	$(AM_V_at)cp $(DesktopLauncher) $(DESTDIR)$(datarootdir)/applications/
+	$(AM_V_at)chmod 644 $(DESTDIR)$(datarootdir)/applications/$(DesktopLauncher)
+	$(AM_V_at)$(mkinstalldirs) $(DESTDIR)$(bindir)
+	$(AM_V_at)rm -f $(DESTDIR)$(bindir)/gp-display-gui
+	$(AM_V_at)ln -s gprofng-display-gui $(DESTDIR)$(bindir)/gp-display-gui
+
+install-exec-local-windows install-exec-local-osx:
+	@echo "================= $@"
 
 uninstall-local:
 	rm -f $(CLR_DIR)/*/apps/gprofng.png $(DESTDIR)$(bindir)/gp-display-gui \

@@ -38,11 +38,11 @@ man_MANS = gprofng-display-gui.1
 # the man output looks standard.
 $(man_MANS): $(srcdir)/doc/gp-macros.texi
 	$(AM_V_GEN)touch $@
-	( nm=`basename $@ .1` ; \
-	  $(AM_V_at)$(TEXI2POD) $(MANCONF) < $(srcdir)/doc/$$nm.texi > $$nm.pod ; \
-	  $(AM_V_at)($(POD2MAN) $$nm.pod | sed -e '/^.if n .na/d' > $@.tmp && \
+	$(AM_V_at)( nm=`basename $@ .1` ; \
+	  $(TEXI2POD) $(MANCONF) < $(srcdir)/doc/$$nm.texi > $$nm.pod ; \
+	  ($(POD2MAN) $$nm.pod | sed -e '/^.if n .na/d' > $@.tmp && \
 	    mv -f $@.tmp $@) || (rm -f $@.tmp && exit 1) ; \
-	  $(AM_V_at)rm -f $$nm.pod )
+	  rm -f $$nm.pod )
 
 gprofng-display-gui.1: $(srcdir)/doc/gprofng-gui.texi
 
