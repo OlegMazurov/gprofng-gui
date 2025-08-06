@@ -7,7 +7,7 @@ its runtime.
 
 The GUI is a Java application utilizing the Swing GUI framework.
 
-To build gprofng-gui from a released tarball:
+1. To build gprofng-gui on Linux from a released tarball:
 
   $ wget https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui.VERSION.tar.gz
   $ tar xzvf gprofng-gui.VERSION.tar.gz
@@ -15,7 +15,7 @@ To build gprofng-gui from a released tarball:
   $ mkdir build && cd build/
   $ ../configure --prefix=PREFIX && make && make install
 
-To build gprofn-gui from the development git repo:
+2. To build gprofn-gui on Linux from the development git repo:
 
   $ git clone https://git.savannah.gnu.org/git/gprofng-gui.git
   $ cd gprofng-gui
@@ -29,4 +29,38 @@ installed in your system and available in your PATH.  Then you can
 launch the GUI using the following gprofng command:
 
   $ gprofng display gui [GUI_OPTIONS] [EXPERIMENT]
+
+
+
+REMOTE CONNECTION FROM WINDOWS AND MACOS
+
+The remote analysis feature added to gprofng-gui 2.0 makes it possible to run
+the gprofng-gui on a client (including Windows and macOS) and connect with ssh
+to remote Linux servers where gprofng is installed.
+
+To build gprofng-gui on macOS:
+ - Do (1) or (2) to install the GUI.
+
+To build gprofng-gui on Windows:
+ - Install JDK and msys2
+ - Run msys2 and install software:
+     pacman -Syu  # You may need to close and reaopen msys2
+     pacman -S mingw-w64-ucrt-x86_64-gcc
+     pacman -S autotools
+     pacman -S git
+ - Add javac to $PATH, for example:
+     PATH="$PATH:/c/Program Files/OpenLogic/jre-21.0.6.7-hotspot/bin"
+ - Do (1) or (2) to install the GUI.
+
+Before connecting to a remote host, configure ssh to connect without password
+and questions from ssh.
+Check that this command runs without any questions from ssh:
+   ssh YOUR_SERVER uname -a
+
+Launch the GUI using the following commands:
+  on Windows
+    PREFIX/bin/gprofng-gui.ps1
+  on macOS
+    PREFIX/bin/gprofng-gui
+
 
