@@ -44,7 +44,7 @@ To build gprofng-gui on macOS:
 To build gprofng-gui on Windows:
  - Install JDK and msys2
  - Run msys2 and install software:
-     pacman -Syu  # You may need to close and reaopen msys2
+     pacman -Syu  # You may need to close and reopen msys2
      pacman -S mingw-w64-ucrt-x86_64-gcc
      pacman -S autotools
      pacman -S git
@@ -62,5 +62,3 @@ Launch the GUI using the following commands:
     PREFIX/bin/gprofng-gui.ps1
   on macOS
     PREFIX/bin/gprofng-gui
-
-
