@@ -7,6 +7,10 @@ See the manual for detailed information.
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+ Version 2.1 (August 2025)
+- Build on Windows and macOS to support the remote analysis from Linux servers.
+- Fixed -Xlint:rawtypes,cast warnings.
+
  Version 2.0 (January 2025)
 - Remote analysis feature added.
   Learn how to use gprofng-gui on Windows and MacOS in images/installer-README.
