@@ -1152,9 +1152,9 @@ public final class Analyzer {
     long totalMsg = IPC_session.getIPCReader().getTotalReceivedMessages();
     long t1 = System.currentTimeMillis();
     int max = 100;
-    Integer k = new Integer(runTest);
+    int k = Integer.valueOf(runTest);
     if (k > 0) {
-      max = max * k.intValue();
+      max = max * k;
     }
     for (int i = 0; i < max; i++) {
       versionHandshake(); // syncTime();

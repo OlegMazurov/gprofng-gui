@@ -192,7 +192,7 @@ public class UserPrefPersistence {
   private static final String METRIC_COLOR_COLOR_ATTR = "color";
 
   private UserPref userPref;
-  private static HashSet<String> experimentErrorHashSet = new HashSet<String>();
+  private static HashSet<String> experimentErrorHashSet = new HashSet<>();
 
   public UserPrefPersistence() {}
 
@@ -551,7 +551,7 @@ public class UserPrefPersistence {
           userName = "";
         }
         if (path != null) {
-          List<AttrValuePair> attrValues = new ArrayList<AttrValuePair>();
+          List<AttrValuePair> attrValues = new ArrayList<>();
           attrValues.add(new AttrValuePair(HOSTNAME_NAME_ATTR, hostName));
           attrValues.add(new AttrValuePair(HOSTNAME_PATH_ATTR, path));
 	  attrValues.add(new AttrValuePair(HOSTNAME_CONNECT_COMMAND_ATTR, connectCommand));
@@ -930,7 +930,7 @@ public class UserPrefPersistence {
 
   class MySaxParser extends DefaultHandler {
 
-    private Stack stack = new Stack();
+    private Stack<String> stack = new Stack<String>();
     private String currentElement = null;
     private String currentText = "";
     private List<ViewPanelOrder> viewPanelOrderList;
@@ -966,32 +966,32 @@ public class UserPrefPersistence {
         String x = atts.getValue(FRAME_X_ATTR);
         String y = atts.getValue(FRAME_Y_ATTR);
         try {
-          Dimension dim = new Dimension(new Integer(w).intValue(), new Integer(h).intValue());
-          Point point = new Point(new Integer(x).intValue(), new Integer(y).intValue());
+          Dimension dim = new Dimension(Integer.valueOf(w), Integer.valueOf(h));
+          Point point = new Point(Integer.valueOf(x), Integer.valueOf(y));
           userPref.setFrameSize(dim);
           userPref.setFrameLocation(point);
         } catch (NumberFormatException nfe) {
           errorMessage("INIT_FILE_ERROR", element, nfe);
         }
       } else if (element.equals(VIEW_ORDER_LIST_ELEM)) {
-        viewPanelOrderList = new ArrayList<ViewPanelOrder>();
+        viewPanelOrderList = new ArrayList<>();
       } else if (element.equals(METRIC_SELECTION_LIST_ELEM)
           || element.equals(METRIC_SELECTION_LIST_ELEM_V12)) {
-        metricsOrderList = new ArrayList<MetricNameSelection>();
+        metricsOrderList = new ArrayList<>();
       } else if (element.equals(METRIC_SORT_LIST_ELEM)) {
         metricSortByMType = new MetricType[MetricsSetting.MET_LAST];
       } else if (element.equals(METRIC_ORDER_LIST_ELEM)) {
         metricOrderLists = (ArrayList<MetricType>[]) new ArrayList[MetricsSetting.MET_LAST];
       } else if (element.equals(METRIC_ORDER_MTYPE_LIST_ELEM)) {
         String orderMtypeString = atts.getValue(METRIC_MTYPE_ATTR);
-        orderMtype = new Integer(orderMtypeString).intValue();
-        metricOrderMTypeList = new ArrayList<MetricType>();
+        orderMtype = Integer.valueOf(orderMtypeString);
+        metricOrderMTypeList = new ArrayList<>();
       } else if (element.equals(LOADOBJECT_LIST_ELEM)) {
-        loadobjectList = new ArrayList<String>();
+        loadobjectList = new ArrayList<>();
       } else if (element.equals(SEARCHPATH_LIST_ELEM)) {
-        searchPathList = new ArrayList<String>();
+        searchPathList = new ArrayList<>();
       } else if (element.equals(PATHMAP_LIST_ELEM)) {
-        pathmap = new ArrayList<String[]>();
+        pathmap = new ArrayList<>();
       } else if (element.equals(PATHMAP_ITEM_ELEM)) {
         String from = atts.getValue(PATHMAP_FROM_ATTR);
         String to = atts.getValue(PATHMAP_TO_ATTR);
@@ -1000,17 +1000,17 @@ public class UserPrefPersistence {
         map[1] = to;
         pathmap.add(map);
       } else if (element.equals(INDEX_OBJECT_LIST_ELEM)) {
-        customIndexObjects = new ArrayList<CustomObject>();
+        customIndexObjects = new ArrayList<>();
       } else if (element.equals(FUNCTION_COLORS_LIST_ELEM)) {
-        functionColors = new ArrayList<ColorRule>();
+        functionColors = new ArrayList<>();
       } else if (element.equals(MEMORY_OBJECT_LIST_ELEM)) {
-        customMemoryObjects = new ArrayList<CustomObject>();
+        customMemoryObjects = new ArrayList<>();
       } else if (element.equals(EXPERIMENT_LIST_ELEM)) {
         String host = "localhost"; // pre version 5
         if (userPref.getVersion() >= 5) {
           host = atts.getValue(HOST_NAME_ATTR);
         }
-        recentExperiments = new ArrayList<ExperimentPickListElement>();
+        recentExperiments = new ArrayList<>();
         recentExperimentsHost = host;
       } else if (element.equals(EXPERIMENT_ELEM)) {
         String path = atts.getValue(PATH_ATTR);
@@ -1018,10 +1018,10 @@ public class UserPrefPersistence {
         String confPath = atts.getValue(CONF_ATTR);
         recentExperiments.add(new ExperimentPickListElement(path, wd, confPath));
       } else if (element.equals(HOSTNAME_LIST_ELEM)) {
-        connectionPropertiesMap = new HashMap<String, ConnectionProperties>();
+        connectionPropertiesMap = new HashMap<>();
         hostNamePickList = new StringPickList();
       } else if (element.equals(METRIC_COLOR_LIST_ELEM)) {
-        customMetricColors = new ArrayList<MetricColor>();
+        customMetricColors = new ArrayList<>();
       } else if (element.equals(HOSTNAME_ELEM)) {
         String name = atts.getValue(HOSTNAME_NAME_ATTR);
         String path = atts.getValue(HOSTNAME_PATH_ATTR);
@@ -1074,14 +1074,14 @@ public class UserPrefPersistence {
       } else if (element.equals(VIEW_ORDER_ELEM)) {
         String name = atts.getValue(VIEW_ORDER_NAME_ATTR);
         String shownString = atts.getValue(VIEW_ORDER_SHOWN_ATTR);
-        viewPanelOrderList.add(new ViewPanelOrder(name, new Boolean(shownString).booleanValue()));
+        viewPanelOrderList.add(new ViewPanelOrder(name, Boolean.valueOf(shownString)));
       } else if (element.equals(METRIC_SELECTION_ELEM)) {
         if (metricsOrderList != null) {
           String name = atts.getValue(METRIC_NAME_ATTR);
-          boolean selected = new Boolean(atts.getValue(METRIC_ORDER_SELECTED_ATTR)).booleanValue();
+          boolean selected = Boolean.valueOf(atts.getValue(METRIC_ORDER_SELECTED_ATTR));
           boolean[] exclIncl = new boolean[6];
           for (int i = 0; i < 6; i++) {
-            boolean val = new Boolean(atts.getValue(METRIC_ORDER_EXCLINCL_ATTR + i)).booleanValue();
+            boolean val = Boolean.valueOf(atts.getValue(METRIC_ORDER_EXCLINCL_ATTR + i));
             exclIncl[i] = val;
           }
           MetricNameSelection metricSetting = new MetricNameSelection(name, selected, exclIncl);
@@ -1092,8 +1092,8 @@ public class UserPrefPersistence {
           String mTypeString = atts.getValue(METRIC_MTYPE_ATTR);
           String name = atts.getValue(METRIC_NAME_ATTR);
           String subTypeString = atts.getValue(METRIC_SUBTYPE_ATTR);
-          int mType = new Integer(mTypeString).intValue();
-          int subType = new Integer(subTypeString).intValue();
+          int mType = Integer.valueOf(mTypeString);
+          int subType = Integer.valueOf(subTypeString);
           if (mType >= 0 && mType <= MetricsSetting.MET_LAST) {
             metricSortByMType[mType] = new MetricType(name, subType);
           }
@@ -1102,7 +1102,7 @@ public class UserPrefPersistence {
         if (metricOrderMTypeList != null) {
           String name = atts.getValue(METRIC_NAME_ATTR);
           String subTypeString = atts.getValue(METRIC_SUBTYPE_ATTR);
-          int subType = new Integer(subTypeString).intValue();
+          int subType = Integer.valueOf(subTypeString);
           metricOrderMTypeList.add(new MetricType(name, subType));
         }
       } else if (element.equals(CUSTOM_OBJECT_LIST_ELEM)) {
@@ -1116,13 +1116,13 @@ public class UserPrefPersistence {
           customMemoryObjects.add(customObject);
         }
       } else if (element.equals(FUNCTION_COLORS_COLOR_RULE_ELEM)) {
-        int type = new Integer(atts.getValue(FUNCTION_COLORS_COLOR_RULE_TYPE_ATTR)).intValue();
+        int type = Integer.valueOf(atts.getValue(FUNCTION_COLORS_COLOR_RULE_TYPE_ATTR));
         String text = atts.getValue(FUNCTION_COLORS_COLOR_RULE_TEXT_ATTR);
         if (text.length() == 0) {
           text = null;
         }
         int colorValue =
-            new Integer(atts.getValue(FUNCTION_COLORS_COLOR_RULE_COLOR_ATTR)).intValue();
+            Integer.valueOf(atts.getValue(FUNCTION_COLORS_COLOR_RULE_COLOR_ATTR));
         Color color = new Color(colorValue);
         if (functionColors != null) {
           functionColors.add(new ColorRule(color, type, text, false));
@@ -1130,7 +1130,7 @@ public class UserPrefPersistence {
       } else if (element.equals(NAV_SPLITPANE_ELEM)) {
         String pos = atts.getValue(SPLITPANE_POS_ATTR);
         try {
-          int posValue = new Integer(pos);
+          int posValue = Integer.valueOf(pos);
           userPref.setNavigationPanelDividerPosition(posValue);
         } catch (NumberFormatException nfe) {
           errorMessage("INIT_FILE_ERROR", element, nfe);
@@ -1172,7 +1172,7 @@ public class UserPrefPersistence {
         throws NumberFormatException {
       String sizeString = atts.getValue(SPLITPANE_RIGHT_SIZE_ATTR);
       if (sizeString != null) {
-        int size = new Integer(sizeString);
+        int size = Integer.valueOf(sizeString);
         splitPaneFixedRightSizeProp.setSize(size);
       }
     }
@@ -1192,19 +1192,19 @@ public class UserPrefPersistence {
         throws SAXException {
       try {
         if (qName.equals(VERSION_ELEM)) {
-          userPref.setVersion(new Integer(currentText).intValue());
+          userPref.setVersion(Integer.valueOf(currentText));
         } else if (qName.equals(LAST_CLOSED_EXP_CONF_PATH_ELEM)) {
           userPref.setLastClosedExpConfPath(currentText);
         } else if (qName.equals(LAST_EXPORT_IMPORT_EXP_CONF_PATH_ELEM)) {
           userPref.setLastExportImportConfPath(currentText);
         } else if (qName.equals(SHOW_COMPARE_WARNING_ELEM)) {
-          userPref.setShowCompareSourceWarning(new Boolean(currentText).booleanValue());
+          userPref.setShowCompareSourceWarning(Boolean.valueOf(currentText));
         } else if (qName.equals(LIBRARY_VISIBILITY_JAVA)) {
-          userPref.setLibraryVisibilityJava(new Boolean(currentText).booleanValue());
+          userPref.setLibraryVisibilityJava(Boolean.valueOf(currentText));
         } else if (qName.equals(FORMATS_WRAP_METRIC_NAMES_IN_TABLES_ELEM)) {
-          userPref.setWrapMetricNamesInTables(new Boolean(currentText).booleanValue());
+          userPref.setWrapMetricNamesInTables(Boolean.valueOf(currentText));
         } else if (qName.equals(METRIC_REVERSED_SORT)) {
-          userPref.setMetricReversedSort(new Boolean(currentText).booleanValue());
+          userPref.setMetricReversedSort(Boolean.valueOf(currentText));
         } else if (qName.equals(VIEW_ORDER_LIST_ELEM)) {
           userPref.setViewPanelOrder(viewPanelOrderList);
           viewPanelOrderList = null;
@@ -1287,33 +1287,33 @@ public class UserPrefPersistence {
           userPref.setLibraryVisibilityExcludePickList(libraryVisibilityExcludeFilterPickList);
           libraryVisibilityExcludeFilterPickList = null;
         } else if (qName.equals(CALL_TREE_THRESHOLD)) {
-          userPref.setCallStackThreshold(new Integer(currentText).intValue());
+          userPref.setCallStackThreshold(Integer.valueOf(currentText));
         } else if (qName.equals(TIMELINE_GROUP_DATA_BY_BUTTON_NAME_ELEM)) {
           userPref.setTimelineGroupDataByButtonName(currentText);
         } else if (qName.equals(TIMELINE_TLDATA_CMD_ELEM)) {
           userPref.setTimelineTLDataCmd(currentText);
         } else if (qName.equals(TIMELINE_STACK_ALIGN_ELEM)) {
-          userPref.setTimelineStackAlign(new Integer(currentText).intValue());
+          userPref.setTimelineStackAlign(Integer.valueOf(currentText));
         } else if (qName.equals(TIMELINE_STACK_DEPTH_ELEM)) {
-          userPref.setTimelineStackDepth(new Integer(currentText).intValue());
+          userPref.setTimelineStackDepth(Integer.valueOf(currentText));
         } else if (qName.equals(TIMELINE_STACK_FRAME_PIXELS_ELEM)) {
-          userPref.setTimelineStackFramePixels(new Integer(currentText).intValue());
+          userPref.setTimelineStackFramePixels(Integer.valueOf(currentText));
         } else if (qName.equals(TIMELINE_SHOW_STATES_ELEM)) {
-          userPref.setTimelineShowEventStates(new Boolean(currentText).booleanValue());
+          userPref.setTimelineShowEventStates(Boolean.valueOf(currentText));
         } else if (qName.equals(TIMELINE_SHOW_DENSITY_ELEM)) {
-          userPref.setTimelineShowEventDensity(new Boolean(currentText).booleanValue());
+          userPref.setTimelineShowEventDensity(Boolean.valueOf(currentText));
         } else if (qName.equals(MACHINE_MODEL_ELEM)) {
           userPref.setMachineModel(currentText);
         } else if (qName.equals(FORMATS_VIEW_MODE)) {
-          userPref.setFormatsViewMode(new Integer(currentText).intValue());
+          userPref.setFormatsViewMode(Integer.valueOf(currentText));
         } else if (qName.equals(FORMATS_STYLE)) {
-          userPref.setFormatsStyle(new Integer(currentText).intValue());
+          userPref.setFormatsStyle(Integer.valueOf(currentText));
         } else if (qName.equals(FORMATS_APPEND_SO_NAME)) {
-          userPref.setFormatsAppendSoName(new Boolean(currentText));
+          userPref.setFormatsAppendSoName(Boolean.valueOf(currentText));
         } else if (qName.equals(FORMATS_COMPARE_MODE)) {
-          userPref.setFormatsCompareMode(new Integer(currentText).intValue());
+          userPref.setFormatsCompareMode(Integer.valueOf(currentText));
         } else if (qName.equals(VALUE_ELEM)) {
-          sourceDisassemblyValues.add(new Integer(currentText).intValue());
+          sourceDisassemblyValues.add(Integer.valueOf(currentText));
         } else if (qName.equals(SOURCE_DISASSEMBLY)) {
           // If reading older versions, copy default dettings into missing values
           int[] defaultSettings = SourceDisassemblySetting.getDefaultSourceDisassemblySetting();
@@ -1337,7 +1337,7 @@ public class UserPrefPersistence {
       if (stack.empty()) {
         currentElement = null;
       } else {
-        currentElement = (String) stack.peek();
+        currentElement = stack.peek();
       }
     }
 

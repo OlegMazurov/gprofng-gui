@@ -54,7 +54,7 @@ public final class AnMain {
    * @return array of arguments without the fontsize flag and that value
    */
   private static String[] processArgs(final String[] args) {
-    ArrayList<String> argsExp = new ArrayList<String>();
+    ArrayList<String> argsExp = new ArrayList<>();
     String argvOrig;
 
     for (int i = 0; i < args.length; i++) {
@@ -76,7 +76,7 @@ public final class AnMain {
           System.exit(1);
         }
         String userdir = args[++i];
-        UserPref.getInstance().setUserDir(userdir);
+        UserPref.setUserDir(userdir);
       } else if (argvOrig.startsWith("--bindir=")) {
         UserPref.binDirFromCommandLine = argvOrig.substring(argvOrig.indexOf("=") + 1);
       } else if (argvOrig.startsWith("--datadir=")) {
@@ -106,7 +106,7 @@ public final class AnMain {
   // sets Fonts for the value of -fontsize key
   private static void setFontSize(int size) {
     // Set all font size to new size
-    Enumeration keys = UIManager.getDefaults().keys();
+    Enumeration<Object> keys = UIManager.getDefaults().keys();
     while (keys.hasMoreElements()) {
       Object key = keys.nextElement();
       Object value = UIManager.get(key);
@@ -160,7 +160,7 @@ public final class AnMain {
     int major = 0;
     int minor = 0;
     int n1, n2;
-    String ver = analyzer.jvm_ver;
+    String ver = Analyzer.jvm_ver;
     if ((n1 = ver.indexOf('.')) != -1) {
       major = Integer.parseInt(ver.substring(0, n1));
       if ((n2 = ver.indexOf('.', n1 + 1)) != -1) {

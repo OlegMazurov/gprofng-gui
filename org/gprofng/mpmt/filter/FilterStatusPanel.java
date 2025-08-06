@@ -53,7 +53,7 @@ public class FilterStatusPanel extends JPanel implements AnChangeListener {
   private JButton manageButton;
   private JTextArea infoArea;
   private final AnWindow anWindow;
-  private List<FilterTextField> filterTextFields = new ArrayList<FilterTextField>();
+  private List<FilterTextField> filterTextFields = new ArrayList<>();
   private JPanel listPanel;
   private JScrollPane scrollPane;
   private int gridy = 0;
@@ -285,7 +285,7 @@ public class FilterStatusPanel extends JPanel implements AnChangeListener {
 
   private void removeAllFilterTextFields() {
     listPanel.removeAll();
-    filterTextFields = new ArrayList<FilterTextField>();
+    filterTextFields = new ArrayList<>();
     gridy = 0;
   }
 

@@ -232,7 +232,7 @@ public final class SelectedObject implements AnChangeListener {
       ipc.send("getSelObjHeapTimestamp");
       ipc.send(0);
       ipc.send(id);
-      return (long) ipc.recvLong();
+      return ipc.recvLong();
     }
   }
 
@@ -242,7 +242,7 @@ public final class SelectedObject implements AnChangeListener {
       ipc.send("getSelObjHeapUserExpId");
       ipc.send(0);
       ipc.send(id);
-      return (int) ipc.recvInt();
+      return ipc.recvInt();
     }
   }
 

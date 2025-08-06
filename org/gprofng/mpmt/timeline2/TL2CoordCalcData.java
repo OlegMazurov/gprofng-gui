@@ -173,8 +173,8 @@ public class TL2CoordCalcData extends CoordCalcDataMaster {
       vcoord_row_tops = vcoord_row_bottoms = null;
       needs_compute = true;
     } else {
-      ArrayList<Integer> new_vcoord_row_tops = new ArrayList(absRowCount);
-      ArrayList<Integer> new_vcoord_row_bottoms = new ArrayList(absRowCount);
+      ArrayList<Integer> new_vcoord_row_tops = new ArrayList<>(absRowCount);
+      ArrayList<Integer> new_vcoord_row_bottoms = new ArrayList<>(absRowCount);
       for (int ii = 0; ii < absRowCount; ii++) {
         new_vcoord_row_tops.add(total_used);
         final int rowHeight;

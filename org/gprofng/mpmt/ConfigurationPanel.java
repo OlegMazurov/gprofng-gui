@@ -138,7 +138,7 @@ public class ConfigurationPanel extends javax.swing.JPanel {
 
   public void initConfigurationChoices(File file) {
     this.expFile = file;
-    List<ConfName> list = new ArrayList<ConfName>();
+    List<ConfName> list = new ArrayList<>();
     File confDir;
     // look inside experiment
     confDir =

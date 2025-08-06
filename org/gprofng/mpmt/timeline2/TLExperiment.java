@@ -60,15 +60,15 @@ public class TLExperiment { // YXXX refactor or rename.  Sole remaining method i
       final boolean show_charts,
       final long time_origin, // timestamp at left origin (nanoseconds)
       final boolean comparing) {
-    List<TL2DataSnapshot.EntityDefinitions> entityList = new ArrayList();
+    List<TL2DataSnapshot.EntityDefinitions> entityList = new ArrayList<>();
 
     if (ents == null || ents.isEmpty()) {
       return entityList;
     }
 
     // add rows that aren't associated with an entity
-    List<DataDescriptor> data_descs_with_ent = new ArrayList();
-    List<DataDescriptor> data_descs_without_ent = new ArrayList();
+    List<DataDescriptor> data_descs_with_ent = new ArrayList<>();
+    List<DataDescriptor> data_descs_without_ent = new ArrayList<>();
 
     final Entity ent0 = ents.get(0);
     final int ent_prop_id = ent0.getPropId();
@@ -159,7 +159,7 @@ public class TLExperiment { // YXXX refactor or rename.  Sole remaining method i
   // TBR? transfer this logic into event details classes?
   private List<PropDescriptor> getChartProps(
       final DataDescriptor dataD, final boolean show_states, final boolean show_charts) {
-    List<PropDescriptor> chartProps = new ArrayList();
+    List<PropDescriptor> chartProps = new ArrayList<>();
 
     Settings.TLData_type tltype = dataD.getTLDataType();
     if (tltype.equals(Settings.TLData_type.TL_SAMPLE)) {
@@ -240,7 +240,7 @@ public class TLExperiment { // YXXX refactor or rename.  Sole remaining method i
       final boolean show_charts,
       final long time_origin,
       final boolean comparing) {
-    final List<RowDefinition> rawDataRows = new ArrayList();
+    final List<RowDefinition> rawDataRows = new ArrayList<>();
     for (DataDescriptor dataD : dscrList) {
       int auxmax = dataD.getAuxCount();
       if (auxmax == 0) { // descriptor doesn't contain multiple types

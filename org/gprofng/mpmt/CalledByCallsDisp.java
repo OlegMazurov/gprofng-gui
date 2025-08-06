@@ -484,7 +484,7 @@ public class CalledByCallsDisp extends FuncListDisp {
       String[] funcNames = ids_names;
       String funcName = AnLocale.getString("Selected function");
       if (funcNames != null && funcNames.length > 0) {
-        funcName = (String) funcNames[0];
+        funcName = funcNames[0];
       }
 
       //                int index = funcName.indexOf('(');

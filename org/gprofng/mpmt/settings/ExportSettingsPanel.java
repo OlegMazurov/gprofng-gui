@@ -45,7 +45,7 @@ public class ExportSettingsPanel extends javax.swing.JPanel {
   private static final Color warningColor = new Color(255, 150, 0);
   ExportSettingsDialog dialog = null;
   DocListener docListener = new DocListener();
-  private List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+  private List<JCheckBox> checkBoxes = new ArrayList<>();
 
   /** Creates new form SaveSettingsPanel */
   public ExportSettingsPanel(ExportSettingsDialog dialog) {
@@ -195,7 +195,7 @@ public class ExportSettingsPanel extends javax.swing.JPanel {
   }
 
   public List<UserPref.What> getWhat() {
-    List<UserPref.What> what = new ArrayList<UserPref.What>();
+    List<UserPref.What> what = new ArrayList<>();
     if (viewsCheckBox.isSelected()) {
       what.add(UserPref.What.VIEWS);
     }

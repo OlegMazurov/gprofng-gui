@@ -42,7 +42,7 @@ public class FilterParser {
   public String go() {
     Stack<Elem> stack = new Stack<Elem>();
     Elem save = null;
-    List<Elem> commas = new ArrayList<Elem>();
+    List<Elem> commas = new ArrayList<>();
 
     if (filter == null) {
       return null;

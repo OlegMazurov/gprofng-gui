@@ -840,7 +840,7 @@ public class UserPref {
   }
 
   public List<ColorRule> getActiveColorRulesDefault() {
-    return new ArrayList<ColorRule>();
+    return new ArrayList<>();
   }
 
   public void setActiveColorRules(List<ColorRule> activeColorRules) {

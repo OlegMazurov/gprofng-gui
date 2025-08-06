@@ -68,8 +68,8 @@ public final class TL2DataFetcher {
     this.timelineView = tl2Disp;
 
     needsFetchAllStackStates = true;
-    stack_htable = new HashMap(1024);
-    stacks_pending = new HashSet();
+    stack_htable = new HashMap<Long, long[]>(1024);
+    stacks_pending = new HashSet<Long>();
     stackFetcherQ = new LinkedBlockingQueue<>();
 
     dataRequestLock = new Object();
@@ -79,7 +79,7 @@ public final class TL2DataFetcher {
     snapshotLock = new Object();
     tl2DataSnapshot = null;
 
-    fetchTLRowDataListeners = new ArrayList();
+    fetchTLRowDataListeners = new ArrayList<>();
 
     ipcContext =
         IPCContext.newDBEIPCContext(
@@ -286,7 +286,7 @@ public final class TL2DataFetcher {
       // start fetching new data.
       List<RowData> rowDataArray = request.snapshot.getRowData();
 
-      List<RowData> fetchRows = new ArrayList();
+      List<RowData> fetchRows = new ArrayList<>();
       // add required rows
       for (int i = request.required_rowStart; i <= request.required_rowEnd; i++) {
         RowData row = rowDataArray.get(i);
@@ -494,7 +494,7 @@ public final class TL2DataFetcher {
           final long binTimeStart = 0;
           final long binTimeEnd = request.binTime - 1;
           for (int bin = 0; bin < perBinStates.length; bin++) {
-            long stateVals[] = (long[]) perBinStates[bin];
+            long stateVals[] = perBinStates[bin];
             if (stateVals == null) {
               continue;
             }
@@ -549,7 +549,7 @@ public final class TL2DataFetcher {
     }
 
     Object[] stacks = anWindow.getStacksFunctions(newStackIdsArray); // IPC!!
-    HashSet<Long> newFunctions = new HashSet();
+    HashSet<Long> newFunctions = new HashSet<Long>();
     synchronized (stack_htable) {
       for (int ii = 0; ii < sz; ii++) {
         long stack_id = newStackIdsArray[ii];
@@ -557,18 +557,12 @@ public final class TL2DataFetcher {
         long[] old = stack_htable.put(stack_id, stack);
         if (old == null) {
           // new stack detected
-          boolean changed = stacks_pending.remove(stack_id);
-          if (!changed) {
-            int iii = 1; // weird
-          }
+          stacks_pending.remove(stack_id);
           // store unique functions
           for (long function : stack) {
-            newFunctions.add(new Long(function));
+            newFunctions.add(function);
           }
         }
-      }
-      if (stacks_pending.size() > 0) {
-        int ii = 1; // for breakpoint.  could happen
       }
     }
     anWindow.getColorChooser().getColorMap().addFunctionsIPC(newFunctions);

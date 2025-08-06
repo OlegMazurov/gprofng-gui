@@ -134,7 +134,7 @@ public final class WelcomeView extends AnDisplay implements ExportSupport, AnCha
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.JPG);
     return formats;
   }

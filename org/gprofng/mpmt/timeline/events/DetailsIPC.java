@@ -60,7 +60,7 @@ public class DetailsIPC {
       final long[] pcs = (long[]) detailVals[3];
       final String[] pcNames = (String[]) detailVals[4];
 
-      List<StackState> stackStates = new ArrayList<StackState>();
+      List<StackState> stackStates = new ArrayList<>();
       for (int i = 0; i < funcs.length; i++) {
         StackViewState svstate = new StackViewState(funcNames[i], pcNames[i], funcs[i], pcs[i]);
         stackStates.add(svstate);

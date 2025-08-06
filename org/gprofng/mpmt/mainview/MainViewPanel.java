@@ -73,9 +73,9 @@ public class MainViewPanel extends javax.swing.JPanel {
   private final SubviewAreaPanel subviewArea2 = new SubviewAreaPanel(SubviewArea.SUBVIEW_AREA_2);
   private final SubviewAreaPanel subviewArea3 = new SubviewAreaPanel(SubviewArea.SUBVIEW_AREA_3);
   private final List<SubviewAreaPanel> subviewAreas =
-      new ArrayList<SubviewAreaPanel>(Arrays.asList(subviewArea1, subviewArea2, subviewArea3));
+      new ArrayList<>(Arrays.asList(subviewArea1, subviewArea2, subviewArea3));
   // List of all added subviews (including custom subviews)
-  private final List<Subview> subviews = new ArrayList<Subview>();
+  private final List<Subview> subviews = new ArrayList<>();
   private final AnSplitPaneFixedRightSize splitPane1;
   private final AnSplitPaneFixedRightSize splitPane2;
   private final AnSplitPaneFixedRightSize splitPane3;

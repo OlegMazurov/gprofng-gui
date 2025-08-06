@@ -754,7 +754,7 @@ public class MetricsGUI {
   }
 
   private JPanel aggregateTreeRootCategory(MetricNode node) {
-    List<Object> rootNodes = new ArrayList<Object>();
+    List<Object> rootNodes = new ArrayList<>();
     int maxWidthAtLevel[] = new int[10];
     int level = 0;
     maxWidthInPixelsOfChildren(node, level + 1, maxWidthAtLevel);
@@ -785,7 +785,7 @@ public class MetricsGUI {
           }
         }
         int maxWidth = maxWidthInPixelsOfChildren(node);
-        List<Bar.ValueColor> barValueColors = new ArrayList<Bar.ValueColor>();
+        List<Bar.ValueColor> barValueColors = new ArrayList<>();
         barValueColors.add(
             new Bar.ValueColor(percent, MetricColors.getColor(child.getMetricBasic().getName())));
         Bar cpuBar = new Bar(barValueColors, percent, compareBars);
@@ -890,7 +890,7 @@ public class MetricsGUI {
           MetricValue metricValue = node.getValues().get(valueNo);
           int percent = metricValue.percentOf(totalValueNode);
 
-          List<ValueColor> valueColorList = new ArrayList<ValueColor>();
+          List<ValueColor> valueColorList = new ArrayList<>();
           if (node.getChildren() != null && !node.getChildren().isEmpty()) {
             for (MetricNode child : node.getChildren()) {
               if (child.getChildren() != null && !child.getChildren().isEmpty()) {
@@ -931,7 +931,7 @@ public class MetricsGUI {
         //                    MetricValue metricValue = node.getValues().get(i);
         //                    int percent = metricValue.percentOf(totalValueNode);
         //
-        //                    List<ValueColor> valueColorList = new ArrayList<ValueColor>();
+        //                    List<ValueColor> valueColorList = new ArrayList<>();
         //                    ValueColor valueColor = new ValueColor(50, Bar.BAR_COMPARE_COLORS[i %
         // 2]);
         //                    valueColorList.add(valueColor);
@@ -970,8 +970,8 @@ public class MetricsGUI {
       totalValueNodeText = rootNode.getMetricBasic().getDisplayName();
     }
 
-    List<BarNode> barNodes = new ArrayList<BarNode>();
-    List<Bar.ValueColor> barValueColors = new ArrayList<Bar.ValueColor>();
+    List<BarNode> barNodes = new ArrayList<>();
+    List<Bar.ValueColor> barValueColors = new ArrayList<>();
     List<MetricNode> children = node.getChildren();
     for (MetricNode child : children) {
       if (child.getMetricType() == MetricNode.MetricType.PLAIN) {
@@ -1016,7 +1016,7 @@ public class MetricsGUI {
         }
         Vector<AnBarTree.BarNode> vector =
             aggregateTreeCategory(rootNode, child, maxWidthAtLevel, level + 1);
-        List<Bar.ValueColor> barValueColorsThisBar = new ArrayList<Bar.ValueColor>();
+        List<Bar.ValueColor> barValueColorsThisBar = new ArrayList<>();
         for (AnBarTree.BarNode barNode : vector) {
           List<ValueColor> valueColorList = barNode.getBar().getValueColor();
           for (ValueColor valueColor : valueColorList) {

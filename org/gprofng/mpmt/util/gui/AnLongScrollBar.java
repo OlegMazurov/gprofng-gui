@@ -95,7 +95,7 @@ public class AnLongScrollBar extends JScrollBar {
           }
         });
 
-    longListeners = new ArrayList();
+    longListeners = new ArrayList<>();
 
     super.setValues(0, 0, 0, 0);
   }

@@ -505,7 +505,7 @@ public class LibraryVisibilityPanel extends JPanel implements AnChangeListener {
   }
 
   public void save() {
-    List<LibraryVisibilitySetting.Entry> list = new ArrayList<LibraryVisibilitySetting.Entry>();
+    List<LibraryVisibilitySetting.Entry> list = new ArrayList<>();
     for (GUIEntry guiEntry : entryListOriginal) {
       list.add(guiEntry.entry.copy());
     }
@@ -556,8 +556,8 @@ public class LibraryVisibilityPanel extends JPanel implements AnChangeListener {
                   @Override
                   public void run() {
                     anyJava = false;
-                    entryListOriginal = new ArrayList<GUIEntry>();
-                    entryListSortedFiltered = new ArrayList<GUIEntry>();
+                    entryListOriginal = new ArrayList<>();
+                    entryListSortedFiltered = new ArrayList<>();
                     List<LibraryVisibilitySetting.Entry> list =
                         AnWindow.getInstance().getSettings().getLibraryVisibilitySetting().get();
                     for (LibraryVisibilitySetting.Entry entry : list) {
@@ -1155,7 +1155,7 @@ public class LibraryVisibilityPanel extends JPanel implements AnChangeListener {
   } // GEN-LAST:event_refreshButtonActionPerformed
 
   private List<GUIEntry> filterEntries(List<GUIEntry> origList, boolean java) {
-    List<GUIEntry> list = new ArrayList<GUIEntry>();
+    List<GUIEntry> list = new ArrayList<>();
     for (GUIEntry guiEntry : origList) {
       if (guiEntry.isJava() == java) {
         list.add(guiEntry);
@@ -1169,7 +1169,7 @@ public class LibraryVisibilityPanel extends JPanel implements AnChangeListener {
     String[] substrings =
         rawIncludeFilterString.split(" "); // multiword match  //FIXUP bypass escaped spaces?
     //        String[] substrings = {raw_includeFilterString}; // exact text match
-    List<String> clauses = new ArrayList();
+    List<String> clauses = new ArrayList<>();
     for (int ii = 0; ii < substrings.length; ii++) {
       if (substrings[ii].isEmpty()) {
         continue; // strip out empty clauses caused by consecutive spaces
@@ -1178,9 +1178,9 @@ public class LibraryVisibilityPanel extends JPanel implements AnChangeListener {
     }
     final List<GUIEntry> newList;
     if (clauses.isEmpty()) {
-      newList = new ArrayList(origList);
+      newList = new ArrayList<>(origList);
     } else {
-      newList = new ArrayList();
+      newList = new ArrayList<>();
       for (GUIEntry entry : origList) {
         boolean pass = false;
         for (String clause : clauses) {

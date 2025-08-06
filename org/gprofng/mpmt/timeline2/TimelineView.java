@@ -1033,7 +1033,7 @@ public final class TimelineView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public java.util.List<ExportFormat> getSupportedExportFormats() {
-    java.util.List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    java.util.List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.JPG);
     return formats;
   }
@@ -1045,7 +1045,7 @@ public final class TimelineView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubviewTimeLine());
     list.add(window.getTimelineCallStackSubview());
     return list;
@@ -1053,7 +1053,7 @@ public final class TimelineView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubviewTimeLine());
     list.add(window.getTimelineCallStackSubview());
     return list;

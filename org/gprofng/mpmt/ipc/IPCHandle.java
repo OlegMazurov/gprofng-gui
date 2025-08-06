@@ -114,7 +114,7 @@ public class IPCHandle {
     }
   };
 
-  private List<IPCListener> ipcListeners = new ArrayList<IPCListener>();
+  private List<IPCListener> ipcListeners = new ArrayList<>();
   private RequestType requestType;
   private IPCContext ipcContext;
   private IPCRequest ipcRequest;

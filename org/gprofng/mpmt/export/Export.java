@@ -172,7 +172,7 @@ public class Export {
       window.IPC().send("setPrintLimit");
       window.IPC().send(0);
       window.IPC().send(limit);
-      return (String) window.IPC().recvString();
+      return window.IPC().recvString();
     }
   }
 

@@ -35,7 +35,7 @@ public final class Experiments {
   // Constructor
   public Experiments(final AnWindow awindow) {
     this.w_IPC = awindow;
-    experiments = new ArrayList();
+    experiments = new ArrayList<>();
   }
 
   // --- public experiment interface ----
@@ -129,7 +129,7 @@ public final class Experiments {
         || groupIds == null) {
       return null;
     }
-    final List<ExperimentProperties.BasicInfo> basicInfoList = new ArrayList();
+    final List<ExperimentProperties.BasicInfo> basicInfoList = new ArrayList<>();
     final long[] offset_time = (long[]) timeObject[0]; // ipcGetRelativeStartTime(exp_id);
     final long[] start_time = (long[]) timeObject[1]; // ipcGetStartTime(exp_id);
     final long[] end_time = (long[]) timeObject[2]; // ipcGetEndTime  (exp_id);
@@ -175,7 +175,7 @@ public final class Experiments {
     if (list == null) {
       return null;
     }
-    final List<List<DataDescriptor>> dataDescriptorList = new ArrayList();
+    final List<List<DataDescriptor>> dataDescriptorList = new ArrayList<>();
     final Object[] dataDescrsInfo = (Object[]) (list[0]);
     final Object[] dataDescrsProps = (Object[]) (list[1]); // array of dbeGetDataPropertiesV2()
     final int size = dataDescrsInfo.length;
@@ -193,7 +193,7 @@ public final class Experiments {
   private List<DataDescriptor> processGetExperimentDataDescriptors_experiment(
       final Object[] dataDescrsInfo, // ipcGetDataDescriptorsV2(exp_id);
       final Object[] dataDescrsProps) {
-    final ArrayList<DataDescriptor> dataDescriptors = new ArrayList();
+    final ArrayList<DataDescriptor> dataDescriptors = new ArrayList<>();
     if (dataDescrsProps == null || dataDescrsInfo == null) {
       return dataDescriptors;
     }
@@ -222,7 +222,7 @@ public final class Experiments {
   }
 
   private ArrayList<PropDescriptor> processDataPropertiesV2(final Object[] list) {
-    final ArrayList<PropDescriptor> propDescriptors = new ArrayList();
+    final ArrayList<PropDescriptor> propDescriptors = new ArrayList<>();
     if (list == null || list.length == 0) {
       return propDescriptors;
     }

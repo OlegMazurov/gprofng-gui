@@ -316,7 +316,7 @@ public abstract class AnDisplay extends JPanel {
   }
 
   public List<JComponent> getDefaultFilterMenuItems() {
-    List<JComponent> menuItems = new ArrayList<JComponent>();
+    List<JComponent> menuItems = new ArrayList<>();
     JMenuItem menuItem;
 
     CustomFilterAction customFilter = new CustomFilterAction();
@@ -353,7 +353,7 @@ public abstract class AnDisplay extends JPanel {
   }
 
   public List<Subview> getVisibleSubviews() {
-    return new ArrayList<Subview>();
+    return new ArrayList<>();
   }
 
   public List<Subview> getSelectedSubviews() {

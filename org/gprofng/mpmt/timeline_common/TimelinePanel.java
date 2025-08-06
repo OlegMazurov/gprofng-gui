@@ -150,7 +150,7 @@ public class TimelinePanel extends JPanel {
     }
   }
 
-  private List<ZoomHistoryEvent> zoomHistory = new ArrayList();
+  private List<ZoomHistoryEvent> zoomHistory = new ArrayList<>();
   private int zoomHistoryIdx = 0; // position of next add, can't undo from here
   private long visible_time_start = 0; // first time visible on screen
   private long visible_time_end = 0; // last  time visible on screen
@@ -276,7 +276,7 @@ public class TimelinePanel extends JPanel {
     // sync with calculators
     initAxisCalculators();
 
-    change_listeners = new Vector();
+    change_listeners = new Vector<>();
     handcursors = new TimelineCursor();
 
     timeCaliper = new TimelineCaliper(0, 0);
@@ -2292,8 +2292,8 @@ public class TimelinePanel extends JPanel {
   }
 
   private void updateHRulerCalipers() {
-    List<Long> valueList = new ArrayList();
-    List<RangeRuler.TabStopTypes> typeList = new ArrayList();
+    List<Long> valueList = new ArrayList<>();
+    List<RangeRuler.TabStopTypes> typeList = new ArrayList<>();
     TimelineCaliper caliper = timeCaliper;
     if (caliper != null) {
       valueList.add(caliper.getLowTime());

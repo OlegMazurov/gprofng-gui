@@ -218,7 +218,7 @@ public final class AnUtility {
   public static final ImageIcon analyzer_icon = getImageIcon("analyzer64.png"); // NOI18N
 
   private static final int chkbox_height = (new JLabel(" ")).getPreferredSize().height; // NOI18N;
-  private static WeakReference wrEnv, wrSigMap;
+  private static WeakReference<Map<String, Integer>> wrSigMap;
   private static boolean lib_path_set = false;
   private static AnThreadGroup threadGroup = new AnThreadGroup();
 
@@ -264,7 +264,7 @@ public final class AnUtility {
 
   public static String getRemoteOutput(String cmd) {
     String rc = Analyzer.getInstance().remoteConnectCommand;
-    ArrayList<String> args = new ArrayList<String>(
+    ArrayList<String> args = new ArrayList<>(
         Arrays.asList(rc.split("\\s+")));
     args.add(cmd);
 
@@ -618,7 +618,7 @@ public final class AnUtility {
 
   // Get experiment list
   public static List<String> getExpList(final String[] args) {
-    final List<String> exp_list = new ArrayList<String>();
+    final List<String> exp_list = new ArrayList<>();
     final int size = args.length;
     for (int i = 0; i < size; i++) {
       List<String> list = getGroupList(args[i]);
@@ -634,7 +634,7 @@ public final class AnUtility {
   // Get experiment from group file
   public static List<String> getGroupList(String path) {
     String line;
-    final List<String> exp_list = new ArrayList<String>();
+    final List<String> exp_list = new ArrayList<>();
     BufferedReader br = null;
 
     try {
@@ -857,9 +857,9 @@ public final class AnUtility {
     try {
       ret = Integer.parseInt(signal);
     } catch (NumberFormatException e) {
-      Map sig_map = (wrSigMap == null) ? null : (Map) wrSigMap.get();
+      Map<String, Integer> sig_map = (wrSigMap == null) ? null : wrSigMap.get();
       if (sig_map == null) {
-        sig_map = new HashMap(100);
+        sig_map = new HashMap<String, Integer>(100);
         sig_map.put("SIGHUP", 1); // NOI18N
         sig_map.put("SIGINT", 2); // NOI18N
         sig_map.put("SIGQUIT", 3); // NOI18N
@@ -893,7 +893,7 @@ public final class AnUtility {
         sig_map.put("SIGPROF", 29); // NOI18N
         sig_map.put("SIGXCPU", 30); // NOI18N
         sig_map.put("SIGXFSZ", 31); // NOI18N
-        wrSigMap = new WeakReference(sig_map);
+        wrSigMap = new WeakReference<Map<String, Integer>>(sig_map);
       }
 
       signal = signal.trim();
@@ -904,7 +904,7 @@ public final class AnUtility {
       if (ret > 0) {
         return ret;
       }
-      final Integer obj = (Integer) sig_map.get(signal);
+      final Integer obj = sig_map.get(signal);
       if (obj != null) {
         ret = obj.intValue();
       }

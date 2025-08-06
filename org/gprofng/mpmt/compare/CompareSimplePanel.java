@@ -318,7 +318,7 @@ public class CompareSimplePanel extends javax.swing.JPanel {
   }
 
   public String[][] getExperimentGroups() {
-    List<String> experiments = new ArrayList<String>();
+    List<String> experiments = new ArrayList<>();
     for (int i = 0; i < noExperimentChoosers; i++) {
       String experimentPath = (String) experimentChooserComboBoxes[i].getSelectedItem();
       if (experimentPath != null && experimentPath.length() > 0) {

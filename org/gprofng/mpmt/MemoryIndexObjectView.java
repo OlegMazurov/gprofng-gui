@@ -117,14 +117,14 @@ public final class MemoryIndexObjectView extends FuncListDisp implements AnChang
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }

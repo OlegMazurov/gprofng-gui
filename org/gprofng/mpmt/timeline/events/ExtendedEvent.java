@@ -43,7 +43,8 @@ public abstract class ExtendedEvent extends EventDetail {
     this.thrid = thrid;
     this.cpuid = cpuid;
 
-    if (stack != 0) this.stack = new Long(stack);
+    if (stack != 0)
+      this.stack = stack;
     else this.stack = null;
     this.stackStates = Collections.unmodifiableList(stackStates);
     this.func = func;
@@ -61,10 +62,12 @@ public abstract class ExtendedEvent extends EventDetail {
     return cpuid;
   }
 
+  @Override
   public final long getStack() {
     return stack.longValue();
   }
 
+  @Override
   public final List<StackState> getStackStates() {
     return stackStates;
   }

@@ -357,7 +357,7 @@ public final class SourceDisassemblyView extends AnDisplay
 
   @Override
   public java.util.List<ExportFormat> getSupportedExportFormats() {
-    java.util.List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    java.util.List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.JPG);
     formats.add(ExportFormat.TEXT);
     return formats;
@@ -370,7 +370,7 @@ public final class SourceDisassemblyView extends AnDisplay
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     list.add(window.getTimelineCallStackSubview());
     list.add(window.getIoCallStackSubview());
@@ -379,7 +379,7 @@ public final class SourceDisassemblyView extends AnDisplay
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }

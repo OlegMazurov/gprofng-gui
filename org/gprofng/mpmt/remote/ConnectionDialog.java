@@ -49,7 +49,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
 
   public static final String help_id = AnVariable.HELP_ConnectRemoteHost;
   private static String startDir = null;
-  private JComboBox hostNameComboBox;
+  private JComboBox<String> hostNameComboBox;
   private JTextField file;
   private JTextField usernameTextField;
   private JTextField solstudioPathTextField;
@@ -151,7 +151,7 @@ public final class ConnectionDialog extends AnDialog implements ItemListener {
   }
 
   protected List<Authentication> getAuthenticationsCopy() {
-    List<Authentication> copy = new ArrayList<Authentication>();
+    List<Authentication> copy = new ArrayList<>();
     for (Authentication auth : authentications) {
       Authentication authCopy = auth.copy();
       copy.add(authCopy);

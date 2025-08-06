@@ -72,8 +72,8 @@ import javax.swing.event.PopupMenuListener;
 
 public class ViewsPanel extends javax.swing.JPanel {
 
-  private List<ViewPanel> viewPanelList = new ArrayList();
-  private List<ViewPanel> viewPanelOriginalOrder = new ArrayList();
+  private List<ViewPanel> viewPanelList = new ArrayList<>();
+  private List<ViewPanel> viewPanelOriginalOrder = new ArrayList<>();
   private int dropLine = -1;
   private static final int dropLineOffset = 0;
   private int gridY = 2;
@@ -168,7 +168,7 @@ public class ViewsPanel extends javax.swing.JPanel {
                   int y1 = 0;
                   int y2 = 0;
                   for (int i = 0; i < viewPanelList.size(); i++) {
-                    ViewPanel viewPanel = (ViewPanel) viewPanelList.get(i);
+                    ViewPanel viewPanel = viewPanelList.get(i);
                     if (!viewPanel.isShown()) {
                       continue;
                     }
@@ -412,7 +412,7 @@ public class ViewsPanel extends javax.swing.JPanel {
 
     int i;
     for (i = viewPanelList.size() - 1; i >= 0; i--) {
-      ViewPanel viewPanel = (ViewPanel) viewPanelList.get(i);
+      ViewPanel viewPanel = viewPanelList.get(i);
       if (viewPanel.isShown()) {
         break;
       }
@@ -620,7 +620,7 @@ public class ViewsPanel extends javax.swing.JPanel {
     if (viewPanelList == null || viewPanelList.isEmpty()) {
       return getSavedViewPanelOrderList(); // from user pref.
     }
-    List<ViewPanelOrder> list = new ArrayList();
+    List<ViewPanelOrder> list = new ArrayList<>();
     for (ViewPanel viewPanel : viewPanelList) {
       list.add(new ViewPanelOrder(viewPanel.getView().getName(), viewPanel.isShown()));
     }

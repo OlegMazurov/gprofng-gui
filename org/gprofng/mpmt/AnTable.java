@@ -2211,7 +2211,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
         return;
       }
 
-      fireAnEvent(new AnEvent(anTable, AnEvent.EVT_SWITCH, from, new Integer(to)));
+      fireAnEvent(new AnEvent(anTable, AnEvent.EVT_SWITCH, from, to));
     }
 
     @Override
@@ -2237,7 +2237,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
 
           if (type == AnDisplay.DSP_Callers) {
             width = resizingColumn.getWidth();
-            fireAnEvent(new AnEvent(anTable, AnEvent.EVT_RESIZE, columnIndex, new Integer(width)));
+            fireAnEvent(new AnEvent(anTable, AnEvent.EVT_RESIZE, columnIndex, width));
           }
 
           break;
@@ -2464,7 +2464,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
         column.setWidth(ext_width);
 
         if (type == AnDisplay.DSP_Callers) {
-          fireAnEvent(new AnEvent(anTable, AnEvent.EVT_RESIZE, nameColumn, new Integer(ext_width)));
+          fireAnEvent(new AnEvent(anTable, AnEvent.EVT_RESIZE, nameColumn, ext_width));
         }
       }
 
@@ -2682,7 +2682,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
     }
 
     // Object which stores the un-sorted row index
-    private final class Row implements Comparable {
+    private final class Row implements Comparable<Row> {
 
       public final int index;
 
@@ -2690,9 +2690,9 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
         this.index = index;
       }
 
-      public final int compareTo(final Object other) {
+      public final int compareTo(final Row other) {
         final int col = (sortColumn >= 0) ? sortColumn : -sortColumn - 1;
-        final int index_o = ((Row) other).index;
+        final int index_o = other.index;
 
         final Object a = data[col][index];
         final Object b = data[col][index_o];
@@ -2743,7 +2743,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
         return new TableColumn();
       }
       try {
-        tc = (TableColumn) tableColumns.elementAt(columnIndex);
+        tc = tableColumns.elementAt(columnIndex);
       } catch (java.lang.ArrayIndexOutOfBoundsException e) {
         tc = new TableColumn();
       }
@@ -2757,7 +2757,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
     }
     final int model_col = table.convertColumnIndexToModel(colNum);
     tableModel.sort(model_col);
-    AnEvent ev = new AnEvent(anTable, AnEvent.EVT_SORT, model_col, type, new Integer(colNum));
+    AnEvent ev = new AnEvent(anTable, AnEvent.EVT_SORT, model_col, type, colNum);
     fireAnEvent(ev);
     table.requestFocus();
   }
@@ -3517,7 +3517,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
 
         // add "show callee source/disasm"
         int[] selectedRows = table.getSelectedRows();
-        ArrayList<Integer> callsiteRows = new ArrayList<Integer>();
+        ArrayList<Integer> callsiteRows = new ArrayList<>();
         for (int i = 0; i < selectedRows.length; i++) {
           int sr = selectedRows[i];
           ArrayList<SelObjInfo> calleeFuncs = renderer.calleeInfo.get(sr);
@@ -5118,7 +5118,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
     private ArrayList<HashMap<String, NavigationHistory>> historyPool = null;
 
     public NavigationHistoryPool() {
-      historyPool = new ArrayList<HashMap<String, NavigationHistory>>();
+      historyPool = new ArrayList<>();
       for (int i = 0; i < 3; i++) {
         historyPool.add(new HashMap<String, NavigationHistory>());
       }
@@ -5171,7 +5171,7 @@ public final class AnTable extends AnTableScrollPane implements AnChangeListener
 
     public NavigationHistory() {
       curPos = -1;
-      history = new ArrayList<SelObjInfo>();
+      history = new ArrayList<>();
       enabled = true;
       newAdded = false;
     }

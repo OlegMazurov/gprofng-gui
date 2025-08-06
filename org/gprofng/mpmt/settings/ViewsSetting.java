@@ -75,7 +75,7 @@ public class ViewsSetting extends Setting {
     }
 
     private void reset() {
-      viewList = new ArrayList<View>();
+      viewList = new ArrayList<>();
       preferredViewName = null;
     }
 
@@ -148,7 +148,7 @@ public class ViewsSetting extends Setting {
     }
 
     private List<View> getSelectedViews() {
-      List<View> list = new ArrayList<View>();
+      List<View> list = new ArrayList<>();
       for (View view : viewList) {
         if (view.isSelected()) {
           list.add(view);
@@ -158,7 +158,7 @@ public class ViewsSetting extends Setting {
     }
 
     private List<View> getStaticViews() {
-      List<View> list = new ArrayList<View>();
+      List<View> list = new ArrayList<>();
       for (View view : viewList) {
         if (view.getAnDispTab().getTType() == AnDisplay.DSP_Welcome
             || view.getAnDispTab().getTType() == AnDisplay.DSP_Overview) {
@@ -169,7 +169,7 @@ public class ViewsSetting extends Setting {
     }
 
     private List<View> getStandardViews() {
-      List<View> list = new ArrayList<View>();
+      List<View> list = new ArrayList<>();
       for (View view : viewList) {
 
         if (view.getAnDispTab().getTType() != AnDisplay.DSP_Welcome
@@ -183,7 +183,7 @@ public class ViewsSetting extends Setting {
     }
 
     private List<View> getIndexViews() {
-      List<View> list = new ArrayList<View>();
+      List<View> list = new ArrayList<>();
       for (View view : viewList) {
         if (view.getAnDispTab().getTType() == AnDisplay.DSP_IndexObject) {
           list.add(view);
@@ -193,7 +193,7 @@ public class ViewsSetting extends Setting {
     }
 
     private List<View> getMemoryViews() {
-      List<View> list = new ArrayList<View>();
+      List<View> list = new ArrayList<>();
       for (View view : viewList) {
         if (view.getAnDispTab().getTType() == AnDisplay.DSP_MemoryObject) {
           list.add(view);
@@ -365,11 +365,11 @@ public class ViewsSetting extends Setting {
           new AnDispTab[] {window.new AnDispTab(AnDisplay.DSP_Welcome, "welcome", null, null)};
       staticSelected = new boolean[] {true};
       listStatic = addStaticObjects(staticObjs);
-      listStandard = new ArrayList<AnDispTab>();
+      listStandard = new ArrayList<>();
       standardViewsSelected = new boolean[0];
-      listIndex = new ArrayList<AnDispTab>();
+      listIndex = new ArrayList<>();
       indexViewsSelected = new boolean[0];
-      listMemory = new ArrayList<AnDispTab>();
+      listMemory = new ArrayList<>();
       memoryViewsSelected = new boolean[0];
       preferredViewName = staticObjs[0].getTCmd();
     } else {
@@ -535,7 +535,7 @@ public class ViewsSetting extends Setting {
 
   public void addCustomIndexObject(String name, String command, String shortDesc, String ldesc) {
     if (customIndexObjects == null) {
-      customIndexObjects = new ArrayList<CustomObject>();
+      customIndexObjects = new ArrayList<>();
     }
     customIndexObjects.add(new CustomObject(name, command, shortDesc, ldesc));
   }
@@ -547,7 +547,7 @@ public class ViewsSetting extends Setting {
   public void addCustomMemoryObject(
       String name, String command, String shortDesc, String longDesc) {
     if (customMemoryObjects == null) {
-      customMemoryObjects = new ArrayList<CustomObject>();
+      customMemoryObjects = new ArrayList<>();
     }
     customMemoryObjects.add(new CustomObject(name, command, shortDesc, longDesc));
   }
@@ -557,7 +557,7 @@ public class ViewsSetting extends Setting {
   }
 
   private List<AnDispTab> addStaticObjects(AnDispTab[] staticObjs) {
-    List<AnDispTab> list = new ArrayList<AnDispTab>();
+    List<AnDispTab> list = new ArrayList<>();
 
     for (int i = 0; i < staticObjs.length; i++) {
       AnDispTab anDispTab = staticObjs[i];
@@ -568,7 +568,7 @@ public class ViewsSetting extends Setting {
   }
 
   private List<AnDispTab> addStandardObjects(Object[] tabObjs) {
-    List<AnDispTab> list = new ArrayList<AnDispTab>();
+    List<AnDispTab> list = new ArrayList<>();
 
     AnWindow window = AnWindow.getInstance();
     int[] ids = (int[]) tabObjs[0];
@@ -586,7 +586,7 @@ public class ViewsSetting extends Setting {
   }
 
   private List<AnDispTab> addIndexObjects(Object[] indxObjs) {
-    List<AnDispTab> list = new ArrayList<AnDispTab>();
+    List<AnDispTab> list = new ArrayList<>();
 
     AnWindow window = AnWindow.getInstance();
     int[] ids = (int[]) indxObjs[0];
@@ -610,7 +610,7 @@ public class ViewsSetting extends Setting {
   }
 
   private List<AnDispTab> addMemoryObjects(Object[] memObjs) {
-    List<AnDispTab> list = new ArrayList<AnDispTab>();
+    List<AnDispTab> list = new ArrayList<>();
 
     AnWindow window = AnWindow.getInstance();
     int[] ids = (int[]) memObjs[0];
@@ -694,7 +694,7 @@ public class ViewsSetting extends Setting {
   }
 
   public List<View> getStaticViews() {
-    List<View> list = new ArrayList<View>();
+    List<View> list = new ArrayList<>();
     for (View view : setting.getStaticViews()) {
       list.add(view);
     }
@@ -702,7 +702,7 @@ public class ViewsSetting extends Setting {
   }
 
   public List<View> getStandardViews() {
-    List<View> list = new ArrayList<View>();
+    List<View> list = new ArrayList<>();
     for (View view : setting.getStandardViews()) {
       list.add(view);
     }
@@ -710,7 +710,7 @@ public class ViewsSetting extends Setting {
   }
 
   public List<View> getIndexViews() {
-    List<View> list = new ArrayList<View>();
+    List<View> list = new ArrayList<>();
     for (View view : setting.getIndexViews()) {
       list.add(view);
     }
@@ -718,7 +718,7 @@ public class ViewsSetting extends Setting {
   }
 
   public List<View> getMemoryViews() {
-    List<View> list = new ArrayList<View>();
+    List<View> list = new ArrayList<>();
     for (View view : setting.getMemoryViews()) {
       list.add(view);
     }
@@ -726,7 +726,7 @@ public class ViewsSetting extends Setting {
   }
 
   public List<AnDispTab> getSelectedViews() {
-    List<AnDispTab> list = new ArrayList<AnDispTab>();
+    List<AnDispTab> list = new ArrayList<>();
     for (View view : setting.getSelectedViews()) {
       list.add(view.getAnDispTab());
     }
@@ -779,7 +779,7 @@ public class ViewsSetting extends Setting {
   private void cleanUpOldObjects2(List<View> list) {
     if (list != null) {
       for (int i = 0; i < list.size(); i++) {
-        View view = (View) list.get(i);
+        View view = list.get(i);
         AnDisplay anDisplay = view.getAnDispTab().getTComp();
 
         if (anDisplay instanceof MemoryIndexObjectView) {
@@ -832,7 +832,7 @@ public class ViewsSetting extends Setting {
   }
 
   public List<JComponent> createViewsSettingsSelector() {
-    List<JComponent> componentList = new ArrayList<JComponent>();
+    List<JComponent> componentList = new ArrayList<>();
     componentList.add(AnWindow.getInstance().getViewsSettingsAction().getMenuItem());
     return componentList;
   }

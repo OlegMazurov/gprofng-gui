@@ -286,7 +286,7 @@ public final class AnWindow implements AnChangeListener {
   private ConnectionDialog connectionChooser = null;
   private AnChooser anRemoteFileChooser;
   private JLabel viewModeLabel;
-  private JComboBox viewModeComboBox;
+  private JComboBox<ViewMode> viewModeComboBox;
   private ToolBarSeparator viewModeSeparator;
   private ToolBarFiller viewModeFiller;
   private CollectDialog profileApplicationDialog = null;
@@ -384,7 +384,7 @@ public final class AnWindow implements AnChangeListener {
   private CalledByCallsFunctionsView calledByCallsFunctionsView;
 
   // Subviews
-  private List<Subview> subviewList = new ArrayList(); // List of all subviews, may contain null's
+  private List<Subview> subviewList = new ArrayList<>(); // List of all subviews, may contain null's
   private Subview selectedDetailsSubview = null;
   private Subview selectedDetailsSubviewTimeLine = null;
   private Subview timelineCallStackSubview = null;
@@ -935,7 +935,7 @@ public final class AnWindow implements AnChangeListener {
         AnLocale.getString(
             "The View Mode setting controls the processing of Java experiments and OpenMP"
                 + " experiments");
-    viewModeComboBox = new JComboBox();
+    viewModeComboBox = new JComboBox<ViewMode>();
     viewModeLabel.setLabelFor(viewModeComboBox);
     viewModeComboBox.setFont(viewModeComboBox.getFont().deriveFont(Font.PLAIN));
     viewModeComboBox.setToolTipText(viewModeComboBoxTT);
@@ -1158,7 +1158,7 @@ public final class AnWindow implements AnChangeListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      ArrayList<String> list = new ArrayList<String>();
+      ArrayList<String> list = new ArrayList<>();
       list.add(experimentPickListElement.getPath());
       String confPath;
       boolean always;
@@ -1191,7 +1191,7 @@ public final class AnWindow implements AnChangeListener {
     String loc_string = AnLocale.getString("gprofng Main Window");
     context.setAccessibleName(loc_string);
     context.setAccessibleDescription(loc_string);
-    standardDisplayList = new ArrayList<AnDisplay>();
+    standardDisplayList = new ArrayList<>();
     // welcomeDisp pane
     welcomeView = new WelcomeView();
     standardDisplayList.add(welcomeView);
@@ -1847,7 +1847,7 @@ public final class AnWindow implements AnChangeListener {
         new Runnable() {
           @Override
           public void run() {
-            List<AnDispTab> list = new ArrayList<AnDispTab>();
+            List<AnDispTab> list = new ArrayList<>();
             getViewsPanel().removeAllViews();
 
             AnDispTab welcome = getWelcomeDispTab();
@@ -1872,7 +1872,7 @@ public final class AnWindow implements AnChangeListener {
         new Runnable() {
           @Override
           public void run() {
-            List<AnDispTab> list = new ArrayList<AnDispTab>();
+            List<AnDispTab> list = new ArrayList<>();
             getViewsPanel().removeAllViews();
 
             AnDispTab welcome = getWelcomeDispTab();
@@ -2343,7 +2343,7 @@ public final class AnWindow implements AnChangeListener {
       String configPath = UserPref.getAsWhenClosedConfigPath(groups[0][0]);
       //            System.out.println("AnWindow:saveExperimentSettings:configPath: " + configPath);
 
-      List<UserPref.What> what = new ArrayList<UserPref.What>();
+      List<UserPref.What> what = new ArrayList<>();
       what.add(UserPref.What.VIEWS);
       what.add(UserPref.What.METRICS);
       what.add(UserPref.What.TIMELINE);
@@ -2361,7 +2361,7 @@ public final class AnWindow implements AnChangeListener {
   }
 
   private void saveAnalyzerSettings() {
-    List<UserPref.What> what = new ArrayList<UserPref.What>();
+    List<UserPref.What> what = new ArrayList<>();
     what.add(UserPref.What.USER);
     UserPref.getInstance().save(UserPref.getAnalyzerInitFilePath(), what);
   }
@@ -2506,7 +2506,7 @@ public final class AnWindow implements AnChangeListener {
         new Runnable() {
           @Override
           public void run() {
-            memoryIndexDisplayList = new ArrayList<AnDisplay>();
+            memoryIndexDisplayList = new ArrayList<>();
             getFilters().resetAllFiltersAction();
             setTitle(null);
             if (anyExperiments) {
@@ -2552,7 +2552,7 @@ public final class AnWindow implements AnChangeListener {
       synchronized (IPC.lock) {
         IPC().send("setExperimentsGroups");
         IPC().send(groups);
-        msg = (String) (IPC().recvString());
+        msg = IPC().recvString();
       }
       if (msg == null) {
         // Experiment(s) did load but may have non-fatal errors or warnings
@@ -2778,7 +2778,7 @@ public final class AnWindow implements AnChangeListener {
 
   private void updatePickList(
       String[][] groups, String workingDirectory, String confPath, boolean alwaysUseThisConf) {
-    List<PickListElement> list = new ArrayList<PickListElement>();
+    List<PickListElement> list = new ArrayList<>();
     for (String[] group : groups) {
       for (String experiment : group) {
         experiment = AnUtility.toFullPath(experiment);

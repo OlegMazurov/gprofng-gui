@@ -60,7 +60,7 @@ public class SearchPathSetting extends Setting {
   }
 
   public static List<String> getDefaultSearchPath() {
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<>();
     list.add("$expts");
     list.add(".");
     return list;
@@ -83,7 +83,7 @@ public class SearchPathSetting extends Setting {
   }
 
   public List<String> get() {
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<>();
     for (String s : searchPath) {
       list.add(s);
     }

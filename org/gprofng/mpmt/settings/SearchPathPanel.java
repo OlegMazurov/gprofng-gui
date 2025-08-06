@@ -39,7 +39,7 @@ import javax.swing.event.ListSelectionEvent;
 
 public class SearchPathPanel extends javax.swing.JPanel {
   private static Color shadedBackground = new Color(246, 246, 246);
-  private List<String> data = new ArrayList<String>();
+  private List<String> data = new ArrayList<>();
   private PMListSelectionListener fromListSelectionListener;
   private PMDocumentListener pmDocumentListener;
   private Settings settings;
@@ -95,7 +95,7 @@ public class SearchPathPanel extends javax.swing.JPanel {
   private class LCR extends DefaultListCellRenderer {
     @Override
     public Component getListCellRendererComponent(
-        JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
       JLabel label =
           (JLabel)
               super.getListCellRendererComponent(

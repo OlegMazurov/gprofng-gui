@@ -194,10 +194,10 @@ public final class TimelineDraw {
     this.colorMap = colorMap;
     stateColorSnapshot = null;
 
-    rowGeometry = new ArrayList();
-    rowGeometryByEntity = new ArrayList();
-    multiselect_rows = new TreeSet();
-    rowNumToEntityNum = new ArrayList();
+    rowGeometry = new ArrayList<>();
+    rowGeometryByEntity = new ArrayList<>();
+    multiselect_rows = new TreeSet<>();
+    rowNumToEntityNum = new ArrayList<>();
 
     // options
     setVZoomLevel(13); // YXXX default, should be set somewhere else?
@@ -280,7 +280,7 @@ public final class TimelineDraw {
   }
 
   public void setSelectedRows(TreeSet<Integer> selected_entities) {
-    multiselect_rows = new TreeSet();
+    multiselect_rows = new TreeSet<Integer>();
     if (recentDataSnapshot == null) {
       // with current design shouldn't happen.  If needed, we could save a copy of selected_entities
       return; // experiment load in progress
@@ -380,9 +380,9 @@ public final class TimelineDraw {
         message = AnLocale.getString("Data not available for this filter selection");
       }
       drawCenteredMessage(g, message, visibleWidth / 2, visibleHeight / 2);
-      rowGeometry = new ArrayList();
-      rowGeometryByEntity = new ArrayList();
-      rowNumToEntityNum = new ArrayList();
+      rowGeometry = new ArrayList<>();
+      rowGeometryByEntity = new ArrayList<>();
+      rowNumToEntityNum = new ArrayList<>();
       iconRuler.setRowGeometry(rowGeometry, 0, -1, -1, -1, multiselect_rows);
       return;
     }
@@ -917,9 +917,9 @@ public final class TimelineDraw {
       return;
     }
     recentDataSnapshot = dataSnapshot;
-    rowGeometry = new ArrayList();
-    rowGeometryByEntity = new ArrayList();
-    rowNumToEntityNum = new ArrayList();
+    rowGeometry = new ArrayList<>();
+    rowGeometryByEntity = new ArrayList<>();
+    rowNumToEntityNum = new ArrayList<>();
     usedHeight = 0; // # of pixels used on virtual vertical axis
 
     { // set globals used in selecting spacing
@@ -950,7 +950,7 @@ public final class TimelineDraw {
     List<ExperimentData> expList;
     final int overallEntityCount;
     if (dataSnapshot == null) {
-      expList = new ArrayList();
+      expList = new ArrayList<>();
       overallEntityCount = 0;
     } else {
       expList = dataSnapshot.getExperimentData();
@@ -960,8 +960,8 @@ public final class TimelineDraw {
     int rowGeometryNum = 0;
 
     // First scan rows to determine where dividers are needed:
-    List<Boolean> entityNeedsSubDividers = new ArrayList(overallEntityCount);
-    List<Boolean> entityNeedsDividers = new ArrayList(overallEntityCount);
+    List<Boolean> entityNeedsSubDividers = new ArrayList<>(overallEntityCount);
+    List<Boolean> entityNeedsDividers = new ArrayList<>(overallEntityCount);
     boolean someEntityHasSubDividers = false;
     boolean someEntityHasDividers = false;
     boolean someEntityIsSampleOrHeapsz = false;
@@ -1055,7 +1055,7 @@ public final class TimelineDraw {
         boolean isEntityStart = true;
         boolean isEntityEnd = false;
         int numEntityDataTypes = entityData.entityRows.size();
-        List<RowGeometry> entityGeos = new ArrayList();
+        List<RowGeometry> entityGeos = new ArrayList<>();
 
         boolean needsSubDividers = entityNeedsSubDividers.get(overallEntityNum);
         for (int ii = 0; ii < numEntityDataTypes; ii++) {
@@ -1182,7 +1182,7 @@ public final class TimelineDraw {
     }
 
     // used by coord calculator
-    ArrayList<Integer> tmpOffsets = new ArrayList();
+    ArrayList<Integer> tmpOffsets = new ArrayList<>();
     int ypos = 0;
     for (RowGeometry row : rowGeometry) {
       int delta = row.endY - ypos;
@@ -1799,8 +1799,7 @@ public final class TimelineDraw {
   }
 
   private String getString(long val) {
-    Long lval = new Long(val);
-    return lval.toString();
+    return Long.toString(val);
   }
 
   private int stringWidth(final Graphics g, Font font, String stmp) {

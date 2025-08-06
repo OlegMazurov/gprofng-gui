@@ -16,7 +16,7 @@ along with this program. If not, see <http://www.gnu.org/licenses>.  */
 package org.gprofng.mpmt;
 
 // Analyzer Address object
-public final class AnAddress extends AnObject implements Comparable {
+public final class AnAddress extends AnObject implements Comparable<AnAddress> {
 
   static final long HI_BIT = 0x8000000000000000L;
   private static final String hexChars = "0123456789ABCDEF";
@@ -27,7 +27,7 @@ public final class AnAddress extends AnObject implements Comparable {
   // Constructor
   public AnAddress(long value) {
     this.value = value & (~HI_BIT);
-    obj = new Long(this.value);
+    obj = this.value;
   }
 
   // Analyzer Address printing format
@@ -54,8 +54,8 @@ public final class AnAddress extends AnObject implements Comparable {
 
   // As Long.compareTo
   @Override
-  public int compareTo(Object o) {
-    return obj.compareTo(((AnAddress) o).toLong());
+  public int compareTo(AnAddress o) {
+    return obj.compareTo(o.toLong());
   }
 
   // String representation as an unsigned integer in base 16

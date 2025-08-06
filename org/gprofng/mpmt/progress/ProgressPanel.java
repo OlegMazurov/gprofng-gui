@@ -242,7 +242,7 @@ public class ProgressPanel extends JPanel implements MouseListener {
           //                        }
           //                    }
         }
-        disableYesButtonAndChangeFont((JComponent) childComp);
+        disableYesButtonAndChangeFont(childComp);
       }
     }
   }

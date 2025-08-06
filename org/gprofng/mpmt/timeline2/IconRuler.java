@@ -85,7 +85,7 @@ public final class IconRuler extends VerticalRowRuler implements Ruler, Accessib
   }
 
   private void reset() {
-    rowGeometry = new ArrayList();
+    rowGeometry = new ArrayList<>();
     rowFirst = -1;
     rowLast = -1;
     eventSelectionRow = -1;

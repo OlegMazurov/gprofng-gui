@@ -1790,8 +1790,8 @@ public class TL2ControlPanel extends AnJPanel
     boolean experimentMasterRowSelected = false;
     boolean entIsExpid = false;
     String entPropIdName = null;
-    final List<Integer> entityIds = new ArrayList();
-    final List<Integer> expIdList = new ArrayList();
+    final List<Integer> entityIds = new ArrayList<>();
+    final List<Integer> expIdList = new ArrayList<>();
     for (int jj = 0; jj <= nSelBlocks /*one extra!*/; jj++) {
       final RowDefinition rowDef0;
       final int userExpId;

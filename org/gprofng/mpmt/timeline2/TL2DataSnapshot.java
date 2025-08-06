@@ -95,17 +95,17 @@ public class TL2DataSnapshot {
     this.absoluteTimeStart = absoluteTimeStart;
     this.absoluteTimeEnd = absoluteTimeEnd;
     this.experimentDefs = Collections.unmodifiableList(expList);
-    experimentDefsByExpid = new HashMap();
+    experimentDefsByExpid = new HashMap<>();
     int ii = 0;
-    ArrayList<ExperimentData> newExpDataList = new ArrayList();
-    ArrayList<RowData> newAllRowData = new ArrayList();
-    ArrayList<EntityData> newAllEntityData = new ArrayList();
-    ArrayList<EntityDefinitions> newAllEntityDefs = new ArrayList();
+    ArrayList<ExperimentData> newExpDataList = new ArrayList<>();
+    ArrayList<RowData> newAllRowData = new ArrayList<>();
+    ArrayList<EntityData> newAllEntityData = new ArrayList<>();
+    ArrayList<EntityDefinitions> newAllEntityDefs = new ArrayList<>();
     for (ExperimentDefinitions expDef : expList) {
-      ArrayList<EntityData> newEntityDataList = new ArrayList();
+      ArrayList<EntityData> newEntityDataList = new ArrayList<>();
       for (EntityDefinitions entityDef : expDef.experimentEntities) {
         // process entity
-        ArrayList<RowData> newEntityData = new ArrayList();
+        ArrayList<RowData> newEntityData = new ArrayList<>();
         for (RowDefinition rowDef : entityDef.entityRows) {
           int expid = rowDef.getUserExpID();
           ExperimentDefinitions tmp = experimentDefsByExpid.put(expid, expDef);

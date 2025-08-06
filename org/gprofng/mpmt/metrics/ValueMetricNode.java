@@ -27,14 +27,14 @@ public class ValueMetricNode extends MetricNode {
   public ValueMetricNode(
       BasicMetric metricBasic, MetricType metricsGroupType, String unit, String unit_uname) {
     super(metricBasic, metricsGroupType);
-    this.values = new ArrayList();
+    this.values = new ArrayList<>();
     this.unit = unit;
     this.unit_uname = unit_uname;
   }
 
   public ValueMetricNode(BasicMetric metricBasic, MetricType metricsGroupType) {
     super(metricBasic, metricsGroupType);
-    this.values = new ArrayList();
+    this.values = new ArrayList<>();
     this.unit = null;
     this.unit_uname = null;
   }

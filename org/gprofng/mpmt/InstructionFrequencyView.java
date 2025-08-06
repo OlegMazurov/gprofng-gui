@@ -135,7 +135,7 @@ public final class InstructionFrequencyView extends AnDisplay
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.TEXT);
     //        formats.add(ExportFormat.HTML);
     //        formats.add(ExportFormat.CSV);

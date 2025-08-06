@@ -15,7 +15,7 @@ along with this program. If not, see <http://www.gnu.org/licenses>.  */
 package org.gprofng.mpmt;
 
 // Analyzer Integer object
-public final class AnInteger extends AnObject implements Comparable {
+public final class AnInteger extends AnObject implements Comparable<AnInteger> {
 
   private final int value;
   private final Integer obj;
@@ -27,6 +27,7 @@ public final class AnInteger extends AnObject implements Comparable {
   }
 
   // Analyzer int printing format
+  @Override
   public String toString() {
     return obj.toString();
   }
@@ -42,6 +43,7 @@ public final class AnInteger extends AnObject implements Comparable {
   }
 
   // Percent printing
+  @Override
   public String toPercent(double total) {
     if (value == 0) {
       if (!showZero) {
@@ -63,13 +65,15 @@ public final class AnInteger extends AnObject implements Comparable {
   }
 
   // To double
+  @Override
   public double doubleValue() {
     return value;
   }
 
   // As int.compareTo
-  public int compareTo(Object o) {
-    return obj.compareTo(((AnInteger) o).toInteger());
+  @Override
+  public int compareTo(AnInteger o) {
+    return obj.compareTo(o.toInteger());
   }
 
   // Convert int[] to AnInteger[]

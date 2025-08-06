@@ -113,7 +113,7 @@ public final class CompareAdvancedDialog extends JDialog implements ItemListener
 
   // Initialize GUI components
   private void initComponents() {
-    expGrops = new ArrayList();
+    expGrops = new ArrayList<>();
     String groupTitle;
     String groupToolTip;
     char mnemonic;
@@ -137,14 +137,14 @@ public final class CompareAdvancedDialog extends JDialog implements ItemListener
               AnLocale.getString("Exeriment(s) to compare against baseline experiments(s)"),
               mnemonic));
     } else if (experimentGrops != null && experimentGrops.length > 1) {
-      List<String> lst = new ArrayList();
+      List<String> lst = new ArrayList<>();
       for (String[] arr : experimentGrops) {
         for (String s : arr) {
           lst.add(s);
         }
       }
       experimentGrops = new String[1][];
-      experimentGrops[0] = (String[]) lst.toArray(new String[lst.size()]);
+      experimentGrops[0] = lst.toArray(new String[lst.size()]);
     }
     if (experimentGrops != null) {
       String fmt = AnLocale.getString("Comparison Group %d");
@@ -156,7 +156,7 @@ public final class CompareAdvancedDialog extends JDialog implements ItemListener
       for (int i = 0; i < experimentGrops.length; i++) {
         ExperimentGroupsPanel grp = expGrops.get(i);
         String[] names = experimentGrops[i];
-        List<String> lst = new ArrayList<String>();
+        List<String> lst = new ArrayList<>();
         for (String s : names) {
           grp.add_exp_or_grp(lst, s);
         }

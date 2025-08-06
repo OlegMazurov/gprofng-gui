@@ -64,10 +64,10 @@ public class Collector {
   private Collector collector;
   protected OutputStream logStream;
   protected BufferedWriter logStreamWriter;
-  protected List logVector;
-  protected List stderr_stdout;
+  protected List<String> logVector;
+  protected List<String> stderr_stdout;
   private int collectorState;
-  protected List collectingStatusListenersList;
+  protected List<ActionListener> collectingStatusListenersList;
   private long elapsedTime = 0;
   private int exitValue = -1;
   private long processID = -1;
@@ -109,14 +109,13 @@ public class Collector {
   /**
    * Constructor
    *
-   * @param cprov - Interface for common methods (CollectDialog and CollectWindow)
-   * @param buttons - Set of dialog buttons : {run, terminate, pause, sample, close}
+   * @param aWindow
    */
   public Collector(final AnWindow aWindow) {
     this.window = aWindow;
     collector = this;
     collectorState = COLLECTING_NONE;
-    collectingStatusListenersList = new ArrayList();
+    collectingStatusListenersList = new ArrayList<>();
   }
 
   /** Get Profiling Type */
@@ -139,8 +138,9 @@ public class Collector {
 
   private void fireCollectingStatusChanged(final int eventId) {
     // through all listeners
-    for (Iterator it = collectingStatusListenersList.iterator(); it.hasNext(); ) {
-      ((ActionListener) it.next()).actionPerformed(new ActionEvent(0, eventId, empty_string));
+    for (Iterator<ActionListener> it = collectingStatusListenersList.iterator();
+        it.hasNext(); ) {
+      it.next().actionPerformed(new ActionEvent(0, eventId, empty_string));
     }
   }
 
@@ -166,7 +166,7 @@ public class Collector {
     logStreamWriter = new BufferedWriter(new OutputStreamWriter(logStream));
   }
 
-  public void setLog(final List outLog) {
+  public void setLog(final List<String> outLog) {
     logVector = outLog;
   }
 
@@ -282,7 +282,7 @@ public class Collector {
           public void run() {
             boolean collect_failed = false;
             try {
-              stderr_stdout = new ArrayList();
+              stderr_stdout = new ArrayList<>();
               AnUtility.setLibPath();
               String remoteConnection = window.getAnalyzer().remoteConnectCommand;
               String remoteShell = window.getAnalyzer().remoteShell;
@@ -315,7 +315,7 @@ public class Collector {
               tr1.setName(STDOUT_READER);
               tr1.setTask(tr1.READ_STDOUT, sc);
               if (logVector == null) {
-                stderr_stdout = new ArrayList(); // NM1
+                stderr_stdout = new ArrayList<>();
               } else {
                 stderr_stdout = logVector;
               }
@@ -1007,10 +1007,10 @@ public class Collector {
       // total_time = ((time2-time0)/1000);
     }
 
-    private List out = null; // NM1 new Vector();
+    private List<String> out = null; // NM1 new Vector();
     // private Boolean out_sync = true; // NM1
 
-    public void setOut(List out) {
+    public void setOut(List<String> out) {
       this.out = out;
     }
 

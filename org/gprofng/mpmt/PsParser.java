@@ -41,7 +41,7 @@ public abstract class PsParser {
 
   public final class PsData {
 
-    private List<List<String>> processes = new ArrayList<List<String>>();
+    private List<List<String>> processes = new ArrayList<>();
 
     private List<String> header = null;
 
@@ -67,7 +67,7 @@ public abstract class PsParser {
     //        }
     /** filter lines and convert to columns */
     public List<List<String>> processes(Pattern re) {
-      List<List<String>> res = new ArrayList<List<String>>();
+      List<List<String>> res = new ArrayList<>();
       // Do filtering
       outer:
       for (List<String> proc : processes) {
@@ -84,7 +84,7 @@ public abstract class PsParser {
     void addProcess(String line) {
       int offset = 0;
 
-      List<String> columns = new ArrayList<String>(headerStr().length - 3);
+      List<String> columns = new ArrayList<>(headerStr().length - 3);
       for (int cx = 0; cx < headerStr().length; cx++) {
         String s = null;
         if (cx == 7) {
@@ -625,7 +625,7 @@ public abstract class PsParser {
             */
     //	if (Log.Ps.debug)
     //	    System.out.printf("parseHeader: '%s'\n", str);
-    parsedHeader = new ArrayList<String>(headerStr().length - 3);
+    parsedHeader = new ArrayList<>(headerStr().length - 3);
     for (int cx = 0; cx < headerStr().length; cx++) {
       String s = null;
       int i;
@@ -736,7 +736,7 @@ public abstract class PsParser {
 
   String[] getPsOutput() {
     String[] s = {""}; // TEMPORARY
-    List<String> v = new ArrayList();
+    List<String> v = new ArrayList<>();
     if (null != psOutput) {
       for (int n = 0; n < psOutput.length(); ) {
         int k = psOutput.indexOf('\n', n);

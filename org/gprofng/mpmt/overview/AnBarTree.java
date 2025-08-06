@@ -228,7 +228,7 @@ public class AnBarTree extends JTree {
           if (checkBoxBarPanel == null) {
             List<Color> keyColorList = null;
             if (bar != null && bar.getValueColor() != null && bar.getValueColor().size() <= 3) {
-              keyColorList = new ArrayList<Color>();
+              keyColorList = new ArrayList<>();
               for (ValueColor valueColor : bar.getValueColor()) {
                 keyColorList.add(valueColor.getColor());
               }
@@ -325,7 +325,7 @@ public class AnBarTree extends JTree {
     }
 
     private List<TreeNode> findNodesInTreeByName(String name) {
-      List<TreeNode> list = new ArrayList<TreeNode>();
+      List<TreeNode> list = new ArrayList<>();
       Object root = getModel().getRoot();
       TreeNode rootNode = (TreeNode) root;
       findNodesInTreeByName(rootNode, list, name);

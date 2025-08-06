@@ -58,37 +58,36 @@ public class ChooserStateView extends JList<StackState> implements AnListener {
     show_duplicates = false;
     funcMap = null;
     sortedData = null;
-    selectedFuncs = new ArrayList<Long>();
+    selectedFuncs = new ArrayList<>();
   }
 
   // Set components (MUST BE CALLED ON AWT THREAD)
   private void setStackStates(Collection<StackState> states) {
-    ArrayList<StackState> data = (states != null) ? new ArrayList(states) : new ArrayList();
+    ArrayList<StackState> data = (states != null) ?
+        new ArrayList<>(states) : new ArrayList<>();
     Collections.sort(
         data,
-        new Comparator() {
-          public int compare(Object a, Object b) {
-            StackState aa, bb;
-            aa = (StackState) a;
-            bb = (StackState) b;
+        new Comparator<StackState>() {
+          @Override
+          public int compare(StackState aa, StackState bb) {
             return aa.getName().compareTo(bb.getName());
           }
         });
-    sortedData = new ArrayList(data);
+    sortedData = new ArrayList<>(data);
 
-    Vector dataList = new Vector();
-    funcMap = new HashMap(); // map func #s to dataList
+    Vector<StackState> dataList = new Vector<StackState>();
+    funcMap = new HashMap<Long, Integer>(); // map func #s to dataList
     String recentName = null; // most recently seen name
     for (StackState state : sortedData) {
       if (show_duplicates || !state.getName().equals(recentName)) {
         dataList.add(state);
         recentName = state.getName();
       }
-      funcMap.put(new Long(state.getNumber()), new Integer(dataList.size() - 1));
+      funcMap.put(state.getNumber(), dataList.size() - 1);
     }
     if (!isSelectionEmpty()) {
       List<StackState> list = getSelectedValuesList();
-      selectedFuncs = new ArrayList();
+      selectedFuncs = new ArrayList<>();
       for (StackState state : list) {
         Long val = state.getNumber();
         selectedFuncs.add(val);
@@ -145,7 +144,7 @@ public class ChooserStateView extends JList<StackState> implements AnListener {
 
   // Set selected function (MUST BE CALLED ON AWT THREAD)
   public StackState getState(int ii) {
-    return (StackState) this.getModel().getElementAt(ii);
+    return getModel().getElementAt(ii);
   }
 
   // Set selected function (MUST BE CALLED ON AWT THREAD)
@@ -154,8 +153,7 @@ public class ChooserStateView extends JList<StackState> implements AnListener {
     if (funcMap == null) {
       return;
     }
-    ListModel data = getModel();
-    if (data == null) {
+    if (getModel() == null) {
       return;
     }
     if (funcs.isEmpty()) {
@@ -179,7 +177,7 @@ public class ChooserStateView extends JList<StackState> implements AnListener {
 
   public void setSelectedFunction(long lfunc) {
     Long func = lfunc;
-    List<Long> funcs = new ArrayList();
+    List<Long> funcs = new ArrayList<>();
     funcs.add(func);
     setSelectedFunctions(funcs);
   }
@@ -193,6 +191,7 @@ public class ChooserStateView extends JList<StackState> implements AnListener {
 
   // List renderer
   protected class ListRenderer extends DefaultListCellRenderer {
+    @Override
     public Component getListCellRendererComponent(
         JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
       super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);

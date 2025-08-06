@@ -35,17 +35,14 @@ public final class LocaleString {
     private final static int key1_len = key1.length();
 
     public static void main(String[] args) {
-        final BufferedReader in;
-        String line;
-        Vector values, mnem_values;
         int index, index1;
         Elem strs;
 
         // Open stdin as BufferedReader
-        in = new BufferedReader(new InputStreamReader(System.in));
-        line = null;
-        values = new Vector();
-        mnem_values = new Vector();
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        String line = null;
+        Vector<Elem> values = new Vector<Elem>();
+        Vector<Elem> mnem_values = new Vector<Elem>();
 
         try {
             for (;;) {
@@ -99,7 +96,7 @@ public final class LocaleString {
 
         Elem elem;
         for (index = 0; index < values.size(); index++) {
-            elem = (Elem) values.get(index);
+            elem = values.get(index);
             if (elem.getKey() != null) {
                 System.out.println(setEscape(elem.getValue()) + "[" + elem.getKey() + "]" + "=" + // NOI18N
                         (elem.getValue().startsWith(" ") ? "\\" : "") + elem.getValue()); // NOI18N
@@ -115,7 +112,7 @@ public final class LocaleString {
             System.out.println("#"); // NOI18N
 
             for (index = 0; index < mnem_values.size(); index++) {
-                elem = (Elem) mnem_values.get(index);
+                elem = mnem_values.get(index);
                 System.out.println(elem.getKey() + "=" + // NOI18N
                         (elem.getValue().startsWith(" ") ? "\\" : "") + elem.getValue()); // NOI18N
             }
@@ -175,10 +172,9 @@ public final class LocaleString {
     }
 
     // Sort the string list
-    private static Vector sort(final Vector vec) {
+    private static Vector<Elem> sort(final Vector<Elem> vec) {
         final int size;
         int index;
-        final Vector result;
 
         // Convert results to Object[] & Sort
         size = vec.size();
@@ -187,7 +183,7 @@ public final class LocaleString {
 
         // Remove Repeated elements
         Elem elem = null;
-        result = new Vector();
+        Vector<Elem> result = new Vector<Elem>();
 
         for (index = 0; index < size; index++) {
             if (((Elem) strs[index]).equals(elem)) {
@@ -222,7 +218,7 @@ public final class LocaleString {
     }
 
     /* Class which contains a parsed properties value */
-    private static final class Elem implements Comparable {
+    private static final class Elem implements Comparable<Elem> {
 
         private String key;   // optional bundle key
         private String value; // required properties value
@@ -261,10 +257,11 @@ public final class LocaleString {
         }
 
         // Comparator implementation method
-        public int compareTo(final Object obj) {
-            final String obj_key = ((Elem) obj).key;
-            final String obj_value = ((Elem) obj).value;
-            final boolean obj_mnem = ((Elem) obj).is_mnemonic;
+        @Override
+        public int compareTo(final Elem obj) {
+            final String obj_key = obj.key;
+            final String obj_value = obj.value;
+            final boolean obj_mnem = obj.is_mnemonic;
 
             if (key != null && obj_key != null) {
                 if (is_mnemonic && obj_mnem) {

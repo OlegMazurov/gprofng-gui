@@ -69,34 +69,27 @@ public class ConnectionManager extends Thread {
     try {
       String str = AnUtility.getenv("SP_ANALYZER_HEARTBEAT_DISABLE");
       if (str != null) {
-        // System.err.println("analyzer: SP_ANALYZER_HEARTBEAT_DISABLE is set");  DEBUG
         IPCLogger.logTrace("\n" + "analyzer: SP_ANALYZER_HEARTBEAT_DISABLE is set");
         connectionManagerStatus = CM_NO_CHECK;
       }
       str = AnUtility.getenv("SP_ANALYZER_HEARTBEAT_MSEC");
       if (str != null) { // set timeout value
-        // System.err.println("analyzer: SP_ANALYZER_HEARTBEAT_MSEC=" + str);  DEBUG
         IPCLogger.logTrace("\n" + "analyzer: SP_ANALYZER_HEARTBEAT_MSEC=" + str);
-        Integer tm = new Integer(str);
-        setTimeOut(tm.intValue());
+        setTimeOut(Integer.valueOf(str));
       }
       long ts_start_checking = 0;
       while (CC_defaultTimeOut > 0) {
         if ((connectionManagerStatus != CM_NO_CHECK) && (Analyzer.getInstance().isRemote())) {
           if (null != cc) {
             if (cc.connectionCheckerState == cc.CHECKER_FINISHED) {
-              // System.err.println("ConnectionChecker finished"); // DEBUG
               cc.join();
-              // System.err.println("ConnectionChecker joined"); // DEBUG
               cc = new ConnectionChecker();
               if (null == cc) {
                 Logger.getLogger(ConnectionManager.class.getName())
                     .log(Level.SEVERE, null, err_cc_msg);
-                // System.err.println(err_cc_msg); // DEBUG
                 return;
               }
               cc.start();
-              // System.err.println("ConnectionChecker started"); // DEBUG
             }
           } else {
             cc = new ConnectionChecker();

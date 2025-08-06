@@ -157,7 +157,7 @@ public class PickList {
   }
 
   public List<PickListElement> getElements() {
-    List<PickListElement> ret = new ArrayList<PickListElement>();
+    List<PickListElement> ret = new ArrayList<>();
     for (PickListElement picklistElement : picklist) {
       if (picklistElement != null) {
         ret.add(picklistElement);

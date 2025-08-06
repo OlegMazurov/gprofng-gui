@@ -897,7 +897,7 @@ public final class ExperimentsView extends AnDisplay implements ExportSupport, A
 
   @Override
   public java.util.List<ExportFormat> getSupportedExportFormats() {
-    java.util.List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    java.util.List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.JPG);
     return formats;
   }

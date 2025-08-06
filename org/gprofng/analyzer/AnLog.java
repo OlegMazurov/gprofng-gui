@@ -39,7 +39,7 @@ public class AnLog {
   }
 
   public static String getLogFileDir() {
-    return UserPref.getInstance().getAnalyzerDirPath();
+    return UserPref.getAnalyzerDirPath();
   }
 
   public static String getLogFilePath() {

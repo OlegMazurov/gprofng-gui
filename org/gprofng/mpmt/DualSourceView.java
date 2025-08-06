@@ -280,7 +280,7 @@ public final class DualSourceView extends AnDisplay implements ExportSupport, An
 
   @Override
   public java.util.List<ExportFormat> getSupportedExportFormats() {
-    java.util.List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    java.util.List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.TEXT);
     formats.add(ExportFormat.JPG);
     return formats;
@@ -293,7 +293,7 @@ public final class DualSourceView extends AnDisplay implements ExportSupport, An
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }

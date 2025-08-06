@@ -57,16 +57,15 @@ public class FlamePanel extends JPanel implements MouseListener, MouseMotionList
     ROWS
   };
 
-  private FlameView flameView;
+  private final FlameView flameView;
   private State state;
   private final Object stateLock = new Object();
   private int lastWidth = 0;
-
-  private DataPanel dataPanel;
+  private final DataPanel dataPanel;
 
   private int rowHeight;
   private Font font;
-  private int defaultFontSize;
+  private final int defaultFontSize;
 
   private static final int outerGap = 2;
   private static final int innerGap = 2;
@@ -154,7 +153,7 @@ public class FlamePanel extends JPanel implements MouseListener, MouseMotionList
   }
 
   private List<JComponent> getMenuList(final FlameBlock selectedFlameBlock) {
-    List<JComponent> list = new ArrayList<JComponent>();
+    List<JComponent> list = new ArrayList<>();
 
     JMenuItem showSource = new JMenuItem(AnLocale.getString("Show Source"));
     showSource.addActionListener(
@@ -507,7 +506,7 @@ public class FlamePanel extends JPanel implements MouseListener, MouseMotionList
       int width = getSize().width;
       Rectangle ret = getVisibleRect();
       g.setColor(AnEnvironment.FLAME_INFO_TEXT_COLOR);
-      Font font = getFont().deriveFont((float) (getFont().getSize() + (float) 3));
+      Font font = getFont().deriveFont((float) (getFont().getSize() + 3));
       g.setFont(font);
       String msg = AnLocale.getString("Fetching data...");
       int msgWidth = g.getFontMetrics().stringWidth(msg);
@@ -520,7 +519,7 @@ public class FlamePanel extends JPanel implements MouseListener, MouseMotionList
       int width = getSize().width;
       Rectangle ret = getVisibleRect();
       g.setColor(AnEnvironment.FLAME_INFO_TEXT_COLOR);
-      Font font = getFont().deriveFont((float) (getFont().getSize() + (float) 3));
+      Font font = getFont().deriveFont((float) (getFont().getSize() + 3));
       g.setFont(font);
       String msg =
           String.format(

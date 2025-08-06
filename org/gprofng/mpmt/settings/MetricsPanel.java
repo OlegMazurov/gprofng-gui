@@ -416,30 +416,30 @@ public class MetricsPanel extends javax.swing.JPanel {
     initComponents();
     initComponents2();
 
-    showCheckBoxes = new ArrayList<JCheckBox>();
+    showCheckBoxes = new ArrayList<>();
     allShowCheckBox.addActionListener(new AllShowActionListener(allShowCheckBox, showCheckBoxes));
 
-    eTimeCheckBoxes = new ArrayList<JCheckBox>();
+    eTimeCheckBoxes = new ArrayList<>();
     eAllTimeCheckBox.addActionListener(
         new AllAttributeActionListener(eAllTimeCheckBox, eTimeCheckBoxes));
 
-    eValueCheckBoxes = new ArrayList<JCheckBox>();
+    eValueCheckBoxes = new ArrayList<>();
     eAllValueCheckBox.addActionListener(
         new AllAttributeActionListener(eAllValueCheckBox, eValueCheckBoxes));
 
-    ePercentCheckBoxes = new ArrayList<JCheckBox>();
+    ePercentCheckBoxes = new ArrayList<>();
     eAllPercentCheckBox.addActionListener(
         new AllAttributeActionListener(eAllPercentCheckBox, ePercentCheckBoxes));
 
-    iTimeCheckBoxes = new ArrayList<JCheckBox>();
+    iTimeCheckBoxes = new ArrayList<>();
     iAllTimeCheckBox.addActionListener(
         new AllAttributeActionListener(iAllTimeCheckBox, iTimeCheckBoxes));
 
-    iValueCheckBoxes = new ArrayList<JCheckBox>();
+    iValueCheckBoxes = new ArrayList<>();
     iAllValueCheckBox.addActionListener(
         new AllAttributeActionListener(iAllValueCheckBox, iValueCheckBoxes));
 
-    iPercentCheckBoxes = new ArrayList<JCheckBox>();
+    iPercentCheckBoxes = new ArrayList<>();
     iAllPercentCheckBox.addActionListener(
         new AllAttributeActionListener(iAllPercentCheckBox, iPercentCheckBoxes));
 
@@ -785,7 +785,7 @@ public class MetricsPanel extends javax.swing.JPanel {
   public List<MetricNameSelection> getMetricNameSelections() {
     AnMetric[] availableMetrics =
         AnWindow.getInstance().getSettings().getMetricsSetting().getAvailableAnMetrics();
-    List<MetricNameSelection> list = new ArrayList<MetricNameSelection>();
+    List<MetricNameSelection> list = new ArrayList<>();
     for (int index = 0; index < availableMetrics.length; index++) {
       AnMetric anMetric = availableMetrics[index];
       MetricGUIEntry metricGUIEntry = metricHashMap.get(anMetric.getComd().hashCode());

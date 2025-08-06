@@ -72,7 +72,7 @@ public class ExperimentProperties {
     this.basic_info = basic_info;
     this.data_desc = data_desc;
     this.time_data_desc = timeDataDescriptions(data_desc);
-    this.desc_map = new HashMap();
+    this.desc_map = new HashMap<>();
   }
 
   public final int getID() {
@@ -140,7 +140,7 @@ public class ExperimentProperties {
   }
 
   private List<DataDescriptor> timeDataDescriptions(List<DataDescriptor> dataDescriptors) {
-    ArrayList<DataDescriptor> tlDataDescriptors = new ArrayList();
+    ArrayList<DataDescriptor> tlDataDescriptors = new ArrayList<>();
     if (dataDescriptors == null) { // experiment dropped?
       return tlDataDescriptors;
     }

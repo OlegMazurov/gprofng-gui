@@ -556,7 +556,7 @@ public class OverviewPanel extends javax.swing.JPanel {
       List<ValueMetricNode> nodeList =
           getAllValueMetricNodes(
               window.getSettings().getMetricsSetting().getMetricStates().getMetricsRootNode(),
-              new ArrayList<ValueMetricNode>());
+              new ArrayList<>());
       IPCMetricsAPI.updateMetricValues(0, nodeList);
       window
           .getSettings()

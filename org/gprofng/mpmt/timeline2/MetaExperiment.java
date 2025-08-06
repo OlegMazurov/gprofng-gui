@@ -66,8 +66,8 @@ public final class MetaExperiment {
     tldata_hidden_mask = 0;
     tldata_show_states = false;
     tldata_show_charts = false;
-    tldata_cnames = new ArrayList();
-    tldata_unames = new ArrayList();
+    tldata_cnames = new ArrayList<>();
+    tldata_unames = new ArrayList<>();
     tldata_unames_version = -1;
   }
 
@@ -118,8 +118,8 @@ public final class MetaExperiment {
     }
     if (this.tldata_unames_version != new_tldata_names_version) {
       this.tldata_unames_version = new_tldata_names_version;
-      this.tldata_cnames = new ArrayList(new_tldata_cnames);
-      this.tldata_unames = new ArrayList(new_tldata_unames);
+      this.tldata_cnames = new ArrayList<>(new_tldata_cnames);
+      this.tldata_unames = new ArrayList<>(new_tldata_unames);
       changed = true;
     }
 
@@ -136,7 +136,7 @@ public final class MetaExperiment {
 
     final calcExperimentTimeOriginsRC origins = calcExperimentTimeOrigins(false, true, true);
 
-    List<ExperimentDefinitions> experimentList = new ArrayList();
+    List<ExperimentDefinitions> experimentList = new ArrayList<>();
     final boolean comparing =
         w_IPC.getSettings().getCompareModeSetting().comparingExperiments(); // does not perform IPC
 
@@ -175,7 +175,7 @@ public final class MetaExperiment {
 
   private List<ExperimentDefinitions> ipcPruneEmptyRows( // IPC!
       List<ExperimentDefinitions> experimentList) {
-    List<ExperimentDefinitions> pruned = Collections.unmodifiableList(new ArrayList());
+    List<ExperimentDefinitions> pruned = Collections.unmodifiableList(new ArrayList<>());
     if (experimentList == null) {
       return pruned;
     }
@@ -223,9 +223,9 @@ public final class MetaExperiment {
     // only add rows for Entities that have data
     // note: each rowBlock corresponds to an entity
     ii = 0;
-    ArrayList<ExperimentDefinitions> newExpList = new ArrayList();
+    ArrayList<ExperimentDefinitions> newExpList = new ArrayList<>();
     for (ExperimentDefinitions expDef : experimentList) {
-      ArrayList<EntityDefinitions> newEntityList = new ArrayList();
+      ArrayList<EntityDefinitions> newEntityList = new ArrayList<>();
       for (EntityDefinitions entityDef : expDef.experimentEntities) {
         boolean entityHasData = false;
         for (RowDefinition row : entityDef.entityRows) {
@@ -292,7 +292,7 @@ public final class MetaExperiment {
       ) {
     List<ExperimentProperties> expProps =
         w_IPC.getExperimentProperties().getAllExperimentProperties();
-    final Map<Integer, Long> rcTimeOrigins = new HashMap(); // key: expId, value: hrt of origin
+    final Map<Integer, Long> rcTimeOrigins = new HashMap<>(); // key: expId, value: hrt of origin
     long rcMaxDuration = 0L;
     if (expProps == null || expProps.isEmpty()) {
       return new calcExperimentTimeOriginsRC(rcMaxDuration, rcTimeOrigins);
@@ -301,7 +301,7 @@ public final class MetaExperiment {
     // loop thru all exps, save subexperiment-to-founder offsets
     if (forceFoundersLeft || forceAllLeft) {
 
-      final Map<Integer, Long> offsets = new HashMap();
+      final Map<Integer, Long> offsets = new HashMap<>();
       long minOffset = 0;
       for (ExperimentProperties exp : expProps) {
         final int expId = exp.getID();
@@ -398,9 +398,9 @@ public final class MetaExperiment {
       private final long wallNormalizeSeconds;
 
       public ConcurrentExperiments(long wallNormalizeSeconds) {
-        subexps = new HashMap();
-        hostInfo = new HashMap();
-        timeInfo = new HashMap();
+        subexps = new HashMap<>();
+        hostInfo = new HashMap<>();
+        timeInfo = new HashMap<>();
         start = Long.MAX_VALUE;
         end = Long.MIN_VALUE;
         this.wallNormalizeSeconds = wallNormalizeSeconds;
@@ -477,8 +477,8 @@ public final class MetaExperiment {
     // create hostMap; maps experiments to canonical host wall-to-hrt reference values:
     long min_wall = Long.MAX_VALUE;
     long max_wall = Long.MIN_VALUE;
-    Map<String, List<HostnameTimeRef>> hostMap = new HashMap(); // key hostname
-    Map<Integer, HostnameTimeRef> expTimeRef = new HashMap(); // key expId
+    Map<String, List<HostnameTimeRef>> hostMap = new HashMap<>(); // key hostname
+    Map<Integer, HostnameTimeRef> expTimeRef = new HashMap<>(); // key expId
     for (ExperimentProperties exp : expProps) {
       String hostname = exp.getHostname();
       if (min_wall > exp.getStartWallSeconds()) {
@@ -492,7 +492,7 @@ public final class MetaExperiment {
       List<HostnameTimeRef> timeRefs = hostMap.get(hostname);
       boolean found = false;
       if (timeRefs == null) {
-        timeRefs = new ArrayList();
+        timeRefs = new ArrayList<>();
         hostMap.put(hostname, timeRefs);
       } else {
         for (HostnameTimeRef hostRef : timeRefs) {
@@ -518,7 +518,7 @@ public final class MetaExperiment {
     final long wallNormalizeSeconds = min_wall;
 
     // first, store all descendents as concurrent
-    final Map<Integer, ConcurrentExperiments> founders = new HashMap(); // founderExpId key
+    final Map<Integer, ConcurrentExperiments> founders = new HashMap<>(); // founderExpId key
     for (ExperimentProperties exp : expProps) {
       final int expId = exp.getID();
       final Integer founderId = exp.getFounderID();
@@ -533,7 +533,7 @@ public final class MetaExperiment {
     }
 
     // next, any founders that are concurrent get merged
-    List<ConcurrentExperiments> blobs = new ArrayList(founders.values());
+    List<ConcurrentExperiments> blobs = new ArrayList<>(founders.values());
     for (int ii = 0; ii < blobs.size(); ii++) {
       ConcurrentExperiments base = blobs.get(ii);
       if (base == null) {
@@ -549,7 +549,7 @@ public final class MetaExperiment {
     }
 
     // next, prune assimilated items
-    List<ConcurrentExperiments> liveBlobs = new ArrayList();
+    List<ConcurrentExperiments> liveBlobs = new ArrayList<>();
     for (ConcurrentExperiments blob : blobs) {
       if (blob == null) {
         continue;
@@ -599,7 +599,7 @@ public final class MetaExperiment {
       return null;
     }
 
-    ArrayList<Entity> ents = new ArrayList();
+    ArrayList<Entity> ents = new ArrayList<>();
     if (objs.length == 0) {
       return ents;
     }
@@ -627,7 +627,7 @@ public final class MetaExperiment {
   }
 
   private List<List<Entity>> ipcGetEntitiesV2(final int[] expIds, final int entity_prop_id) {
-    List<List<Entity>> entsList = new ArrayList();
+    List<List<Entity>> entsList = new ArrayList<>();
     if (expIds.length == 0) {
       return entsList;
     }

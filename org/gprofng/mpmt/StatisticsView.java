@@ -189,8 +189,7 @@ public final class StatisticsView extends AnDisplay implements ExportSupport, An
 
   @Override
   public java.util.List<ExportSupport.ExportFormat> getSupportedExportFormats() {
-    java.util.List<ExportSupport.ExportFormat> formats =
-        new ArrayList<ExportSupport.ExportFormat>();
+    java.util.List<ExportSupport.ExportFormat> formats = new ArrayList<>();
     //        formats.add(ExportSupport.ExportFormat.TEXT);
     //        formats.add(ExportSupport.ExportFormat.HTML);
     //        formats.add(ExportSupport.ExportFormat.CSV);

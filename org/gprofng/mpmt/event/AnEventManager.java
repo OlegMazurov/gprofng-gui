@@ -31,7 +31,7 @@ public class AnEventManager {
   private List<AnChangeListener> listenerList = null;
 
   private AnEventManager() {
-    listenerList = new ArrayList<AnChangeListener>();
+    listenerList = new ArrayList<>();
   }
 
   /**

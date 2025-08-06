@@ -1261,7 +1261,7 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.TEXT);
     formats.add(ExportFormat.HTML);
     formats.add(ExportFormat.CSV);
@@ -1276,7 +1276,7 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     if (type == DSP_Functions || type == DSP_Lines || type == DSP_PCs) {
       list.add(window.getTimelineCallStackSubview());
@@ -1293,7 +1293,7 @@ public class FuncListDisp extends AnDisplay implements ExportSupport {
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }

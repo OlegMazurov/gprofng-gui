@@ -135,7 +135,7 @@ public class ExclusiveOrInclusivePanel extends JPanel {
   }
 
   List<JMenuItem> getSortByMenuItems() {
-    List<JMenuItem> list = new ArrayList<JMenuItem>();
+    List<JMenuItem> list = new ArrayList<>();
     for (AttributePanel attributepanel : attributepanels) {
       list.add(attributepanel.getSortByMenuItem());
     }

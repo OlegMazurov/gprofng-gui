@@ -50,8 +50,8 @@ public class TimelineSetting extends Setting {
 
   private static final String default_prop_name = "THRID"; // Default // FIXUP: UGLY!!!!
 
-  private List<EntityProp> tl_entity_props = new ArrayList();
-  private List settings;
+  private List<EntityProp> tl_entity_props = new ArrayList<>();
+  private List<Object> settings;
 
   private long tldata_hidden_bitmask; // states of checkboxes
   private List<String> tldata_unames; // names shown for checkboxes
@@ -86,21 +86,21 @@ public class TimelineSetting extends Setting {
               tl_entity_prop_cmd_names.get(ii)));
     }
     tldata_hidden_bitmask = 0;
-    tldata_unames = new ArrayList();
-    tldata_cnames = new ArrayList();
-    tldata_unused_hidden = new HashSet();
+    tldata_unames = new ArrayList<>();
+    tldata_cnames = new ArrayList<>();
+    tldata_unused_hidden = new HashSet<>();
     tldata_names_version = 0;
     tldata_cmd = tldata_cmd_default;
   }
 
-  private void init(Object originalSource, List settings) {
+  private void init(Object originalSource, List<Object> settings) {
     // if called externally, add code to update tldata_* state
     this.settings = settings;
     fireChangeEvent(originalSource, settings);
   }
 
   /** Called from Settings Save */
-  public void set(Object originalSource, List newSettings, boolean changed) {
+  public void set(Object originalSource, List<Object> newSettings, boolean changed) {
     if (changed) {
       setValueAndFireChangeEvent(originalSource, this, newSettings);
     }
@@ -117,7 +117,7 @@ public class TimelineSetting extends Setting {
       int stackFramePixels,
       boolean showEventStates,
       boolean showEventDensity) {
-    List settingsCopy = (List) AnWindow.getInstance().getSettings().getTimelineSettings(true);
+    List<Object> settingsCopy = (List<Object>) AnWindow.getInstance().getSettings().getTimelineSettings(true);
 
     //        setProps(tl_entprops);
     //        tldata_unused_hidden = parseTLDataCmd(in_tldata_cmd);
@@ -164,7 +164,7 @@ public class TimelineSetting extends Setting {
     tl_entprop_cnames = (String[]) tl_entprops[3];
 
     // first item in list is "unknown" propId==0; skip it
-    tl_entity_props = new ArrayList();
+    tl_entity_props = new ArrayList<>();
     for (int i = 1; tl_entprop_ids != null && i < tl_entprop_ids.length; i++) {
       int thisId = tl_entprop_ids[i];
       String thisName = tl_entprop_names[i];
@@ -178,9 +178,9 @@ public class TimelineSetting extends Setting {
   private boolean resetTLDataNames() {
     Experiments experiments = AnWindow.getInstance().getExperimentProperties();
     // determine unique "data types" shown in Presentation Timeline Tab
-    final HashSet<String> uniqueNames = new HashSet();
-    final ArrayList<String> dataCNames = new ArrayList();
-    final ArrayList<String> dataUNames = new ArrayList();
+    final HashSet<String> uniqueNames = new HashSet<>();
+    final ArrayList<String> dataCNames = new ArrayList<>();
+    final ArrayList<String> dataUNames = new ArrayList<>();
     for (ExperimentProperties exp : experiments.getAllExperimentProperties()) {
       for (DataDescriptor dataD : exp.getTstampDataDescriptors()) {
         int auxmax = dataD.getAuxCount();
@@ -274,7 +274,7 @@ public class TimelineSetting extends Setting {
 
   private static Set<String> parseTLDataCmd(String new_tldata_cmd) {
     // <new_tldata_cmd> == text that follows the .er.rc "tldata" command
-    Set<String> cnamesToHide = new HashSet();
+    Set<String> cnamesToHide = new HashSet<String>();
     {
       if (new_tldata_cmd == null || new_tldata_cmd.length() == 0) {
         return cnamesToHide;
@@ -345,11 +345,11 @@ public class TimelineSetting extends Setting {
     return tldata_names_version;
   }
 
-  public List getTLDataUNames() {
+  public List<String> getTLDataUNames() {
     return tldata_unames;
   }
 
-  public List getTLDataCNames() {
+  public List<String> getTLDataCNames() {
     return tldata_cnames;
   }
 
@@ -380,7 +380,7 @@ public class TimelineSetting extends Setting {
       int stackFramePixels,
       boolean showEventStates,
       boolean showEventDensity) {
-    List settingsCopy = (List) AnWindow.getInstance().getSettings().getTimelineSettings(true);
+    List<Object> settingsCopy = (List<Object>) AnWindow.getInstance().getSettings().getTimelineSettings(true);
 
     setProps(tl_entprops);
     tldata_unused_hidden = parseTLDataCmd(in_tldata_cmd);
@@ -414,7 +414,7 @@ public class TimelineSetting extends Setting {
     init(originalSource, settingsCopy);
   }
 
-  private List getSettings() {
+  private List<Object> getSettings() {
     return settings;
   }
 
@@ -499,7 +499,7 @@ public class TimelineSetting extends Setting {
   }
 
   public void setTLStackDepth(Object originalSource, int stackDepth) {
-    List settingsCopy = (List) AnWindow.getInstance().getSettings().getTimelineSettings(true);
+    List<Object> settingsCopy = (List<Object>) AnWindow.getInstance().getSettings().getTimelineSettings(true);
 
     if (stackDepth > TimelineDraw.TIMELINE_MAX_VZOOM_LEVEL) {
       stackDepth = TimelineDraw.TIMELINE_MAX_VZOOM_LEVEL;
@@ -514,7 +514,7 @@ public class TimelineSetting extends Setting {
   }
 
   public void setTLStackFramePixels(Object originalSource, int stackFramePixels) {
-    List settingsCopy = (List) AnWindow.getInstance().getSettings().getTimelineSettings(true);
+    List<Object> settingsCopy = (List<Object>) AnWindow.getInstance().getSettings().getTimelineSettings(true);
 
     boolean changed = false;
     if ((Integer) (settingsCopy.get(10)) != stackFramePixels) {
@@ -527,7 +527,7 @@ public class TimelineSetting extends Setting {
 
   public void setTLGroupDataBySelectedButtonIndex(
       Object originalSource, int new_tl_entity_button_num) {
-    List settingsCopy = (List) AnWindow.getInstance().getSettings().getTimelineSettings(true);
+    List<Object> settingsCopy = (List<Object>) AnWindow.getInstance().getSettings().getTimelineSettings(true);
     if (new_tl_entity_button_num < 0 || new_tl_entity_button_num >= tl_entity_props.size()) {
       return; // weird
     }

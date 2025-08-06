@@ -134,7 +134,7 @@ public class MetricStates {
     }
 
     copy.setMetricListsByMType(copyMetricListsByMType);
-    List<MetricState> copyMetricStateList = new ArrayList<MetricState>();
+    List<MetricState> copyMetricStateList = new ArrayList<>();
     for (MetricState metricState : metricStateList) {
       copyMetricStateList.add(metricState.copy());
     }
@@ -149,7 +149,7 @@ public class MetricStates {
       MetricStates oldMetricsStates, MetricStates newMetricsStates) {
     if (oldMetricsStates == null) {
       // Just copy the 'new' list
-      List<MetricNameSelection> changes = new ArrayList<MetricNameSelection>();
+      List<MetricNameSelection> changes = new ArrayList<>();
       for (MetricState metricState : newMetricsStates.getMetricStateList()) {
         changes.add(
             new MetricNameSelection(
@@ -180,7 +180,7 @@ public class MetricStates {
           "METRICERROR: MetricStates.getChangedMetrics: old and new lists are different");
     }
 
-    List<MetricNameSelection> changes = new ArrayList<MetricNameSelection>();
+    List<MetricNameSelection> changes = new ArrayList<>();
     for (int i = 0; i < oldMetricStateList.size(); i++) {
       MetricState oldMetricState = oldMetricStateList.get(i);
       MetricState newMetricState = newMetricStateList.get(i);
@@ -195,7 +195,7 @@ public class MetricStates {
   }
 
   public List<int[]> getChangedMetricSortColumns() {
-    List<int[]> list = new ArrayList<int[]>();
+    List<int[]> list = new ArrayList<>();
 
     // Check change in sort column index
     for (int mtype = 0; mtype < MetricsSetting.MET_LAST; mtype++) {
@@ -290,8 +290,8 @@ public class MetricStates {
     MMetric mMetric = metricListsByMType[mtype];
     AnMetric sortMetric = mMetric.getSortMetric();
     AnMetric[] mlist = mMetric.getmMetricList();
-    List<AnMetric> metricsToMove = new ArrayList<AnMetric>();
-    List<AnMetric> metricsNotToMove = new ArrayList<AnMetric>();
+    List<AnMetric> metricsToMove = new ArrayList<>();
+    List<AnMetric> metricsNotToMove = new ArrayList<>();
     for (int i = 0; i < mlist.length; i++) {
       if (mlist[i].getComd().equals(metricName)) {
         metricsToMove.add(mlist[i]);
@@ -309,7 +309,7 @@ public class MetricStates {
       }
     }
     if (insertionIndex != -1) {
-      List<AnMetric> newList = new ArrayList<AnMetric>();
+      List<AnMetric> newList = new ArrayList<>();
       if (before) {
         for (int i = 0; i <= insertionIndex - 1; i++) {
           newList.add(metricsNotToMove.get(i));
@@ -345,7 +345,7 @@ public class MetricStates {
   }
 
   public List<AnMetric> getSelectedMetricsByMType(int mType) {
-    List<AnMetric> list = new ArrayList<AnMetric>();
+    List<AnMetric> list = new ArrayList<>();
     String lastName = null;
 
     MMetric mList = metricListsByMType[mType];
@@ -420,7 +420,7 @@ public class MetricStates {
     List<MetricType>[] lists = (ArrayList<MetricType>[]) new ArrayList[MetricsSetting.MET_LAST];
 
     for (int mtype = 0; mtype < MetricsSetting.MET_LAST; mtype++) {
-      List<MetricType> orderList = new ArrayList<MetricType>();
+      List<MetricType> orderList = new ArrayList<>();
       MMetric metricList = metricListsByMType[mtype];
       for (AnMetric anMetric : metricList.getmMetricList()) {
         orderList.add(new MetricType(anMetric.getComd(), anMetric.getSubType()));
@@ -447,7 +447,7 @@ public class MetricStates {
 
   public List<AnMetric> getAnMetricsByMTypeTrimmed(int mtype) {
     AnMetric[] anMetricList = getMetricListByMType(mtype);
-    List<AnMetric> list = new ArrayList<AnMetric>();
+    List<AnMetric> list = new ArrayList<>();
     if (anMetricList != null) {
       String last = null;
       for (AnMetric anMetric : anMetricList) {

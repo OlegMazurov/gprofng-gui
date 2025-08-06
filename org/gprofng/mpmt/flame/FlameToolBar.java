@@ -45,11 +45,11 @@ import javax.swing.event.PopupMenuListener;
 
 public class FlameToolBar extends JToolBar {
 
-  private FlameView flameView;
+  private final FlameView flameView;
   private AnMetric[] availableMetrics;
   private JComboBox metricComboBox;
   private JSpinner zoomSpinner;
-  private int defaultZoomLevel;
+  private final int defaultZoomLevel;
   private JPopupMenu metricsSelectorpopup = null;
 
   private Stack<FlameBlock> setBaseStack = new Stack<FlameBlock>();
@@ -112,7 +112,7 @@ public class FlameToolBar extends JToolBar {
     metricLabel.setToolTipText(AnLocale.getString("Selected metric"));
     metricLabel.setDisplayedMnemonic(AnLocale.getString('e', "FlameViewMetricLabel"));
     add(metricLabel);
-    metricComboBox = new JComboBox();
+    metricComboBox = new JComboBox<AnMetric>();
     metricLabel.setLabelFor(metricComboBox);
     metricComboBox.setToolTipText(AnLocale.getString("Selected metric"));
     metricComboBox.addPopupMenuListener(

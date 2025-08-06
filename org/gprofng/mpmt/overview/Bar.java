@@ -46,7 +46,7 @@ public class Bar extends JPanel {
   private int value;
 
   public Bar(Color color, int value, CompareBarData[] compareValues) {
-    List<ValueColor> vc = new ArrayList<ValueColor>();
+    List<ValueColor> vc = new ArrayList<>();
     vc.add(new ValueColor(value, color));
     init(vc, value, compareValues);
     //        paintNumber = false;
@@ -54,7 +54,7 @@ public class Bar extends JPanel {
   }
 
   public Bar(ValueColor[] valueColor, int value, CompareBarData[] compareValues) {
-    init(new ArrayList<ValueColor>(Arrays.asList(valueColor)), value, compareValues);
+    init(new ArrayList<>(Arrays.asList(valueColor)), value, compareValues);
   }
 
   public Bar(List<ValueColor> valueColor, int value, CompareBarData[] compareValues) {
@@ -89,7 +89,7 @@ public class Bar extends JPanel {
         if (value == MetricValue.PERCENT_NAN || value >= BAR_MAX_PERCENT) {
           value = BAR_MAX_PERCENT;
         }
-        int vbarValue = (int) (barWidth * value) / 100;
+        int vbarValue = (barWidth * value) / 100;
         int fillValue = vbarValue;
         if (fillValue <= 1) {
           fillValue = 1;
@@ -135,7 +135,7 @@ public class Bar extends JPanel {
       if (noCompareBars() > 0 && compareValues[0].getPercentOfTotal() == MetricValue.PERCENT_NAN) {
         vbarValue = 0; // YXXX For now, show zero value for main bar (Thomas: TBD)
       } else {
-        vbarValue = (int) (barWidth * vc.getValue()) / 100;
+        vbarValue = (barWidth * vc.getValue()) / 100;
       }
 
       g.setColor(vc.getColor());
@@ -165,7 +165,7 @@ public class Bar extends JPanel {
             value = BAR_MAX_PERCENT - (combinedValue - value);
           }
         }
-        int vbarValue = (int) (barWidth * value) / 100;
+        int vbarValue = (barWidth * value) / 100;
         int borderOffset = 1;
         if (showBorder) {
           g.setColor(AnEnvironment.BAR_BORDER_COLOR);

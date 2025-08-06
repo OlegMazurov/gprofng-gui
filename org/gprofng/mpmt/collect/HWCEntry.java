@@ -197,7 +197,7 @@ public class HWCEntry {
   }
 
   public List<String> getSetNames() {
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<>();
 
     if (isSet()) {
       // Parse

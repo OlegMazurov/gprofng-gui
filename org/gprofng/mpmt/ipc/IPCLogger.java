@@ -64,7 +64,7 @@ public class IPCLogger {
     }
     if (ipcDelayString != null) {
       try {
-        ipcDelay = new Integer(ipcDelayString).intValue();
+        ipcDelay = Integer.valueOf(ipcDelayString);
       } catch (NumberFormatException nfe) {
       }
     }

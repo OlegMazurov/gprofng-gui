@@ -40,7 +40,7 @@ public class TurnerPanel extends javax.swing.JPanel {
   private boolean expanded = true;
   private Filler filler;
   private static final int fillerWith = 14;
-  private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
+  private List<ChangeListener> changeListeners = new ArrayList<>();
   private JButton turnerButton;
 
   public TurnerPanel(

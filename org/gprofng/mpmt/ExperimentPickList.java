@@ -29,7 +29,7 @@ public class ExperimentPickList extends PickList {
   }
 
   public List<ExperimentPickListElement> getRecentExperiments() {
-    List<ExperimentPickListElement> list = new ArrayList<ExperimentPickListElement>();
+    List<ExperimentPickListElement> list = new ArrayList<>();
     List<PickListElement> mostRecentExperiments = getElements();
     for (PickListElement ple : mostRecentExperiments) {
       list.add((ExperimentPickListElement) ple);
@@ -39,7 +39,7 @@ public class ExperimentPickList extends PickList {
 
   public List<ExperimentPickListElement> getRecentExperiments(int max) {
     int numberAdded = 0;
-    List<ExperimentPickListElement> list = new ArrayList<ExperimentPickListElement>();
+    List<ExperimentPickListElement> list = new ArrayList<>();
     List<PickListElement> mostRecentExperiments = getElements();
     for (PickListElement ple : mostRecentExperiments) {
       list.add((ExperimentPickListElement) ple);
@@ -53,7 +53,7 @@ public class ExperimentPickList extends PickList {
 
   public List<ExperimentPickListElement> getRecentValidExperiments(int max) {
     int numberAdded = 0;
-    List<ExperimentPickListElement> list = new ArrayList<ExperimentPickListElement>();
+    List<ExperimentPickListElement> list = new ArrayList<>();
     List<PickListElement> mostRecentExperiments = getElements();
     for (PickListElement ple : mostRecentExperiments) {
       if (exists(((ExperimentPickListElement) ple).getPath())) {

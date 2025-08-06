@@ -45,14 +45,14 @@ public class LibraryVisibilitySetting extends Setting {
   }
 
   public void setFromStrings(Object originalSource, List<String> initStates) {
-    List<Entry> newSettings = new ArrayList<Entry>();
+    List<Entry> newSettings = new ArrayList<>();
     for (Entry entry : settings) {
       newSettings.add(entry.copy());
     }
 
     if (initStates != null && !initStates.isEmpty()) {
       for (String s : initStates) {
-        int stateValue = new Integer(s.substring(0, 1));
+        int stateValue = Integer.valueOf(s.substring(0, 1));
         String path = s.substring(2);
         for (Entry entry : newSettings) {
           if (entry.getPath().equals(path)) {
@@ -81,7 +81,7 @@ public class LibraryVisibilitySetting extends Setting {
 
     if (initStates != null && !initStates.isEmpty()) {
       for (String s : initStates) {
-        int stateValue = new Integer(s.substring(0, 1));
+        int stateValue = Integer.valueOf(s.substring(0, 1));
         String path = s.substring(2);
         for (int i = 0; i < paths.length; i++) {
           if (paths[i].equals(path)) {
@@ -93,7 +93,7 @@ public class LibraryVisibilitySetting extends Setting {
       setLoadObjectStateIPC(0, states); // IPC
     }
 
-    settings = new ArrayList<Entry>();
+    settings = new ArrayList<>();
     for (int i = 0; i < names.length; i++) {
       Entry entry = new Entry(names[i], paths[i], states[i], indices[i], java[i] == 1);
       settings.add(entry);
@@ -129,7 +129,7 @@ public class LibraryVisibilitySetting extends Setting {
 
   // For persistance
   public List<String> getStates() {
-    List<String> list = new ArrayList<String>();
+    List<String> list = new ArrayList<>();
     for (Entry entry : settings) {
       if (entry.getState() != 0) {
         list.add("" + entry.getState() + ":" + entry.getPath());

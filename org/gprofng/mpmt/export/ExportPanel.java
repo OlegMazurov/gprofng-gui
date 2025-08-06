@@ -277,7 +277,7 @@ public class ExportPanel extends javax.swing.JPanel {
     if (limit.length() == 0) {
       return null;
     }
-    return new Integer(limit).intValue();
+    return Integer.valueOf(limit);
   }
 
   private void validateInput() {

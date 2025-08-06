@@ -43,7 +43,7 @@ public abstract class ColorMap {
         long _version, HashMap<Long, Color> _colorMap, HashMap<Long, StackState> _stackStateMap) {
       versionNum = _version;
       colorMap = (_colorMap != null) ? (HashMap<Long, Color>) _colorMap.clone() : null;
-      stackStates = (_stackStateMap != null) ? new ArrayList(_stackStateMap.values()) : null;
+      stackStates = (_stackStateMap != null) ? new ArrayList<>(_stackStateMap.values()) : null;
     }
 
     protected long getVersion() {
@@ -68,10 +68,10 @@ public abstract class ColorMap {
   // Constructor
   public ColorMap() {
     versionNumber = 0;
-    colorMap = new HashMap();
-    stackStateMap = new HashMap();
-    activeRules = new ArrayList();
-    defaultRules = new ArrayList();
+    colorMap = new HashMap<>();
+    stackStateMap = new HashMap<>();
+    activeRules = new ArrayList<>();
+    defaultRules = new ArrayList<>();
   }
 
   public synchronized void reset() {
@@ -343,7 +343,7 @@ public abstract class ColorMap {
     long[] funcs = (long[]) res[0];
     String[] names = (String[]) res[1];
     long[] functions = (long[]) res[2];
-    List<StackState> states = new ArrayList();
+    List<StackState> states = new ArrayList<>();
     for (int ii = 0; ii < funcs.length; ii++) {
       if (names[ii] == null) {
         continue;
@@ -391,7 +391,7 @@ public abstract class ColorMap {
     AnWindow anWindow = AnWindow.getInstance();
     final String[] names = anWindow.getFuncNames(funcs); // IPC!!
 
-    ArrayList<StackState> missing = new ArrayList();
+    ArrayList<StackState> missing = new ArrayList<>();
     for (int ii = 0; ii < funcs.length; ii++) {
       long func = funcs[ii];
       String name = names[ii];

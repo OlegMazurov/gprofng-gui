@@ -1065,7 +1065,7 @@ public final class HeapView extends FuncListDisp
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     list.add(window.getHeapCallStackSubview());
     return list;
@@ -1073,7 +1073,7 @@ public final class HeapView extends FuncListDisp
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     list.add(window.getHeapCallStackSubview());
     return list;

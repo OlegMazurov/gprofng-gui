@@ -366,7 +366,7 @@ public class HWCSelectPanel extends JPanel {
     String[] substrings =
         rawIncludeFilterString.split(" "); // multiword match  //FIXUP bypass escaped spaces?
     //        String[] substrings = {raw_includeFilterString}; // exact text match
-    List<String> clauses = new ArrayList();
+    List<String> clauses = new ArrayList<>();
     for (int ii = 0; ii < substrings.length; ii++) {
       if (substrings[ii].isEmpty()) {
         continue; // strip out empty clauses caused by consecutive spaces
@@ -375,9 +375,9 @@ public class HWCSelectPanel extends JPanel {
     }
     final List<HWCEntry> newList;
     if (clauses.isEmpty()) {
-      newList = new ArrayList(origList);
+      newList = new ArrayList<>(origList);
     } else {
-      newList = new ArrayList();
+      newList = new ArrayList<>();
       for (HWCEntry entry : origList) {
         boolean pass = false;
         for (String clause : clauses) {
@@ -435,7 +435,7 @@ public class HWCSelectPanel extends JPanel {
     includeComboBox.removeItemListener(includeItemListener);
     excludeComboBox.removeItemListener(excludeItemListener);
 
-    hwcFilteredList = new ArrayList<HWCEntry>();
+    hwcFilteredList = new ArrayList<>();
 
     // Check boxes
     for (HWCEntry hwcEntry : hwcFlatList) {
@@ -625,7 +625,7 @@ public class HWCSelectPanel extends JPanel {
   }
 
   protected List<HWCEntry> getSelectedEntries() {
-    List<HWCEntry> list = new ArrayList<HWCEntry>();
+    List<HWCEntry> list = new ArrayList<>();
 
     int selected[] = table.getSelectedRows();
     for (int i : selected) {

@@ -41,7 +41,7 @@ public class TimelineCursor extends Component {
   public TimelineCursor() {
     Image img;
     Cursor cursor;
-    savedCursors = new HashMap();
+    savedCursors = new HashMap<>();
     img = createOpenHandImage(24, 24);
     openHandImage = img;
     img = createOpenHandImage(32, 32);

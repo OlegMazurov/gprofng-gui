@@ -1154,7 +1154,7 @@ public class SourceDisp extends FuncListDisp {
         functionCallerCalleeAdded = new HashMap<Integer, Boolean>();
       }
       if (functionId == null) {
-        functionId = new ArrayList<Long>();
+        functionId = new ArrayList<>();
       }
       if (functionIdToRow == null) {
         functionIdToRow = new HashMap<Long, Integer>();
@@ -1235,7 +1235,7 @@ public class SourceDisp extends FuncListDisp {
         }
       }
 
-      rowToFuncBaseRow = new ArrayList<Integer>();
+      rowToFuncBaseRow = new ArrayList<>();
       int baseRow = 0;
       for (int i = 0; i < table_data[fl_table.getNameCol()].length; i++) {
         Object value = table_data[fl_table.getNameCol()][i];
@@ -1332,7 +1332,7 @@ public class SourceDisp extends FuncListDisp {
         SelObjInfo fi = new SelObjInfo(calleeId, -1, funcName);
         ArrayList<SelObjInfo> callees = calleeInfo.get(callsite);
         if (callees == null) {
-          callees = new ArrayList<SelObjInfo>();
+          callees = new ArrayList<>();
           callees.add(fi);
           calleeInfo.put(callsite, callees);
           if (fl_table.getType() == AnDisplay.DSP_Source
@@ -1372,7 +1372,7 @@ public class SourceDisp extends FuncListDisp {
 
         ArrayList<SelObjInfo> callers = callerInfo.get(funcId);
         if (callers == null) {
-          callers = new ArrayList<SelObjInfo>();
+          callers = new ArrayList<>();
           callers.add(fi);
           callerInfo.put(funcId, callers);
         } else {
@@ -1749,7 +1749,7 @@ public class SourceDisp extends FuncListDisp {
         }
       }
 
-      public ArrayList<Highlighter> marker = new ArrayList<Highlighter>();
+      public ArrayList<Highlighter> marker = new ArrayList<>();
       private String text = "";
       private String type = "";
       private int curRow = -1;

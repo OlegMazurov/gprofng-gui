@@ -159,7 +159,7 @@ public class AnFileSystemView extends FileSystemView {
       AnLog.log("AnFileSystemView.getFiles: Thread ID=" + ThreadID + " " + e);
     } catch (Exception e) {
     }
-    return (File[]) anFiles.toArray(new File[anFiles.size()]);
+    return anFiles.toArray(new File[anFiles.size()]);
   }
 
   /**

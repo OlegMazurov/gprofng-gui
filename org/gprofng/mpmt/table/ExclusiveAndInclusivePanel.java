@@ -76,7 +76,7 @@ public class ExclusiveAndInclusivePanel extends JPanel {
     ImageIcon staticIcon = null;
 
     int nameCount = 0;
-    exclusiveOrInclusivePanelList = new ArrayList<ExclusiveOrInclusivePanel>();
+    exclusiveOrInclusivePanelList = new ArrayList<>();
 
     for (int i = column; i < column + count; i++) {
       AnMetric anMetric = metricLabels[i].getAnMetric();
@@ -268,7 +268,7 @@ public class ExclusiveAndInclusivePanel extends JPanel {
   }
 
   public List<JMenuItem> getSortByMenuItems() {
-    List<JMenuItem> list = new ArrayList<JMenuItem>();
+    List<JMenuItem> list = new ArrayList<>();
     for (ExclusiveOrInclusivePanel exclusiveOrInclusivePanel : exclusiveOrInclusivePanelList) {
       list.addAll(exclusiveOrInclusivePanel.getSortByMenuItems());
     }

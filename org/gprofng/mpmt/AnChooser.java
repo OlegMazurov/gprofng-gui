@@ -549,7 +549,7 @@ public class AnChooser extends JFileChooser implements PropertyChangeListener {
   }
 
   public List<String> getExperiments() {
-    final List<String> list = new ArrayList<String>();
+    final List<String> list = new ArrayList<>();
     String errstr = "";
     final File[] files = getSelectedAnFiles();
     if (files != null) {

@@ -47,14 +47,15 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
 
   private AnMenuListener menuListener;
   private AnTable table;
-  private /*final*/ double box_height = 2.; // height of rect
+  private final double box_height = 2.; // height of rect
   public static final int HOTGAP_WIDTH = 18;
   private final double box_width = HOTGAP_WIDTH - 6; // width of rect
   private final double height_adjustment = 16; // height of the scrollbare arrow
   private final double handle_adjustment = 8; // half height of the handle
   private final double x_left = (HOTGAP_WIDTH - box_width) / 2 - 1; // left rect indentation
-  private Vector hots, vect; // hots - list of hot lines; vect - list of hot rects
-  private Vector warm_lines; // warm_lines - list of warm lines (a metric value > 0)
+  private Vector<RectData> vect;      // list of hot rects
+  private Vector<Integer> hots;       // list of hot lines
+  private Vector<Integer> warm_lines; // list of warm lines (a metric value > 0)
   private int warm_lines_count = 0; // count of warm lines
   private boolean show_warm_lines = true;
   private FuncListDisp disp = null; // SRC or DIS display
@@ -124,7 +125,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
         return;
       }
       if (show_warm_lines) {
-        warm_lines = new Vector();
+        warm_lines = new Vector<Integer>();
 
         for (int i = 0; i < row_count; i++) {
           int mcc = model.getColumnCount();
@@ -134,9 +135,9 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
             if (j == k) {
               continue;
             }
-            s = (String) model.getValueAt(i, j).toString();
+            s = model.getValueAt(i, j).toString();
             if (s.matches(".*[1-9].*")) {
-              warm_lines.add(new Integer(i));
+              warm_lines.add(i);
               break;
             }
           }
@@ -146,12 +147,12 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
         warm_lines_count = 0;
       }
 
-      hots = new Vector();
+      hots = new Vector<Integer>();
 
       for (int i = 0; i < row_count; i++) {
         int j;
         if ((j = model.getSrcType(i)) < 0) {
-          hots.add(new Integer(i));
+          hots.add(i);
         }
       }
 
@@ -208,14 +209,14 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
         line_height = (dim.height / row_count);
       }
 
-      vect = new Vector(hots_count + warm_lines_count);
+      vect = new Vector<RectData>(hots_count + warm_lines_count);
 
       int addRow = 0;
 
       Rectangle2D.Double cur_rect_warm = null;
       int current_line = table.getSelectedRow();
       for (int i = 0; i < warm_lines_count; i++) {
-        line = ((Integer) warm_lines.get(i)).intValue();
+        line = warm_lines.get(i);
         y = addRow + height_adjustment + inc * line;
 
         rect = new java.awt.geom.Rectangle2D.Double(x_left, y, box_width, box_height);
@@ -241,7 +242,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
 
       Rectangle2D.Double cur_rect_hot = null;
       for (int i = 0; i < hots_count; i++) {
-        line = ((Integer) hots.get(i)).intValue();
+        line = hots.get(i);
         y = addRow + height_adjustment + inc * line;
 
         rect = new java.awt.geom.Rectangle2D.Double(x_left, y, box_width, box_height);
@@ -315,15 +316,15 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
     RectData data;
     Vector<Integer> candidates = new Vector<Integer>();
     for (int i = 0; i < size; i++) {
-      data = (RectData) vect.get(i);
+      data = vect.get(i);
       if (data.getRect().contains(p)) {
         candidates.add(i);
       }
     }
     for (int i = 0; i < candidates.size(); i++) {
-      data = (RectData) vect.get(candidates.get(i));
+      data = vect.get(candidates.get(i));
       for (int j = 0; j < hots_count; j++) {
-        int line = ((Integer) hots.get(j)).intValue();
+        int line = hots.get(j);
         if (line == data.getLine()) {
           setText(data.getHint());
           isHotRect = true;
@@ -333,7 +334,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
       }
     }
     for (int i = 0; i < candidates.size(); i++) {
-      data = (RectData) vect.get(candidates.get(i));
+      data = vect.get(candidates.get(i));
       setText(data.getHint());
       isHotRect = true;
       curr_line = data.getLine();
@@ -476,7 +477,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
   public void HG_Next_Hot_Line() {
     int current_line = table.getSelectedRow();
     for (int i = 0; i < hots_count; i++) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line >= line) {
         continue;
       }
@@ -490,7 +491,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
   public void HG_Prev_Hot_Line() {
     int current_line = table.getSelectedRow();
     for (int i = hots_count - 1; i >= 0; i--) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line <= line) {
         continue;
       }
@@ -506,7 +507,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
     int next_nz_line = -1;
     int current_line = table.getSelectedRow();
     for (int i = 0; i < hots_count; i++) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line >= line) {
         continue;
       }
@@ -514,7 +515,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
       break;
     }
     for (int i = 0; i < warm_lines_count; i++) {
-      int line = ((Integer) warm_lines.get(i)).intValue();
+      int line = warm_lines.get(i);
       if (current_line >= line) {
         continue;
       }
@@ -543,7 +544,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
     int next_nz_line = -1;
     int current_line = table.getSelectedRow();
     for (int i = hots_count - 1; i >= 0; i--) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line <= line) {
         continue;
       }
@@ -551,7 +552,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
       break;
     }
     for (int i = warm_lines_count - 1; i >= 0; i--) {
-      int line = ((Integer) warm_lines.get(i)).intValue();
+      int line = warm_lines.get(i);
       if (current_line <= line) {
         continue;
       }
@@ -578,7 +579,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
   public boolean HG_Is_Next_Hot_Line() {
     int current_line = table.getSelectedRow();
     for (int i = 0; i < hots_count; i++) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line >= line) {
         continue;
       }
@@ -591,7 +592,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
   public boolean HG_Is_Prev_Hot_Line() {
     int current_line = table.getSelectedRow();
     for (int i = hots_count - 1; i >= 0; i--) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line <= line) {
         continue;
       }
@@ -609,7 +610,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
     }
     int current_line = table.getSelectedRow();
     for (int i = 0; i < hots_count; i++) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line >= line) {
         continue;
       }
@@ -617,7 +618,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
       break;
     }
     for (int i = 0; i < warm_lines_count; i++) {
-      int line = ((Integer) warm_lines.get(i)).intValue();
+      int line = warm_lines.get(i);
       if (current_line >= line) {
         continue;
       }
@@ -639,7 +640,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
     }
     int current_line = table.getSelectedRow();
     for (int i = hots_count - 1; i >= 0; i--) {
-      int line = ((Integer) hots.get(i)).intValue();
+      int line = hots.get(i);
       if (current_line <= line) {
         continue;
       }
@@ -647,7 +648,7 @@ public final class AnHotGap extends JPanel implements MouseListener, MouseMotion
       break;
     }
     for (int i = warm_lines_count - 1; i >= 0; i--) {
-      int line = ((Integer) warm_lines.get(i)).intValue();
+      int line = warm_lines.get(i);
       if (current_line <= line) {
         continue;
       }

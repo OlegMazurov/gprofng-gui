@@ -673,7 +673,7 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.JPG);
     return formats;
   }
@@ -694,7 +694,7 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     //        list.add(window.getTimelineCallStackSubview());
     //        list.add(window.getIoCallStackSubview());
@@ -703,7 +703,7 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }
@@ -865,7 +865,7 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
   protected List<JComponent> getFilterMenuList(FlameBlock flameBlock) {
     String text;
     JMenuItem menuItem;
-    List<JComponent> list = new ArrayList<JComponent>();
+    List<JComponent> list = new ArrayList<>();
 
     text = ADD_FILTER + FILTER_SELECTED_BRANCH_LONG_NAME;
     menuItem = new JMenuItem(new FilterSelectedBranch(text, flameBlock));
@@ -1182,14 +1182,14 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
 
   // processing of processCallTree*IPC() data for one set of blocks
   private List<FlameBlock> processCallTreeNodeIPC(Object[] blockInfo) {
-    List<FlameBlock> flameBlocks = new ArrayList<FlameBlock>();
+    List<FlameBlock> flameBlocks = new ArrayList<>();
     if (blockInfo == null) {
       return flameBlocks;
     }
     int[] blockIDs = (int[]) blockInfo[0];
     int[] parentIDs = (int[]) blockInfo[1];
     long[] functionIDs = (long[]) blockInfo[2];
-    Object metricObjs = (Object) blockInfo[3]; // could be double, int, long
+    Object metricObjs = blockInfo[3]; // could be double, int, long
 
     if (blockIDs == null || blockIDs.length == 0) {
       return flameBlocks;
@@ -1279,7 +1279,7 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
       long[] ids = (long[]) res[0];
       String[] names = (String[]) res[1];
       long[] functions = (long[]) res[2];
-      List<StackState> states = new ArrayList();
+      List<StackState> states = new ArrayList<>();
       HashMap<Long, StackState> functionIdNameMap = new HashMap<Long, StackState>();
       for (int ii = 0; ii < ids.length; ii++) {
         // Colors
@@ -1299,11 +1299,8 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
   /** returns row data */
   private List<FlameRow> getRowDataIPC(String metricName, int row) {
     // examples of three methods.
-
     updateColorMapIPC(row);
-
-    List<FlameRow> flameRows = new ArrayList();
-
+    List<FlameRow> flameRows = new ArrayList<>();
     if (XXXgetRowByLevel) {
       Object[] tmp = getCallTreeLevelIPC(metricName, row);
       List<FlameBlock> blocks = processCallTreeNodeIPC(tmp);
@@ -1334,11 +1331,11 @@ public class FlameView extends AnDisplay implements ExportSupport, AnChangeListe
       row_count = getCallTreeNumLevelsIPC();
       int node_idxs[] = {0}; // 0 will fetch the root node
       for (int tmpRow = 0; tmpRow < row_count; tmpRow++) {
-        List<FlameBlock> blocks = new ArrayList();
+        List<FlameBlock> blocks = new ArrayList<>();
         // get children of nodes in list
         Object[] res = getCallTreeChildrenIPC(metricName, tmpRow, node_idxs);
         // get results
-        ArrayList<Integer> children = new ArrayList<Integer>(); // nodes for next query
+        ArrayList<Integer> children = new ArrayList<>(); // nodes for next query
         if (res != null) {
           for (int jj = 0; jj < res.length; jj++) { // should match node_idxs.length
             Object[] tmp = (Object[]) res[jj];

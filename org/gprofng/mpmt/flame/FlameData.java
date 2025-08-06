@@ -19,13 +19,12 @@ import org.gprofng.mpmt.AnMetric;
 import org.gprofng.mpmt.AnWindow;
 import org.gprofng.mpmt.statecolors.StackState;
 import org.gprofng.mpmt.util.gui.AnUtility;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class FlameData {
 
-  private FlameView flameView;
+  private final FlameView flameView;
   private AnMetric anMetric = null;
   private FlameRow[] flameRows = null;
   private Map<Long, StackState> functionIdNameMap = null;
@@ -33,7 +32,7 @@ public class FlameData {
   private FlameBlock mouseOverFlameBlock = null;
   private FlameBlock selectedFlameBlock = null;
 
-  private static Object selectedObjectLock = new Object();
+  private static final Object selectedObjectLock = new Object();
   private static UpdateSelectedObjectThread selectedObjectThread;
 
   protected FlameData(FlameView flameView, AnMetric anMetric, int rowCount) {
@@ -106,7 +105,6 @@ public class FlameData {
   }
 
   protected void calculateFlameBlockWidths(int width) {
-    Date start = new Date();
     FlameRow[] flameRows = getFlameRows();
     FlameBlock baseFlameBlock = getBaseFlameBlock();
     for (int row = 0; row < flameRows.length; row++) {
@@ -158,7 +156,7 @@ public class FlameData {
           flameRow.setReadyToPaint();
         }
       } else {
-        double xFactor = ((double) width) / ((double) baseFlameBlock.getInclusiveValue());
+        double xFactor = ((double) width) / baseFlameBlock.getInclusiveValue();
         FlameRow parentFlameRow = flameRows[row - 1];
         if (parentFlameRow == null || !parentFlameRow.isReadyToPaint()) {
           break;
@@ -257,8 +255,6 @@ public class FlameData {
         flameRow.setReadyToPaint();
       }
     }
-    //        System.out.println("calculateFlameBlockWidths() " + (new Date().getTime() -
-    // start.getTime()));
   }
 
   private int getBlockCount() {

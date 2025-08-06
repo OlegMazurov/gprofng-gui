@@ -48,7 +48,7 @@ public final class Filters {
   private Stack<FilterClause> clausesUndoStack = new Stack<FilterClause>();
   private Stack<FilterClause> clausesRedoStack = new Stack<FilterClause>();
   // Listeners
-  private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
+  private List<ChangeListener> changeListeners = new ArrayList<>();
 
   // Constructor
   public Filters(final AnWindow window, final Frame frame) {
@@ -113,7 +113,7 @@ public final class Filters {
   }
 
   public List<FilterClause> getFilters() {
-    List<FilterClause> list1 = new ArrayList<FilterClause>();
+    List<FilterClause> list1 = new ArrayList<>();
     Iterator<FilterClause> iterator = clausesStack.iterator();
     while (iterator.hasNext()) {
       FilterClause clause = iterator.next();
@@ -121,16 +121,16 @@ public final class Filters {
         if (clause.isStandardFilter()) {
           list1.add(clause);
         } else if (clause.isCustomFilter()) {
-          list1 = new ArrayList<FilterClause>(); // reset list
+          list1 = new ArrayList<>(); // reset list
           list1.add(clause);
         } else if (clause.isNoFiltersFilter()) {
-          list1 = new ArrayList<FilterClause>(); // reset list
+          list1 = new ArrayList<>(); // reset list
         } else {
           assert true;
         }
       }
     }
-    List<FilterClause> list2 = new ArrayList<FilterClause>();
+    List<FilterClause> list2 = new ArrayList<>();
     for (int n = list1.size() - 1; n >= 0; n--) {
       list2.add(list1.get(n));
     }
@@ -197,16 +197,16 @@ public final class Filters {
   private String getStandardFilters(boolean insertNL) {
     StringBuilder sb = new StringBuilder();
 
-    List<FilterClause> enabledFilters = new ArrayList<FilterClause>();
+    List<FilterClause> enabledFilters = new ArrayList<>();
     for (FilterClause clause : clausesStack) {
       if (clause.isEnabled()) {
         if (clause.isStandardFilter()) {
           enabledFilters.add(clause);
         } else if (clause.isCustomFilter()) {
-          enabledFilters = new ArrayList<FilterClause>(); // reset list
+          enabledFilters = new ArrayList<>(); // reset list
           enabledFilters.add(clause);
         } else if (clause.isNoFiltersFilter()) {
-          enabledFilters = new ArrayList<FilterClause>(); // reset list
+          enabledFilters = new ArrayList<>(); // reset list
         } else {
           assert true;
         }

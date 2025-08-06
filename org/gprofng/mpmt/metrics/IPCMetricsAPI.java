@@ -51,9 +51,6 @@ public class IPCMetricsAPI {
       Object[] data = (Object[]) ipcResult.getObject();
       MetricNode nodeTree = parseRefMetricTreeIpcData(null, data, 0);
       return nodeTree;
-    } else {
-      int i = 0; // for breakpoint
-      // error handling
     }
     return null;
   }
@@ -178,8 +175,8 @@ public class IPCMetricsAPI {
     //        System.out.println("updateMetricValues:");
 
     // split into lists of nodes w/ metrics and nodes that just have values
-    List<SelectableMetricNode> selectableMetrics = new ArrayList<SelectableMetricNode>();
-    List<ValueMetricNode> valueMetricsOnly = new ArrayList<ValueMetricNode>();
+    List<SelectableMetricNode> selectableMetrics = new ArrayList<>();
+    List<ValueMetricNode> valueMetricsOnly = new ArrayList<>();
     for (ValueMetricNode valueMetricNode : valueMetricList) {
       if (valueMetricNode instanceof SelectableMetricNode) {
         selectableMetrics.add((SelectableMetricNode) valueMetricNode);
@@ -246,7 +243,7 @@ public class IPCMetricsAPI {
     int nonMetIndex = 0;
     for (int i = 0; i < nc; i++) {
       ValueMetricNode node;
-      ArrayList<MetricValue> mvlist = new ArrayList();
+      ArrayList<MetricValue> mvlist = new ArrayList<>();
       String label;
       if (i < metlist.size()) {
         node = metlist.get(metIndex++);
@@ -262,7 +259,7 @@ public class IPCMetricsAPI {
           unit = AnLocale.getString("Seconds");
         }
       } else if (node instanceof ValueMetricNode) {
-        String vmunit = ((ValueMetricNode) node).getUnit();
+        String vmunit = node.getUnit();
         if (vmunit != null && vmunit.compareTo("SECONDS") == 0) {
           unit = AnLocale.getString("Seconds");
         }

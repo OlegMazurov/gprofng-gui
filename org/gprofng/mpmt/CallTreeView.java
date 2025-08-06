@@ -1455,8 +1455,8 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
     CT_TreeNode tn;
     DefaultMutableTreeNode anode;
     DefaultMutableTreeNode node_to_expand = null;
-    Vector nextNodes;
-    Vector prevNodes;
+    Vector<CT_TreeNode> nextNodes;
+    Vector<CT_TreeNode> prevNodes;
     String nodeName;
 
     double minValue = 0.0;
@@ -1538,7 +1538,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
         node_to_expand = tnTotal;
       }
     }
-    prevNodes = new Vector(1);
+    prevNodes = new Vector<CT_TreeNode>(1);
     prevNodes.add(tnTotal);
     int nrows = prevNodes.size();
 
@@ -1548,10 +1548,10 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
         .setProgress(progress, AnLocale.getString("Initializing call tree"));
 
     // Step 2: add callees to tnTotal node
-    nextNodes = new Vector(0); // Next level nodes
+    nextNodes = new Vector<CT_TreeNode>(0); // Next level nodes
     int level = 1;
     for (int row = 0; /* row < nrows */ ; ) { // We don't know yet how many rows this tree will have
-      CT_TreeNode dn = (CT_TreeNode) prevNodes.elementAt(row);
+      CT_TreeNode dn = prevNodes.elementAt(row);
       CT_TreeNode[] tns = getChildrenOfTreeNode(dn, false);
 
       if (++progress > 98) {
@@ -1596,7 +1596,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
           // We are done, the tree is built deep enough
           // NM Add fake child to each "leaf" node for future
           for (int i = 0; i < nextNodes.size(); i++) {
-            tn = (CT_TreeNode) nextNodes.elementAt(i);
+            tn = nextNodes.elementAt(i);
             // try to add its children
             addChildren(tn);
           }
@@ -1608,15 +1608,12 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
           break;
         }
         prevNodes = nextNodes;
-        nextNodes = new Vector(0); // Next level nodes
+        nextNodes = new Vector<CT_TreeNode>(0); // Next level nodes
         row = 0;
       }
-      cstack = (long[]) ((CT_TreeNode) prevNodes.elementAt(row)).stack;
+      cstack = prevNodes.elementAt(row).stack;
       ct_callstack.setIDs(cstack);
     }
-    // t = System.currentTimeMillis() - t;
-    // System.out.println("DEBUG: CallTreeDisp.CT_BuildTree(maxlevel=" + maxlevel + "): time=" + t +
-    // " mls.");
 
     // Finally add all nodes to the tree
     // Probably we have to use EventDispatchThread there
@@ -1706,9 +1703,9 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
       return null;
     }
     long totalID = total.ID;
-    Vector v = new Vector();
+    Vector<long[]> v = new Vector<long[]>();
     CT_FindAllCallStacksForStackFragment(stack, totalID, v);
-    return (v);
+    return v;
   }
 
   /**
@@ -1753,8 +1750,8 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
     CT_TreeNode tn;
     DefaultMutableTreeNode anode;
     DefaultMutableTreeNode node_to_expand = null;
-    Vector nextNodes;
-    Vector prevNodes;
+    Vector<CT_TreeNode> nextNodes;
+    Vector<CT_TreeNode> prevNodes;
 
     // double minValue = 0.0;
     AnObject[] incMetrics = null;
@@ -1820,14 +1817,14 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
     }
 
     // Step 2: update tnTotal children
-    prevNodes = new Vector(1);
+    prevNodes = new Vector<CT_TreeNode>(1);
     prevNodes.add(tnTotal);
     int nrows = prevNodes.size();
-    nextNodes = new Vector(0); // Next level nodes
+    nextNodes = new Vector<CT_TreeNode>(0); // Next level nodes
     int level = 1;
     for (int row = 0; /* row < nrows */ ; ) {
       { // new version
-        CT_TreeNode pn = (CT_TreeNode) prevNodes.elementAt(row);
+        CT_TreeNode pn = prevNodes.elementAt(row);
         CT_TreeNode[] tns = getChildrenOfTreeNode(pn, false);
         // update children
         CT_TreeNode child = null;
@@ -1875,10 +1872,10 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
           break;
         }
         prevNodes = nextNodes;
-        nextNodes = new Vector(0); // Next level nodes
+        nextNodes = new Vector<CT_TreeNode>(0); // Next level nodes
         row = 0;
       }
-      cstack = (long[]) ((CT_TreeNode) prevNodes.elementAt(row)).stack;
+      cstack = prevNodes.elementAt(row).stack;
       ct_callstack.setIDs(cstack);
     }
     // t = System.currentTimeMillis() - t;
@@ -1909,7 +1906,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
     prevNodes = new Vector<CT_TreeNode>();
     prevNodes.add(sn);
     int nrows = prevNodes.size();
-    cstack = (long[]) sn.stack;
+    cstack = sn.stack;
     ct_callstack.setIDs(cstack);
 
     // Step 2: add callees to start_node node
@@ -1966,7 +1963,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
         nextNodes = new Vector<CT_TreeNode>(); // Next level nodes
         row = 0;
       }
-      cstack = (long[]) ((CT_TreeNode) prevNodes.elementAt(row)).stack;
+      cstack = prevNodes.elementAt(row).stack;
       ct_callstack.setIDs(cstack);
     }
     // t = System.currentTimeMillis() - t;
@@ -3664,7 +3661,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.TEXT);
     //        formats.add(ExportFormat.HTML);
     //        formats.add(ExportFormat.CSV);
@@ -3820,7 +3817,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     list.add(window.getTimelineCallStackSubview());
     list.add(window.getIoCallStackSubview());
@@ -3829,7 +3826,7 @@ public final class CallTreeView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }

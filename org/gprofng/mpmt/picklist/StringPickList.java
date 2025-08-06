@@ -35,7 +35,7 @@ public class StringPickList extends PickList {
   }
 
   public List<StringPickListElement> getStringElements() {
-    List<StringPickListElement> list = new ArrayList<StringPickListElement>();
+    List<StringPickListElement> list = new ArrayList<>();
     List<PickListElement> mostRecentExperiments = getElements();
     for (PickListElement ple : mostRecentExperiments) {
       list.add((StringPickListElement) ple);

@@ -231,7 +231,7 @@ public class CheckBoxBarPanel extends javax.swing.JPanel {
                   ;
                   if (!interrupted) {
                     List<MetricNameSelected> metricNameSelected =
-                        new ArrayList<MetricNameSelected>();
+                        new ArrayList<>();
                     for (CheckBoxBarPanel cbbp : checkBoxBarPanelList) {
                       metricNameSelected.add(
                           new MetricNameSelected(
@@ -250,7 +250,7 @@ public class CheckBoxBarPanel extends javax.swing.JPanel {
   }
 
   protected static void resetCheckBoxBarPanelList() {
-    checkBoxBarPanelList = new ArrayList<CheckBoxBarPanel>();
+    checkBoxBarPanelList = new ArrayList<>();
   }
 
   /**

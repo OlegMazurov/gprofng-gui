@@ -47,18 +47,17 @@ public class AnTableHeaderPanel extends JPanel {
     testLabel.setFont(boldFont);
   }
 
-  private List<MetricPanel> metricPanels = new ArrayList<MetricPanel>();
-  private List<Integer> startColumns = new ArrayList<Integer>();
-  private List<Integer> columnCounts = new ArrayList<Integer>();
-  private List<Integer> panelWidths = new ArrayList<Integer>();
-
+  private final List<MetricPanel> metricPanels;
+  private final List<Integer> startColumns;
+  private final List<Integer> columnCounts;
+  private final List<Integer> panelWidths;
   private int dropPosition = -1;
 
   public AnTableHeaderPanel(AnTable anTable, MetricLabel[] metricLabels, boolean wrapMetricName) {
-    metricPanels = new ArrayList<MetricPanel>();
-    startColumns = new ArrayList<Integer>();
-    columnCounts = new ArrayList<Integer>();
-    panelWidths = new ArrayList<Integer>();
+    metricPanels = new ArrayList<>();
+    startColumns = new ArrayList<>();
+    columnCounts = new ArrayList<>();
+    panelWidths = new ArrayList<>();
 
     int[][] columnWidth = anTable.getColumnWidth();
 

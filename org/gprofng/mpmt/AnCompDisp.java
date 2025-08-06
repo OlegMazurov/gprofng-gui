@@ -930,7 +930,7 @@ public class AnCompDisp extends FuncListDisp implements ExportSupport {
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.TEXT);
     formats.add(ExportFormat.JPG);
     return formats;
@@ -943,7 +943,7 @@ public class AnCompDisp extends FuncListDisp implements ExportSupport {
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     list.add(window.getTimelineCallStackSubview());
     list.add(window.getIoCallStackSubview());
@@ -960,7 +960,7 @@ public class AnCompDisp extends FuncListDisp implements ExportSupport {
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     return list;
   }

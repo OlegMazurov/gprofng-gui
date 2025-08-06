@@ -17,7 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses>.  */
 package org.gprofng.mpmt;
 
 // Analyzer String object
-public final class AnString extends AnObject implements Comparable {
+public final class AnString extends AnObject implements Comparable<AnString> {
   private String obj;
 
   // Constructor
@@ -31,8 +31,8 @@ public final class AnString extends AnObject implements Comparable {
   }
 
   // As String.compareTo
-  public int compareTo(Object o) {
-    return obj.compareTo((String) o);
+  public int compareTo(AnString o) {
+    return obj.compareTo(o.toString());
   }
 
   // Never used

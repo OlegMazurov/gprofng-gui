@@ -145,13 +145,13 @@ public final class CollectPanel extends JPanel implements ActionListener {
   public JLabel start_state;
 
   public List<HWCEntry> selectedHWCList;
-  public JList hwcList;
+  public JList<HWCEntry> hwcList;
   private JScrollPane hwcListScrollPane;
   private HWCSelectDialog hwcSelectDialog = null;
   private AnDialog2 availableCountersDialog = null;
 
   public List<String> sel_attr;
-  public JList attrList;
+  public JList<String> attrList;
   private JScrollPane attrScrollPane;
   public JButton updateButton, cancelButton;
   public JPanel buttonPanel;
@@ -254,7 +254,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
   private final String[][] hwc_att_data;
   private String[][] hwc_reg_data;
 
-  private final ArrayList data_list, left_list;
+  private final ArrayList<CollectData> data_list, left_list;
   private final boolean profile_running_process;
   private final boolean system_profiling;
 
@@ -368,8 +368,8 @@ public final class CollectPanel extends JPanel implements ActionListener {
     CSTR_WORK = AnLocale.getString("Working Directory");
     CSTR_TARGET_JDK = AnLocale.getString("Target JDK");
 
-    data_list = new ArrayList();
-    left_list = new ArrayList();
+    data_list = new ArrayList<>();
+    left_list = new ArrayList<>();
 
     this.buttons = buttons;
 
@@ -397,9 +397,9 @@ public final class CollectPanel extends JPanel implements ActionListener {
     hwc_help = getHwcHelp(system_profiling);
 
     // populate hwc_map and hwcFlatList
-    hwcI18NMap = new HashMap();
-    hwcNameMap = new HashMap();
-    hwcFlatList = new ArrayList();
+    hwcI18NMap = new HashMap<>();
+    hwcNameMap = new HashMap<>();
+    hwcFlatList = new ArrayList<>();
     // prepend default counters at top of list
     for (int ii = 0; hwcSets[0] != null && ii < hwcSets[0].length; ii++) {
       HWCEntry hwcEntry =
@@ -679,7 +679,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
    *
    * @param from
    */
-  private void output(InputStream from, List fromVector) {
+  private void output(InputStream from, List<String> fromVector) {
     String line;
     Thread thisThread = Thread.currentThread();
     BufferedReader br = null;
@@ -695,7 +695,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
         line = null;
         if (null == br) {
           if (fromVector.size() > 0) {
-            line = (String) fromVector.get(0);
+            line = fromVector.get(0);
             fromVector.remove(0);
           } else if (output_thread != thisThread) {
             closed = true;
@@ -866,7 +866,8 @@ public final class CollectPanel extends JPanel implements ActionListener {
   }
 
   // Add one collect argument
-  private static void addOne(final ArrayList cmd_list, final String flag, final String str) {
+  private static void addOne(final ArrayList<String> cmd_list,
+      final String flag, final String str) {
     if ((str != null) && (str.length() > 0)) {
       if (flag != null) {
         cmd_list.add(flag);
@@ -875,12 +876,9 @@ public final class CollectPanel extends JPanel implements ActionListener {
     }
   }
 
-  private ArrayList getCmdList() {
-    final ArrayList cmd_list;
+  private ArrayList<String> getCmdList() {
+    final ArrayList<String> cmd_list = new ArrayList<>();
     final String hwc1, hwc2;
-
-    cmd_list = new ArrayList();
-
     String cmd = Analyzer.getInstance().getPathToCollect();
 
     // experiment name/dir/group
@@ -1102,7 +1100,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
                 : ipc_str_empty;
         String[] hwcs = hwc1.split(ipc_str_comma);
         for (int i = 0; i < sel_attr.size(); i++) {
-          attr = attr + (String) sel_attr.get(i);
+          attr = attr + sel_attr.get(i);
         }
         if (!reg_alloc.getValue().equals("None")) {
           regval = "/" + reg_alloc.getValue();
@@ -1170,11 +1168,10 @@ public final class CollectPanel extends JPanel implements ActionListener {
     String attrStr = "~" + attrname + "=";
     String attrEntry = attrStr + ctr_attr.getValue();
 
-    Iterator en;
+    Iterator<String> en = sel_attr.iterator();
     boolean found = false;
-    int i;
-    for (i = 0, en = sel_attr.iterator(); en.hasNext(); i++) {
-      String cur_elem = (String) en.next();
+    for (int i = 0; en.hasNext(); i++) {
+      String cur_elem = en.next();
       if (cur_elem.indexOf(attrStr) != -1) {
         sel_attr.set(i, attrEntry); // replace element
         found = true;
@@ -1477,7 +1474,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
   @Override
   public void actionPerformed(final ActionEvent event) {
     String col_cmd;
-    final Iterator iter;
+    Iterator<String> iter;
     int i;
     final String cmd = event.getActionCommand();
     final String empty = ipc_str_empty;
@@ -1696,7 +1693,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
       /* ^profile_running_process */
 
       // Create commands list and invoke collect
-      final ArrayList cmdList = getCmdList();
+      final ArrayList<String> cmdList = getCmdList();
       final String[] cmds = new String[ /*getCmdList()*/cmdList.size()];
       col_cmd = empty;
 
@@ -1715,7 +1712,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
       /* ^profile_running_process */
 
       for (i = 0, iter = /*getCmdList()*/ cmdList.iterator(); iter.hasNext(); i++) {
-        cmds[i] = (String) iter.next();
+        cmds[i] = iter.next();
         col_cmd += cmds[i] + ipc_str_space;
         if ((i == 0) && (null != output_file_name)) {
           col_cmd += "--outfile" + ipc_str_space + output_file_name + ipc_str_space;
@@ -1752,7 +1749,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
               };
         } else {
           final PipedInputStream pis = null;
-          final List logVector = new ArrayList();
+          final List<String> logVector = new ArrayList<>();
           collector.setLog(logVector);
           output_thread =
               new Thread("Collector Panel Output Thread") {
@@ -1850,7 +1847,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
     } else if (cmd.equals(AnLocale.getString("Preview Command:"))) {
       col_cmd = empty;
       for (i = 0, iter = getCmdList().iterator(); iter.hasNext(); i++) {
-        col_cmd += ((String) iter.next()) + ipc_str_space;
+        col_cmd += iter.next() + ipc_str_space;
       }
       // Temporary correction of default HWC set
       String pattern = "-h " + ipc_str_hwc_default + ipc_str_comma;
@@ -1884,7 +1881,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
       preview_cmd.setText(col_cmd);
     } else if (cmd.equals(AnLocale.getString("Properties"))) {
       toAdd = true;
-      HWCEntry entry = (HWCEntry) hwcList.getSelectedValue();
+      HWCEntry entry = hwcList.getSelectedValue();
       showHWCPropertyDialog(entry);
     } else if (cmd.equals(AnLocale.getString("Add"))) {
       showHWCSelectDialog();
@@ -2281,9 +2278,9 @@ public final class CollectPanel extends JPanel implements ActionListener {
   }
 
   private List<List<HWCEntry>> getHWCsAllProcess(Object[] obj) {
-    List<List<HWCEntry>> types = new ArrayList();
-    List<HWCEntry> std = new ArrayList();
-    List<HWCEntry> raw = new ArrayList();
+    List<List<HWCEntry>> types = new ArrayList<>();
+    List<HWCEntry> std = new ArrayList<>();
+    List<HWCEntry> raw = new ArrayList<>();
     types.add(std);
     types.add(raw);
     int ii = 0;
@@ -2498,8 +2495,8 @@ public final class CollectPanel extends JPanel implements ActionListener {
     attrPanel.add(selectedAttrLabel, BorderLayout.NORTH);
 
     // Selected list
-    sel_attr = new ArrayList();
-    attrList = new JList(sel_attr.toArray());
+    sel_attr = new ArrayList<>();
+    attrList = new JList<String>(sel_attr.toArray(new String[sel_attr.size()]));
     attrList.getAccessibleContext().setAccessibleName(AnLocale.getString("Attribute Selection"));
     attrList
         .getAccessibleContext()
@@ -3284,7 +3281,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
 
   public void initHWCPanel(JPanel data_panel) {
     hwcSelectDialog = null;
-    selectedHWCList = new ArrayList();
+    selectedHWCList = new ArrayList<>();
     hwcPanel = new JPanel(new BorderLayout());
     hwcPanel.setBorder(BorderFactory.createEmptyBorder(0, 16, 6, 8));
     counterLabel = new JLabel(AnLocale.getString("Selected Hardware Counters:"));
@@ -3292,16 +3289,16 @@ public final class CollectPanel extends JPanel implements ActionListener {
     counterLabel.setToolTipText(AnLocale.getString("List of hardware counters to profile"));
     hwcPanel.add(counterLabel, BorderLayout.NORTH);
 
-    hwcList = new JList(selectedHWCList.toArray());
+    hwcList = new JList<HWCEntry>(selectedHWCList.toArray(new HWCEntry[selectedHWCList.size()]));
     // Set tooltip
     hwcList.addMouseMotionListener(
         new MouseMotionAdapter() {
           @Override
           public void mouseMoved(MouseEvent evt) {
-            ListModel model = hwcList.getModel();
+            ListModel<HWCEntry> model = hwcList.getModel();
             int index = hwcList.locationToIndex(evt.getPoint());
             if (index >= 0) {
-              HWCEntry entry = (HWCEntry) model.getElementAt(index);
+              HWCEntry entry = model.getElementAt(index);
               String ttText = entry.getDescriptionText(hwcNameMap);
               hwcList.setToolTipText(ttText);
             }
@@ -3421,13 +3418,12 @@ public final class CollectPanel extends JPanel implements ActionListener {
 
   // Set all HWC related controls
   public void updateButtons() {
+    hwcList.setListData(selectedHWCList.toArray(new HWCEntry[selectedHWCList.size()]));
     if ((selectedHWCList.isEmpty()) || (!hwc1_prof.check.isSelected())) {
-      hwcList.setListData(selectedHWCList.toArray());
       removeButton.setEnabled(false);
       propertyButton.setEnabled(false);
       hwcListScrollPane.setEnabled(false);
     } else {
-      hwcList.setListData(selectedHWCList.toArray());
       hwcList.setSelectedIndex(0);
       removeButton.setEnabled(true);
       propertyButton.setEnabled(true);
@@ -3484,7 +3480,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
 
   // Set all HWC attribute related controls
   public void setAttrButtons() {
-    attrList.setListData(sel_attr.toArray());
+    attrList.setListData(sel_attr.toArray(new String[sel_attr.size()]));
     if (sel_attr.isEmpty()) {
       remAttr.setEnabled(false);
       modAttr.setEnabled(false);
@@ -3565,7 +3561,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
 
       String str, head;
 
-      final List headers = new ArrayList(6);
+      final List<String> headers = new ArrayList<>(6);
       headers.add(AnLocale.getString("Path:"));
       headers.add("$JDK_HOME");
       headers.add("$JAVA_PATH");
@@ -3573,10 +3569,10 @@ public final class CollectPanel extends JPanel implements ActionListener {
       headers.add(AnLocale.getString("Current JVM"));
       headers.add(AnLocale.getString("Default (PATH based)"));
 
-      add(CollectUtility.AnComboBox.COMBO_TEXT, (String) headers.get(0), ipc_str_empty, true);
+      add(CollectUtility.AnComboBox.COMBO_TEXT, headers.get(0), ipc_str_empty, true);
 
       for (int i = 1; i < 6; i++) {
-        head = (String) headers.get(i);
+        head = headers.get(i);
         // process environment variables
         if (head.startsWith("$")) {
           str = getenv(head.substring(1));
@@ -3829,7 +3825,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
     final JCheckBox check;
     final JButton button;
     JLabel text;
-    JComboBox combo;
+    JComboBox<String> combo;
     JTextField field;
     final String name;
     final String[][] data;
@@ -4003,7 +3999,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
         }
       }
 
-      add(combo = new JComboBox(list));
+      add(combo = new JComboBox<String>(list));
       add(field = new JTextField(init_val, 8));
       combo.setEnabled(set);
       // combo.setSelectedItem(list[0]);
@@ -4445,7 +4441,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
     }
 
     // Align label/combo-box
-    public void setAlignmentX(final ArrayList data_list) {
+    public void setAlignmentX(final ArrayList<CollectData> data_list) {
       int i;
       for (i = 0; i < 4; i++) // 1.check 2.label 3.option 4.text
       {
@@ -4453,18 +4449,19 @@ public final class CollectPanel extends JPanel implements ActionListener {
       }
     }
 
-    public void setAlignmentX(final int index, final ArrayList data_list) {
+    public void setAlignmentX(final int index,
+        final ArrayList<CollectData> data_list) {
       int width, max_width;
       CollectData cd;
       JComponent cmp;
       Dimension psize;
-      Iterator iter = data_list.iterator();
+      Iterator<CollectData> iter = data_list.iterator();
 
       max_width = 0;
 
       // Find the maximum width
       while (iter.hasNext()) {
-        cd = (CollectData) iter.next();
+        cd = iter.next();
         if (index >= cd.getComponentCount()) {
           continue;
         }
@@ -4480,7 +4477,7 @@ public final class CollectPanel extends JPanel implements ActionListener {
       iter = data_list.iterator();
 
       while (iter.hasNext()) {
-        cd = (CollectData) iter.next();
+        cd = iter.next();
 
         if (index >= cd.getComponentCount()) {
           continue;

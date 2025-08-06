@@ -531,7 +531,7 @@ public class CollectPanel3 extends JPanel {
     }
     List<List<String>> tp = psParser.getData(true).processes(re); // Processes
     // Convert List<List<String>> to Object[][]....
-    List<Object[]> tpList = new ArrayList<Object[]>();
+    List<Object[]> tpList = new ArrayList<>();
     for (List<String> object : tp) {
       tpList.add(object.toArray());
     }

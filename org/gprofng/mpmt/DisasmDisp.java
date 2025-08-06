@@ -880,7 +880,7 @@ public class DisasmDisp extends SourceDisp {
                     (HashMap<String, ArrayList<Integer>>) entry.getValue();
                 ArrayList<Integer> list = regMap.get(regFullName(r));
                 if (list == null) {
-                  list = new ArrayList<Integer>();
+                  list = new ArrayList<>();
                   regMap.put(regFullName(r), list);
                 }
                 if (!list.contains(row)) {
@@ -890,7 +890,7 @@ public class DisasmDisp extends SourceDisp {
             } else {
               ArrayList<Integer> list = regRows.get(regFullName(r));
               if (list == null) {
-                list = new ArrayList<Integer>();
+                list = new ArrayList<>();
                 regRows.put(regFullName(r), list);
               }
               if (!list.contains(row)) {
@@ -1160,7 +1160,7 @@ public class DisasmDisp extends SourceDisp {
         }
       }
 
-      public ArrayList<Highlighter> marker = new ArrayList<Highlighter>();
+      public ArrayList<Highlighter> marker = new ArrayList<>();
       private String text = "";
       private int curRow = -1;
 
@@ -1457,7 +1457,7 @@ public class DisasmDisp extends SourceDisp {
       private void addRegPosition(String reg, int start, int length) {
         ArrayList<Position> positions = regPositions.get(regFullName(reg));
         if (positions == null) {
-          positions = new ArrayList<Position>();
+          positions = new ArrayList<>();
           regPositions.put(regFullName(reg), positions);
         }
         positions.add(new Position(start, length));
@@ -1466,7 +1466,7 @@ public class DisasmDisp extends SourceDisp {
       private void addAddrPosition(String realAddr, int start, int length) {
         ArrayList<Position> positions = addrPositions.get(realAddr);
         if (positions == null) {
-          positions = new ArrayList<Position>();
+          positions = new ArrayList<>();
           if (!realAddr.equals("?")) {
             addrPositions.put(realAddr, positions);
           }

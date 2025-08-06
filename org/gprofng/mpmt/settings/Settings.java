@@ -207,8 +207,8 @@ public final class Settings
     //        name_col = -1;
 
     // tldata
-    tldata_checkBoxes = new ArrayList();
-    tldata_check_unames = new ArrayList();
+    tldata_checkBoxes = new ArrayList<>();
+    tldata_check_unames = new ArrayList<>();
     previous_tldata_names_version = 0;
     tldata_show_states = false;
     tldata_show_counts = false;
@@ -698,8 +698,8 @@ public final class Settings
     // translate metric selections to timeline DATA checkbox mask
     MetricsSetting metricsSetting = getMetricsSetting();
     AnMetric[] anMetrics = metricsSetting.getAvailableAnMetrics();
-    Set<String> allList = new HashSet();
-    Set<String> enabledList = new HashSet();
+    Set<String> allList = new HashSet<String>();
+    Set<String> enabledList = new HashSet<String>();
     for (int ii = 0; ii < anMetrics.length; ii++) {
       String dataType = anMetrics[ii].getDataTypeName();
       if (dataType == null) {
@@ -719,7 +719,7 @@ public final class Settings
         enabledList.add(tlDataCmd);
       }
     }
-    Set<String> disabledList = new HashSet(allList);
+    Set<String> disabledList = new HashSet<String>(allList);
     for (String enabled : enabledList) {
       disabledList.remove(enabled);
     }
@@ -958,7 +958,7 @@ public final class Settings
     final JPanel entity_button_panel = new AnJPanel(new GridLayout(1, 3));
 
     buttonGroup = new ButtonGroup();
-    tl_entity_button = new ArrayList<JRadioButton>();
+    tl_entity_button = new ArrayList<>();
     int tl_entity_selected_btn = getTimelineSetting().getTl_entity_selected_btn();
     TimelineSetting.EntityProp entProp;
     for (int i = 0; null != (entProp = getTimelineSetting().getTl_entity_prop(i)); i++) {
@@ -1237,7 +1237,7 @@ public final class Settings
     gridBagConstraints.gridy = 3;
     gridBagConstraints.insets = new Insets(4, 4, 0, 4);
     memoryObjectPanel.add(machineModelLabel, gridBagConstraints);
-    final JComboBox machineModelComboBox = new JComboBox();
+    final JComboBox<String> machineModelComboBox = new JComboBox<String>();
     machineModelLabel.setLabelFor(machineModelComboBox);
     AnUtility.setAccessibleContext(
         machineModelComboBox.getAccessibleContext(), AnLocale.getString("Machine Models"));
@@ -1252,7 +1252,7 @@ public final class Settings
     if (!((getViewsSetting().getMachineModel() == null)
         || (getViewsSetting().getMachineModel().equals("")))) {
       for (int i = 0; i < machineModelComboBox.getItemCount(); i++) {
-        String mn = (String) machineModelComboBox.getItemAt(i);
+        String mn = machineModelComboBox.getItemAt(i);
         if (mn.equalsIgnoreCase(getViewsSetting().getMachineModel())) {
           machineModelComboBox.setSelectedIndex(i);
           break;
@@ -1318,7 +1318,7 @@ public final class Settings
     viewsPanel.repaint(); // FIXUP ?
   }
 
-  private void setMachineModel(final JComboBox comboBox, String machineModelName) {
+  private void setMachineModel(final JComboBox<String> comboBox, String machineModelName) {
     if ((machineModelName == null) || (machineModelName.equals(AnLocale.getString("(none)")))) {
       machineModelName = "";
     }
@@ -1348,7 +1348,7 @@ public final class Settings
                         machineModelName3 = AnLocale.getString("(none)");
                       }
                       for (int i = 0; i < comboBox.getItemCount(); i++) {
-                        String mn = (String) comboBox.getItemAt(i);
+                        String mn = comboBox.getItemAt(i);
                         if (mn.equalsIgnoreCase(machineModelName3)) {
                           comboBox.setSelectedIndex(i);
                           break;
@@ -1395,7 +1395,7 @@ public final class Settings
     for (int i = 0; i < staticViewCheckBoxes.length; i++) {
       chk_panel = new AnJPanel(new GridLayout(1, 2));
       chk_panel.add(staticViewCheckBoxes[i] = new AnUtility.AnCheckBox(" ", true)); // <=== FIXUP
-      ((AnUtility.AnCheckBox) staticViewCheckBoxes[i]).addItemListener(this);
+      staticViewCheckBoxes[i].addItemListener(this);
       JLabel itemlabel = (JLabel) AnUtility.getItem(tab_names[i]);
       //            itemlabel.setDisplayedMnemonic(tab_mnems[i]);
       itemlabel.setLabelFor(staticViewCheckBoxes[i]);
@@ -1443,7 +1443,7 @@ public final class Settings
       ViewsSetting.View view = standard_tablist.get(i);
       chk_panel = new AnJPanel(new GridLayout(1, 2));
       chk_panel.add(standardObjectCheckBoxes[i] = new AnUtility.AnCheckBox(" ", view.isSelected()));
-      ((AnUtility.AnCheckBox) standardObjectCheckBoxes[i]).addItemListener(this);
+      standardObjectCheckBoxes[i].addItemListener(this);
       itemlabel = (JLabel) AnUtility.getItem(tab_names[i]);
       AnUtility.setAccessibleContext(itemlabel.getAccessibleContext(), tab_names[i]);
       AnUtility.setAccessibleContext(
@@ -1539,7 +1539,7 @@ public final class Settings
 
   private void updateTLDataCheckBoxes() {
     tl_type_panel.removeAll();
-    tldata_checkBoxes = new ArrayList(); // Does listener result in leak?
+    tldata_checkBoxes = new ArrayList<>(); // Does listener result in leak?
     List<String> tldata_unames = timelineSetting.getTLDataUNames();
     long tldata_check_hidden_bitmask = timelineSetting.getTLDataHiddenMask();
     for (int i = 0; i < tldata_unames.size(); i++) {
@@ -2184,7 +2184,7 @@ public final class Settings
       }
 
       // return values
-      final ArrayList newtm_evt = new ArrayList(); // AnSettingChangeEvent.Type.TIMELINE event
+      final ArrayList<Object> newtm_evt = new ArrayList<>(); // AnSettingChangeEvent.Type.TIMELINE event
       newtm_evt.add(new_tl_entity_prop_name); // 0
       newtm_evt.add(new_tl_entity_button_num); // 1
       newtm_evt.add(new_stack_align); // 2

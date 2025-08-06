@@ -78,9 +78,9 @@ public class EventDetails {
     tbPanel = new JPanel(new BorderLayout());
 
     // EventDetail Pane: Timeline selection
-    allFields = new ArrayList<JTextField>();
-    extendedFields = new ArrayList<JTextField>();
-    extendedLabels = new ArrayList<JLabel>();
+    allFields = new ArrayList<>();
+    extendedFields = new ArrayList<>();
+    extendedLabels = new ArrayList<>();
 
     anList = new AnList(true);
     AccessibleContext context = anList.getAccessibleContext();

@@ -75,7 +75,7 @@ public class RangeRuler extends VerticalRowRuler implements Ruler, Accessible {
   private boolean staggerHorizontalLabels;
   private int labelBoundaryCoord = 0; // coordinate of edge of title
   private String title;
-  private ArrayList<PaintListener> paintListeners = new ArrayList();
+  private ArrayList<PaintListener> paintListeners = new ArrayList<>();
   private boolean lockPreferredSize = false;
   private Dimension preferredD = new Dimension(1, 1); // non-zero for layout mgr
 
@@ -141,8 +141,8 @@ public class RangeRuler extends VerticalRowRuler implements Ruler, Accessible {
     if (this.orientation == this.VERTICAL_ORIENTATION) {
       inverseOrder = !inverseOrder;
     }
-    this.tabStopTypes = new ArrayList();
-    this.tabStopValues = new ArrayList();
+    this.tabStopTypes = new ArrayList<>();
+    this.tabStopValues = new ArrayList<>();
     String aText =
         orientation == RangeRuler.HORIZONTAL_ORIENTATION
             ? AnLocale.getString("Horizontal Ruler")

@@ -20,15 +20,15 @@ import static org.gprofng.mpmt.AnObject.format_group_decimal;
 import static org.gprofng.mpmt.AnObject.format_sdecimal;
 import static org.gprofng.mpmt.AnObject.zero_decimal;
 
-public final class AnDouble extends AnObject implements Comparable {
+public final class AnDouble extends AnObject implements Comparable<AnDouble> {
 
-  private double value;
-  private Double obj;
+  private final double value;
+  private final Double obj;
 
   // Constructor
   public AnDouble(double value) {
     this.value = value;
-    obj = new Double(this.value);
+    obj = value;
   }
 
   // Analyzer Double printing format
@@ -95,8 +95,8 @@ public final class AnDouble extends AnObject implements Comparable {
 
   // As Double.compareTo
   @Override
-  public int compareTo(Object o) {
-    return obj.compareTo(((AnDouble) o).toDouble());
+  public int compareTo(AnDouble o) {
+    return obj.compareTo(o.toDouble());
   }
 
   // Convert double[] to AnDouble[]

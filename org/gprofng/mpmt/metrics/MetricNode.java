@@ -47,7 +47,7 @@ public class MetricNode {
   public MetricNode(BasicMetric metricBasic, MetricType metricType) {
     this.metricBasic = metricBasic;
     this.metricType = metricType;
-    this.children = new ArrayList<MetricNode>();
+    this.children = new ArrayList<>();
     this.hiddenInOverview = false;
   }
 
@@ -83,7 +83,7 @@ public class MetricNode {
   }
 
   public List<MetricNode> findByName(String name) {
-    List<MetricNode> list = new ArrayList<MetricNode>();
+    List<MetricNode> list = new ArrayList<>();
     findByName(name, list);
     return list;
   }
@@ -138,7 +138,7 @@ public class MetricNode {
                   selectableMetricNode.getValueType());
           node.addChild(child);
           // Set the same value
-          List<MetricValue> list = new ArrayList<MetricValue>();
+          List<MetricValue> list = new ArrayList<>();
           for (MetricValue metricValue : selectableMetricNode.getValues()) {
             MetricValue metricValueClone = metricValue.clone();
             list.add(metricValueClone);

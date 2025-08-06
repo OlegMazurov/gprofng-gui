@@ -89,8 +89,8 @@ public class ExperimentGroupsPanel extends javax.swing.JPanel implements ActionL
   }
 
   public void update_exps_list(final List<String> lst) {
-    final List<String> listAbsNames = new ArrayList();
-    final List<String> listBaseNames = new ArrayList();
+    final List<String> listAbsNames = new ArrayList<>();
+    final List<String> listBaseNames = new ArrayList<>();
     L_LOOP:
     for (int i = 0, sz = (lst == null) ? 0 : lst.size(); i < sz; i++) {
       String fname = lst.get(i);
@@ -126,7 +126,7 @@ public class ExperimentGroupsPanel extends javax.swing.JPanel implements ActionL
       if (ac.showDialog(this, null) == AnChooser.APPROVE_OPTION) {
         File files[] = ac.getSelectedAnFiles();
         if (files != null) {
-          List<String> lst = new ArrayList();
+          List<String> lst = new ArrayList<>();
           if (listAbsPathes != null) {
             lst.addAll(listAbsPathes);
           }
@@ -140,7 +140,7 @@ public class ExperimentGroupsPanel extends javax.swing.JPanel implements ActionL
     } else if (cmd.equals("btnRemove")) {
       int[] sel = listExpNames.getSelectedIndices();
       if (sel.length > 0) {
-        List<String> lst = new ArrayList();
+        List<String> lst = new ArrayList<>();
         if (listAbsPathes != null) {
           lst.addAll(listAbsPathes);
         }
@@ -195,7 +195,7 @@ public class ExperimentGroupsPanel extends javax.swing.JPanel implements ActionL
     @Override
     protected void importString(JComponent c, String str) {
       debug("ListTransferHandler::importString: " + str);
-      List<String> lst = new ArrayList();
+      List<String> lst = new ArrayList<>();
       if (listAbsPathes != null) {
         lst.addAll(listAbsPathes);
       }
@@ -228,7 +228,7 @@ public class ExperimentGroupsPanel extends javax.swing.JPanel implements ActionL
     protected void cleanup(JComponent c, boolean remove) {
       debug("ListTransferHandler::cleanup: " + id + " " + remove);
       if (remove && (indices != null)) {
-        List<String> lst = new ArrayList();
+        List<String> lst = new ArrayList<>();
         if (listAbsPathes != null) {
           lst.addAll(listAbsPathes);
         }

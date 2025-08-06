@@ -17,14 +17,14 @@ package org.gprofng.mpmt;
 
 import static org.gprofng.mpmt.AnObject.format_group_integer;
 
-public final class AnLong extends AnObject implements Comparable {
+public final class AnLong extends AnObject implements Comparable<AnLong> {
 
-  private long value;
-  private Long obj;
+  private final long value;
+  private final Long obj;
 
   public AnLong(long value) {
     this.value = value;
-    obj = new Long(this.value);
+    obj = this.value;
   }
 
   // Analyzer Long printing format
@@ -99,8 +99,8 @@ public final class AnLong extends AnObject implements Comparable {
 
   // As Long.compareTo
   @Override
-  public int compareTo(Object o) {
-    return obj.compareTo(((AnLong) o).toLong());
+  public int compareTo(AnLong o) {
+    return obj.compareTo(o.toLong());
   }
 
   // Convert long[] to AnLong[]

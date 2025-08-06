@@ -64,7 +64,7 @@ public final class AnColorChooser extends AnDialog
 
   private JColorChooser chooser;
   private JButton set_sel, set_all, reset, set_class;
-  private JComboBox combo_class;
+  private JComboBox<String> combo_class;
   private JTextField str_class;
   private JRadioButton idle_normal, idle_inv, idle_color;
   private JLabel idle_label;
@@ -150,7 +150,7 @@ public final class AnColorChooser extends AnDialog
     set_class.addActionListener(this);
     panel.add(set_class);
 
-    combo_class = new JComboBox(ColorRule.SETC_STR);
+    combo_class = new JComboBox<>(ColorRule.SETC_STR);
     AnUtility.setAccessibleContext(
         combo_class.getAccessibleContext(), AnLocale.getString("Function filter"));
     panel.add(combo_class);
@@ -258,7 +258,7 @@ public final class AnColorChooser extends AnDialog
       if (false /* indices.length == size && size>0 */) { // treat "ctrl-a" as all
         color_map.setRuleAllFunctions(color);
       } else {
-        ArrayList<ColorRule> rules = new ArrayList();
+        ArrayList<ColorRule> rules = new ArrayList<>();
         for (int jj = 0; jj < indices.length; jj++) {
           int ii = indices[jj];
           StackState state = function_list.getState(ii);
@@ -302,23 +302,13 @@ public final class AnColorChooser extends AnDialog
 
   // (MUST BE CALLED ON AWT THREAD)
   private void funcSelChanged(EventObject event) {
-    final JList list;
-    final StackState state;
-
     if (event.getSource() instanceof StackView) { // ChooserStateView
-      list = (StackView) event.getSource();
-      state = (StackState) list.getSelectedValue();
-    } else {
-      // XXXmpview, figure this out...
-      // System.err.println("XXXmpview colorchooser: eventsource unknown");
-      return;
+      StackView list = (StackView) event.getSource();
+      StackState state = (StackState) list.getSelectedValue();
+      if (state != null) {
+        setSelectedFunction(state.getNumber());
+      }
     }
-
-    if (state == null) {
-      return;
-    }
-
-    setSelectedFunction(state.getNumber());
   }
 
   @Override

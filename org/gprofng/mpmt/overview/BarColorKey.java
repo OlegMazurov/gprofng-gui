@@ -30,7 +30,7 @@ public class BarColorKey extends JPanel {
   private List<Color> keyColorList;
 
   public BarColorKey(Color keyColor) {
-    List<Color> fillColorList = new ArrayList<Color>();
+    List<Color> fillColorList = new ArrayList<>();
     fillColorList.add(keyColor);
     this.keyColorList = fillColorList;
     init();

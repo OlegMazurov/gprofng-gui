@@ -296,7 +296,7 @@ public final class OverviewView extends AnDisplay implements ExportSupport, AnCh
 
   @Override
   public List<ExportFormat> getSupportedExportFormats() {
-    List<ExportFormat> formats = new ArrayList<ExportFormat>();
+    List<ExportFormat> formats = new ArrayList<>();
     formats.add(ExportFormat.JPG);
     return formats;
   }

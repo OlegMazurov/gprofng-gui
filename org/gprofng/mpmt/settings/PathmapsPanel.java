@@ -39,13 +39,13 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.ListSelectionEvent;
 
 public class PathmapsPanel extends javax.swing.JPanel {
-  private static Color shadedBackground = new Color(249, 249, 249);
-  private static Color listLabelBackground = new Color(241, 241, 241);
+  private static final Color shadedBackground = new Color(249, 249, 249);
+  private static final Color listLabelBackground = new Color(241, 241, 241);
   private List<String> dataFrom;
   private List<String> dataTo;
-  private PMListSelectionListener fromListSelectionListener;
-  private PMDocumentListener pmDocumentListener;
-  private Settings settings;
+  private final PMListSelectionListener fromListSelectionListener;
+  private final PMDocumentListener pmDocumentListener;
+  private final Settings settings;
 
   public PathmapsPanel(Settings settings) {
     this.settings = settings;
@@ -111,7 +111,7 @@ public class PathmapsPanel extends javax.swing.JPanel {
   private class LCR extends DefaultListCellRenderer {
     @Override
     public Component getListCellRendererComponent(
-        JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+        JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
       JLabel label =
           (JLabel)
               super.getListCellRendererComponent(
@@ -148,8 +148,8 @@ public class PathmapsPanel extends javax.swing.JPanel {
   public void updateGUI() {
     String[] from = AnWindow.getInstance().getSettings().getPathMapSetting().getPathMapFrom();
     String[] to = AnWindow.getInstance().getSettings().getPathMapSetting().getPathMapTo();
-    dataFrom = new ArrayList(Arrays.asList(from));
-    dataTo = new ArrayList(Arrays.asList(to));
+    dataFrom = new ArrayList<>(Arrays.asList(from));
+    dataTo = new ArrayList<>(Arrays.asList(to));
     refreshPanel(0);
   }
 
@@ -160,8 +160,8 @@ public class PathmapsPanel extends javax.swing.JPanel {
 
   /** Called from Save button in Settings panel */
   public void checkPathMapChanged(Object originalSource) {
-    String[] from = (String[]) dataFrom.toArray(new String[dataFrom.size()]);
-    String[] to = (String[]) dataTo.toArray(new String[dataTo.size()]);
+    String[] from = dataFrom.toArray(new String[dataFrom.size()]);
+    String[] to = dataTo.toArray(new String[dataTo.size()]);
     String[][] pathMap = new String[2][];
     pathMap[0] = from;
     pathMap[1] = to;

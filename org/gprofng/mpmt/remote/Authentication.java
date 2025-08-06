@@ -79,7 +79,7 @@ public class Authentication {
    * @return the default set of authentication methods
    */
   public static List<Authentication> getDefaultAuthentications() {
-    List<Authentication> def = new ArrayList<Authentication>();
+    List<Authentication> def = new ArrayList<>();
     def.add(new Authentication(Authentication.Type.PUBLIC_KEY, true));
     def.add(new Authentication(Authentication.Type.PASSWORD, true));
     //        def.add(new Authentication(Authentication.Type.KEYBOARD_INTERACTIVE, false)); // Don't
@@ -132,7 +132,7 @@ public class Authentication {
    */
   public static List<Authentication> fromXMLString(String xmlString) {
     String[] auths = xmlString.split(",");
-    List<Authentication> list = new ArrayList<Authentication>();
+    List<Authentication> list = new ArrayList<>();
     for (String auth : auths) {
       String[] s = auth.split("=");
       Authentication.Type type = Type.fromString(s[0]);

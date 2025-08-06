@@ -111,7 +111,7 @@ public class MetricsSetting extends Setting {
   }
 
   private List<MetricState> constructMetricStates(MetricNode metricsRootNode) {
-    List<MetricState> list = new ArrayList<MetricState>();
+    List<MetricState> list = new ArrayList<>();
     constructMetricStates(metricsRootNode, null, -1, list);
     // Add Name metric to the end
     AnMetric nameMetric = availableAnMetrics[availableAnMetrics.length - 1]; // Always last ?
@@ -453,7 +453,7 @@ public class MetricsSetting extends Setting {
   }
 
   public synchronized List<MetricNameSelection> getMetricOrder() {
-    List<MetricNameSelection> list = new ArrayList<MetricNameSelection>();
+    List<MetricNameSelection> list = new ArrayList<>();
     if (availableAnMetrics != null) {
       for (AnMetric anMetric : availableAnMetrics) {
         String name = anMetric.getComd();
@@ -530,7 +530,7 @@ public class MetricsSetting extends Setting {
       metricStates.transferSortChangesToMetricStates(sortColumnListChanged);
     }
 
-    List<AnMetric> metricsWithSelections = new ArrayList<AnMetric>();
+    List<AnMetric> metricsWithSelections = new ArrayList<>();
     List<MetricState> metricStatesList = getMetricStates().getMetricStateList();
     if (metricStatesList != null) {
       for (MetricState metricState : metricStatesList) {
@@ -577,7 +577,7 @@ public class MetricsSetting extends Setting {
       }
     }
     boolean set_sort = false;
-    List<AnMetric> metricsWithSelectionsSorted = new ArrayList<AnMetric>();
+    List<AnMetric> metricsWithSelectionsSorted = new ArrayList<>();
 
     // populate sorted_mlist - start with items in the previous list
     AnMetric[] metrics;
@@ -654,7 +654,7 @@ public class MetricsSetting extends Setting {
     //            System.out.println(anMetric.getUserName() + " " + anMetric.getSubType());
     //        }
     // Sort so excluded/included for the same metric are next to each other
-    List<AnMetric> pairedList = new ArrayList<AnMetric>();
+    List<AnMetric> pairedList = new ArrayList<>();
     int index1 = 0;
     while (index1 < metricsWithSelectionsSortedArray.length) {
       AnMetric anMetric = metricsWithSelectionsSortedArray[index1];
@@ -1135,7 +1135,7 @@ public class MetricsSetting extends Setting {
 
   private List<Component> getMetricOptionsItems(
       final AnMetric anMetric, final AnTable anTable, JMenu sortByMenu) {
-    List<Component> componentList = new ArrayList<Component>();
+    List<Component> componentList = new ArrayList<>();
 
     final MetricState metricState = getMetricStates().findMetricStateByName(anMetric.getComd());
     if (metricState != null) {
@@ -1457,7 +1457,7 @@ public class MetricsSetting extends Setting {
   }
 
   public synchronized List<Component> getOtherMetricItems(AnTable anTable) {
-    List<Component> list = new ArrayList<Component>();
+    List<Component> list = new ArrayList<>();
 
     // Table format
     JMenu formatMenuItem = new JMenu(AnLocale.getString("Format"));
@@ -1563,13 +1563,13 @@ public class MetricsSetting extends Setting {
   }
 
   public synchronized List<JComponent> createMetricSettingsSelector() {
-    List<JComponent> componentList = new ArrayList<JComponent>();
+    List<JComponent> componentList = new ArrayList<>();
     componentList.add(AnWindow.getInstance().getMetricsSettingsAction().getMenuItem());
     return componentList;
   }
 
   private List<JComponent> createMetricsSelector(int dtype, boolean addMetricActions) {
-    List<JComponent> componentList = new ArrayList<JComponent>();
+    List<JComponent> componentList = new ArrayList<>();
     List<MetricState> metricStateList =
         AnWindow.getInstance()
             .getSettings()
@@ -1677,7 +1677,7 @@ public class MetricsSetting extends Setting {
     int dtype = table.getType();
     int mtype = dtype2mtype(dtype);
     List<AnMetric> anMetricList = metricStates.getAnMetricsByMTypeTrimmed(mtype);
-    List<Component> componentList = new ArrayList<Component>();
+    List<Component> componentList = new ArrayList<>();
     for (AnMetric anMetric : anMetricList) {
       JMenu metricMenu = new JMenu(anMetric.getUserName());
       JPopupMenu popupMenu = new JPopupMenu();

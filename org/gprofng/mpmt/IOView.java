@@ -1418,7 +1418,7 @@ public final class IOView extends FuncListDisp
 
   @Override
   public List<Subview> getVisibleSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     if (calStkButton.isSelected()) {
       list.add(window.getIoCallStackSubview());
@@ -1428,7 +1428,7 @@ public final class IOView extends FuncListDisp
 
   @Override
   public List<Subview> getSelectedSubviews() {
-    List<Subview> list = new ArrayList();
+    List<Subview> list = new ArrayList<>();
     list.add(window.getSelectedDetailsSubview());
     if (calStkButton.isSelected()) {
       list.add(window.getIoCallStackSubview());

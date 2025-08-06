@@ -47,7 +47,7 @@ public class ImportSettingsPanel extends javax.swing.JPanel {
   private final ImportSettingsDialog dialog;
   private final DocListener docListener = new DocListener();
   private UserPref userPref;
-  private List<JCheckBox> checkBoxes = new ArrayList<JCheckBox>();
+  private List<JCheckBox> checkBoxes = new ArrayList<>();
 
   /** Creates new form SaveSettingsPanel */
   public ImportSettingsPanel(ImportSettingsDialog dialog) {
@@ -132,7 +132,7 @@ public class ImportSettingsPanel extends javax.swing.JPanel {
   }
 
   public List<UserPref.What> getWhat() {
-    List<UserPref.What> what = new ArrayList<UserPref.What>();
+    List<UserPref.What> what = new ArrayList<>();
     if (metricsCheckBox.isSelected()) {
       what.add(UserPref.What.METRICS);
     }

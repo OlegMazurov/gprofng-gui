@@ -26,7 +26,7 @@ public class SelectableMetricNode extends ValueMetricNode {
   private final MetricOption exclusive; // presentation's exclusive checkboxes
   private final MetricOption inclusive; // presentation's inclusive checkboxes
   private final int valueType; // YXXX placeholder.  For now, AnVariable.VT_INT, etc.
-  private List<ChangeListener> changeListeners = new ArrayList<ChangeListener>();
+  private List<ChangeListener> changeListeners = new ArrayList<>();
 
   public SelectableMetricNode(
       BasicMetric metricBasic,

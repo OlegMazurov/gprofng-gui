@@ -94,7 +94,7 @@ public final class TL2Drawer implements TimelineDrawer {
     dataAxisReader = dataAxisMaster;
 
     verticalRuler = new IconRuler(new ValuesLong(0, 0));
-    selection_listeners = new ArrayList();
+    selection_listeners = new ArrayList<>();
     cursorEventQ = new LinkedBlockingQueue();
     cursorEventQueueInit();
 
@@ -641,7 +641,7 @@ public final class TL2Drawer implements TimelineDrawer {
   public List<Integer> getRowBlockSelectList() {
     // returns a sorted list of selected row blocks (i.e. threads,samples...).
     // The list consists of indices for use with getRowDefsByBlock()
-    return new ArrayList(selected_row_blocks);
+    return new ArrayList<>(selected_row_blocks);
   }
 
   // utilities

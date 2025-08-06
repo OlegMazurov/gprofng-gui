@@ -285,7 +285,7 @@ public final class AnMetric {
     return (value_styles & v) == v;
   }
 
-  private static Hashtable simulatedGroupIds = new Hashtable();
+  private static Hashtable<String, Integer> simulatedGroupIds = new Hashtable<String, Integer>();
 
   private Color getMetricBackgroundInternal(
       String expr_spec) { // YXXX should use group id value from dbe
@@ -297,7 +297,7 @@ public final class AnMetric {
       simulatedGroupId = simulatedGroupIds.size() + 1;
       simulatedGroupIds.put(expr_spec, simulatedGroupId);
     } else {
-      simulatedGroupId = (Integer) simulatedGroupIds.get(expr_spec);
+      simulatedGroupId = simulatedGroupIds.get(expr_spec);
     }
     return getMetricBackground(simulatedGroupId);
   }

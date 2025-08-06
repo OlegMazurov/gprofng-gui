@@ -258,7 +258,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
       String buttonTT = AnLocale.getString("Click an experiment name below to reopen it");
       openRecentExperimentButton = addActionButton(panel, gridy++, buttonText, buttonTT, null);
       if (Analyzer.getInstance().isConnected()) {
-        recentExperimentsButtons = new ArrayList<WelcomeButton>();
+        recentExperimentsButtons = new ArrayList<>();
         for (ExperimentPickListElement experimentElement : recentExperiments) {  
 	  String displayName = AnUtility.basename(experimentElement.getPath());
           int length = displayName.length();
@@ -477,7 +477,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-      ArrayList<String> list = new ArrayList<String>();
+      ArrayList<String> list = new ArrayList<>();
       list.add(experimentElement.getPath());
       String confPath;
       boolean always;
