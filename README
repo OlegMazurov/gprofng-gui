@@ -7,7 +7,7 @@ its runtime.
 
 The GUI is a Java application utilizing the Swing GUI framework.
 
-1. To build gprofng-gui on Linux from a released tarball:
+1. To build gprofng-gui on GNU/Linux from a released tarball:
 
   $ wget https://ftp.gnu.org/gnu/gprofng-gui/gprofng-gui.VERSION.tar.gz
   $ tar xzvf gprofng-gui.VERSION.tar.gz
@@ -15,7 +15,7 @@ The GUI is a Java application utilizing the Swing GUI framework.
   $ mkdir build && cd build/
   $ ../configure --prefix=PREFIX && make && make install
 
-2. To build gprofn-gui on Linux from the development git repo:
+2. To build gprofn-gui on GNU/Linux from the development git repo:
 
   $ git clone https://git.savannah.gnu.org/git/gprofng-gui.git
   $ cd gprofng-gui
@@ -36,7 +36,7 @@ REMOTE CONNECTION FROM WINDOWS AND MACOS
 
 The remote analysis feature added to gprofng-gui 2.0 makes it possible to run
 the gprofng-gui on a client (including Windows and macOS) and connect with ssh
-to remote Linux servers where gprofng is installed.
+to remote GNU/Linux servers where gprofng is installed.
 
 To build gprofng-gui on macOS:
  - Do (1) or (2) to install the GUI.
