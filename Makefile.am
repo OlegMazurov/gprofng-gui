@@ -603,8 +603,7 @@ $(GPROFNG_JAR): $(anmodule_MF) $(MPMT_FILES) \
 		 $(MPMT_PROPERTIES) $(ICONS:%=$(srcdir)/%)
 	$(AM_V_GEN)rm -f $(GPROFNG_CLASSES)
 	$(AM_V_at)$(JAVAC) -cp $(srcdir) $(JAVAC_FLAGS) -d . $(srcdir)/$(MPMT_DIR)/Analyzer.java
-	$(AM_V_at)$(JAR) $(JAR_FLAGS) $@ $(anmodule_MF) $(MPMT_PROPERTIES) $(MPMT_DIR) \
-		-C $(srcdir) $(MPMT_DIR)/icons
+	$(AM_V_at)$(JAR) $(JAR_FLAGS) $@ $(anmodule_MF) $(MPMT_PROPERTIES) -C $(srcdir) $(MPMT_DIR)/icons $(GPROFNG_CLASSES)
 
 #
 # Standalone gprofng GUI
