@@ -7,6 +7,9 @@ See the manual for detailed information.
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+ Version 2.2 (August 2025)
+- Fixed build with recent versions of the JDK.
+
  Version 2.1 (August 2025)
 - Build on Windows and macOS to support the remote analysis from Linux servers.
 - Fixed -Xlint:rawtypes,cast warnings.
