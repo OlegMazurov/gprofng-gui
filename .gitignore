@@ -1,25 +1,13 @@
-*.diff
-*.patch
-*.orig
-*~
-*%
-*.class
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build
+!**/src/test/**/build
 
-autom4te.cache
-config.cache
+### IntelliJ IDEA ###
+.idea/
+out/
 
-# ignore core files, but not java/net/protocol/core/
-core
-!core/
-
-Makefile.in
-aclocal.m4
-configure
-INSTALL
-compile
-install-sh
-missing
-mdate-sh
-stamp-*
-doc/version.texi
+### Mac OS ###
+.DS_Store
 
