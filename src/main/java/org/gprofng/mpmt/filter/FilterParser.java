@@ -63,7 +63,7 @@ public class FilterParser {
         elem = new Elem(Type.COMMA);
       } else {
         try {
-          int val = new Integer(tok).intValue();
+          int val = Integer.parseInt(tok);
           elem = new Elem(val);
         } catch (NumberFormatException e) {
           return null;

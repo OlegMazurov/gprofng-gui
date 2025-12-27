@@ -57,9 +57,7 @@ public class RainbowColorScale {
     dstep = (maxg - ming) / (0.45 * height); // next: add green for 0.45 height
 
     for (int i = 0; i < height; i++) {
-      Color c =
-          new Color(
-              new Double(fr).intValue(), new Double(fg).intValue(), new Double(fb).intValue());
+      Color c = new Color((int) fr, (int) fg, (int) fb);
       int idx = height - i - 1;
       colVector[idx] = c;
       if (phase == 1) { // add green till we get to yellow
