@@ -342,7 +342,7 @@ public final class Analyzer {
       if (null == os_name) {
         throw new Exception("OS is not supported yet.");
       }
-      if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux"))) {
+      if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux")) && (!os_name.equals("Mac OS X"))) {
         throw new Exception("OS " + os_name + " is not supported yet.");
       }
     }

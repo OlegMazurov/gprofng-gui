@@ -119,16 +119,16 @@ export PATH
 # define OS_TYPE
 #
 
-OS_TYPE=`/bin/uname`
+OS_TYPE=`uname`
 
 PRG=$(readlink -f -- "$0")
 progdir=$(dirname -- "$PRG")
 
 fdhome="$progdir/.."
 
-GPROFNG_bindir=
-GPROFNG_libdir=
-GPROFNG_datadir=
+GPROFNG_bindir=/opt/gprofng/bin
+GPROFNG_libdir=/opt/gprofng/lib
+GPROFNG_datadir=/opt/gprofng/share
 
 #
 # L10N path
@@ -261,7 +261,7 @@ if [ "$jdkhome" = "" ]; then
 
     # finally, just try /usr/java/bin/java
     if [ "$jdkhome" = "" ]; then
-	jdkhome=/usr/java
+	jdkhome=/usr
 	java_how=$I18Ntxt15
     fi
 fi
@@ -287,15 +287,15 @@ if [ $verbose = "true" ] ; then
 fi
 
 # Check DISPLAY variable
-if [ "no$DISPLAY" = "no" ]; then
-    Message 16 $0  # "$0: ERROR: environment variable DISPLAY is not set"
-    exit 2
-fi
+#if [ "no$DISPLAY" = "no" ]; then
+#    Message 16 $0  # "$0: ERROR: environment variable DISPLAY is not set"
+#    exit 2
+#fi
 
 # If this is Solaris SPARC disable sun.java2d.xrender
 if [ "${OS_TYPE}" = "SunOS" ]; then
     # if [ "no$VNCDESKTOP" != "no" ]; then
-        HW_TYPE=`/bin/uname -p`
+        HW_TYPE=`uname -p`
         if [ "${HW_TYPE}" = "sparc" ]; then
             jargs="-Dsun.java2d.xrender=false ${jargs}"
         fi
@@ -316,7 +316,8 @@ if [ $verbose = "true" ]; then
 #    eval "/usr/bin/strace -v -f -t -o ${USER_DIR}/truss.log '$jdkhome/bin/java'" $jargs -jar ${gprofng_jar} $args
 #    exit
 fi
-eval "'$jdkhome/bin/java'" $jargs -jar "'${gprofng_jar}'" $args >"${LOG}" 2>"${LOG}.err"
+#debug='-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=*:5005'
+eval "'$jdkhome/bin/java'" $debug $jargs -jar "'${gprofng_jar}'" $args >"${LOG}" 2>"${LOG}.err"
 res=$?
 
 if [ $verbose = "true" ]; then
@@ -330,11 +331,11 @@ fi
 
 # Execution failed
 # /bin/echo "Command failed: $jdkhome/bin/java $jargs -jar ${gprofng_jar} $args"
-err=`/bin/cat -- "${LOG}" | /bin/grep UnsupportedClassVersionError | wc -l`
+err=`/bin/cat -- "${LOG}" | grep UnsupportedClassVersionError | wc -l`
 if [ ${err} -eq 0 ]; then
-    err=`/bin/cat -- "${LOG}" | /bin/grep 'java: command not found' | wc -l`
+    err=`/bin/cat -- "${LOG}" | grep 'java: command not found' | wc -l`
     if [ ${err} -eq 0 ]; then
-        err=`/bin/cat -- "${LOG}" | /bin/grep ClassFormatError | wc -l`
+        err=`/bin/cat -- "${LOG}" | grep ClassFormatError | wc -l`
         if [ ${err} -eq 0 ]; then
             # unknown error
             if [ $verbose != "true" ]; then
