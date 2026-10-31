@@ -44,6 +44,7 @@ public final class RowDefinition {
   // specification for additional chart properties
   private final List<PropDescriptor> chartProps;
   private final String chartPropNames[];
+  private final List<ChartStyle> chartStyles; // application metrics only, else null
 
   // descriptive strings
   private final String exp_name;
@@ -64,6 +65,19 @@ public final class RowDefinition {
       final List<PropDescriptor> chartProps,
       final long time_adjust,
       final boolean compare_on) {
+    this(experiment, entity, d_descriptor, aux, chartProps, null, time_adjust, compare_on);
+  }
+
+  public RowDefinition(
+      final ExperimentProperties experiment,
+      Entity entity,
+      final DataDescriptor d_descriptor,
+      final int aux,
+      final List<PropDescriptor> chartProps,
+      final List<ChartStyle> chartStyles,
+      final long time_adjust,
+      final boolean compare_on) {
+    this.chartStyles = chartStyles;
     this.compare_on = compare_on;
     this.exp_id = experiment.getID();
     this.user_exp_id = experiment.getUserID();
@@ -169,6 +183,14 @@ public final class RowDefinition {
     }
   }
 
+  /** Scale of a chart of an application metrics row. */
+  public ChartStyle getChartStyle(final int chartIdx) {
+    if (chartStyles == null || chartIdx < 0 || chartIdx >= chartStyles.size()) {
+      return ChartStyle.VISIBLE;
+    }
+    return chartStyles.get(chartIdx);
+  }
+
   public List<PropDescriptor> getChartProperties() {
     return chartProps;
   }
@@ -222,6 +244,7 @@ public final class RowDefinition {
     Settings.TLData_type tltype = data_descriptor.getTLDataType();
     if (!tltype.equals(Settings.TLData_type.TL_SAMPLE)
         && !tltype.equals(Settings.TLData_type.TL_HEAPSZ)
+        && !tltype.equals(Settings.TLData_type.TL_APPMETRICS)
         && // YXXX where to decide when to show stacks?
         !tltype.equals(Settings.TLData_type.TL_GCEVENT)) { // CXXX Bug 20801848
       moreInfo = AnLocale.getString(" Call Stacks");

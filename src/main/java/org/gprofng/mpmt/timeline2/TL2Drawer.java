@@ -471,6 +471,7 @@ public final class TL2Drawer implements TimelineDrawer {
       if (onlyWithStacks
           && (tlData_type.equals(Settings.TLData_type.TL_SAMPLE)
               || tlData_type.equals(Settings.TLData_type.TL_HEAPSZ)
+              || tlData_type.equals(Settings.TLData_type.TL_APPMETRICS)
               || // YXXX add property for no stacks?
               tlData_type.equals(Settings.TLData_type.TL_GCEVENT))) { // CXXX Bug 20801848
         // ignore samples and heapsz when searching for a good row for initial selection
@@ -516,7 +517,8 @@ public final class TL2Drawer implements TimelineDrawer {
               rowDef.getEntity().getPropId(),
               eventIdx,
               rowDef.getCpuFreq(),
-              rowDef.getTimeOrigin());
+              rowDef.getTimeOrigin(),
+              rowDef.getChartPropNames());
     }
 
     final Vector<StackState> stackFrames;

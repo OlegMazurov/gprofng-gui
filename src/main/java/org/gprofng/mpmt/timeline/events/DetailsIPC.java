@@ -21,6 +21,7 @@ import org.gprofng.mpmt.IPC;
 import org.gprofng.mpmt.settings.Settings;
 import org.gprofng.mpmt.statecolors.StackState;
 import org.gprofng.mpmt.statecolors.StackViewState;
+import org.gprofng.mpmt.timeline2.AppMetricTree;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +40,8 @@ public class DetailsIPC {
       int entity_prop_id,
       long event_id,
       int cpu_freq,
-      long time_adjust) {
+      long time_adjust,
+      String[] chartPropNames) {
 
     final EventDetail[] events;
     if (tl_type.equals(Settings.TLData_type.TL_SAMPLE)) {
@@ -47,6 +49,9 @@ public class DetailsIPC {
       events = ipcGetSampleObjs(m_window, exp_id, event_id, event_id, exp_name, time_adjust);
     } else if (tl_type.equals(Settings.TLData_type.TL_GCEVENT)) { // CXXX Bug 20801848
       events = ipcGetGCEventObjs(m_window, exp_id, event_id, event_id, exp_name, time_adjust);
+    } else if (tl_type.equals(Settings.TLData_type.TL_APPMETRICS)) {
+      return ipcGetAppMetricEvent(
+          m_window, exp_id, entity_prop_id, event_id, time_adjust, chartPropNames);
     } else {
       final Object[] detailVals;
       detailVals = ipcGetTLDetails(m_window, exp_id, data_id, entity_prop_id, event_id);
@@ -337,6 +342,40 @@ public class DetailsIPC {
     }
 
     return event;
+  }
+
+  // The row's metrics at one sample; a stacked row has one property that names all its metrics.
+  private static AppMetricEvent ipcGetAppMetricEvent(
+      AnWindow m_window,
+      final int exp_id,
+      final int entity_prop_id,
+      final long event_id,
+      final long time_adjust,
+      final String[] chartPropNames) {
+    if (chartPropNames == null) {
+      return null;
+    }
+    final List<String> names = new ArrayList<>();
+    for (String prop : chartPropNames) {
+      for (String name : prop.split(String.valueOf(AppMetricTree.STACK_SEPARATOR))) {
+        names.add(name);
+      }
+    }
+    final String[] nameArray = names.toArray(new String[0]);
+    final Object[] res;
+    synchronized (IPC.lock) {
+      m_window.IPC().send("getAppMetricValues");
+      m_window.IPC().send(0);
+      m_window.IPC().send(exp_id);
+      m_window.IPC().send(entity_prop_id);
+      m_window.IPC().send(event_id);
+      m_window.IPC().send(nameArray);
+      res = (Object[]) m_window.IPC().recvObject();
+    }
+    if (res == null) {
+      return null;
+    }
+    return new AppMetricEvent(((long[]) res[0])[0], time_adjust, nameArray, (double[]) res[1]);
   }
 
   private static Object[] ipcGetTLDetails(

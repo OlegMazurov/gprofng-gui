@@ -2194,6 +2194,9 @@ public class DBE {
             tmp_ts = MAX_TIME;
         final long end_ts = tmp_ts;
 
+        if (data_id == ProfData_type.DATA_APPMETRICS.getValue())
+            return dbeGetAppMetricTLData(dbevindex, exp_id, exp, start_ts, delta, numDeltas, chartProps);
+
         DataView packets = getTimelinePackets(dbevindex, exp_id, data_id, entity_prop_id);
         if (packets == null)
             return null;
@@ -2508,6 +2511,97 @@ public class DBE {
                 ? dbeGetTLDataRepVals(view_mode, start_ts, delta, numDeltas, packets, representativeEvents, repsShowDuration)
                 : null;
         return new Object[] { representativeVals, propVals };
+    }
+
+    static Object[] dbeGetAppMetricTLData(int dbevindex, int exp_id, Experiment exp, long start_ts,
+                                          long delta, int numDeltas, String[] chartProps) {
+        AppMetrics metrics = exp.getAppMetrics();
+        if (metrics == null || chartProps == null)
+            return null;
+        int[] keep = appMetricSamplesInView(dbevindex, exp_id);
+        if (keep == null)
+            return null;
+        long start = start_ts - exp.getStartTime();
+        Object[] propVals = new Object[chartProps.length];
+        for (int i = 0; i < chartProps.length; i++) {
+            if (chartProps[i].indexOf(AppMetrics.STACK_SEPARATOR) < 0) {
+                propVals[i] = appMetricSeries(metrics, chartProps[i], start, delta, numDeltas, keep);
+                continue;
+            }
+            String[] members = chartProps[i].split(String.valueOf(AppMetrics.STACK_SEPARATOR));
+            Object[] stack = new Object[members.length];
+            for (int k = 0; k < members.length; k++)
+                stack[k] = appMetricSeries(metrics, members[k], start, delta, numDeltas, keep);
+            propVals[i] = stack;
+        }
+        return new Object[] { null, propVals };
+    }
+
+    static int[] appMetricSamplesInView(int dbevindex, int exp_id) {
+        DataView packets = getTimelinePackets(dbevindex, exp_id,
+                ProfData_type.DATA_APPMETRICS.getValue(), Prop_type.PROP_NONE.ordinal());
+        if (packets == null)
+            return null;
+        int[] keep = new int[(int) packets.getSize()];
+        for (int i = 0; i < keep.length; i++)
+            keep[i] = (int) packets.getIdByIdx(i);
+        return keep;
+    }
+
+    private static double[] appMetricSeries(AppMetrics metrics, String name, long start, long delta,
+                                            int numDeltas, int[] keep) {
+        int m = metrics.indexOf(name);
+        double[] vals = m < 0 ? new double[numDeltas] : metrics.binSamples(m, start, delta, numDeltas, keep);
+        if (m < 0)
+            java.util.Arrays.fill(vals, Double.NaN);
+        for (int b = 0; b < vals.length; b++) {
+            if (Double.isNaN(vals[b]))
+                vals[b] = AppMetrics.MISSING_WIRE;
+        }
+        return vals;
+    }
+
+    public static Object[] dbeGetAppMetricValues(int dbevindex, int exp_id, int entity_prop_id,
+                                                 long event_id, String[] names) {
+        Experiment exp = DbeSession.getInstance().get_exp(exp_id < 0 ? 0 : exp_id);
+        AppMetrics metrics = exp == null ? null : exp.getAppMetrics();
+        if (metrics == null || names == null)
+            return null;
+        DataView packets = getTimelinePackets(dbevindex, exp_id, ProfData_type.DATA_APPMETRICS.getValue(),
+                entity_prop_id);
+        if (packets == null || event_id < 0 || event_id >= packets.getSize())
+            return null;
+        int sample = (int) packets.getIdByIdx(event_id);
+        double[] values = new double[names.length];
+        for (int i = 0; i < names.length; i++) {
+            int m = metrics.indexOf(names[i]);
+            double v = m < 0 ? Double.NaN : metrics.values(m)[sample];
+            values[i] = Double.isNaN(v) ? AppMetrics.MISSING_WIRE : v;
+        }
+        return new Object[] { new long[] { exp.getStartTime() + metrics.times()[sample] }, values };
+    }
+
+    public static Object[] dbeGetAppMetricTree(int exp_id) {
+        Experiment exp = DbeSession.getInstance().get_exp(exp_id);
+        AppMetrics metrics = exp == null ? null : exp.getAppMetrics();
+        if (metrics == null)
+            return null;
+        int n = metrics.metricCount();
+        String[] names = new String[n];
+        String[] descs = new String[n];
+        String[] groups = new String[n];
+        int[] types = new int[n];
+        double[] mins = new double[n];
+        double[] maxs = new double[n];
+        for (int i = 0; i < n; i++) {
+            names[i] = metrics.name(i);
+            descs[i] = metrics.description(i);
+            groups[i] = metrics.group(i);
+            types[i] = metrics.type(i).ordinal();
+            mins[i] = metrics.min(i);
+            maxs[i] = metrics.max(i);
+        }
+        return new Object[] { names, descs, groups, types, mins, maxs };
     }
 
     private static Object[] dbeGetTLDataRepVals(VMode view_mode, long start_ts, long delta, int numDeltas,

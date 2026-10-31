@@ -477,7 +477,15 @@ public final class TL2DataFetcher {
         if (thisProp == null) {
           continue;
         }
-        if (thisProp instanceof long[][]) {
+        if (thisProp instanceof Object[] && !(thisProp instanceof long[][])) {
+          // a stacked application metrics chart: one double[] per member
+          final Object[] members = (Object[]) thisProp;
+          final double[][] series = new double[members.length][];
+          for (int k = 0; k < members.length; k++) {
+            series[k] = (double[]) members[k];
+          }
+          chartPropVals[propNum] = series;
+        } else if (thisProp instanceof long[][]) {
           // thisProp represents multiple states; convert to Events
           long perBinStates[][] = (long[][]) thisProp;
 

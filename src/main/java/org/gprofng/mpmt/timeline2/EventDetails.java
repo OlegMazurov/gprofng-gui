@@ -22,11 +22,13 @@ import org.gprofng.mpmt.AnLocale;
 import org.gprofng.mpmt.AnVariable;
 import org.gprofng.mpmt.AnWindow;
 import org.gprofng.mpmt.statecolors.StackState;
+import org.gprofng.mpmt.timeline.events.AppMetricEvent;
 import org.gprofng.mpmt.timeline.events.EventDetail;
 import org.gprofng.mpmt.timeline.events.ExtendedEvent;
 import org.gprofng.mpmt.util.gui.AnUtility;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.accessibility.AccessibleContext;
@@ -39,7 +41,7 @@ import javax.swing.SwingConstants;
 // Initial version derived from timeline/TimelineDisp.java
 // YXXX Ideally, clean this up for TL2
 public class EventDetails {
-  private static final int NUM_EVT_SPC_LBL = 20; // YXXX yuck: max # of eventSpecLabels/Text
+  private static final int NUM_EVT_SPC_LBL = 40; // YXXX yuck: max # of eventSpecLabels/Text
 
   // state
   private boolean extendedShowing; // show extended fields & stacks on RH tab
@@ -62,6 +64,7 @@ public class EventDetails {
   // event-specific fields
   private JTextField[] eventSpecText;
   private JLabel[] eventSpecLabels;
+  private int baseLabelWidth; // width of the event-specific label column when it was created
 
   private ArrayList<JTextField> allFields;
   private ArrayList<JTextField> extendedFields;
@@ -124,6 +127,7 @@ public class EventDetails {
               ind); // YXXX bogus, really depends on font
     }
 
+    baseLabelWidth = 0;
     for (int i = 0; i < NUM_EVT_SPC_LBL; i++) {
       AnUtility.AnLabel label =
           new AnUtility.AnLabel(
@@ -138,6 +142,7 @@ public class EventDetails {
       eventSpecLabels[i].setLabelFor(eventSpecText[i]);
 
       anList.add(eventSpecLabels[i], eventSpecText[i]);
+      baseLabelWidth = Math.max(baseLabelWidth, eventSpecLabels[i].getPreferredSize().width);
       allFields.add(eventSpecText[i]);
     }
 
@@ -168,6 +173,34 @@ public class EventDetails {
     extendedLabels.add(lbl);
 
     return fld;
+  }
+
+  // The label column has a fixed width (set when the panel is built, for the microstate names).
+  // Application metric names are longer and would be cut off, so for them the column is made as
+  // wide as the longest name; for every other kind it goes back to its original width.
+  private void fitLabelColumn(final int count, final boolean fitToText) {
+    int width = baseLabelWidth;
+    if (fitToText) {
+      width = 0;
+      for (int i = 0; i < count; i++) {
+        final JLabel label = eventSpecLabels[i];
+        int w =
+            label.getFontMetrics(label.getFont()).stringWidth(label.getText())
+                + label.getInsets().left
+                + label.getInsets().right;
+        if (label.getIcon() != null) {
+          w += label.getIcon().getIconWidth() + label.getIconTextGap();
+        }
+        width = Math.max(width, w);
+      }
+    }
+    for (JLabel label : eventSpecLabels) {
+      final Dimension size = new Dimension(width, label.getPreferredSize().height);
+      label.setMinimumSize(size);
+      label.setPreferredSize(size);
+      label.setMaximumSize(new Dimension(width, label.getMaximumSize().height));
+    }
+    anList.revalidate();
   }
 
   private void clearTimeline() {
@@ -228,6 +261,7 @@ public class EventDetails {
       for (int i = labels.length; i < NUM_EVT_SPC_LBL; i++) {
         eventSpecLabels[i].setVisible(false);
       }
+      fitLabelColumn(labels.length, basicEvent instanceof AppMetricEvent);
     }
 
     oldLabels = labels;

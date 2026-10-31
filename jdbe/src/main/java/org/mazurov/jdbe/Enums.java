@@ -141,7 +141,8 @@ public class Enums {
         DATA_OMP4(13, "Not implemented"),        // OpenMP profiling data (parreg descriptions)
         DATA_OMP5(14, "Not implemented"),        // OpenMP profiling data (task descriptions)
         DATA_IOTRACE(15, "IO Tracing"),     // IO tracing data
-        DATA_LAST(16, "Not implemented");
+        DATA_APPMETRICS(16, "Application Metrics"), // periodic application metrics (AppMetrics)
+        DATA_LAST(17, "Not implemented");
 
         private int value;
         private String uname;

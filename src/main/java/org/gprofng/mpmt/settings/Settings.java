@@ -2821,6 +2821,7 @@ public final class Settings
     TL_RACES("PROFDATA_TYPE_RACE", "datarace", AnUtility.races_icon),
     TL_DLCK("PROFDATA_TYPE_DLCK", "deadlock", AnUtility.races_icon),
     TL_IOTRACE("PROFDATA_TYPE_IOTRACE", "iotrace", AnUtility.iotrace_icon),
+    TL_APPMETRICS("PROFDATA_TYPE_APPMETRICS", "appmetrics", AnUtility.samp_icon),
     TL_UNKNOWN(null, "unknown", null),
     TL_ALL(null, "all", null);
 
@@ -2865,7 +2866,8 @@ public final class Settings
       TL_MPI,
       TL_RACES,
       TL_DLCK,
-      TL_IOTRACE
+      TL_IOTRACE,
+      TL_APPMETRICS
     }; // CXXX Bug 20801848
     //      public static final List<TLData_type> VALUES
     //              = Collections.unmodifiableList(Arrays.asList(values));

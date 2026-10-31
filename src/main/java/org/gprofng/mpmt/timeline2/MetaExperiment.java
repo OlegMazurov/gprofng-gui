@@ -41,6 +41,7 @@ public final class MetaExperiment {
   // created and owned by this class:
   private final TL2DataFetcher tl2DataFetcher;
   private final TLExperiment tlExperiment;
+  private final AppMetricsModel appMetrics;
 
   // timeline fetch settings
   private TimelineSetting.EntityProp entity_prop = null; // Row mode: CPU, THREAD, etc.
@@ -57,7 +58,8 @@ public final class MetaExperiment {
       final TimelineView timelineView) { // TimelineView only for doRepaint()
     this.w_IPC = awindow;
     this.tl2DataFetcher = new TL2DataFetcher(timelineView, awindow);
-    this.tlExperiment = new TLExperiment();
+    this.appMetrics = new AppMetricsModel(awindow);
+    this.tlExperiment = new TLExperiment(appMetrics);
     init_tldata_settings();
   }
 
@@ -128,6 +130,7 @@ public final class MetaExperiment {
 
   public synchronized void ipcUpdateRows() { // generates a new TL2DataSnapshot //IPC!
     resetTimeData();
+    appMetrics.reset();
     if (entity_prop == null) {
       tl2DataFetcher.setTL2DataSnapshot(null);
       return;
@@ -167,6 +170,10 @@ public final class MetaExperiment {
     TL2DataSnapshot tl2DataSnapshot;
     tl2DataSnapshot = new TL2DataSnapshot(entity_prop, experimentList, 0, origins.maxDuration);
     tl2DataFetcher.setTL2DataSnapshot(tl2DataSnapshot);
+  }
+
+  AppMetricsModel getAppMetrics() {
+    return appMetrics;
   }
 
   // --- internal stuff ----

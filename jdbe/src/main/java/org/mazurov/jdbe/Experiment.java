@@ -3052,7 +3052,36 @@ public class Experiment {
     public DataDescriptor get_raw_events(int data_id) {
         if (data_id == DATA_HEAPSZ.getValue())
             return get_heapsz_events();
+        if (data_id == DATA_APPMETRICS.getValue()) {
+            getAppMetrics();
+            return dataDscrs[data_id];
+        }
         return data_id >= 0 && data_id < dataDscrs.length ? dataDscrs[data_id] : null;
+    }
+
+    private AppMetrics appMetrics;
+    private boolean appMetricsLoaded;
+
+    public synchronized AppMetrics getAppMetrics() {
+        if (appMetricsLoaded)
+            return appMetrics;
+        appMetricsLoaded = true;
+        if (start_sec == 0 || last_event == ZERO_TIME)
+            return null;
+        appMetrics = AppMetrics.findAndLoad(new File(expt_name), start_sec, last_event - exp_start_time);
+        if (appMetrics == null)
+            return null;
+
+        DataDescriptor dDscr = newDataDescriptor(DATA_APPMETRICS);
+        PropDescr prop = new PropDescr(Prop_type.PROP_TSTAMP, "TSTAMP");
+        prop.uname = "High resolution timestamp";
+        prop.vtype = VType_type.TYPE_UINT64;
+        dDscr.addProperty(prop);
+        for (long t : appMetrics.times()) {
+            long recn = dDscr.addRecord();
+            dDscr.setValue(Prop_type.PROP_TSTAMP.ordinal(), recn, exp_start_time + t);
+        }
+        return appMetrics;
     }
 
     public int base_data_id(int data_id) {

@@ -865,6 +865,7 @@ public final class TimelineView extends AnDisplay implements ExportSupport, AnCh
     drawer.setParent(timelinePanel); // YXXX yuck
 
     controlPanel = new TL2ControlPanel(window, timelinePanel, drawer);
+    controlPanel.setAppMetricsChooser(this::showAppMetricsChooser);
     detailsInfoTabComp.add(controlPanel.getDetailsTextPanel());
     callStackPane.add(controlPanel.getDetailsPanel(), BorderLayout.CENTER);
     callStackPane.revalidate();
@@ -893,6 +894,17 @@ public final class TimelineView extends AnDisplay implements ExportSupport, AnCh
       leftTabPanel.add(timelinePanel, BorderLayout.CENTER);
     }
     leftTabPanel.revalidate();
+  }
+
+  /** Lets the user choose which application metrics are shown, then rebuilds the rows. */
+  private void showAppMetricsChooser() { // EDT
+    AppMetricsChooser.show(
+        window,
+        metaExperiment.getAppMetrics(),
+        () -> {
+          computed = false; // doCompute() only rebuilds the rows when the view is out of date
+          computeOnAWorkerThread();
+        });
   }
 
   @Override

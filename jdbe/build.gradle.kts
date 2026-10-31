@@ -12,6 +12,22 @@ java {
     }
 }
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform("org.junit:junit-bom:5.11.4"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+}
+
+tasks.test {
+    useJUnitPlatform()
+    // opening a real experiment (experiments/*.er) needs far more than the default 512 MB
+    maxHeapSize = "4g"
+}
+
 tasks.withType<JavaCompile> {
     options.encoding = "UTF-8"
 }
@@ -22,16 +38,4 @@ tasks.jar {
     manifest {
         attributes["Main-Class"] = "org.mazurov.jdbe.ERPrint"
     }
-}
-
-// Replays a recorded GUI session (SP_ANALYZER_LOG_IPC=5) through a separate
-// process and the embedded engine and compares the responses.
-// Usage: ./gradlew :jdbe:parityCheck -Plog=<experiment.er | ipc.log>
-tasks.register<JavaExec>("parityCheck") {
-    group = "verification"
-    description = "Process-vs-embedded engine parity check"
-    classpath = sourceSets["main"].runtimeClasspath + sourceSets["test"].runtimeClasspath
-    mainClass = "org.mazurov.jdbe.ParityCheck"
-    dependsOn("testClasses")
-    args(providers.gradleProperty("log").map { listOf(it) }.orElse(emptyList()))
 }

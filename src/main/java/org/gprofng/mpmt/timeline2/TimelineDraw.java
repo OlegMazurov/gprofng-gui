@@ -702,8 +702,9 @@ public final class TimelineDraw {
       return chart_padding();
     }
 
-    if (dataType.equals(Settings.TLData_type.TL_HEAPSZ)) {
-      // heapsize event data and chart
+    if (dataType.equals(Settings.TLData_type.TL_HEAPSZ)
+        || dataType.equals(Settings.TLData_type.TL_APPMETRICS)) {
+      // heapsize or application metrics event data and chart
       if (chartIdx == -1) { // event data
         int padding = chart_padding();
         if (padding < STANDARD_WHITESPACE_PIXELS) {
@@ -734,8 +735,10 @@ public final class TimelineDraw {
       final int numCharts) {
     Settings.TLData_type dataType = rowDef.getTLDataType();
 
-    if (chartIdx == -1 && dataType.equals(Settings.TLData_type.TL_HEAPSZ)) {
-      // heapsz event data
+    if (chartIdx == -1
+        && (dataType.equals(Settings.TLData_type.TL_HEAPSZ)
+            || dataType.equals(Settings.TLData_type.TL_APPMETRICS))) {
+      // heapsz or application metrics event data
       return 0;
     }
 
@@ -812,8 +815,9 @@ public final class TimelineDraw {
       return nominalSampleHeight;
     }
 
-    if (dataType.equals(Settings.TLData_type.TL_HEAPSZ)) {
-      // heapsize event data and chart
+    if (dataType.equals(Settings.TLData_type.TL_HEAPSZ)
+        || dataType.equals(Settings.TLData_type.TL_APPMETRICS)) {
+      // heapsize or application metrics event data and chart
       if (chartIdx == -1) { // event data
         if (vzoom_level <= 1) {
           return 2;
@@ -1289,6 +1293,11 @@ public final class TimelineDraw {
         //                final boolean preferZeroYOrigin = true;
         drawRowChartValues(
             g, row, dataCopy, longVals, binStartOffset, visibleWidth, preferZeroYOrigin);
+      } else if (vals instanceof double[]) {
+        drawRowMetricBars(
+            g, row, dataCopy, new double[][] {(double[]) vals}, binStartOffset, visibleWidth);
+      } else if (vals instanceof double[][]) {
+        drawRowMetricBars(g, row, dataCopy, (double[][]) vals, binStartOffset, visibleWidth);
       } else if (vals instanceof SampleEvent[]) {
         SampleEvent sampleEvents[] = (SampleEvent[]) vals;
         drawRowEvents(g, row, sampleEvents, binStartOffset, visibleWidth, false, false);
@@ -1796,6 +1805,239 @@ public final class TimelineDraw {
     g.drawLine(x1, y1, x2, y1);
     g.drawLine(x1, y2, x2, y2);
     g.setColor(Color.BLACK);
+  }
+
+  private static final int METRIC_BAR_MIN_WIDTH = 3;
+  private static final Color[] METRIC_BAR_COLORS = {
+    new Color(0x1f, 0x77, 0xb4),
+    new Color(0xff, 0x7f, 0x0e),
+    new Color(0x2c, 0xa0, 0x2c),
+    new Color(0xd6, 0x27, 0x28),
+    new Color(0x94, 0x67, 0xbd),
+    new Color(0x8c, 0x56, 0x4b),
+    new Color(0xe3, 0x77, 0xc2),
+    new Color(0x17, 0xbe, 0xcf),
+    new Color(0xbc, 0xbd, 0x22),
+    new Color(0x7f, 0x7f, 0x7f)
+  };
+
+  // Application metric values as colored bars from zero: one series per metric, stacked when
+  // there are several (positive values up from zero, negative ones down). The vertical range is
+  // that of the visible bins unless the chart has a fixed scale. Bins without a value are empty.
+  private void drawRowMetricBars(
+      Graphics g,
+      final RowGeometry row,
+      final RowData dataCopy,
+      final double series[][],
+      final int binStartOffset,
+      final int visibleWidth) {
+    final int rowStartY = row.startY - currScrollY;
+    final int dataStartY = row.dataStartY - currScrollY;
+    final int dataEndY = row.dataEndY - currScrollY;
+    final int rowHeight = dataEndY - dataStartY + 1;
+
+    final int[] binMinMax = getRowVisibleBinMinMax(dataCopy);
+    final int lowBinLimit = binMinMax[0];
+    final int highBinLimit = binMinMax[1] + 1; // +1 is fudge for missing pixel at some zooms
+
+    final int borderHeight = rowHeight < 6 ? 0 : 1;
+    final int yOrigin = dataEndY - borderHeight;
+    final int dataHeight = rowHeight - 2 * borderHeight;
+
+    final int nbins = series.length == 0 ? 0 : series[0].length;
+    final int startBin = binStartOffset >= 0 ? binStartOffset : 0;
+
+    final ChartStyle chartScale = row.rowData.rowDefinition.getChartStyle(row.chartPropIdx);
+    final boolean multi = series.length > 1; // several metrics share the row
+    final boolean stackIt = multi && chartScale.stacked; // else each starts from zero
+    double minVal = 0; // zero origin unless there are negative values
+    double maxVal = 0;
+    if (chartScale.fixed) {
+      minVal = chartScale.min;
+      maxVal = chartScale.max;
+    } else {
+      maxVal = Double.NEGATIVE_INFINITY;
+      for (int bin = startBin; bin < nbins; bin++) {
+        final int visibleBin = bin - binStartOffset;
+        if (visibleBin > highBinLimit) {
+          break;
+        }
+        if (visibleBin < lowBinLimit) {
+          continue;
+        }
+        double up = 0;
+        double down = 0;
+        for (double[] values : series) {
+          final double v = values[bin];
+          if (v == AppMetricTree.MISSING_VALUE) {
+            continue;
+          }
+          if (stackIt) {
+            if (v >= 0) {
+              up += v;
+            } else {
+              down += v;
+            }
+          } else {
+            up = Math.max(up, v);
+            down = Math.min(down, v);
+          }
+        }
+        minVal = Math.min(minVal, down);
+        maxVal = Math.max(maxVal, up);
+      }
+      if (maxVal == Double.NEGATIVE_INFINITY) {
+        maxVal = 0;
+      }
+    }
+    final double range = maxVal - minVal;
+    final double scale = range > 0 ? (double) dataHeight / range : 0;
+
+    {
+      int xMargin = timeAxisCalculator.getMargin();
+      drawHorizontalBand(
+          g,
+          xMargin,
+          dataStartY,
+          visibleWidth - xMargin,
+          dataEndY,
+          CHART_BORDER_COLOR,
+          CHART_BACKGROUND_COLOR);
+      drawCaliper(g, dataStartY + 1, dataEndY - 1, CHART_BACKGROUND_SEL_COLOR);
+    }
+
+    final int[] order = new int[series.length]; // order in which the metrics are drawn
+    final int baselineY = yOrigin - (int) Math.round(scale * (0 - minVal));
+    for (int bin = startBin; bin < nbins; bin++) {
+      final int visibleBin = bin - binStartOffset;
+      if (visibleBin > highBinLimit) {
+        break;
+      }
+      if (visibleBin < lowBinLimit) {
+        continue;
+      }
+      // Each value is a sample at a point in time, drawn like an event: at least
+      // METRIC_BAR_MIN_WIDTH wide, centered on its bin, otherwise one pixel short of the bin so
+      // that neighbors stay apart.
+      final int binX1 = timeAxisCalculator.getLowCoordForBin(visibleBin);
+      final int binX2 = timeAxisCalculator.getLowCoordForBin(visibleBin + 1) - 1;
+      final int binWidth = Math.max(1, binX2 - binX1 + 1);
+      final int width = binWidth > METRIC_BAR_MIN_WIDTH ? binWidth - 1 : METRIC_BAR_MIN_WIDTH;
+      final int x1 = binWidth > METRIC_BAR_MIN_WIDTH ? binX1 : (binX1 + binX2 + 1) / 2 - width / 2;
+      for (int k = 0; k < order.length; k++) {
+        order[k] = k;
+      }
+      if (multi && !stackIt) {
+        // largest first, so that the smaller bars in front of it stay visible
+        for (int i = 1; i < order.length; i++) {
+          final int k = order[i];
+          int j = i - 1;
+          while (j >= 0 && magnitude(series[order[j]][bin]) < magnitude(series[k][bin])) {
+            order[j + 1] = order[j];
+            j--;
+          }
+          order[j + 1] = k;
+        }
+      }
+      double up = 0;
+      double down = 0;
+      for (int o = 0; o < order.length; o++) {
+        final int k = order[o];
+        final double v = series[k][bin];
+        if (v == AppMetricTree.MISSING_VALUE) {
+          continue;
+        }
+        final double from;
+        final double to;
+        if (stackIt) {
+          from = v >= 0 ? up : down + v;
+          to = v >= 0 ? up + v : down;
+          if (v >= 0) {
+            up += v;
+          } else {
+            down += v;
+          }
+        } else {
+          from = Math.min(0, v);
+          to = Math.max(0, v);
+        }
+        // pixel rows of the segment, clipped to the chart
+        int y1 = yOrigin - (int) Math.round(scale * (to - minVal));
+        int y2 = yOrigin - (int) Math.round(scale * (from - minVal));
+        if (v != 0 && y1 == y2) {
+          y1--; // a non-zero value is always visible
+        }
+        y1 = Math.max(y1, dataStartY + borderHeight);
+        y2 = Math.min(y2, dataEndY - borderHeight);
+        if (y2 < y1) {
+          continue;
+        }
+        g.setColor(METRIC_BAR_COLORS[(multi ? k : row.chartPropIdx) % METRIC_BAR_COLORS.length]);
+        g.fillRect(x1, y1, width, y2 - y1 + 1);
+      }
+    }
+    if (minVal < 0 && dataHeight > 8) { // zero line
+      g.setColor(CHART_BORDER_COLOR);
+      g.drawLine(timeAxisCalculator.getMargin(), baselineY, visibleWidth - timeAxisCalculator.getMargin(), baselineY);
+    }
+
+    FontInfo title_font = getSmallFont(g);
+    FontInfo value_font = getSmallBoldFont(g);
+    if (title_font != null
+        && value_font != null
+        && value_font.height - 3 <= dataStartY - rowStartY) {
+      int xMargin = timeAxisCalculator.getMargin();
+      int xMax = timeAxisCalculator.getCanvasPixels() - xMargin;
+      int xMin = xMargin;
+      int textStartY = dataStartY - 1 - title_font.height + title_font.ascent;
+
+      String yValue = AppMetricTree.format(maxVal);
+      int yValueWidth = stringWidth(g, value_font.font, yValue);
+      g.setFont(title_font.font);
+      final int titleRight = xMax - yValueWidth - 10;
+      if (multi) {
+        // legend: a color swatch and the name of each metric
+        final String[] names = row.propName.split(String.valueOf(AppMetricsModel.STACK_SEPARATOR));
+        final int swatch = Math.max(4, title_font.height - 4);
+        int x = xMin + 1;
+        for (int k = 0; k < names.length; k++) {
+          final int w = swatch + 3 + stringWidth(g, title_font.font, names[k]);
+          if (x + w > titleRight) {
+            if (x + 8 <= titleRight) {
+              g.setColor(Color.BLACK);
+              g.drawString("...", x, textStartY);
+            }
+            break;
+          }
+          g.setColor(METRIC_BAR_COLORS[k % METRIC_BAR_COLORS.length]);
+          g.fillRect(x, textStartY - swatch + 1, swatch, swatch);
+          g.setColor(Color.BLACK);
+          g.drawString(names[k], x + swatch + 3, textStartY);
+          x += w + 8;
+        }
+      } else {
+        final String chartTitle = row.propUName;
+        if (stringWidth(g, title_font.font, chartTitle) < titleRight - xMin) {
+          g.setColor(Color.BLACK);
+          g.drawString(chartTitle, xMin + 1, textStartY);
+        }
+      }
+      g.setColor(CHART_NUMERIC_TEXT_COLOR);
+      g.setFont(value_font.font);
+      if (yValueWidth < xMax - xMin) {
+        g.drawString(yValue, xMax - yValueWidth - 1, textStartY);
+      }
+      if (value_font.height + 2 < dataHeight) {
+        yValue = AppMetricTree.format(minVal);
+        yValueWidth = stringWidth(g, value_font.font, yValue);
+        textStartY = yOrigin - value_font.height + value_font.ascent;
+        g.drawString(yValue, xMax - yValueWidth - 1, textStartY);
+      }
+    }
+  }
+
+  private static double magnitude(final double v) {
+    return v == AppMetricTree.MISSING_VALUE ? -1 : Math.abs(v);
   }
 
   private String getString(long val) {

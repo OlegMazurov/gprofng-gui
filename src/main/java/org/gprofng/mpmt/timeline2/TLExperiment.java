@@ -22,6 +22,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TLExperiment { // YXXX refactor or rename.  Sole remaining method is createRows()
+  private final AppMetricsModel appMetrics;
+
+  TLExperiment(final AppMetricsModel appMetrics) {
+    this.appMetrics = appMetrics;
+  }
+
   private final PropDescriptor PROP_EVT_COUNT = // used to get packet count
       new PropDescriptor(
           "EVT_COUNT",
@@ -80,6 +86,7 @@ public class TLExperiment { // YXXX refactor or rename.  Sole remaining method i
         continue; // only draw entities that have time
       }
       if (dataD.getTLDataType().equals(Settings.TLData_type.TL_HEAPSZ)
+          || dataD.getTLDataType().equals(Settings.TLData_type.TL_APPMETRICS)
           || dataD.getTLDataType().equals(Settings.TLData_type.TL_GCEVENT)) { // CXXX Bug 20801848
         // YXXX see if we can avoid special case by adding property to DataDescriptor
         data_descs_without_ent.add(dataD);
@@ -158,11 +165,17 @@ public class TLExperiment { // YXXX refactor or rename.  Sole remaining method i
 
   // TBR? transfer this logic into event details classes?
   private List<PropDescriptor> getChartProps(
-      final DataDescriptor dataD, final boolean show_states, final boolean show_charts) {
+      final ExperimentProperties experimentProperties,
+      final DataDescriptor dataD,
+      final boolean show_states,
+      final boolean show_charts) {
     List<PropDescriptor> chartProps = new ArrayList<>();
 
     Settings.TLData_type tltype = dataD.getTLDataType();
-    if (tltype.equals(Settings.TLData_type.TL_SAMPLE)) {
+    if (tltype.equals(Settings.TLData_type.TL_APPMETRICS)) {
+      // one chart per selected metric, or a single stacked one
+      chartProps.addAll(appMetrics.charts(experimentProperties.getID()).props);
+    } else if (tltype.equals(Settings.TLData_type.TL_SAMPLE)) {
       if (show_charts) {
         chartProps.add(PROP_EVT_COUNT);
       }
@@ -251,10 +264,14 @@ public class TLExperiment { // YXXX refactor or rename.  Sole remaining method i
         if (!descriptorIsEnabled(tldata_cmd, tldata_hidden_mask, tldata_cnames)) {
           continue;
         }
-        List<PropDescriptor> chartProps = getChartProps(dataD, show_states, show_charts);
+        List<PropDescriptor> chartProps = getChartProps(experimentProperties, dataD, show_states, show_charts);
+        final List<ChartStyle> scales =
+            dataD.getTLDataType().equals(Settings.TLData_type.TL_APPMETRICS)
+                ? appMetrics.charts(experimentProperties.getID()).scales
+                : null;
         RowDefinition row =
             new RowDefinition(
-                experimentProperties, ent, dataD, aux, chartProps, time_origin, comparing);
+                experimentProperties, ent, dataD, aux, chartProps, scales, time_origin, comparing);
         rawDataRows.add(row);
       }
     }

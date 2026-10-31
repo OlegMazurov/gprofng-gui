@@ -1170,6 +1170,12 @@ public class TL2ControlPanel extends AnJPanel
     return submenu1;
   }
 
+  private Runnable appMetricsChooser;
+
+  void setAppMetricsChooser(final Runnable chooser) {
+    this.appMetricsChooser = chooser;
+  }
+
   private JPopupMenu createPopupMenu(boolean filterOnly) {
     JMenu submenu1;
     JMenuItem menuItem;
@@ -1219,6 +1225,16 @@ public class TL2ControlPanel extends AnJPanel
       popup.add(newTimeRangeSubMenu());
       popup.add(newScrollSubMenu());
       popup.addSeparator();
+      if (appMetricsChooser != null) {
+        popup.add(
+            new JMenuItem(
+                new AbstractAction(AnLocale.getString("Application Metrics...")) {
+                  @Override
+                  public void actionPerformed(ActionEvent ev) {
+                    appMetricsChooser.run();
+                  }
+                }));
+      }
       // Add menu it em Properties
       menuItem = new JMenuItem(new ChangeDataPresentation());
       menuItem.setAccelerator(KeyboardShortcuts.settingsActionShortcut);

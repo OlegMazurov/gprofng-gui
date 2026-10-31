@@ -239,6 +239,21 @@ public class ERIPC {
                     Object[] res = dbeGetExperimentDataDescriptors(expIds);
                     req.writeArray(res);
                 }
+                case "getAppMetricTree" -> {
+                    int exp_id = req.readInt();
+                    ipc_log("  exp_id = %d%n", exp_id);
+                    req.writeArray(dbeGetAppMetricTree(exp_id));
+                }
+                case "getAppMetricValues" -> {
+                    int dbevindex = req.readInt();
+                    int exp_id = req.readInt();
+                    int entity_prop_id = req.readInt();
+                    long event_id = req.readLong();
+                    String[] names = (String[]) req.readArray();
+                    ipc_log("  args = %d, %d, %d, %d, %d names%n", dbevindex, exp_id, entity_prop_id, event_id,
+                            names == null ? 0 : names.length);
+                    req.writeArray(dbeGetAppMetricValues(dbevindex, exp_id, entity_prop_id, event_id, names));
+                }
                 case "hasTLData" -> {
                     int dbevindex = req.readInt();
                     int[] exp_ids = (int[]) req.readArray();
