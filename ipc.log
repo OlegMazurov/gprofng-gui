@@ -1,0 +1,5693 @@
+Args: -IPC
+ipc: initApplication
+  nbm: false, arg1: '/opt', arg2: '/opt/lib/serial.dat'
+  processing IPC command initApplication complete
+ipc: initView
+  new view = 0; clone of view -1
+  processing IPC command initView complete
+ipc: getCurrentDirectory
+  processing IPC command getCurrentDirectory complete
+ipc: reExec
+  reExec requested; throwing RestartRequestedException
+Args: -IPC
+ipc: initApplication
+  nbm: false, arg1: '', arg2: '/lib/serial.dat'
+  processing IPC command initApplication complete
+ipc: initView
+  new view = 0; clone of view 0
+  processing IPC command initView complete
+ipc: setExperimentsGroups
+  groups.size = 0
+  processing IPC command setExperimentsGroups complete
+ipc: setNameFormat
+  args = 0, 1, false
+  processing IPC command setNameFormat complete
+ipc: getCompareModeV2
+  viewIndex = 0 returns 0
+  processing IPC command getCompareModeV2 complete
+ipc: getMachineModel
+  returns 'null'
+  processing IPC command getMachineModel complete
+ipc: getExpEnable
+  arg1 = 0
+  processing IPC command getExpEnable complete
+ipc: getViewModeEnable
+  processing IPC command getViewModeEnable complete
+ipc: getEntityProps
+  args = 0
+  processing IPC command getEntityProps complete
+ipc: getCurMetricsV2
+  args = 0, 0
+dbeGetCurMetricsV2[MET_NORMAL] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 1
+dbeGetCurMetricsV2[MET_CALL] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 2
+dbeGetCurMetricsV2[MET_DATA] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 3
+dbeGetCurMetricsV2[MET_INDX] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 4
+dbeGetCurMetricsV2[MET_CALL_AGR] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 5
+dbeGetCurMetricsV2[MET_COMMON] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 6
+dbeGetCurMetricsV2[MET_IO] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 7
+dbeGetCurMetricsV2[MET_SRCDIS] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 8
+dbeGetCurMetricsV2[MET_HEAP] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getRefMetricsV2
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getRefMetricsV2 complete
+ipc: getJavaEnable
+  processing IPC command getJavaEnable complete
+ipc: getRefMetricTree
+  args = 0, false
+  array: size = 13
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    boolean[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  array: size = 3
+    class [[Ljava.lang.Object;
+    class [[Ljava.lang.Object;
+    class [[Ljava.lang.Object;
+  processing IPC command getRefMetricTree complete
+ipc: setCurMetricsV2
+  args = 0 0 0 [1] [1] [1] [1] [1] [1] [1]
+  processing IPC command setCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 0
+dbeGetCurMetricsV2[MET_NORMAL] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 1
+dbeGetCurMetricsV2[MET_CALL] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 2
+dbeGetCurMetricsV2[MET_DATA] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 3
+dbeGetCurMetricsV2[MET_INDX] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 4
+dbeGetCurMetricsV2[MET_CALL_AGR] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 5
+dbeGetCurMetricsV2[MET_COMMON] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 6
+dbeGetCurMetricsV2[MET_IO] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 7
+dbeGetCurMetricsV2[MET_SRCDIS] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 8
+dbeGetCurMetricsV2[MET_HEAP] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: listMachineModels
+  processing IPC command listMachineModels complete
+ipc: getTabListInfo
+  arg = 0
+  processing IPC command getTabListInfo complete
+ipc: getTabSelectionState
+  args = 0
+  processing IPC command getTabSelectionState complete
+ipc: getIndxObjDescriptions
+  args = 0
+  processing IPC command getIndxObjDescriptions complete
+ipc: getIndxTabSelectionState
+  arg = 0
+  -- returned 7-vector [bool]
+  processing IPC command getIndxTabSelectionState complete
+ipc: getMemObjects
+  args = 0
+  processing IPC command getMemObjects complete
+ipc: getMemTabSelectionState
+  arg = 0
+  processing IPC command getMemTabSelectionState complete
+ipc: getLoadObjectList
+  arg = 0
+  returning 5 vectors for 0 LoadObjects
+  processing IPC command getLoadObjectList complete
+ipc: getExpsProperty
+  processing IPC command getExpsProperty complete
+ipc: getExpsProperty
+  processing IPC command getExpsProperty complete
+ipc: reExec
+  reExec requested; throwing RestartRequestedException
+Args: -IPC
+ipc: initApplication
+  nbm: false, arg1: '', arg2: '/lib/serial.dat'
+  processing IPC command initApplication complete
+ipc: initView
+  new view = 0; clone of view 0
+  processing IPC command initView complete
+ipc: setCurrentDirectory
+  arg = /Users/olegmazurov/MYWORK/JDBE/experiments
+  processing IPC command setCurrentDirectory complete
+ipc: setSearchPath
+  2 strings
+  processing IPC command setSearchPath complete
+ipc: setPathmaps
+  0 strings
+  processing IPC command setPathmaps complete
+ipc: setExperimentsGroups
+  groups.size = 1
+  Group 0
+ : [/Users/olegmazurov/MYWORK/JDBE/experiments/Browser-11.er]
+  processing IPC command setExperimentsGroups complete
+ipc: setNameFormat
+  args = 0, 1, false
+  processing IPC command setNameFormat complete
+ipc: getCompareModeV2
+  viewIndex = 0 returns 0
+  processing IPC command getCompareModeV2 complete
+ipc: getMachineModel
+  returns 'null'
+  processing IPC command getMachineModel complete
+ipc: getExpEnable
+  arg1 = 0
+  processing IPC command getExpEnable complete
+ipc: getFounderExpId
+  expIds = 1
+  processing IPC command getFounderExpId complete
+ipc: getUserExpId
+  expIds = 1
+  processing IPC command getUserExpId complete
+ipc: getExpVerboseName
+  expIds = 1
+  processing IPC command getExpVerboseName complete
+ipc: getExpGroupId
+  expIds = 1
+  processing IPC command getExpGroupId complete
+ipc: getExperimentTimeInfo
+  cnt = 1
+  processing IPC command getExperimentTimeInfo complete
+ipc: getExperimentDataDescriptors
+  cnt = 1
+  processing IPC command getExperimentDataDescriptors complete
+ipc: getViewModeEnable
+  processing IPC command getViewModeEnable complete
+ipc: getEntityProps
+  args = 0
+  processing IPC command getEntityProps complete
+ipc: getCurMetricsV2
+  args = 0, 0
+dbeGetCurMetricsV2[MET_NORMAL] 13
+  array: size = 19
+    int[]: size = 13
+    int[]: size = 13
+    int[]: size = 13
+    int[]: size = 13
+    int[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    int[]: size = 13
+    boolean[]: size = 13
+    String[]: size = 13
+    int[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 1
+dbeGetCurMetricsV2[MET_CALL] 18
+  array: size = 19
+    int[]: size = 18
+    int[]: size = 18
+    int[]: size = 18
+    int[]: size = 18
+    int[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    int[]: size = 18
+    boolean[]: size = 18
+    String[]: size = 18
+    int[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 2
+dbeGetCurMetricsV2[MET_DATA] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 3
+dbeGetCurMetricsV2[MET_INDX] 6
+  array: size = 19
+    int[]: size = 6
+    int[]: size = 6
+    int[]: size = 6
+    int[]: size = 6
+    int[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    int[]: size = 6
+    boolean[]: size = 6
+    String[]: size = 6
+    int[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+    String[]: size = 6
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 4
+dbeGetCurMetricsV2[MET_CALL_AGR] 18
+  array: size = 19
+    int[]: size = 18
+    int[]: size = 18
+    int[]: size = 18
+    int[]: size = 18
+    int[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    int[]: size = 18
+    boolean[]: size = 18
+    String[]: size = 18
+    int[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+    String[]: size = 18
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 5
+dbeGetCurMetricsV2[MET_COMMON] 13
+  array: size = 19
+    int[]: size = 13
+    int[]: size = 13
+    int[]: size = 13
+    int[]: size = 13
+    int[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    int[]: size = 13
+    boolean[]: size = 13
+    String[]: size = 13
+    int[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+    String[]: size = 13
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 6
+dbeGetCurMetricsV2[MET_IO] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 7
+dbeGetCurMetricsV2[MET_SRCDIS] 8
+  array: size = 19
+    int[]: size = 8
+    int[]: size = 8
+    int[]: size = 8
+    int[]: size = 8
+    int[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    int[]: size = 8
+    boolean[]: size = 8
+    String[]: size = 8
+    int[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 8
+dbeGetCurMetricsV2[MET_HEAP] 5
+  array: size = 19
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    int[]: size = 5
+    boolean[]: size = 5
+    String[]: size = 5
+    int[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+  processing IPC command getCurMetricsV2 complete
+ipc: getRefMetricsV2
+  array: size = 19
+    int[]: size = 8
+    int[]: size = 8
+    int[]: size = 8
+    int[]: size = 8
+    int[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    int[]: size = 8
+    boolean[]: size = 8
+    String[]: size = 8
+    int[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+    String[]: size = 8
+  processing IPC command getRefMetricsV2 complete
+ipc: getJavaEnable
+  processing IPC command getJavaEnable complete
+ipc: getRefMetricTree
+  args = 0, false
+  array: size = 13
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    boolean[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  array: size = 5
+    class [[Ljava.lang.Object;
+    class [[Ljava.lang.Object;
+    class [[Ljava.lang.Object;
+    class [[Ljava.lang.Object;
+    class [[Ljava.lang.Object;
+  processing IPC command getRefMetricTree complete
+ipc: setCurMetricsV2
+  args = 0 0 0 [5] [5] [5] [5] [5] [5] [5]
+  processing IPC command setCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 0
+dbeGetCurMetricsV2[MET_NORMAL] 5
+  array: size = 19
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    int[]: size = 5
+    boolean[]: size = 5
+    String[]: size = 5
+    int[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 1
+dbeGetCurMetricsV2[MET_CALL] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 2
+dbeGetCurMetricsV2[MET_DATA] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 3
+dbeGetCurMetricsV2[MET_INDX] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 4
+dbeGetCurMetricsV2[MET_CALL_AGR] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 5
+dbeGetCurMetricsV2[MET_COMMON] 5
+  array: size = 19
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    int[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    int[]: size = 5
+    boolean[]: size = 5
+    String[]: size = 5
+    int[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+    String[]: size = 5
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 6
+dbeGetCurMetricsV2[MET_IO] 1
+  array: size = 19
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    boolean[]: size = 1
+    String[]: size = 1
+    int[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+    String[]: size = 1
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 7
+dbeGetCurMetricsV2[MET_SRCDIS] 3
+  array: size = 19
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    boolean[]: size = 3
+    String[]: size = 3
+    int[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+    String[]: size = 3
+  processing IPC command getCurMetricsV2 complete
+ipc: getCurMetricsV2
+  args = 0, 8
+dbeGetCurMetricsV2[MET_HEAP] 2
+  array: size = 19
+    int[]: size = 2
+    int[]: size = 2
+    int[]: size = 2
+    int[]: size = 2
+    int[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    int[]: size = 2
+    boolean[]: size = 2
+    String[]: size = 2
+    int[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+    String[]: size = 2
+  processing IPC command getCurMetricsV2 complete
+ipc: listMachineModels
+  processing IPC command listMachineModels complete
+ipc: getTabListInfo
+  arg = 0
+  processing IPC command getTabListInfo complete
+ipc: getTabSelectionState
+  args = 0
+  processing IPC command getTabSelectionState complete
+ipc: getIndxObjDescriptions
+  args = 0
+  processing IPC command getIndxObjDescriptions complete
+ipc: getIndxTabSelectionState
+  arg = 0
+  -- returned 7-vector [bool]
+  processing IPC command getIndxTabSelectionState complete
+ipc: getMemObjects
+  args = 0
+  processing IPC command getMemObjects complete
+ipc: getMemTabSelectionState
+  arg = 0
+  processing IPC command getMemTabSelectionState complete
+ipc: getLoadObjectList
+  arg = 0
+  returning 5 vectors for 1 LoadObjects
+  processing IPC command getLoadObjectList complete
+ipc: getExpsProperty
+  processing IPC command getExpsProperty complete
+ipc: getExpsProperty
+  processing IPC command getExpsProperty complete
+ipc: getRefMetricTreeValues
+  args = 0, metcmds.length=7, nonmetcmds.length=2
+  processing IPC command getRefMetricTreeValues complete
+ipc: getOverviewText
+  arg = 0
+  processing IPC command getOverviewText complete
+ipc: getSelObj
+  args = 0, 1, 0, res = 0
+  processing IPC command getSelObj complete
+ipc: getSelObj
+  args = 0, 1, 0, res = 0
+  processing IPC command getSelObj complete
+ipc: setFuncDataV2
+  args = 0, 0, 1, 0
+  processing IPC command setFuncDataV2 complete
+ipc: getMsg
+  args = 0, 2
+  processing IPC command getMsg complete
+ipc: getNames
+  args = 0, 1, 0
+  processing IPC command getNames complete
+ipc: getFuncList
+  args = 0, 1, 0
+  processing IPC command getFuncList complete
+ipc: setSelObj
+  args = 0, 1, 1, 0
+  processing IPC command setSelObj complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getMsg
+  args = 0, 4
+  processing IPC command getMsg complete
+ipc: getMsg
+  args = 0, 1
+  processing IPC command getMsg complete
+ipc: getFuncListMini
+  args = 0, 1, 0
+dbeGetFuncListMini: index=0 type=CP_TOTAL_CPU vtype=VT_DOUBLE v.d=353265.975403 v.l=0 v.str=null
+dbeGetFuncListMini: index=1 type=CP_TOTAL_CPU vtype=VT_DOUBLE v.d=353265.975403 v.l=0 v.str=null
+dbeGetFuncListMini: index=2 type=HEAP_ALLOC_BYTES vtype=VT_ULLONG v.d=0.000000 v.l=693762118344 v.str=null
+dbeGetFuncListMini: index=3 type=HEAP_ALLOC_BYTES vtype=VT_ULLONG v.d=0.000000 v.l=693762118344 v.str=null
+dbeGetFuncListMini: index=4 type=ONAME vtype=VT_LABEL v.d=0.000000 v.l=0 v.str=<Total>
+  processing IPC command getFuncListMini complete
+ipc: getNames
+  args = 0, 1, 0
+  processing IPC command getNames complete
+ipc: getMsg
+  args = 0, 4
+  processing IPC command getMsg complete
+ipc: getSelObj
+  args = 0, 1, 0, res = 145644
+  processing IPC command getSelObj complete
+ipc: setFuncDataV2
+  args = 0, 145644, 1, 0
+  processing IPC command setFuncDataV2 complete
+ipc: getMsg
+  args = 0, 2
+  processing IPC command getMsg complete
+ipc: getNames
+  args = 0, 1, 0
+  processing IPC command getNames complete
+ipc: getFuncList
+  args = 0, 1, 0
+  processing IPC command getFuncList complete
+ipc: getSelIndex
+  args = 0, 145644, 1, 0, res = 1
+  processing IPC command getSelIndex complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getMsg
+  args = 0, 4
+  processing IPC command getMsg complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getFilterStr
+  args = 0
+  processing IPC command getFilterStr complete
+ipc: getSelObj
+  args = 0, 1, 0, res = 145644
+  processing IPC command getSelObj complete
+ipc: getSelObjV2
+  arg1 = 0  arg2 = FUNCTION, res = 145644
+  processing IPC command getSelObjV2 complete
+ipc: getObjNameV2
+  arg1 = 0, arg2 = 145644, res = jdk.internal.misc.Unsafe.park(boolean, long)
+  processing IPC command getObjNameV2 complete
+ipc: getTableDataV2
+  args = 0, MET_CALL, CALLERS, FUNCTION, 0, 1
+  processing IPC command getTableDataV2 complete
+ipc: getNames
+  args = 0, 7, 0
+  processing IPC command getNames complete
+ipc: getTableDataV2
+  args = 0, MET_CALL, CALLEES, FUNCTION, 0, 1
+  processing IPC command getTableDataV2 complete
+ipc: getSummary
+  args = 0, [1], 1, 0
+  processing IPC command getSummary complete
+ipc: getEntitiesV2
+  args = 0, 1, 4
+  processing IPC command getEntitiesV2 complete
+ipc: hasTLData
+  dbev_id = 0, cnt = 1225
+  processing IPC command hasTLData complete
+ipc: getTLEventIdxNearTime
+  args = 0, 0, 3, 4, 1, 0, 0, 323798986000
+  processing IPC command getTLEventIdxNearTime complete
+ipc: getTLEventCenterTime
+  args = 0, 0, 3, 4, 1, 0, 637, -1
+  processing IPC command getTLEventCenterTime complete
+ipc: getTLEventCenterTime
+  args = 0, 0, 3, 4, 1, 0, 637, 1
+  processing IPC command getTLEventCenterTime complete
+ipc: getTLData
+  args = 0, 0, 0, 0, 0, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 1, 0, 0, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 2, 0, 0, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 1, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 1, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 2, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLDetails
+  args = 0, 0, 3, 4, 637
+  processing IPC command getTLDetails complete
+ipc: getCallTreeFuncs
+  args = 0
+  processing IPC command getCallTreeFuncs complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 2, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 3, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 3, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 4, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 4, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 5, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 579
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 5, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 6, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 6, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 7, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 7, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 8, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 16
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 8, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 9, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 9, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 10, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 10, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 11, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 11, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 12, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 12, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 13, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 13, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 14, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 101
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 14, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 15, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 15, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 16, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 16, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 17, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 64
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 17, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 18, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 18, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 19, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 19, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 20, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 28
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 20, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 21, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 21, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 22, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 22, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 23, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 81
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 23, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 24, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 24, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 25, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 25, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 26, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 26, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 47
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 27, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 27, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 28, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 28, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 29, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 29, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 42
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 30, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 30, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 31, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 31, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 32, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 18
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 32, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 33, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 33, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 34, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 34, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 35, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 21
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 35, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 36, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 36, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 37, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 37, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 38, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 38, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 39, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 27
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 39, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 40, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 40, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 41, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 41, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 42, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 42, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 43, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 43, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 44, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 11
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 44, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 23
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 45, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 45, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 46, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 46, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 47, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 54
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 47, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 48, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 48, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 49, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 49, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 50, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 20
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 50, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 51, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 51, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 52, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 52, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 53, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 22
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 53, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 54, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 54, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 55, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 55, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 56, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 161
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 56, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 57, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 57, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 58, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 58, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 59, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 402
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 59, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 60, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 60, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 61, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 61, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 62, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 29
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 62, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 63, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 63, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 64, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 64, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 65, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 65, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 66, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 66, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 67, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 67, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 68, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 22
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 68, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 69, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 69, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 70, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 70, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 71, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 13
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 71, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 72, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 72, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 73, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 73, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 74, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1041
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 74, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 75, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 75, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 76, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 76, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 77, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 262
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 77, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 78, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 78, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 79, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 79, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 80, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 96
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 80, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 81, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 81, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 82, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 82, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 83, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 108
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 83, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 84, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 84, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 85, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 85, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 86, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 64
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 86, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 87, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 87, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 88, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 88, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 89, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 56
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 89, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 90, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 90, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 91, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 91, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 92, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 31
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 92, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 93, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 93, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 94, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 94, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 95, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 65
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 95, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 96, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 96, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 97, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 97, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 98, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 45
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 98, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 99, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 99, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 100, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 100, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 101, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 38
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 101, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 102, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 102, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 103, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 103, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 104, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 38
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 104, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 105, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 105, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 106, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 106, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 107, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 78
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 107, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 108, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 108, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 109, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 109, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 110, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 664
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 110, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 111, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 111, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 112, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 112, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 113, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 303
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 113, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 114, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 114, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 115, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 115, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 116, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 99
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 116, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 117, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 117, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 118, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 118, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 119, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 168
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 119, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 120, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 120, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 121, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 121, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 122, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 122
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 122, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 123, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 123, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 124, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 124, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 125, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 81
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 125, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 126, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 126, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 127, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 127, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 128, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getFuncNames
+  arg1 = 0, argc = 4
+  processing IPC command getFuncNames complete
+ipc: getStacksFunctions
+  argc = 124
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 128, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 129, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 129, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 130, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 130, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 131, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 16
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 131, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 132, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 132, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 133, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 133, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 134, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 128
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 134, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 135, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 135, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 136, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 136, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 137, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 22
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 137, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 138, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 138, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 139, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 139, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 140, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 60
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 140, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 141, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 141, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 142, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 142, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 143, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 35
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 143, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 144, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 144, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 145, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 145, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 146, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 73
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 146, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 147, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 147, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 148, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 148, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 149, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 21
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 149, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 150, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 150, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 151, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 151, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 152, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 38
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 152, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 153, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 153, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 154, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 154, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 155, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 24
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 155, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 156, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 156, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 157, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 157, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 158, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 56
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 158, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 159, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 159, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 160, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 160, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 161, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 66
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 161, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 162, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 162, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 163, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 163, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 164, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 87
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 164, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 165, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 165, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 166, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 166, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 167, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 74
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 167, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 168, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 168, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 169, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 169, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 170, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 34
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 170, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 171, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 171, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 172, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 172, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 173, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 61
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 173, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 174, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 174, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 175, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 175, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 176, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 20
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 176, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 177, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 177, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 178, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 178, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 179, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 42
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 179, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 180, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 180, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 181, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 181, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 182, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 53
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 182, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 183, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 183, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 184, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 184, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 185, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 36
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 185, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 186, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 186, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 187, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 187, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 188, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 27
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 188, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 189, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 189, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 190, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 190, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 191, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 43
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 191, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 192, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 192, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 193, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 193, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 194, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 35
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 194, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 195, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 195, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 196, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 196, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 197, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 26
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 197, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 198, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 198, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 199, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 199, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 200, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 56
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 200, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 201, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 201, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 202, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 202, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 203, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 18
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 203, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 204, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 204, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 205, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 205, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 206, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 206, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 207, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 207, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 208, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 208, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 209, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 209, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 210, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 210, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 211, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 211, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 212, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 212, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 213, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 213, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 214, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 214, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 215, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 17
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 215, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 216, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 216, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 217, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 217, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 218, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 13
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 218, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 219, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 219, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 220, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 220, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 221, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 221, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 222, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 222, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 223, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 223, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 224, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 224, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 225, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 225, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 226, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 226, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 227, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 227, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 228, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 228, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 229, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 229, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 230, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 230, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 231, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 231, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 232, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 232, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 233, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 233, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 234, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 234, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 235, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 235, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 236, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 21
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 236, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 237, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 237, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 238, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 238, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 239, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 239, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 240, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 240, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 241, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 241, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 242, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 242, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 243, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 243, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 244, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 244, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 245, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 245, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 246, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 246, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 247, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 247, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 248, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 248, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 249, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 249, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 250, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 250, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 251, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 251, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 252, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 252, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 253, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 253, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 254, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 11
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 254, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 255, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 255, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 256, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 256, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 257, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 257, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 258, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 258, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 259, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 259, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 260, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 5
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 260, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 261, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 261, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 262, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 262, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 263, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 7
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 263, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 264, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 264, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 265, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 265, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 266, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 17
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 266, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 267, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 267, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 268, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 268, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 269, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 269, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 270, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 270, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 271, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 271, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 272, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 272, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 273, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 273, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 274, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 274, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 275, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 13
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 275, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 276, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 276, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 277, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 277, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 278, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 278, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 279, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 279, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 280, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 280, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 281, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 18
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 281, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 282, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 282, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 283, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 283, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 284, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 284, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 285, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 285, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 286, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 286, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 287, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 287, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 288, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 288, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 289, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 289, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 290, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 290, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 291, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 291, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 292, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 292, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 293, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 293, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 294, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 294, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 295, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 295, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 296, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 296, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 297, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 297, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 298, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 298, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 299, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 299, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 22
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 300, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 300, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 301, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 301, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 302, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 14
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 302, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 303, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 303, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 304, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 304, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 305, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 305, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 306, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 306, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 307, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 307, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 24
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 308, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 308, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 309, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 309, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 310, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 310, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 311, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 19
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 311, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 312, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 312, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 313, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 313, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 314, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 7
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 314, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 315, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 315, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 316, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 316, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 317, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 317, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 318, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 318, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 319, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 319, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 320, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 21
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 320, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 321, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 321, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 322, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 322, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 323, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 62
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 323, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 324, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 324, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 325, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 325, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 326, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 24
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 326, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 327, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 327, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 328, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 328, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 329, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 11
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 329, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 330, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 330, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 331, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 331, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 332, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 332, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 333, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 333, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 334, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 334, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 335, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 14
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 335, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 336, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 336, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 337, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 337, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 338, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 338, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 339, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 339, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 340, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 340, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 341, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 341, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 342, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 342, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 343, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 343, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 344, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 344, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 345, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 345, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 346, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 346, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 347, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 347, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 348, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 348, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 349, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 349, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 350, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 350, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 351, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 351, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 352, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 352, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 353, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 353, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 354, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 354, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 355, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 355, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 356, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 356, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 357, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 357, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 358, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 358, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 359, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 359, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 360, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 360, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 361, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 361, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 362, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 362, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 363, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 363, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 364, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 364, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 365, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 20
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 365, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 366, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 366, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 367, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 367, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 368, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 23
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 368, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 369, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 369, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 370, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 370, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 371, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 21
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 371, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 372, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 372, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 373, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 373, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 374, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getFuncNames
+  arg1 = 0, argc = 5
+  processing IPC command getFuncNames complete
+ipc: getStacksFunctions
+  argc = 25
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 374, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 375, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 375, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 376, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 376, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 377, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 5
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 377, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 378, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 378, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 379, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 379, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 380, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 27
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 380, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 381, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 381, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 382, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 382, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 383, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 383, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 384, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 384, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 385, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 385, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 386, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 17
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 386, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 387, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 387, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 388, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 388, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 389, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 19
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 389, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 390, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 390, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 391, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 391, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 392, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 392, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 393, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 393, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 394, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 394, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 395, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 17
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 395, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 396, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 396, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 397, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 397, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 398, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 398, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 399, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 399, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 400, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 400, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 401, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 17
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 401, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 402, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 402, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 403, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 403, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 404, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 17
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 404, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 405, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 405, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 406, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 406, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 407, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 23
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 407, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 408, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 408, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 409, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 409, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 410, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 22
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 410, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 411, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 411, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 412, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 412, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 413, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 413, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 414, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 414, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 415, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 415, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 416, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 416, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 417, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 417, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 418, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 418, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 419, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 5
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 419, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 420, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 420, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 421, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 421, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 422, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 422, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 423, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 423, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 424, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 424, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 425, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 425, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 426, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 426, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 427, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 427, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 428, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 7
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 428, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 429, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 429, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 430, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 430, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 431, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 431, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 432, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 432, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 433, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 433, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 434, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 14
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 434, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 435, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 11
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 435, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 436, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 436, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 437, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 5
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 437, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 438, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 438, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 439, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 439, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 440, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 5
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 7
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 440, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 441, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 441, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 442, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 442, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 443, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 443, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 444, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 444, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 445, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 445, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 446, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 11
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 446, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 447, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 447, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 448, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 448, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 449, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 449, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 450, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 450, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 451, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 451, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 452, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 452, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 453, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 453, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 454, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 454, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 455, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 7
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 7
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 455, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 456, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 456, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 457, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 457, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 458, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 458, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 459, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 459, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 460, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 460, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 461, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 461, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 462, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 462, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 463, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 463, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 464, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 464, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 465, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 465, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getFuncNames
+  arg1 = 0, argc = 2
+  processing IPC command getFuncNames complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 466, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 466, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 467, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 14
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 467, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 468, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 468, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 469, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 469, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 470, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 8
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 470, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 471, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 471, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 472, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 472, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 473, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 473, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 11
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 474, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 474, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 475, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 475, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 476, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 476, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 477, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 477, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 478, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 478, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 479, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 479, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 480, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 480, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 481, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 481, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 482, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 482, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 483, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 483, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 484, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 484, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 485, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 485, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 486, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 486, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 487, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 487, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 488, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 488, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 489, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 489, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 490, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 490, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 491, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 491, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 492, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 492, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 493, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 493, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 494, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 494, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 495, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 495, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 496, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 496, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 497, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 497, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 498, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 498, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 499, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 499, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 500, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 500, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 501, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 501, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 502, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 502, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 503, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 503, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 504, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 504, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 505, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 505, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 506, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 506, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 507, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 507, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 508, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 508, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 509, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 509, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 510, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 510, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 511, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 511, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 512, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 512, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 513, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 513, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 514, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 514, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 515, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 515, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 516, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 516, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 517, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 517, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 518, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 518, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 519, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 519, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 520, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 520, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 521, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 521, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 522, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 522, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 523, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 523, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 524, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 524, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 525, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 525, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 526, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 526, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 527, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 527, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 528, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 528, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 529, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 529, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 530, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 530, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 531, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 531, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 532, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 532, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 533, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 4
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 533, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 534, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 534, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 535, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 535, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 536, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 536, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 537, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 537, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 538, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 538, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 539, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 539, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 540, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 540, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 541, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 541, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 542, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 3
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 542, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 543, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 543, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 544, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 544, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 545, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 545, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 546, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 546, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 547, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 547, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 548, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 548, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 549, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 549, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 550, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 550, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 551, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 551, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 552, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 552, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 553, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 553, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 554, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 554, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 555, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 555, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 556, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 556, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 557, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 31
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 557, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 558, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 558, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 559, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 559, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 560, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 21
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 560, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 561, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 561, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 562, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 562, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 563, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 15
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 23
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 563, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 564, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 564, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 565, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 565, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 566, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 6
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 23
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 566, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 567, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 567, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 568, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 568, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 569, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 12
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 25
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 569, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 570, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 570, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 571, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 571, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 572, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 9
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 572, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 573, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 573, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 574, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 574, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 575, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 2
+  processing IPC command getStacksFunctions complete
+ipc: getStacksFunctions
+  argc = 10
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 575, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 576, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 576, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 577, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 577, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 578, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 578, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 579, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 579, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 580, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 580, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 581, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 581, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 582, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 582, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 583, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 583, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 584, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 584, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 585, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 585, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 586, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 586, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 587, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 587, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 588, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 588, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 589, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 589, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 590, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 590, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 591, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 591, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 592, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 592, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 593, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 593, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 594, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 594, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 595, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 595, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 596, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 596, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 597, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 597, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 598, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 598, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 599, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 599, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 600, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 600, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 601, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 601, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 602, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 602, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 603, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 603, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 604, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 604, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 605, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 605, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 606, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 606, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 607, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 607, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 608, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 5
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 608, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 609, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 609, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 610, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 610, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getTLData
+  args = 0, 0, 3, 4, 611, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete
+ipc: getStacksFunctions
+  argc = 1
+  processing IPC command getStacksFunctions complete
+ipc: getTLData
+  args = 0, 0, 6, 4, 611, 0, 0, 679536173, 953, true
+  processing IPC command getTLData complete

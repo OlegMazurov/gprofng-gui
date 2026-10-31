@@ -63,7 +63,7 @@ public final class Analyzer {
   public boolean IPC_started = false;
   public boolean connectingToRemoteHost = false; // true during the connecting process
   public boolean connectingToRemoteHostEnabled = true;
-  public boolean profileRunningProcessEnabled = false;
+  public boolean profileRunningProcessEnabled = true;
   public boolean kernelProfilingEnabled = false;
   public boolean old_IPC_status = false;
   public int cur_id = 0;
@@ -115,6 +115,8 @@ public final class Analyzer {
   private final String ipc_protocol = IPC_PROTOCOL;
 
   public static final String DisplayAppName = "gp-display-text";
+  // Shown (About, logs) in place of the gp-display-text path when the engine runs in this JVM
+  private static final String EmbeddedEngineName = "JDBE (embedded)";
   private static final String CollectAppName = "gp-collect-app";
   private static final String KernelAppName = "gp-collect-kernel";
 
@@ -324,8 +326,12 @@ public final class Analyzer {
     if (er_print == null || er_print.equals(emptyString)) {
       er_print = AnUtility.getenv("SP_ANALYZER_ER_PRINT");
     }
+    // Local analysis runs the JDBE engine on a thread of this JVM; setting
+    // SP_ANALYZER_ER_PRINT selects a separate gp-display-text process instead.
+    boolean embeddedEngine = false;
     if (er_print == null || er_print.equals(emptyString)) {
-      er_print = getPathToApp(DisplayAppName);
+      embeddedEngine = remoteConnection == null;
+      er_print = embeddedEngine ? EmbeddedEngineName : getPathToApp(DisplayAppName);
     } else {
       IPCLogger.logTrace("\n" + "analyzer: SP_ANALYZER_ER_PRINT='" + er_print + "'");
       if (remoteConnection != null) {
@@ -342,7 +348,7 @@ public final class Analyzer {
       if (null == os_name) {
         throw new Exception("OS is not supported yet.");
       }
-      if ((!os_name.equals("SunOS")) && (!os_name.equals("Linux")) && (!os_name.equals("Mac OS X"))) {
+      if (!os_name.equals("SunOS") && !os_name.equals("Linux") && !os_name.equals("Mac OS X") && !os_name.startsWith("Windows")) {
         throw new Exception("OS " + os_name + " is not supported yet.");
       }
     }
@@ -359,7 +365,11 @@ public final class Analyzer {
       er_printCmd = er_printCmd + er_printCmd_extn;
     }
     stopConnectionManager();
-    IPC_session.init(er_printCmd, true);
+    if (embeddedEngine) {
+      IPC_session.initEmbedded(new String[] {"-" + cmode + "IPC"}, true);
+    } else {
+      IPC_session.init(er_printCmd, true);
+    }
     setIPCStarted(true);
     startConnectionManager();
     fireConnectionStatus(AnChangeEvent.Type.REMOTE_CONNECTION_CHANGED);
@@ -2089,7 +2099,7 @@ public final class Analyzer {
   }
 
   public static String getAnalyzerReleaseName() {
-    return PERFORMANCE_ANALYZER_RELEASE_NAME;
+    return System.getProperty("analyzer.name", PERFORMANCE_ANALYZER_RELEASE_NAME);
   }
 
   /** Update IPC connection status */

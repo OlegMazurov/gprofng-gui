@@ -77,9 +77,27 @@ public final class IPC {
 
   public void init(final String cmd, boolean run) throws Exception {
     this.cmd = cmd;
+//    ProcessBuilder pb = new ProcessBuilder(cmd.split(" "));
+//    pb.inheritIO();
+//    delegate = pb.start();
     final Runtime rt = Runtime.getRuntime();
     delegate = rt.exec(cmd);
+    connect(run);
+  }
 
+  /**
+   * Runs the JDBE engine on a thread of this JVM instead of spawning gp-display-text; the wire
+   * protocol is the same, over in-memory pipes.
+   *
+   * @param args the arguments gp-display-text would get, starting with -IPC
+   */
+  public void initEmbedded(final String[] args, boolean run) throws Exception {
+    this.cmd = "<embedded JDBE engine> " + String.join(" ", args);
+    delegate = EmbeddedProcess.start(args);
+    connect(run);
+  }
+
+  private void connect(boolean run) {
     processOutput = delegate.getInputStream();
     processInput = delegate.getOutputStream();
     processError = delegate.getErrorStream();

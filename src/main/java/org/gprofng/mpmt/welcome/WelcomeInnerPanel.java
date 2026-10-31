@@ -99,7 +99,7 @@ public class WelcomeInnerPanel extends javax.swing.JPanel {
     createExperimentTitleLabel.setEnabled(connected);
     viewExperimentTitleLabel.setEnabled(connected);
     profileAppButton.setEnabled(connected);
-    profileRunningAppButton.setEnabled(false);
+    profileRunningAppButton.setEnabled(true);
     //        profileKernelButton.setEnabled(connected &&
     // Analyzer.getInstance().isKernelProfilingEnabled());
     openExistingExperimentButton.setEnabled(connected);
